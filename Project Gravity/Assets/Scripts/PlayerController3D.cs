@@ -8,6 +8,8 @@ public class PlayerController3D : MonoBehaviour
     private readonly float GRAVITY = 9.8f;
     public Transform camera;
     public float speed = 6f;
+    private bool targetHit;
+    private Quaternion targetRotation;
 
     public float turnSmoothTime = 0.05f;
     private float turnSmoothVelocity;
@@ -21,11 +23,29 @@ public class PlayerController3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (targetHit)
+        {
+            
+        }
+        
+        // Handles gravity changes
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, Mathf.Infinity, gravityChangeLayer))
+            {
+                //targetRotation = hit.normal;
+                Physics.gravity = hit.normal * -1 * GRAVITY;
+            }
+
+            //Physics.gravity *= -1;
+            Debug.Log(hit.normal);
+        }
+        
+        // Handles movement and aim
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-
         if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
@@ -37,19 +57,9 @@ public class PlayerController3D : MonoBehaviour
             transform.position += (moveDirection.normalized * speed * Time.deltaTime);
         }
 
-        // Handles gravity changes
-        /*
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            RaycastHit hit;
-            if(Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, gravityChangeLayer))
-            {
-                Physics.gravity = hit.normal * -1 * GRAVITY;
-            }
+        
+        
 
-            Physics.gravity *= -1;
-            Debug.Log("Gravity is now: " + Physics.gravity);
-        }
-        */
+        
     }
 }

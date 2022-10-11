@@ -21,7 +21,6 @@ public class MeshTransparencyHandler : MonoBehaviour
 
     void Update()
     {
-        
         if (Vector3.Distance(graphicsTransform.transform.position, camera.transform.position) < cameraSettings.m_Orbits[1].m_Radius)
         {
             float alpha = Vector3.Distance(graphicsTransform.transform.position, camera.transform.position) /
