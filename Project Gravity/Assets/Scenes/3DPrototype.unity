@@ -2911,7 +2911,7 @@ GameObject:
   - component: {fileID: 1139170482}
   - component: {fileID: 1139170481}
   - component: {fileID: 1139170480}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4239,7 +4239,7 @@ GameObject:
   - component: {fileID: 1613469381}
   - component: {fileID: 1613469380}
   - component: {fileID: 1613469379}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4627,7 +4627,7 @@ GameObject:
   - component: {fileID: 1703785602}
   - component: {fileID: 1703785601}
   - component: {fileID: 1703785600}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4724,7 +4724,7 @@ GameObject:
   - component: {fileID: 1783133919}
   - component: {fileID: 1783133918}
   - component: {fileID: 1783133917}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4821,7 +4821,7 @@ GameObject:
   - component: {fileID: 1804497133}
   - component: {fileID: 1804497132}
   - component: {fileID: 1804497131}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5340,7 +5340,7 @@ GameObject:
   - component: {fileID: 2026195387}
   - component: {fileID: 2026195386}
   - component: {fileID: 2026195385}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5965,11 +5965,16 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7397151520060016782, guid: 23c6a17115a5e9341b0c229c649fa2a5, type: 3}
+      propertyPath: gravityChangeLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 7526356294123457513, guid: 23c6a17115a5e9341b0c229c649fa2a5, type: 3}
       propertyPath: m_Name
       value: 3D Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 996608936, guid: 23c6a17115a5e9341b0c229c649fa2a5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 23c6a17115a5e9341b0c229c649fa2a5, type: 3}
 --- !u!1 &4563420620267697743 stripped
 GameObject:

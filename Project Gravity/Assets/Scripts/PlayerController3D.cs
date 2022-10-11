@@ -23,6 +23,8 @@ public class PlayerController3D : MonoBehaviour
             {
                 Physics.gravity = hit.normal * -1 * GRAVITY;
             }
+
+            Physics.gravity *= -1;
             Debug.Log("Gravity is now: " + Physics.gravity);
         }
     }
