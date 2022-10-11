@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,9 @@ public class PlayerController3D : MonoBehaviour
     private readonly float GRAVITY = 9.8f;
     public Transform camera;
     public float speed = 6f;
-    private bool targetHit;
-    private Quaternion targetRotation;
-
+    // Keep in mind that that the vectors are the opposite value to how they are added
     public float turnSmoothTime = 0.05f;
-    private float turnSmoothVelocity;
+    private float _turnSmoothVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -23,25 +22,17 @@ public class PlayerController3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (targetHit)
-        {
-            
-        }
-        
         // Handles gravity changes
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastHit hit;
-            if(Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, Mathf.Infinity, gravityChangeLayer))
+            if(Physics.Raycast(transform.position, camera.transform.forward, out hit, Mathf.Infinity, gravityChangeLayer))
             {
-                //targetRotation = hit.normal;
                 Physics.gravity = hit.normal * -1 * GRAVITY;
             }
-
-            //Physics.gravity *= -1;
-            Debug.Log(hit.normal);
+            
         }
-        
+
         // Handles movement and aim
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -49,17 +40,12 @@ public class PlayerController3D : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
                 turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             transform.position += (moveDirection.normalized * speed * Time.deltaTime);
         }
-
-        
-        
-
-        
     }
 }

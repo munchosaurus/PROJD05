@@ -5,9 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/3D Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/3D Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/3DPrototype.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/3DPrototype.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MeshTransparencyHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MeshTransparencyHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController3D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController3D.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1665475262836</updated>
       <workItem from="1665475265752" duration="2850000" />
-      <workItem from="1665478411914" duration="2941000" />
+      <workItem from="1665478411914" duration="12635000" />
     </task>
     <servers />
   </component>
