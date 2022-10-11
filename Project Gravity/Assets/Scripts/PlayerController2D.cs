@@ -21,7 +21,7 @@ public class PlayerController2D : MonoBehaviour
             RaycastHit hit;
             Vector3 direction = GetMousePositionOnPlane() - transform.position;
 
-            if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, gravityChangeLayer))
+            if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, gravityChangeLayer, QueryTriggerInteraction.Collide))
             {
                 Physics.gravity = hit.normal * -1 * GRAVITY;
                 Debug.Log("HIT - Normal: " + hit.normal);
