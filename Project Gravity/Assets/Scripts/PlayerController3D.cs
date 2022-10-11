@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController3D : MonoBehaviour
 {
     [SerializeField] private LayerMask gravityChangeLayer;
-    private readonly float GRAVITY = 9.8f;
+    private readonly float GRAVITY = 9.81f;
 
     // Start is called before the first frame update
     void Start()
