@@ -92,7 +92,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void MoveHorizontal(float direction)
     {
-        if(ShouldAddMoreMoveForce(direction))
+        if (ShouldAddMoreMoveForce(direction))
             playerRigidBody.AddForce(new Vector3 (direction, 0, 0) * acceleration);
     }
 
@@ -134,8 +134,6 @@ public class PlayerController2D : MonoBehaviour
             Physics.gravity = -hit.normal * GRAVITY;
             transform.rotation = Quaternion.LookRotation(transform.forward, hit.normal);
             isHorizontal = hit.normal.y != 0;
-
-            Debug.Log(Physics.gravity);
         }
     }
 
