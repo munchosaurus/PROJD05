@@ -2,10 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/2DFormStatePrototype.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/2DFormStatePrototype.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scriptables.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Forms.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Forms/Ball.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Forms/Ball.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Forms/Cube.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Forms/Cube.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Form.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Form.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/FormStates.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/FormStates.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/3D Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/3D Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/3DPrototype.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/3DPrototype.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController3D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController3D.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +25,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2Fyre6wYjG5VlVd9qI2ldcB7RwW" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectReloadState">
     <option name="STATE" value="1" />
   </component>
@@ -25,11 +36,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="rider.run.widget.enabled.cache" value="false" />
+    <property name="settings.editor.selected.configurable" value="CodeLensConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -64,6 +77,7 @@
       <updated>1665475262836</updated>
       <workItem from="1665475265752" duration="2850000" />
       <workItem from="1665478411914" duration="12635000" />
+      <workItem from="1665563691302" duration="3216000" />
     </task>
     <servers />
   </component>
@@ -85,6 +99,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
 </project>
