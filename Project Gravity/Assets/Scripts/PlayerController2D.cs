@@ -100,11 +100,9 @@ public class PlayerController2D : MonoBehaviour
 
     private bool IsGrounded()
     {
-        float sphereCastRadius = 0.4f;
-        float castDistance = 0.15f;
-        Ray sphereCastTravelRay = new Ray(transform.position, -transform.up);
+        Vector3 boxCastDimensions = new Vector3(0.9f, 0.05f, 0.9f);
 
-        return Physics.SphereCast(sphereCastTravelRay, sphereCastRadius, castDistance, groundLayer);
+        return Physics.BoxCast(transform.position, boxCastDimensions, -transform.up, transform.rotation, transform.localScale.y / 2, groundLayer);
     }
 
     private void MovePlayer(float moveDirection)
@@ -128,7 +126,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void MoveHorizontal(float direction)
     {
-        if(ShouldAddMoreMoveForce(direction))
+        if (ShouldAddMoreMoveForce(direction))
             playerRigidBody.AddForce(new Vector3 (direction, 0, 0) * acceleration);
     }
 
@@ -170,8 +168,6 @@ public class PlayerController2D : MonoBehaviour
             Physics.gravity = -hit.normal * GRAVITY;
             transform.rotation = Quaternion.LookRotation(transform.forward, hit.normal);
             isHorizontal = hit.normal.y != 0;
-
-            Debug.Log(Physics.gravity);
         }
     }
 
