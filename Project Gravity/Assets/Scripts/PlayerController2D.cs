@@ -18,16 +18,51 @@ public class PlayerController2D : MonoBehaviour
     private bool isHorizontal = true;
     private float JUMP_FORCE_MULTIPLIER = 100;
     private float jumpCooldownTimer = 0;
+    
+    // Crap below for level finishing
+    private IngameMenu _menu;
+    [SerializeField] private Transform levelTarget;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody>();
+        _menu = gameObject.GetComponentInChildren<IngameMenu>();
+        levelTarget = GameObject.FindWithTag("Target").gameObject.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Will not perform anything if the lock state is true
+        if (GameController.GetPlayerInputIsLocked())
+        {
+            return;
+        }
+
+        // Handling completion of level and interaction text
+        if (Vector3.Distance(gameObject.transform.position, levelTarget.position) < 0.5f && IsGrounded())
+        {
+            if (!_menu.interactText.activeSelf)
+            {
+                _menu.interactText.SetActive(true);
+            }
+            if (Input.GetKeyDown(KeyCode.E) )
+            {
+                _menu.interactText.SetActive(false);
+                _menu.Pause(1);
+            }
+        }
+        else
+        {
+            if (_menu.interactText.activeSelf)
+            {
+                _menu.interactText.SetActive(false);
+            }
+        }
+        
+
+        
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             ShootGravityGun();
