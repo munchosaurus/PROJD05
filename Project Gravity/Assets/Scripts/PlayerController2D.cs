@@ -33,7 +33,7 @@ public class PlayerController2D : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Will not perform anything if the lock state is true
         if (GameController.GetPlayerInputIsLocked())
@@ -68,7 +68,7 @@ public class PlayerController2D : MonoBehaviour
         {
             ShootGravityGun();
         }
-
+        
         if (IsGrounded())
         {
             if (Input.GetKey(KeyCode.Space))
@@ -87,6 +87,7 @@ public class PlayerController2D : MonoBehaviour
                 move = Input.GetAxis("Vertical");
             }
 
+            Debug.Log(move);
             MovePlayer(move);
         }
 
