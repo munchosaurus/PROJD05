@@ -26,6 +26,7 @@ public class PlayerController2D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Physics.gravity = new Vector3(0, -9.81f,0);
         playerRigidBody = GetComponent<Rigidbody>();
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
         levelTarget = GameObject.FindWithTag("Target").gameObject.transform;
