@@ -86,8 +86,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 move = Input.GetAxis("Vertical");
             }
-
-            Debug.Log(move);
+            
             MovePlayer(move);
         }
 
