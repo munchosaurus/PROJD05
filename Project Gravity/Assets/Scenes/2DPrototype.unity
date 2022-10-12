@@ -2433,10 +2433,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1061672191659828517, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: coolDown
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4154199187743665173, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
+    - target: {fileID: 6620443681475069146, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 7406499542109578701, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
       propertyPath: maxVelocity
       value: 5

@@ -11,6 +11,9 @@ public class FormStates : MonoBehaviour
     private Form _currentForm;
     [Header("Add default form to index 0 of array")]
     [SerializeField] private Form[] allForms;
+    [Header("Add seconds (as float) for form switch cooldown")]
+    [SerializeField] private float coolDown;
+    private int _cooldownCounter;
 
     private void Start()
     {
@@ -24,11 +27,17 @@ public class FormStates : MonoBehaviour
         _meshRenderer.material = _currentForm.formMaterial;
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        if (_cooldownCounter < coolDown*60)
+        {
+            _cooldownCounter += 1;
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             ChangeForm();
+            _cooldownCounter = 0;
         }
     }
     
