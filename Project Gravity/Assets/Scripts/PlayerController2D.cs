@@ -64,11 +64,9 @@ public class PlayerController2D : MonoBehaviour
 
     private bool IsGrounded()
     {
-        float sphereCastRadius = 0.4f;
-        float castDistance = 0.15f;
-        Ray sphereCastTravelRay = new Ray(transform.position, -transform.up);
+        Vector3 boxCastDimensions = new Vector3(0.9f, 0.05f, 0.9f);
 
-        return Physics.SphereCast(sphereCastTravelRay, sphereCastRadius, castDistance, groundLayer);
+        return Physics.BoxCast(transform.position, boxCastDimensions, -transform.up, transform.rotation, transform.localScale.y / 2, groundLayer);
     }
 
     private void MovePlayer(float moveDirection)
