@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6620443681475069146}
   - component: {fileID: 6072096595434927129}
   - component: {fileID: 3598191227808667767}
+  - component: {fileID: 1061672191659828517}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -41,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676775352064022129}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!64 &6072096595434927129
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -55,7 +56,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!23 &3598191227808667767
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -76,7 +77,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 376f03dcfd3e5e34ea75d6cc69a8fc3a, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,6 +99,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1061672191659828517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676775352064022129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f36a4ea60927314ea1530ad17a5bd14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allForms:
+  - {fileID: 11400000, guid: 25a6287db786cb34891e90f705fc6e61, type: 2}
+  - {fileID: 11400000, guid: ffcac56125c9a6d459480d4d651b22b7, type: 2}
 --- !u!1 &7406499542109578702
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +162,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &7406499542109578701
 MonoBehaviour:
@@ -163,3 +179,11 @@ MonoBehaviour:
   gravityChangeLayer:
     serializedVersion: 2
     m_Bits: 64
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  jumpForce: 3
+  jumpCooldown: 0.5
+  maxVelocity: 5
+  acceleration: 3
+  decelleration: 3

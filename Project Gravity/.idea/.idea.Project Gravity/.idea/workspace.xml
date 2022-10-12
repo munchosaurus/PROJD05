@@ -2,18 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/2DFormStatePrototype.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/2DFormStatePrototype.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scriptables.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Forms.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Forms/Ball.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Forms/Ball.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Forms/Cube.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Forms/Cube.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Form.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Form.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/FormStates.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/FormStates.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,7 +65,7 @@
       <updated>1665475262836</updated>
       <workItem from="1665475265752" duration="2850000" />
       <workItem from="1665478411914" duration="12635000" />
-      <workItem from="1665563691302" duration="3216000" />
+      <workItem from="1665563691302" duration="4202000" />
     </task>
     <servers />
   </component>
