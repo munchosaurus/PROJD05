@@ -114,7 +114,7 @@ MonoBehaviour:
   allForms:
   - {fileID: 11400000, guid: 25a6287db786cb34891e90f705fc6e61, type: 2}
   - {fileID: 11400000, guid: ffcac56125c9a6d459480d4d651b22b7, type: 2}
-  coolDown: 3
+  coolDown: 0.5
 --- !u!1 &7406499542109578702
 GameObject:
   m_ObjectHideFlags: 0
