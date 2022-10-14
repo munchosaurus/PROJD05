@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FormStates : MonoBehaviour
@@ -16,6 +17,8 @@ public class FormStates : MonoBehaviour
     private MeshRenderer _meshRenderer;
     private Form _currentForm;
     private int _cooldownCounter;
+    private GameObject _parentGameObject;
+    private PlayerController2D _playerController2D;
     private Rigidbody _rigidbody;
 
     private void Start()
@@ -24,9 +27,11 @@ public class FormStates : MonoBehaviour
         _meshFilter = gameObject.GetComponent<MeshFilter>();
         _meshCollider = gameObject.GetComponent<MeshCollider>();
         _meshRenderer = gameObject.GetComponent<MeshRenderer>();
-        _rigidbody = gameObject.transform.parent.gameObject.GetComponent<Rigidbody>();
-        _currentForm = allForms[0];
-        ChangeForm();
+        _parentGameObject = gameObject.transform.parent.gameObject;
+        _playerController2D = _parentGameObject.GetComponent<PlayerController2D>();
+        _rigidbody = _parentGameObject.GetComponent<Rigidbody>();
+        _cooldownCounter = (int) coolDown * 60;
+        ChangeForm(0);
     }
 
     void FixedUpdate()
@@ -41,26 +46,26 @@ public class FormStates : MonoBehaviour
         {
             if (_currentForm.formName.Equals(allForms[0].formName))
             {
-                _currentForm = allForms[1];
+                ChangeForm(1);
             }
             else
             {
-                _currentForm = allForms[0];
+                ChangeForm(0);
             }
-
-            ChangeForm();
             _cooldownCounter = 0;
         }
     }
 
-    private void ChangeForm()
+    private void ChangeForm(int formIndex)
     {
+        _currentForm = allForms[formIndex];
         _meshFilter.sharedMesh = _currentForm.formMesh;
         _meshCollider.sharedMesh = _currentForm.formMesh;
         _meshRenderer.material = _currentForm.formMaterial;
         if (_currentForm.canMove)
         {
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            _playerController2D.RotateToPlane();
         }
         else
         {

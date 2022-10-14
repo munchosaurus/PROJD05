@@ -12,6 +12,7 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float maxVelocity = 5f;
     [SerializeField] private float acceleration = 2f;
     [SerializeField] private float decelleration = 3f;
+    [SerializeField] private Vector3 currentFacing;
     
     private FormStates formStates;
     private readonly float GRAVITY = 9.81f;
@@ -32,6 +33,7 @@ public class PlayerController2D : MonoBehaviour
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
         levelTarget = GameObject.FindWithTag("Target").gameObject.transform;
         formStates = gameObject.GetComponentInChildren<FormStates>();
+        
     }
 
     // Update is called once per frame
@@ -96,7 +98,8 @@ public class PlayerController2D : MonoBehaviour
         {
             jumpCooldownTimer -= Time.deltaTime;
         }
-
+        Vector3 eulerRotation = transform.rotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(0, 0, eulerRotation.z);
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
@@ -167,9 +170,10 @@ public class PlayerController2D : MonoBehaviour
 
         if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, gravityChangeLayer, QueryTriggerInteraction.Collide) && hit.normal == hit.collider.transform.right)
         {
-            Physics.gravity = -hit.normal * GRAVITY;
-            transform.rotation = Quaternion.LookRotation(transform.forward, hit.normal);
-            isHorizontal = hit.normal.y != 0;
+            currentFacing = hit.normal;
+            Physics.gravity = -currentFacing * GRAVITY;
+            RotateToPlane();
+            isHorizontal = currentFacing.y != 0;
         }
     }
 
@@ -180,6 +184,14 @@ public class PlayerController2D : MonoBehaviour
         xy.Raycast(ray, out float distance);
 
         return ray.GetPoint(distance);
+    }
+
+    public void RotateToPlane()
+    {
+        if (formStates.GetCurrentForm().canMove)
+        {
+            transform.rotation = Quaternion.LookRotation(transform.forward, currentFacing);
+        }
     }
 
     private void OnDrawGizmos()
