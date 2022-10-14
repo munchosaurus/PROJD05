@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Cube
   m_EditorClassIdentifier: 
   formName: Cube
+  canMove: 1
   formMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   formMaterial: {fileID: 2100000, guid: 376f03dcfd3e5e34ea75d6cc69a8fc3a, type: 2}

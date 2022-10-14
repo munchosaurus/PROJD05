@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class FormStates : MonoBehaviour
 {
+    [Header("Add default form to index 0 of array")] [SerializeField]
+    private Form[] allForms;
+
+    [Header("Add seconds (as float) for form switch cooldown")] [SerializeField]
+    private float coolDown;
+
     private MeshFilter _meshFilter;
     private MeshCollider _meshCollider;
     private MeshRenderer _meshRenderer;
     private Form _currentForm;
-    [Header("Add default form to index 0 of array")]
-    [SerializeField] private Form[] allForms;
-    [Header("Add seconds (as float) for form switch cooldown")]
-    [SerializeField] private float coolDown;
     private int _cooldownCounter;
+    private Rigidbody _rigidbody;
 
     private void Start()
     {
@@ -21,39 +24,52 @@ public class FormStates : MonoBehaviour
         _meshFilter = gameObject.GetComponent<MeshFilter>();
         _meshCollider = gameObject.GetComponent<MeshCollider>();
         _meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        _rigidbody = gameObject.transform.parent.gameObject.GetComponent<Rigidbody>();
         _currentForm = allForms[0];
-        _meshFilter.sharedMesh = _currentForm.formMesh;
-        _meshCollider.sharedMesh = _currentForm.formMesh;
-        _meshRenderer.material = _currentForm.formMaterial;
+        ChangeForm();
     }
 
     void FixedUpdate()
     {
-        if (_cooldownCounter < coolDown*60)
+        if (_cooldownCounter <= coolDown * 60)
         {
             _cooldownCounter += 1;
             return;
         }
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            if (_currentForm.formName.Equals(allForms[0].formName))
+            {
+                _currentForm = allForms[1];
+            }
+            else
+            {
+                _currentForm = allForms[0];
+            }
+
             ChangeForm();
             _cooldownCounter = 0;
         }
     }
-    
+
     private void ChangeForm()
     {
-        for (int i = 0; i < allForms.Length; i++)
-        {
-            if (_currentForm.formName.Equals(allForms[i].formName))
-            {
-                continue;
-            }
-            _currentForm = allForms[i];
-            break;
-        }
         _meshFilter.sharedMesh = _currentForm.formMesh;
         _meshCollider.sharedMesh = _currentForm.formMesh;
         _meshRenderer.material = _currentForm.formMaterial;
+        if (_currentForm.canMove)
+        {
+            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+        else
+        {
+            _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        }
+    }
+
+    public Form GetCurrentForm()
+    {
+        return _currentForm;
     }
 }

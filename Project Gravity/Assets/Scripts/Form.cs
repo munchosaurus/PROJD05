@@ -4,6 +4,7 @@
 public class Form : ScriptableObject
 {
     public string formName;
+    public bool canMove;
     public Mesh formMesh;
     public Material formMaterial;
 }

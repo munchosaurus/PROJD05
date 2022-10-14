@@ -12,7 +12,8 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float maxVelocity = 5f;
     [SerializeField] private float acceleration = 2f;
     [SerializeField] private float decelleration = 3f;
-
+    
+    private FormStates formStates;
     private readonly float GRAVITY = 9.81f;
     private Rigidbody playerRigidBody;
     private bool isHorizontal = true;
@@ -30,6 +31,7 @@ public class PlayerController2D : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody>();
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
         levelTarget = GameObject.FindWithTag("Target").gameObject.transform;
+        formStates = gameObject.GetComponentInChildren<FormStates>();
     }
 
     // Update is called once per frame
@@ -69,7 +71,7 @@ public class PlayerController2D : MonoBehaviour
             ShootGravityGun();
         }
         
-        if (IsGrounded())
+        if (IsGrounded() && formStates.GetCurrentForm().canMove)
         {
             if (Input.GetKey(KeyCode.Space))
             {

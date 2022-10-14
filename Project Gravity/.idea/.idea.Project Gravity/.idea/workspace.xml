@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/2D Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/2D Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/2DPrototype.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/2DPrototype.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Forms/Cube.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Forms/Cube.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Form.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Form.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FormStates.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FormStates.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController2D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController2D.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +80,7 @@
       <workItem from="1665478411914" duration="12635000" />
       <workItem from="1665563691302" duration="13648000" />
       <workItem from="1665648645384" duration="523000" />
+      <workItem from="1665738563955" duration="3669000" />
     </task>
     <servers />
   </component>
