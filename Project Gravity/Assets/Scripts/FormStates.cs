@@ -31,6 +31,7 @@ public class FormStates : MonoBehaviour
         _playerController2D = _parentGameObject.GetComponent<PlayerController2D>();
         _rigidbody = _parentGameObject.GetComponent<Rigidbody>();
         _cooldownCounter = (int) coolDown * 60;
+        _currentForm = allForms[0];
         ChangeForm(0);
     }
 
@@ -41,19 +42,20 @@ public class FormStates : MonoBehaviour
             _cooldownCounter += 1;
             return;
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+    public void TriggerFormChange()
+    {
+        if (_currentForm.formName.Equals(allForms[0].formName))
         {
-            if (_currentForm.formName.Equals(allForms[0].formName))
-            {
-                ChangeForm(1);
-            }
-            else
-            {
-                ChangeForm(0);
-            }
-            _cooldownCounter = 0;
+            ChangeForm(1);
         }
+        else
+        {
+            ChangeForm(0);
+        }
+
+        _cooldownCounter = 0;
     }
 
     private void ChangeForm(int formIndex)
