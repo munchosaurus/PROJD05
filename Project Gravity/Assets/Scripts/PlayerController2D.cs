@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController2D : MonoBehaviour
 {
@@ -13,27 +14,28 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float acceleration = 2f;
     [SerializeField] private float decelleration = 3f;
     [SerializeField] private Vector3 currentFacing;
-    
+
+    private InputAction.CallbackContext movementKeyInfo;
     private FormStates formStates;
     private readonly float GRAVITY = 9.81f;
     private Rigidbody playerRigidBody;
     private bool isHorizontal = true;
     private float JUMP_FORCE_MULTIPLIER = 100;
     private float jumpCooldownTimer = 0;
-    
+
     // Crap below for level finishing
     private IngameMenu _menu;
     [SerializeField] private Transform levelTarget;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Physics.gravity = new Vector3(0, -9.81f,0);
+        Physics.gravity = new Vector3(0, -9.81f, 0);
         playerRigidBody = GetComponent<Rigidbody>();
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
         levelTarget = GameObject.FindWithTag("Target").gameObject.transform;
         formStates = gameObject.GetComponentInChildren<FormStates>();
-        
+        currentFacing = new Vector3(0f, 1f, 0f);
     }
 
     // Update is called once per frame
@@ -45,17 +47,17 @@ public class PlayerController2D : MonoBehaviour
             return;
         }
 
-        // Handling completion of level and interaction text
-        if (Vector3.Distance(gameObject.transform.position, levelTarget.position) < 0.5f && IsGrounded())
+        if (jumpCooldownTimer > 0)
+        {
+            jumpCooldownTimer -= Time.deltaTime;
+        }
+
+        MovePlayer();
+        if (IsGoalReached())
         {
             if (!_menu.interactText.activeSelf)
             {
                 _menu.interactText.SetActive(true);
-            }
-            if (Input.GetKeyDown(KeyCode.E) )
-            {
-                _menu.interactText.SetActive(false);
-                _menu.Pause(1);
             }
         }
         else
@@ -65,74 +67,67 @@ public class PlayerController2D : MonoBehaviour
                 _menu.interactText.SetActive(false);
             }
         }
-        
 
-        
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            ShootGravityGun();
-        }
-        
-        if (IsGrounded() && formStates.GetCurrentForm().canMove)
-        {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Jump();
-            }
-
-            float move;
-
-            if (isHorizontal)
-            {
-                move = Input.GetAxis("Horizontal");
-            }
-            else
-            {
-                move = Input.GetAxis("Vertical");
-            }
-            
-            MovePlayer(move);
-        }
-
-        if(jumpCooldownTimer > 0)
-        {
-            jumpCooldownTimer -= Time.deltaTime;
-        }
         Vector3 eulerRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0, 0, eulerRotation.z);
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+    }
+
+    public void Interact()
+    {
+        if (IsGoalReached())
+        {
+            _menu.interactText.SetActive(false);
+            _menu.Pause(1);
+        }
+    }
+
+    private bool IsGoalReached()
+    {
+        return (Vector3.Distance(gameObject.transform.position, levelTarget.position) < 0.5f && IsGrounded());
+    }
+
+    public void SetMovementInput(InputAction.CallbackContext movement)
+    {
+        movementKeyInfo = movement;
     }
 
     private bool IsGrounded()
     {
         Vector3 boxCastDimensions = new Vector3(0.9f, 0.05f, 0.9f);
 
-        return Physics.BoxCast(transform.position, boxCastDimensions, -transform.up, transform.rotation, transform.localScale.y / 2, groundLayer);
+        return Physics.BoxCast(transform.position, boxCastDimensions, -transform.up, transform.rotation,
+            transform.localScale.y / 2, groundLayer);
     }
 
-    private void MovePlayer(float moveDirection)
+    private void MovePlayer()
     {
-        if (moveDirection == 0 && playerRigidBody.velocity.magnitude > 0)
+        if (IsGrounded() && formStates.GetCurrentForm().canMove)
         {
-            playerRigidBody.AddForce(playerRigidBody.velocity.normalized * -decelleration);
-        }
-        else {
-            if (isHorizontal)
+            if (movementKeyInfo.ReadValue<Vector2>().magnitude == 0 && playerRigidBody.velocity.magnitude > 0)
             {
-                MoveHorizontal(moveDirection);
+                playerRigidBody.AddForce(playerRigidBody.velocity.normalized * -decelleration);
             }
             else
             {
-                MoveVertical(moveDirection);
+                if (isHorizontal)
+                {
+                    MoveHorizontal(movementKeyInfo.ReadValue<Vector2>().x);
+                }
+                else
+                {
+                    MoveVertical(movementKeyInfo.ReadValue<Vector2>().y);
+                }
             }
+
+            ClampMoveSpeed();
         }
-        ClampMoveSpeed();
     }
 
     private void MoveHorizontal(float direction)
     {
         if (ShouldAddMoreMoveForce(direction))
-            playerRigidBody.AddForce(new Vector3 (direction, 0, 0) * acceleration);
+            playerRigidBody.AddForce(new Vector3(direction, 0, 0) * acceleration);
     }
 
     private void MoveVertical(float direction)
@@ -148,27 +143,28 @@ public class PlayerController2D : MonoBehaviour
 
     private void ClampMoveSpeed()
     {
-        if(playerRigidBody.velocity.magnitude > maxVelocity)
+        if (playerRigidBody.velocity.magnitude > maxVelocity)
         {
             playerRigidBody.velocity = playerRigidBody.velocity.normalized * maxVelocity;
         }
     }
 
-    private void Jump()
+    public void Jump()
     {
-        if (jumpCooldownTimer <= 0)
+        if (jumpCooldownTimer <= 0 && formStates.GetCurrentForm().canMove && IsGrounded())
         {
             playerRigidBody.AddForce(transform.up * jumpForce * JUMP_FORCE_MULTIPLIER);
             jumpCooldownTimer = jumpCooldown;
         }
     }
 
-    private void ShootGravityGun()
+    public void ShootGravityGun()
     {
         RaycastHit hit;
         Vector3 direction = GetMousePositionOnPlane() - transform.position;
 
-        if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, gravityChangeLayer, QueryTriggerInteraction.Collide) && hit.normal == hit.collider.transform.right)
+        if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, gravityChangeLayer,
+                QueryTriggerInteraction.Collide) && hit.normal == hit.collider.transform.right)
         {
             currentFacing = hit.normal;
             Physics.gravity = -currentFacing * GRAVITY;
