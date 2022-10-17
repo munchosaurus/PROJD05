@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController2D : MonoBehaviour
 {
-    [SerializeField] private LayerMask gravityChangeLayer;
+    [SerializeField] public LayerMask gravityChangeLayer;
     [SerializeField] private LayerMask groundLayer;
 
     [SerializeField] private float jumpForce = 3f;
@@ -13,13 +13,13 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float maxVelocity = 5f;
     [SerializeField] private float acceleration = 2f;
     [SerializeField] private float decelleration = 3f;
-    [SerializeField] private Vector3 currentFacing;
+    //[SerializeField] private Vector3 currentFacing; // moving to GravityController
 
     private InputAction.CallbackContext movementKeyInfo;
     private FormStates formStates;
-    private readonly float GRAVITY = 9.81f;
+    //private readonly float GRAVITY = 9.81f; // Moving to GravityController
     private Rigidbody playerRigidBody;
-    private bool isHorizontal = true;
+    //private bool isHorizontal = true; // Moving to gravityController
     private float JUMP_FORCE_MULTIPLIER = 100;
     private float jumpCooldownTimer = 0;
 
@@ -35,7 +35,8 @@ public class PlayerController2D : MonoBehaviour
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
         levelTarget = GameObject.FindWithTag("Target").gameObject.transform;
         formStates = gameObject.GetComponentInChildren<FormStates>();
-        currentFacing = new Vector3(0f, 1f, 0f);
+        
+        //currentFacing = new Vector3(0f, 1f, 0f); // moving to GravityController
     }
 
     // Update is called once per frame
@@ -87,6 +88,7 @@ public class PlayerController2D : MonoBehaviour
         return (Vector3.Distance(gameObject.transform.position, levelTarget.position) < 0.5f && IsGrounded());
     }
 
+    // Used by input system
     public void SetMovementInput(InputAction.CallbackContext movement)
     {
         movementKeyInfo = movement;
@@ -102,15 +104,18 @@ public class PlayerController2D : MonoBehaviour
 
     private void MovePlayer()
     {
+        Debug.Log("Jag kör och " + movementKeyInfo.ReadValue<Vector2>().magnitude);
         if (IsGrounded() && formStates.GetCurrentForm().canMove)
         {
+            Debug.Log("Kommer in i första ifsatsen");
             if (movementKeyInfo.ReadValue<Vector2>().magnitude == 0 && playerRigidBody.velocity.magnitude > 0)
             {
                 playerRigidBody.AddForce(playerRigidBody.velocity.normalized * -decelleration);
             }
             else
             {
-                if (isHorizontal)
+                Debug.Log("Kommer in i else");
+                if (GravityController.IsGravityHorizontal())
                 {
                     MoveHorizontal(movementKeyInfo.ReadValue<Vector2>().x);
                 }
@@ -149,6 +154,7 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    // Used by input system.
     public void Jump()
     {
         if (jumpCooldownTimer <= 0 && formStates.GetCurrentForm().canMove && IsGrounded())
@@ -157,7 +163,17 @@ public class PlayerController2D : MonoBehaviour
             jumpCooldownTimer = jumpCooldown;
         }
     }
+    
+    public void RotateToPlane()
+    {
+        if (formStates.GetCurrentForm().canMove)
+        {
+            transform.rotation = Quaternion.LookRotation(transform.forward, GravityController.GetCurrentFacing());
+        }
+    }
 
+    // Moved to GravityGun
+    /*
     public void ShootGravityGun()
     {
         RaycastHit hit;
@@ -171,8 +187,10 @@ public class PlayerController2D : MonoBehaviour
             RotateToPlane();
             isHorizontal = currentFacing.y != 0;
         }
-    }
+    }*/
 
+    // Moved to GravityGun
+    /*
     private Vector3 GetMousePositionOnPlane()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -180,18 +198,18 @@ public class PlayerController2D : MonoBehaviour
         xy.Raycast(ray, out float distance);
 
         return ray.GetPoint(distance);
+    }*/
+
+    // moved to GravityController
+    /*
+    public Vector3 GetCurrentFacing()
+    {
+        return currentFacing;
     }
 
-    public void RotateToPlane()
+    public void SetCurrentFacing(Vector3 normal)
     {
-        if (formStates.GetCurrentForm().canMove)
-        {
-            transform.rotation = Quaternion.LookRotation(transform.forward, currentFacing);
-        }
-    }
+        currentFacing = normal;
+    }*/
 
-    private void OnDrawGizmos()
-    {
-        Debug.DrawRay(transform.position, GetMousePositionOnPlane() - transform.position, Color.green);
-    }
 }
