@@ -212,8 +212,8 @@ MonoBehaviour:
   jumpForce: 3
   jumpCooldown: 0.5
   maxVelocity: 5
-  playerMovementAcceleration: 15
-  playerMovementDecelleration: 25
+  playerMovementAcceleration: 25
+  playerMovementDecelleration: 15
   jumpForceMultiplier: 100
   formSwitchCooldown: 0.5
   allPlayerForms:
