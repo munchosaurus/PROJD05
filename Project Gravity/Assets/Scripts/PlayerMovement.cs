@@ -7,23 +7,17 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public LayerMask gravityChangeLayer;
     [SerializeField] private LayerMask groundLayer;
-
     private float _jumpForce;
     private float _jumpCooldown;
     private float _maxVelocity;
     private float _acceleration;
     private float _decelleration;
     private float _jumpForceMultiplier;
-
-
     private InputAction.CallbackContext _movementKeyInfo;
     private FormStates _formStates;
     private Rigidbody _playerRigidBody;
     private float _jumpCooldownTimer;
-
     private PlayerStats _playerStats;
-
-    // Crap below for level finishing
     private IngameMenu _menu;
     [SerializeField] private Transform levelTarget;
 
@@ -84,25 +78,10 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, eulerRotation.z);
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
-
-    public void Interact()
-    {
-        if (IsGoalReached())
-        {
-            _menu.interactText.SetActive(false);
-            _menu.Pause(1);
-        }
-    }
-
+    
     private bool IsGoalReached()
     {
         return (Vector3.Distance(gameObject.transform.position, levelTarget.position) < 0.5f && IsGrounded());
-    }
-
-    // Used by input system
-    public void SetMovementInput(InputAction.CallbackContext movement)
-    {
-        _movementKeyInfo = movement;
     }
 
     private bool IsGrounded()
@@ -111,6 +90,32 @@ public class PlayerMovement : MonoBehaviour
 
         return Physics.BoxCast(transform.position, boxCastDimensions, -transform.up, transform.rotation,
             transform.localScale.y / 2, groundLayer);
+    }
+
+    // Called by input system
+    public void Interact()
+    {
+        if (IsGoalReached())
+        {
+            _menu.interactText.SetActive(false);
+            _menu.Pause(1);
+        }
+    }
+    
+    // Called by input system
+    public void Jump()
+    {
+        if (_jumpCooldownTimer <= 0 && _formStates.GetCurrentForm().canMove && IsGrounded())
+        {
+            _playerRigidBody.AddForce(transform.up * _jumpForce * _jumpForceMultiplier);
+            _jumpCooldownTimer = _jumpCooldown;
+        }
+    }
+    
+    // Called by input system
+    public void SetMovementInput(InputAction.CallbackContext movement)
+    {
+        _movementKeyInfo = movement;
     }
 
     private void MovePlayer()
@@ -158,16 +163,6 @@ public class PlayerMovement : MonoBehaviour
         if (_playerRigidBody.velocity.magnitude > _maxVelocity)
         {
             _playerRigidBody.velocity = _playerRigidBody.velocity.normalized * _maxVelocity;
-        }
-    }
-
-    // Used by input system.
-    public void Jump()
-    {
-        if (_jumpCooldownTimer <= 0 && _formStates.GetCurrentForm().canMove && IsGrounded())
-        {
-            _playerRigidBody.AddForce(transform.up * _jumpForce * _jumpForceMultiplier);
-            _jumpCooldownTimer = _jumpCooldown;
         }
     }
 
