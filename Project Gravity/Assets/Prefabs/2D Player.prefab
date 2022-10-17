@@ -111,10 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f36a4ea60927314ea1530ad17a5bd14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allForms:
-  - {fileID: 11400000, guid: 25a6287db786cb34891e90f705fc6e61, type: 2}
-  - {fileID: 11400000, guid: ffcac56125c9a6d459480d4d651b22b7, type: 2}
-  coolDown: 0.5
 --- !u!1 &7406499542109578702
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +123,7 @@ GameObject:
   - component: {fileID: 4154199187743665173}
   - component: {fileID: 7406499542109578701}
   - component: {fileID: 1921015880380027198}
+  - component: {fileID: 4244639442256880407}
   - component: {fileID: 1061672191659828517}
   m_Layer: 0
   m_Name: 2D Player
@@ -187,11 +184,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  jumpForce: 3
-  jumpCooldown: 0.5
-  maxVelocity: 5
-  acceleration: 25
-  decelleration: 10
   levelTarget: {fileID: 0}
 --- !u!114 &1921015880380027198
 MonoBehaviour:
@@ -205,6 +197,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d13e61bf8dcf41dfba40c64200ddc70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4244639442256880407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406499542109578702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca8a86641514f38ac986cf78b85167e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 3
+  jumpCooldown: 0.5
+  maxVelocity: 5
+  playerMovementAcceleration: 15
+  playerMovementDecelleration: 25
+  jumpForceMultiplier: 100
+  formSwitchCooldown: 0.5
+  allPlayerForms:
+  - {fileID: 11400000, guid: 25a6287db786cb34891e90f705fc6e61, type: 2}
+  - {fileID: 11400000, guid: ffcac56125c9a6d459480d4d651b22b7, type: 2}
 --- !u!114 &1061672191659828517
 MonoBehaviour:
   m_ObjectHideFlags: 0

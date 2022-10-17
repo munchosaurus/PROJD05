@@ -1,26 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class FormStates : MonoBehaviour
 {
-    [Header("Add default form to index 0 of array")] [SerializeField]
-    private Form[] allForms;
-
-    [Header("Add seconds (as float) for form switch cooldown")] [SerializeField]
-    private float coolDown;
-
     private MeshFilter _meshFilter;
     private MeshCollider _meshCollider;
     private MeshRenderer _meshRenderer;
     private Form _currentForm;
-    private int _cooldownCounter;
     private GameObject _parentGameObject;
-    private PlayerController2D _playerController2D;
+    private PlayerMovement _playerMovement;
     private Rigidbody _rigidbody;
-
+    private PlayerStats _playerStats;
+    private int _cooldownCounter;
+    private float _coolDown;
+    private Form[] _allForms;
+    
     private void Start()
     {
         // Initializes and stores references to the different mesh attributes to be altered throughout play.
@@ -28,16 +21,20 @@ public class FormStates : MonoBehaviour
         _meshCollider = gameObject.GetComponent<MeshCollider>();
         _meshRenderer = gameObject.GetComponent<MeshRenderer>();
         _parentGameObject = gameObject.transform.parent.gameObject;
-        _playerController2D = _parentGameObject.GetComponent<PlayerController2D>();
+        _playerMovement = _parentGameObject.GetComponent<PlayerMovement>();
         _rigidbody = _parentGameObject.GetComponent<Rigidbody>();
-        _cooldownCounter = (int) coolDown * 60;
-        _currentForm = allForms[0];
+
+        _playerStats = _parentGameObject.GetComponent<PlayerStats>();
+        _allForms = _playerStats.GetAllForms();
+        _cooldownCounter = (int) _playerStats.GetFormSwitchCooldown() * 60;
+        _coolDown = _playerStats.GetFormSwitchCooldown();
+        _currentForm = _allForms[0];
         ChangeForm(0);
     }
 
     void FixedUpdate()
     {
-        if (_cooldownCounter <= coolDown * 60)
+        if (_cooldownCounter <= _coolDown * 60)
         {
             _cooldownCounter += 1;
             return;
@@ -46,7 +43,7 @@ public class FormStates : MonoBehaviour
 
     public void TriggerFormChange()
     {
-        if (_currentForm.formName.Equals(allForms[0].formName))
+        if (_currentForm.formName.Equals(_allForms[0].formName))
         {
             ChangeForm(1);
         }
@@ -60,14 +57,14 @@ public class FormStates : MonoBehaviour
 
     private void ChangeForm(int formIndex)
     {
-        _currentForm = allForms[formIndex];
+        _currentForm = _allForms[formIndex];
         _meshFilter.sharedMesh = _currentForm.formMesh;
         _meshCollider.sharedMesh = _currentForm.formMesh;
         _meshRenderer.material = _currentForm.formMaterial;
         if (_currentForm.canMove)
         {
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-            _playerController2D.RotateToPlane();
+            _playerMovement.RotateToPlane();
         }
         else
         {

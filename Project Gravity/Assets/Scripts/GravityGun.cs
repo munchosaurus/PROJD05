@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class GravityGun : MonoBehaviour
 {
-    private PlayerController2D _playerController;
+    private PlayerMovement _playerController;
 
     private void Awake()
     {
-        _playerController = gameObject.GetComponent<PlayerController2D>();
+        _playerController = gameObject.GetComponent<PlayerMovement>();
     }
 
     private void TriggerGravityGunEvent(RaycastHit hit)

@@ -49,7 +49,7 @@ public static class GravityController
         {
             SetCurrentFacing(gravityGunEvent.hitNormal);
             SetNewGravity();
-            gravityGunEvent.SourceGameObject.GetComponent<PlayerController2D>().RotateToPlane();
+            gravityGunEvent.SourceGameObject.GetComponent<PlayerMovement>().RotateToPlane();
             SetHorizontal(_isHorizontal = _currentFacing.y != 0);
         }
         catch

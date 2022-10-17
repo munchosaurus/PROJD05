@@ -2846,6 +2846,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4244639442256880407, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: jumpForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244639442256880407, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: playerMovementAcceleration
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244639442256880407, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: playerMovementDecelleration
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7406499542109578702, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
       propertyPath: m_Name
       value: 2D Player
