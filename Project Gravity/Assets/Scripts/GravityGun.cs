@@ -30,9 +30,8 @@ public class GravityGun : MonoBehaviour
         // TODO: Look at the maxdistance
         
         if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, _playerController.gravityChangeLayer,
-                QueryTriggerInteraction.Collide) && hit.normal == hit.collider.transform.right)
+                QueryTriggerInteraction.Collide) && hit.normal == hit.collider.transform.right && GravityController.GetCurrentFacing() != -hit.normal * GravityController.GetGravity())
         {
-            Debug.Log("Ska trigga event");
             TriggerGravityGunEvent(hit);
         }
     }

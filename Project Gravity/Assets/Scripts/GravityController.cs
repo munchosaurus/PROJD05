@@ -43,6 +43,11 @@ public static class GravityController
         Physics.gravity = -_currentFacing * GRAVITY;
     }
 
+    public static float GetGravity()
+    {
+        return GRAVITY;
+    }
+
     private static void OnGravityGunHit(GravityGunEvent gravityGunEvent)
     {
         try
