@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerStats _playerStats;
     private IngameMenu _menu;
     [SerializeField] private Transform levelTarget;
+    private Vector3 boxCastDimensions;
 
     // Start is called before the first frame update
     void Awake()
@@ -31,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
         _acceleration = _playerStats.GetPlayerMovementAcceleration();
         _decelleration = _playerStats.GetPlayerMovementDecelleration();
         _jumpForceMultiplier = _playerStats.GetJumpForceMultiplier();
+        boxCastDimensions = new Vector3(0.9f, 0.05f, 0.9f);
+        
 
         Physics.gravity = new Vector3(0, -9.81f, 0);
         _playerRigidBody = GetComponent<Rigidbody>();
@@ -86,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        Vector3 boxCastDimensions = new Vector3(0.9f, 0.05f, 0.9f);
+        
 
         return Physics.BoxCast(transform.position, boxCastDimensions, -transform.up, transform.rotation,
             transform.localScale.y / 2, groundLayer);
