@@ -50,7 +50,6 @@ public static class GravityController
 
     private static void OnGravityGunHit(GravityGunEvent gravityGunEvent)
     {
-        Debug.Log("gravity event triggas");
         try
         {
             SetCurrentFacing(gravityGunEvent.hitNormal);

@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/2DPrototype.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/2DPrototype.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/DynamicObjectMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DynamicObjectMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GravityController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GravityController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GravityGun.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GravityGun.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
