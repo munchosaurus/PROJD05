@@ -372,6 +372,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 30bc6748-72f4-4cba-a091-bc042ba851b7
     m_ActionName: PlayerControls/SwitchForm[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2124406989537400889}
+        m_TargetAssemblyTypeName: IngameMenu, Assembly-CSharp
+        m_MethodName: ChangePauseState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bad429da-d47e-42b6-b9ac-eb9b4614c480
+    m_ActionName: PlayerControls/PauseGame[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControls
@@ -599,6 +615,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+--- !u!114 &2124406989537400889 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1447688653, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+  m_PrefabInstance: {fileID: 2124406988836315636}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8b2ef3b252642c28c6c524deabf1375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7723872939631677414 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8524150135373803026, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
