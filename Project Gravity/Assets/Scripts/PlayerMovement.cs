@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         _decelleration = _playerStats.GetPlayerMovementDecelleration();
         _jumpForceMultiplier = _playerStats.GetJumpForceMultiplier();
         _airMovementMultiplier = _playerStats.GetAirMovementMultiplier();
-        boxCastDimensions = new Vector3(0.49f, 0.05f, 0.49f);
+        boxCastDimensions = new Vector3(0.9f, 0.05f, 0.9f);
         
 
         Physics.gravity = new Vector3(0, -9.81f, 0);

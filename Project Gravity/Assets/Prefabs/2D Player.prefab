@@ -219,6 +219,7 @@ MonoBehaviour:
   allPlayerForms:
   - {fileID: 11400000, guid: 25a6287db786cb34891e90f705fc6e61, type: 2}
   - {fileID: 11400000, guid: ffcac56125c9a6d459480d4d651b22b7, type: 2}
+  airMovementMultiplier: 0.2
 --- !u!114 &1061672191659828517
 MonoBehaviour:
   m_ObjectHideFlags: 0
