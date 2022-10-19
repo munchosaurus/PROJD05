@@ -17,20 +17,17 @@ public class DynamicObjectMovement : MonoBehaviour
     private Quaternion lockedRotation;
     private Vector3 boxCastDimensions;
     private bool isGrounded;
-    private Transform groundCheck;
-    private Vector2 currentFacing;
     [SerializeField] private Vector3 horizontalCast, verticalCast;
     bool groundedRight;
     bool groundedLeft;
     bool groundedUp;
-    bool groundedDown;
+    [SerializeField] bool groundedDown;
 
 
     // Start is called before the first frame update
     void Start()
     {
         velocity = Vector3.zero;
-        groundCheck = gameObject.transform.GetChild(0).transform;
         lockedRotation = new Quaternion(0, 0, 0, 0);
 
         EventSystem.Current.RegisterListener<GravityGunEvent>(OnGravityChange, ref _gravityGunEventGuid);
@@ -49,6 +46,7 @@ public class DynamicObjectMovement : MonoBehaviour
             if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
                     transform.localScale.y / 2, groundMask))
             {
+                ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.down, hit.distance, Color.green);
                 groundedDown = true;
                 transform.position = new Vector3(transform.position.x,
                     hit.collider.transform.position.y + hit.collider.transform.localScale.y, transform.position.z);
@@ -62,6 +60,8 @@ public class DynamicObjectMovement : MonoBehaviour
             if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
                     transform.localScale.y / 2, groundMask))
             {
+                ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.up, hit.distance, Color.green);
+
                 groundedUp = true;
                 transform.position = new Vector3(transform.position.x,
                     hit.collider.transform.position.y - hit.collider.transform.localScale.y, transform.position.z);
@@ -79,6 +79,8 @@ public class DynamicObjectMovement : MonoBehaviour
             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
                     transform.localScale.x / 2, groundMask))
             {
+                ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.right, hit.distance, Color.green);
+
                 groundedRight = true;
                 transform.position = new Vector3(hit.collider.transform.position.x - hit.collider.transform.localScale.x,
                     transform.position.y, transform.position.z);
@@ -92,6 +94,8 @@ public class DynamicObjectMovement : MonoBehaviour
             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, transform.rotation,
                     transform.localScale.x / 2, groundMask))
             {
+                ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.left, hit.distance, Color.green);
+
                 groundedLeft = true;
                 transform.position = new Vector3(hit.collider.transform.position.x + hit.collider.transform.localScale.x,
                     transform.position.y, transform.position.z);
@@ -123,6 +127,6 @@ public class DynamicObjectMovement : MonoBehaviour
 
     private void OnGravityChange(GravityGunEvent gravityGunEvent)
     {
-        currentFacing = gravityGunEvent.hitNormal;
+        
     }
 }
