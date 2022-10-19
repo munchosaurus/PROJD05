@@ -15,6 +15,9 @@ public class PlayerStats : MonoBehaviour
     [Header("Add default form to index 0 of array")] 
     [SerializeField] private Form[] allPlayerForms;
 
+    [Header("Add a float to multiply with the player movement acceleration for when player is in air")] [SerializeField]
+    private float airMovementMultiplier;
+
     public float GetJumpForce()
     {
         return jumpForce;
@@ -48,6 +51,11 @@ public class PlayerStats : MonoBehaviour
     public float GetFormSwitchCooldown()
     {
         return formSwitchCooldown;
+    }
+
+    public float GetAirMovementMultiplier()
+    {
+        return airMovementMultiplier;
     }
 
     public Form[] GetAllForms()

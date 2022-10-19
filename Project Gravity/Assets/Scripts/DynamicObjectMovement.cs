@@ -102,10 +102,6 @@ public class DynamicObjectMovement : MonoBehaviour
             }
         }
 
-
-
-
-
         if (groundedDown && Physics.gravity.y < 0)
         {
             velocity.y = 0;
@@ -123,58 +119,6 @@ public class DynamicObjectMovement : MonoBehaviour
         }
 
         transform.position += velocity * Time.fixedDeltaTime;
-
-        // RaycastHit hit;
-        // Physics.Raycast(transform.position, -GravityController.GetCurrentFacing(), out hit, 
-        //     (transform.localScale.y / 2), groundMask);
-        //
-        // if (hit.collider)
-        // {
-        //     Vector3 newPos = transform.position;
-        //     currentFacing = GravityController.GetCurrentFacing();
-        //     if (currentFacing.y < 0)
-        //     {
-        //         if (groundCheck.localPosition.y != 0.5f)
-        //         {
-        //             groundCheck.localPosition = new Vector3(0,
-        //                 0.5f, 0);
-        //         }
-        //         newPos.y -= Vector3.Distance(groundCheck.position, hit.point);
-        //     } else if (currentFacing.y > 0)
-        //     {
-        //         if (groundCheck.localPosition.y != -0.5f)
-        //         {
-        //             groundCheck.localPosition = new Vector3(0,
-        //                 -0.5f, 0);
-        //         }
-        //         newPos.y += Vector3.Distance(groundCheck.position, hit.point);
-        //     } else if (currentFacing.x < 0)
-        //     {
-        //         if (groundCheck.localPosition.x != 0.5f)
-        //         {
-        //             groundCheck.localPosition = new Vector3(0.5f,
-        //                 0, 0);
-        //         }
-        //         newPos.x -= Vector3.Distance(groundCheck.position, hit.point);
-        //     }
-        //     else
-        //     {
-        //         if (groundCheck.localPosition.x != -0.5f)
-        //         {
-        //             groundCheck.localPosition = new Vector3(-0.5f,
-        //                 0, 0);
-        //         }
-        //         newPos.x += Vector3.Distance(groundCheck.position, hit.point);
-        //     }
-        //
-        //     transform.position = newPos;
-        //     velocity = Vector3.zero;
-        // }
-        // else
-        // {
-        //     velocity += Physics.gravity * Time.fixedDeltaTime;
-        //     transform.position += velocity * Time.fixedDeltaTime;
-        // }
     }
 
     private void OnGravityChange(GravityGunEvent gravityGunEvent)

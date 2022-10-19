@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public LayerMask gravityChangeLayer;
     [SerializeField] private LayerMask groundLayer;
+    private float _airMovementMultiplier;
     private float _jumpForce;
     private float _jumpCooldown;
     private float _maxVelocity;
@@ -32,7 +33,8 @@ public class PlayerMovement : MonoBehaviour
         _acceleration = _playerStats.GetPlayerMovementAcceleration();
         _decelleration = _playerStats.GetPlayerMovementDecelleration();
         _jumpForceMultiplier = _playerStats.GetJumpForceMultiplier();
-        boxCastDimensions = new Vector3(0.9f, 0.05f, 0.9f);
+        _airMovementMultiplier = _playerStats.GetAirMovementMultiplier();
+        boxCastDimensions = new Vector3(0.49f, 0.05f, 0.49f);
         
 
         Physics.gravity = new Vector3(0, -9.81f, 0);
@@ -89,8 +91,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        
-
         return Physics.BoxCast(transform.position, boxCastDimensions, -transform.up, transform.rotation,
             transform.localScale.y / 2, groundLayer);
     }
@@ -122,6 +122,43 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void MovePlayer()
+    {
+        if (_formStates.GetCurrentForm().canMove)
+        {
+            if (!IsGrounded())
+            {
+                if (GravityController.IsGravityHorizontal())
+                {
+                    MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x * _airMovementMultiplier);
+                }
+                else
+                {
+                    MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y * _airMovementMultiplier);
+                }
+            }
+            else
+            {
+                if (_movementKeyInfo.ReadValue<Vector2>().magnitude == 0 && _playerRigidBody.velocity.magnitude > 0)
+                {
+                    _playerRigidBody.AddForce(_playerRigidBody.velocity.normalized * -_decelleration);
+                }
+                else
+                {
+                    if (GravityController.IsGravityHorizontal())
+                    {
+                        MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x);
+                    }
+                    else
+                    {
+                        MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y);
+                    }
+                }
+                ClampMoveSpeed();
+            }
+        }
+    }
+
+    private void MovePlayerNew()
     {
         if (IsGrounded() && _formStates.GetCurrentForm().canMove)
         {
