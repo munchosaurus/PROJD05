@@ -158,29 +158,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void MovePlayerNew()
-    {
-        if (IsGrounded() && _formStates.GetCurrentForm().canMove)
-        {
-            if (_movementKeyInfo.ReadValue<Vector2>().magnitude == 0 && _playerRigidBody.velocity.magnitude > 0)
-            {
-                _playerRigidBody.AddForce(_playerRigidBody.velocity.normalized * -_decelleration);
-            }
-            else
-            {
-                if (GravityController.IsGravityHorizontal())
-                {
-                    MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x);
-                }
-                else
-                {
-                    MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y);
-                }
-            }
-            ClampMoveSpeed();
-        }
-    }
-
     private void MoveHorizontal(float direction)
     {
         if (ShouldAddMoreMoveForce(direction))
