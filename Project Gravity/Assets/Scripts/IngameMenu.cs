@@ -8,16 +8,14 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private GameObject[] menus;
     [SerializeField] public GameObject interactText;
 
-    private void Update()
+    public void ChangePauseState()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (menus[0].activeSelf)
         {
-            if (menus[0].activeSelf)
-            {
-                return;
-            }
-            Pause(0);
+            return;
         }
+
+        Pause(0);
     }
 
     public void Unpause()
@@ -26,7 +24,7 @@ public class IngameMenu : MonoBehaviour
         {
             if (menus[i].activeSelf)
             {
-                menus[i].SetActive(false);            
+                menus[i].SetActive(false);
             }
         }
 
@@ -34,6 +32,7 @@ public class IngameMenu : MonoBehaviour
         {
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
+
         GameController.UnpauseGame();
     }
 
@@ -43,8 +42,9 @@ public class IngameMenu : MonoBehaviour
         gameObject.SetActive(true);
         if (!menus[index].activeSelf)
         {
-            menus[index].SetActive(true);            
+            menus[index].SetActive(true);
         }
+
         GameController.PauseGame();
     }
 

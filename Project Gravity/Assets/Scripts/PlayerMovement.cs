@@ -100,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsGoalReached())
         {
+            // TODO: SAVE HIGHSCORE AFTER FETCHING TIMER IN LEVELTIMER
             _menu.interactText.SetActive(false);
             _menu.Pause(1);
         }
