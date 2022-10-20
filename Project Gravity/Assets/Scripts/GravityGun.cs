@@ -5,10 +5,61 @@ public class GravityGun : MonoBehaviour
 {
     private PlayerMovement _playerController;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private float ImpactMultiplier;
+    [SerializeField] private Material[] crosshairMaterials;
+    private Vector3 _currentDirection;
+    private GameObject crosshair;
+    private MeshRenderer crosshairMesh;
 
     private void Awake()
     {
         _playerController = gameObject.GetComponent<PlayerMovement>();
+        crosshair = GameObject.FindGameObjectWithTag("Crosshair");
+        crosshairMesh = crosshair.GetComponentInChildren<MeshRenderer>();
+    }
+
+    void FixedUpdate()
+    {
+        if (crosshair == null)
+        {
+            return;
+        }
+
+        _currentDirection = GetMousePositionOnPlane() - transform.position;
+
+        SetCrosshair();
+
+    }
+
+    private void SetCrosshair()
+    {
+        RaycastHit groundHit;
+        RaycastHit gravityHit;
+        Physics.Raycast(transform.position, _currentDirection, out groundHit, Mathf.Infinity, groundMask);
+        Physics.Raycast(transform.position, _currentDirection, out gravityHit, Mathf.Infinity,
+            _playerController.gravityChangeLayer);
+        Vector3 groundPoint = new Vector3(groundHit.point.x, groundHit.point.y, 0);
+        
+        if (gravityHit.collider)
+        {
+            Vector3 gravityPoint = new Vector3(gravityHit.point.x, gravityHit.point.y, 0);
+            if (Vector3.Distance(transform.position, gravityPoint) <=
+                Vector3.Distance(transform.position, groundPoint))
+            {
+                crosshair.transform.position = gravityPoint * ImpactMultiplier;
+                crosshairMesh.material = crosshairMaterials[0];
+            }
+            else
+            {
+                crosshair.transform.position = groundPoint * ImpactMultiplier;
+                crosshairMesh.material = crosshairMaterials[1];
+            }
+        }
+        else
+        {
+            crosshair.transform.position = groundPoint * ImpactMultiplier;
+            crosshairMesh.material = crosshairMaterials[1];
+        }
     }
 
     private void TriggerGravityGunEvent(RaycastHit hit)
@@ -26,10 +77,9 @@ public class GravityGun : MonoBehaviour
     {
         RaycastHit groundHit;
         RaycastHit hit;
-        Vector3 direction = GetMousePositionOnPlane() - transform.position;
 
-        Physics.Raycast(transform.position, direction, out groundHit, Mathf.Infinity, groundMask);
-        if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity,
+        Physics.Raycast(transform.position, _currentDirection, out groundHit, Mathf.Infinity, groundMask);
+        if (Physics.Raycast(transform.position, _currentDirection, out hit, Mathf.Infinity,
                 _playerController.gravityChangeLayer,
                 QueryTriggerInteraction.Collide) && GravityController.GetCurrentFacing() !=
             -hit.normal * GravityController.GetGravity())

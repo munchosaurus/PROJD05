@@ -200,6 +200,10 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 128
+  ImpactMultiplier: 0.97
+  crosshairMaterials:
+  - {fileID: 2100000, guid: 376f03dcfd3e5e34ea75d6cc69a8fc3a, type: 2}
+  - {fileID: 2100000, guid: f00b925a7310f4146a3d139abe99409d, type: 2}
 --- !u!114 &4244639442256880407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,7 +408,6 @@ GameObject:
   - component: {fileID: 6394910182839126809}
   - component: {fileID: 3083834398281714532}
   - component: {fileID: 9037748494824450984}
-  - component: {fileID: 5671048337608082355}
   m_Layer: 0
   m_Name: Up
   m_TagString: Untagged
@@ -477,19 +480,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5671048337608082355
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8639306054269957531}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2124406988836315636
 PrefabInstance:
   m_ObjectHideFlags: 0
