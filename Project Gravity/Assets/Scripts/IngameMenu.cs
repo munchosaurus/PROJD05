@@ -7,6 +7,17 @@ public class IngameMenu : MonoBehaviour
 {
     [SerializeField] private GameObject[] menus;
     [SerializeField] public GameObject interactText;
+    [SerializeField] private Texture2D customCursor;
+
+    private void Start()
+    {
+        SetCustomCursor();
+    }
+
+    void SetCustomCursor()
+    {
+        Cursor.SetCursor(customCursor, new Vector2(3, 3), CursorMode.ForceSoftware);
+    }
 
     public void ChangePauseState()
     {
@@ -32,7 +43,8 @@ public class IngameMenu : MonoBehaviour
         {
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
-
+        
+        SetCustomCursor();
         GameController.UnpauseGame();
     }
 
@@ -44,14 +56,24 @@ public class IngameMenu : MonoBehaviour
         {
             menus[index].SetActive(true);
         }
-
+        
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         GameController.PauseGame();
     }
 
     public void LoadScene(int scene)
     {
-        SceneManager.LoadScene(scene);
         Unpause();
+        if (scene == 0)
+        {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        }
+        else
+        {
+            SetCustomCursor();
+        }
+        SceneManager.LoadScene(scene);
+        
     }
 
     public void QuitGame()

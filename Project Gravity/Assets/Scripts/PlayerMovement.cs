@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         _decelleration = _playerStats.GetPlayerMovementDecelleration();
         _jumpForceMultiplier = _playerStats.GetJumpForceMultiplier();
         _airMovementMultiplier = _playerStats.GetAirMovementMultiplier();
-        boxCastDimensions = new Vector3(0.9f, 0.05f, 0.9f);
+        boxCastDimensions = new Vector3(0.49f, 0.05f, 0.49f);
 
 
         Physics.gravity = new Vector3(0, -9.81f, 0);
@@ -58,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Makes sure player is standing on ground and has a form that can move before calling upon method handling
         // user movement input
-
         MovePlayer();
 
 
@@ -80,7 +79,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 eulerRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0, 0, eulerRotation.z);
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        
     }
 
     private bool IsGoalReached()
@@ -136,22 +134,14 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (_movementKeyInfo.ReadValue<Vector2>().magnitude == 0 && _playerRigidBody.velocity.magnitude > 0)
+            if (GravityController.IsGravityHorizontal())
             {
-                _playerRigidBody.AddForce(_playerRigidBody.velocity.normalized * -_decelleration);
+                MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x);
             }
             else
             {
-                if (GravityController.IsGravityHorizontal())
-                {
-                    MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x);
-                }
-                else
-                {
-                    MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y);
-                }
+                MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y);
             }
-
             ClampMoveSpeed();
         }
     }

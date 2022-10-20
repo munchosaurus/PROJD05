@@ -33,18 +33,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "GravityGun",
+                    "name": "PauseGame",
                     "type": "Button",
-                    "id": "accccaf1-883a-4449-a616-1db6c0dd9b9f",
+                    "id": "bad429da-d47e-42b6-b9ac-eb9b4614c480",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PauseGame",
+                    "name": "GravityGun",
                     "type": "Button",
-                    "id": "bad429da-d47e-42b6-b9ac-eb9b4614c480",
+                    "id": "2057b4db-dd19-4256-b3bd-3cfb60887628",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -142,23 +142,23 @@
                 },
                 {
                     "name": "",
-                    "id": "fc0a20b6-148b-47b4-b8d9-e7e6adde54a8",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GravityGun",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "41de82cd-e734-420e-87a0-bd503a00fa9e",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "PauseGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "adf403fc-005f-4974-bc0c-c8de393ba0ef",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GravityGun",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
