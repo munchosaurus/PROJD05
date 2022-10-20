@@ -63,7 +63,7 @@ public class DynamicObjectMovement : MonoBehaviour
                     hit.distance, Color.green);
                 groundedDown = true;
                 transform.position = new Vector3(transform.position.x,
-                    hit.collider.transform.position.y + hit.collider.transform.localScale.y, transform.position.z);
+                    GetClosestGridCentre(transform.position.y), transform.position.z);
             }
         }
         else if (velocity.y > 0)
@@ -75,7 +75,7 @@ public class DynamicObjectMovement : MonoBehaviour
                     hit.distance, Color.green);
                 groundedUp = true;
                 transform.position = new Vector3(transform.position.x,
-                    hit.collider.transform.position.y - hit.collider.transform.localScale.y, transform.position.z);
+                    GetClosestGridCentre(transform.position.y), transform.position.z);
             }
         }
 
@@ -88,8 +88,8 @@ public class DynamicObjectMovement : MonoBehaviour
                     hit.distance, Color.green);
                 groundedRight = true;
                 transform.position = new Vector3(
-                    hit.collider.transform.position.x - hit.collider.transform.localScale.x,
-                    transform.position.y, transform.position.z);
+                    GetClosestGridCentre(transform.position.x),
+                    transform.position.y, 0);
             }
         }
         else if (velocity.x < 0)
@@ -101,10 +101,37 @@ public class DynamicObjectMovement : MonoBehaviour
                     hit.distance, Color.green);
                 groundedLeft = true;
                 transform.position = new Vector3(
-                    hit.collider.transform.position.x + hit.collider.transform.localScale.x,
-                    transform.position.y, transform.position.z);
+                    GetClosestGridCentre(transform.position.x),
+                    transform.position.y, 0);
             }
         }
+    }
+
+    private float GetClosestGridCentre(float origin)
+    {
+        if (Math.Abs(origin) > Math.Abs(Math.Round(origin)))
+        {
+            if (origin > 0)
+            {
+                return (float) Math.Round(Math.Abs(origin)) + 0.5f;
+            }
+            if (origin < 0)
+            {
+                return -((float) Math.Round(Math.Abs(origin)) + 0.5f);
+            }
+        }
+        else
+        {
+            if (origin > 0)
+            {
+                return (float) Math.Round(Math.Abs(origin)) - 0.5f;
+            }
+            if (origin < 0)
+            {
+                return -((float) Math.Round(Math.Abs(origin)) - 0.5f);
+            }
+        }
+        return origin;
     }
 
     private void ApplyCollisions()

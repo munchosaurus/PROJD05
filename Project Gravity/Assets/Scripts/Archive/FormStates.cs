@@ -25,9 +25,9 @@ public class FormStates : MonoBehaviour
         _rigidbody = _parentGameObject.GetComponent<Rigidbody>();
 
         _playerStats = _parentGameObject.GetComponent<PlayerStats>();
-        _allForms = _playerStats.GetAllForms();
-        _cooldownCounter = (int) _playerStats.GetFormSwitchCooldown() * 60;
-        _coolDown = _playerStats.GetFormSwitchCooldown();
+        //_allForms = _playerStats.GetAllForms();
+        //_cooldownCounter = (int) _playerStats.GetFormSwitchCooldown() * 60;
+        //_coolDown = _playerStats.GetFormSwitchCooldown();
         _currentForm = _allForms[0];
         ChangeForm(0);
     }
@@ -37,7 +37,6 @@ public class FormStates : MonoBehaviour
         if (_cooldownCounter <= _coolDown * 60)
         {
             _cooldownCounter += 1;
-            return;
         }
     }
 

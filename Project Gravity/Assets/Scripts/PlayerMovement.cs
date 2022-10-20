@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     private float _decelleration;
     private float _jumpForceMultiplier;
     private InputAction.CallbackContext _movementKeyInfo;
-    private FormStates _formStates;
     private Rigidbody _playerRigidBody;
     private float _jumpCooldownTimer;
     private PlayerStats _playerStats;
@@ -35,13 +34,12 @@ public class PlayerMovement : MonoBehaviour
         _jumpForceMultiplier = _playerStats.GetJumpForceMultiplier();
         _airMovementMultiplier = _playerStats.GetAirMovementMultiplier();
         boxCastDimensions = new Vector3(0.9f, 0.05f, 0.9f);
-        
+
 
         Physics.gravity = new Vector3(0, -9.81f, 0);
         _playerRigidBody = GetComponent<Rigidbody>();
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
         levelTarget = GameObject.FindWithTag("Target").gameObject.transform;
-        _formStates = gameObject.GetComponentInChildren<FormStates>();
     }
 
     // Update is called once per frame
@@ -82,14 +80,15 @@ public class PlayerMovement : MonoBehaviour
         Vector3 eulerRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0, 0, eulerRotation.z);
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        
     }
-    
+
     private bool IsGoalReached()
     {
         return (Vector3.Distance(gameObject.transform.position, levelTarget.position) < 0.5f && IsGrounded());
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics.BoxCast(transform.position, boxCastDimensions, -transform.up, transform.rotation,
             transform.localScale.y / 2, groundLayer);
@@ -105,17 +104,17 @@ public class PlayerMovement : MonoBehaviour
             _menu.Pause(1);
         }
     }
-    
+
     // Called by input system
     public void Jump()
     {
-        if (_jumpCooldownTimer <= 0 && _formStates.GetCurrentForm().canMove && IsGrounded())
+        if (_jumpCooldownTimer <= 0 && IsGrounded())
         {
             _playerRigidBody.AddForce(transform.up * _jumpForce * _jumpForceMultiplier);
             _jumpCooldownTimer = _jumpCooldown;
         }
     }
-    
+
     // Called by input system
     public void SetMovementInput(InputAction.CallbackContext movement)
     {
@@ -124,38 +123,36 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (_formStates.GetCurrentForm().canMove)
+        if (!IsGrounded())
         {
-            if (!IsGrounded())
+            if (GravityController.IsGravityHorizontal())
             {
-                if (GravityController.IsGravityHorizontal())
-                {
-                    MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x * _airMovementMultiplier);
-                }
-                else
-                {
-                    MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y * _airMovementMultiplier);
-                }
+                MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x * _airMovementMultiplier);
             }
             else
             {
-                if (_movementKeyInfo.ReadValue<Vector2>().magnitude == 0 && _playerRigidBody.velocity.magnitude > 0)
+                MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y * _airMovementMultiplier);
+            }
+        }
+        else
+        {
+            if (_movementKeyInfo.ReadValue<Vector2>().magnitude == 0 && _playerRigidBody.velocity.magnitude > 0)
+            {
+                _playerRigidBody.AddForce(_playerRigidBody.velocity.normalized * -_decelleration);
+            }
+            else
+            {
+                if (GravityController.IsGravityHorizontal())
                 {
-                    _playerRigidBody.AddForce(_playerRigidBody.velocity.normalized * -_decelleration);
+                    MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x);
                 }
                 else
                 {
-                    if (GravityController.IsGravityHorizontal())
-                    {
-                        MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x);
-                    }
-                    else
-                    {
-                        MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y);
-                    }
+                    MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y);
                 }
-                ClampMoveSpeed();
             }
+
+            ClampMoveSpeed();
         }
     }
 
@@ -186,9 +183,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void RotateToPlane()
     {
-        if (_formStates.GetCurrentForm().canMove)
-        {
-            transform.rotation = Quaternion.LookRotation(transform.forward, GravityController.GetCurrentFacing());
-        }
+        transform.rotation = Quaternion.LookRotation(transform.forward, GravityController.GetCurrentFacing());
     }
 }

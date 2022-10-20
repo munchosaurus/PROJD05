@@ -10,10 +10,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float playerMovementAcceleration;
     [SerializeField] private float playerMovementDecelleration;
     [SerializeField] private float jumpForceMultiplier;
-    [Header("Add seconds (as float) for form switch cooldown")]
-    [SerializeField] private float formSwitchCooldown;
-    [Header("Add default form to index 0 of array")] 
-    [SerializeField] private Form[] allPlayerForms;
 
     [Header("Add a float to multiply with the player movement acceleration for when player is in air")] [SerializeField]
     private float airMovementMultiplier;
@@ -48,18 +44,9 @@ public class PlayerStats : MonoBehaviour
         return jumpForceMultiplier;
     }
 
-    public float GetFormSwitchCooldown()
-    {
-        return formSwitchCooldown;
-    }
 
     public float GetAirMovementMultiplier()
     {
         return airMovementMultiplier;
-    }
-
-    public Form[] GetAllForms()
-    {
-        return allPlayerForms;
     }
 }
