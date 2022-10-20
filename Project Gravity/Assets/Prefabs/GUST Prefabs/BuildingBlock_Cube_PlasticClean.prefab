@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7513921266747082403}
   - component: {fileID: 5738211397274595945}
   m_Layer: 0
-  m_Name: BuildingBlock_Cube_CleanPlastic
+  m_Name: BuildingBlock_Cube_PlasticClean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
