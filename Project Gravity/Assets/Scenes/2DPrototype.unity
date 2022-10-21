@@ -2976,6 +2976,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1414563862}
     m_Modifications:
+    - target: {fileID: 7660835832202393602, guid: b16c05f7e46370244980cf6520d88317, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 4876016769225002412, guid: 67f67543a76e7d54d950d515ed23a660, type: 3}
     - target: {fileID: 8165094197702842839, guid: b16c05f7e46370244980cf6520d88317, type: 3}
       propertyPath: m_Name
       value: Dynamic Cube
