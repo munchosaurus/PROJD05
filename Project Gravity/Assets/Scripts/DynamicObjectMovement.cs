@@ -13,6 +13,9 @@ public class DynamicObjectMovement : MonoBehaviour
 {
     [SerializeField] private Vector3 velocity;
     [SerializeField] private LayerMask groundMask;
+
+    [SerializeField] private LayerMask magnetMask;
+
     //private Guid _gravityGunEventGuid;
     private Quaternion lockedRotation;
     private Vector3 boxCastDimensions;
@@ -36,14 +39,18 @@ public class DynamicObjectMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-
         velocity += Physics.gravity * Time.fixedDeltaTime;
         transform.rotation = lockedRotation;
-        
+
+        if (CheckForMagnets())
+        {
+            return;
+        }
+
         CheckForCollisions();
         ApplyFriction();
         ApplyCollisions();
-        
+
         transform.position += velocity * Time.fixedDeltaTime;
     }
 
@@ -107,6 +114,79 @@ public class DynamicObjectMovement : MonoBehaviour
         }
     }
 
+    private bool CheckMagnet(Vector3 direction, RaycastHit hit)
+    {
+        try
+        {
+            if (hit.collider.gameObject.GetComponent<GravityMagnet>().IsTriggered())
+            {
+                Vector3 boxCastDraw;
+                if (direction.x != 0)
+                {
+                    boxCastDraw = horizontalCast;
+                }
+                else
+                {
+                    boxCastDraw = verticalCast;
+                }
+                ExtDebug.DrawBoxCastOnHit(transform.position, boxCastDraw, transform.rotation, direction,
+                    hit.distance, Color.red);
+                velocity.x = 0;
+                velocity.y = 0;
+                return true;
+            }
+
+            return false;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    private bool CheckForMagnets()
+    {
+        RaycastHit hit;
+        if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
+                transform.localScale.y / 2, magnetMask))
+        {
+            if (CheckMagnet(Vector3.down, hit))
+            {
+                return true;
+            }
+        }
+
+        if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
+                transform.localScale.y / 2, magnetMask))
+        {
+            if (CheckMagnet(Vector3.up, hit))
+            {
+                return true;
+            }
+        }
+
+        if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
+                transform.localScale.x / 2, magnetMask))
+        {
+            if (CheckMagnet(Vector3.right, hit))
+            {
+                return true;
+            }
+        }
+
+        if (Physics.BoxCast(transform.position, verticalCast, Vector3.left, out hit, transform.rotation,
+                transform.localScale.x / 2, magnetMask))
+        {
+            if (CheckMagnet(Vector3.left, hit))
+            {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
     private float GetClosestGridCentre(float origin)
     {
         if (Math.Abs(origin) > Math.Abs(Math.Round(origin)))
@@ -115,6 +195,7 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 return (float) Math.Round(Math.Abs(origin)) + 0.5f;
             }
+
             if (origin < 0)
             {
                 return -((float) Math.Round(Math.Abs(origin)) + 0.5f);
@@ -126,11 +207,13 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 return (float) Math.Round(Math.Abs(origin)) - 0.5f;
             }
+
             if (origin < 0)
             {
                 return -((float) Math.Round(Math.Abs(origin)) - 0.5f);
             }
         }
+
         return origin;
     }
 
