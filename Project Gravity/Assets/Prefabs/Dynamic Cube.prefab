@@ -64,8 +64,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8691269494517433448, guid: 67f67543a76e7d54d950d515ed23a660, type: 3}
-  - {fileID: 9000545389588721753, guid: 67f67543a76e7d54d950d515ed23a660, type: 3}
+  - {fileID: 3597618059847582156, guid: 67f67543a76e7d54d950d515ed23a660, type: 3}
+  - {fileID: 4876016769225002412, guid: 67f67543a76e7d54d950d515ed23a660, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,6 +103,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 128
+  magnetMask:
+    serializedVersion: 2
+    m_Bits: 0
   horizontalCast: {x: 0.05, y: 0.49, z: 0.49}
   verticalCast: {x: 0.49, y: 0.05, z: 0.49}
   groundedRight: 0
