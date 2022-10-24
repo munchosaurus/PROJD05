@@ -29,8 +29,10 @@ public class WallFunctions : MonoBehaviour
             {
                 for (int y = 0; y < w.dimensions.y; y++)
                 {
-                    GameObject go = Instantiate(w.wallPrefab, new Vector3(x, y, z), Quaternion.identity);
+                    GameObject go = PrefabUtility.InstantiatePrefab(w.wallPrefab) as GameObject;
 
+                    go.transform.position = new Vector3(x, y, z);
+                    go.transform.rotation = Quaternion.identity;
                     go.transform.parent = parent;
                 }
             }
@@ -49,13 +51,15 @@ public class WallFunctions : MonoBehaviour
 
                     if (Array.Exists(w.specialPrefabPositions, element => element == found))
                     {
-                        go = Instantiate(w.specialPrefabs[(int)found.z], new Vector3(x, y, z), Quaternion.identity);
+                        go = PrefabUtility.InstantiatePrefab(w.specialPrefabs[(int)found.z]) as GameObject;
                     }
                     else
                     {
-                        go = Instantiate(w.wallPrefab, new Vector3(x, y, z), Quaternion.identity);
+                        go = PrefabUtility.InstantiatePrefab(w.wallPrefab) as GameObject;
                     }
 
+                    go.transform.position = new Vector3(x, y, z);
+                    go.transform.rotation = Quaternion.identity;
                     go.transform.parent = parent;
                 }
             }
