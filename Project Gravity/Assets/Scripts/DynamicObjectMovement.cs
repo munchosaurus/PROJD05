@@ -54,6 +54,50 @@ public class DynamicObjectMovement : MonoBehaviour
         transform.position += velocity * Time.fixedDeltaTime;
     }
 
+    private bool ShouldInheritMovement(GameObject otherObject, bool isHorizontal)
+    {
+        if (otherObject.GetComponentInParent<Rigidbody>() != null)
+        {
+            if (isHorizontal)
+            {
+                if (otherObject.GetComponentInParent<Rigidbody>().velocity.x != 0)
+                {
+                    velocity.y = otherObject.GetComponentInParent<Rigidbody>().velocity.x;
+                    return true;
+                } 
+            }
+            else
+            {
+                if (otherObject.GetComponentInParent<Rigidbody>().velocity.y != 0)
+                {
+                    velocity.y = otherObject.GetComponentInParent<Rigidbody>().velocity.y;
+                    return true;
+                } 
+            }
+        }
+        else if(otherObject.GetComponent<DynamicObjectMovement>() != null)
+        {
+            if (isHorizontal)
+            {
+                if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.x) < velocity.x && otherObject.GetComponent<DynamicObjectMovement>().velocity.x != 0)
+                {
+                    velocity.y = otherObject.GetComponentInParent<Rigidbody>().velocity.x;
+                    return true;
+                } 
+            }
+            else
+            {
+                if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.y) < velocity.y && otherObject.GetComponent<DynamicObjectMovement>().velocity.y != 0)
+                {
+                    velocity.y = otherObject.GetComponentInParent<Rigidbody>().velocity.y;
+                    return true;
+                } 
+            }
+        }
+
+        return false;
+    }
+
     private void CheckForCollisions()
     {
         groundedDown = false;
@@ -68,9 +112,12 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.down,
                     hit.distance, Color.green);
-                groundedDown = true;
-                transform.position = new Vector3(transform.position.x,
-                    GetClosestGridCentre(transform.position.y), transform.position.z);
+                if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                {
+                    groundedDown = true;
+                    transform.position = new Vector3(transform.position.x,
+                        GetClosestGridCentre(transform.position.y), transform.position.z);
+                }
             }
         }
         else if (velocity.y > 0)
@@ -80,9 +127,12 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.up,
                     hit.distance, Color.green);
-                groundedUp = true;
-                transform.position = new Vector3(transform.position.x,
-                    GetClosestGridCentre(transform.position.y), transform.position.z);
+                if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                {
+                    groundedUp = true;
+                    transform.position = new Vector3(transform.position.x,
+                        GetClosestGridCentre(transform.position.y), transform.position.z);
+                }
             }
         }
 
@@ -93,10 +143,13 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.right,
                     hit.distance, Color.green);
-                groundedRight = true;
-                transform.position = new Vector3(
-                    GetClosestGridCentre(transform.position.x),
-                    transform.position.y, 0);
+                if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                {
+                    groundedRight = true;
+                    transform.position = new Vector3(
+                        GetClosestGridCentre(transform.position.x),
+                        transform.position.y, 0);
+                }
             }
         }
         else if (velocity.x < 0)
@@ -106,10 +159,13 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.left,
                     hit.distance, Color.green);
-                groundedLeft = true;
-                transform.position = new Vector3(
-                    GetClosestGridCentre(transform.position.x),
-                    transform.position.y, 0);
+                if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                {
+                    groundedLeft = true;
+                    transform.position = new Vector3(
+                        GetClosestGridCentre(transform.position.x),
+                        transform.position.y, 0);
+                }
             }
         }
     }
