@@ -13,10 +13,7 @@ public class DynamicObjectMovement : MonoBehaviour
 {
     [SerializeField] private Vector3 velocity;
     [SerializeField] private LayerMask groundMask;
-
     [SerializeField] private LayerMask magnetMask;
-
-    //private Guid _gravityGunEventGuid;
     private Quaternion lockedRotation;
     private Vector3 boxCastDimensions;
     private bool isGrounded;
@@ -33,8 +30,6 @@ public class DynamicObjectMovement : MonoBehaviour
     {
         velocity = Vector3.zero;
         lockedRotation = new Quaternion(0, 0, 0, 0);
-
-        //EventSystem.Current.RegisterListener<GravityGunEvent>(, ref _gravityGunEventGuid);
     }
 
     void FixedUpdate()
@@ -176,12 +171,8 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             if (hit.collider.gameObject.GetComponent<GravityMagnet>().IsTriggered())
             {
-                Vector3 boxCastDraw;
+                Vector3 boxCastDraw = horizontalCast;
                 if (direction.x != 0)
-                {
-                    boxCastDraw = horizontalCast;
-                }
-                else
                 {
                     boxCastDraw = verticalCast;
                 }
@@ -209,6 +200,9 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             if (CheckMagnet(Vector3.down, hit))
             {
+                transform.position = new Vector3(
+                    transform.position.x,GetClosestGridCentre(
+                    transform.position.y), 0);
                 return true;
             }
         }
@@ -218,6 +212,9 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             if (CheckMagnet(Vector3.up, hit))
             {
+                transform.position = new Vector3(
+                    transform.position.x,GetClosestGridCentre(
+                        transform.position.y), 0);
                 return true;
             }
         }
@@ -227,6 +224,9 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             if (CheckMagnet(Vector3.right, hit))
             {
+                transform.position = new Vector3(
+                    GetClosestGridCentre(transform.position.x),
+                    transform.position.y, 0);
                 return true;
             }
         }
@@ -236,6 +236,10 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             if (CheckMagnet(Vector3.left, hit))
             {
+                Debug.Log(Vector3.Distance(gameObject.transform.position, hit.point));
+                transform.position = new Vector3(
+                    GetClosestGridCentre(transform.position.x),
+                    transform.position.y, 0);
                 return false;
             }
         }
