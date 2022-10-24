@@ -13,10 +13,7 @@ public class DynamicObjectMovement : MonoBehaviour
 {
     [SerializeField] private Vector3 velocity;
     [SerializeField] private LayerMask groundMask;
-
     [SerializeField] private LayerMask magnetMask;
-
-    //private Guid _gravityGunEventGuid;
     private Quaternion lockedRotation;
     private Vector3 boxCastDimensions;
     private bool isGrounded;
@@ -33,8 +30,6 @@ public class DynamicObjectMovement : MonoBehaviour
     {
         velocity = Vector3.zero;
         lockedRotation = new Quaternion(0, 0, 0, 0);
-
-        //EventSystem.Current.RegisterListener<GravityGunEvent>(, ref _gravityGunEventGuid);
     }
 
     void FixedUpdate()
