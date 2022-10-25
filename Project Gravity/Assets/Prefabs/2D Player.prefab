@@ -1333,7 +1333,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 128
-  ImpactMultiplier: 0.97
+  impactMultiplier: 0.97
   crosshairMaterials:
   - {fileID: 2100000, guid: 376f03dcfd3e5e34ea75d6cc69a8fc3a, type: 2}
   - {fileID: 2100000, guid: f00b925a7310f4146a3d139abe99409d, type: 2}
@@ -1548,7 +1548,19 @@ MonoBehaviour:
     m_ActionId: aff80d19-98cc-4617-a088-521d3cf5d8be
     m_ActionName: PlayerControls/ChangePlayerInputStats[/Keyboard/g]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: CameraFollowPlayer, Assembly-CSharp
+        m_MethodName: Zoom
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c3991b6a-6264-42ea-8cff-743b1dfc2e84
     m_ActionName: PlayerControls/Zoom[/Mouse/scroll]
   m_NeverAutoSwitchControlSchemes: 0

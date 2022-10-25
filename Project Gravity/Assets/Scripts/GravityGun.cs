@@ -24,10 +24,10 @@ public class GravityGun : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (crosshair == null)
+        /*if (crosshair == null)
         {
             return;
-        }
+        }*/
         
         _currentDirection = GetMousePositionOnPlane() - transform.position;
         _lineRenderer.SetPosition(0, transform.position);
