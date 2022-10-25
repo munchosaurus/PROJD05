@@ -49,7 +49,7 @@ public class CameraFollowPlayer : MonoBehaviour
             
             move = true;
         }
-        Debug.Log(targetPosition);
+       
         MoveCamera(targetPosition);
     }
 
