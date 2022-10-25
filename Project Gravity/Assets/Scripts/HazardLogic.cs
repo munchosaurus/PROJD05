@@ -6,16 +6,24 @@ using UnityEngine;
 public class HazardLogic : MonoBehaviour
 {
     [SerializeField] private IngameMenu menu;
-    [SerializeField] private string playerTag;
+    [SerializeField] private Vector3 horizontalCast, verticalCast;
+    [SerializeField] private LayerMask hazardMask;
     void Start()
     {
         menu = FindObjectOfType<IngameMenu>();
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    private void FixedUpdate()
     {
-        if (other.CompareTag(playerTag))
+        CheckForHazards();
+    }
+
+    
+    private void CheckForHazards()
+    {
+        RaycastHit hit;
+        if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
+                transform.localScale.y / 2, hazardMask))
         {
             if (menu != null)
             {
@@ -26,11 +34,35 @@ public class HazardLogic : MonoBehaviour
                 Debug.Log("Cannot find menu script");
             }
         }
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag(playerTag))
+        if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
+                transform.localScale.y / 2, hazardMask))
+        {
+            if (menu != null)
+            {
+                menu.Pause(2);
+            }
+            else
+            {
+                Debug.Log("Cannot find menu script");
+            }
+        }
+
+        if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
+                transform.localScale.x / 2, hazardMask))
+        {
+            if (menu != null)
+            {
+                menu.Pause(2);
+            }
+            else
+            {
+                Debug.Log("Cannot find menu script");
+            }
+        }
+
+        if (Physics.BoxCast(transform.position, verticalCast, Vector3.left, out hit, transform.rotation,
+                transform.localScale.x / 2, hazardMask))
         {
             if (menu != null)
             {

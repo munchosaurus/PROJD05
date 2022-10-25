@@ -1254,6 +1254,7 @@ GameObject:
   - component: {fileID: 7406499542109578701}
   - component: {fileID: 1921015880380027198}
   - component: {fileID: 4244639442256880407}
+  - component: {fileID: 5558133775299111569}
   - component: {fileID: 1061672191659828517}
   m_Layer: 0
   m_Name: 2D Player
@@ -1356,6 +1357,31 @@ MonoBehaviour:
   playerMovementDecelleration: 15
   jumpForceMultiplier: 100
   airMovementMultiplier: 0.2
+  jumpForceAlternative: 5
+  jumpCooldownAlternative: 0.7
+  maxVelocityAlternative: 6
+  playerMovementAccelerationAlternative: 35
+  playerMovementDecellerationAlternative: 20
+  jumpForceMultiplierAlternative: 110
+  airMovementMultiplierAlternative: 0.4
+--- !u!114 &5558133775299111569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406499542109578702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac642a6cde7af541b1dc7bc96b26c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: {fileID: 0}
+  horizontalCast: {x: 0.05, y: 0.49, z: 0.49}
+  verticalCast: {x: 0.49, y: 0.05, z: 0.49}
+  hazardMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &1061672191659828517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1505,6 +1531,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2057b4db-dd19-4256-b3bd-3cfb60887628
     m_ActionName: PlayerControls/Test[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aff80d19-98cc-4617-a088-521d3cf5d8be
+    m_ActionName: PlayerControls/ChangePlayerInputStats[/Keyboard/g]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControls
