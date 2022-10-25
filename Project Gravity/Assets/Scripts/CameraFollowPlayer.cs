@@ -17,17 +17,14 @@ public class CameraFollowPlayer : MonoBehaviour
     private Vector3 offSet;
     private Vector3 velocity = Vector3.zero;
     private bool move;
-    
+
     private Vector3 targetPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         // JUST FOR TESTING, EACH LEVEL WILL HAVE ITS OWN LOAD OF TARGET FOR CAMERA
-        targetZ = -40;
-        targetX = 0;
-        targetY = 5;
-        offSet = transform.position;
+        targetZ = minimumDistance;
     }
 
     // Update is called once per frame
@@ -38,8 +35,7 @@ public class CameraFollowPlayer : MonoBehaviour
 
     private void UpdateCamera()
     {
-        
-        if (targetZ <= maximumDistance+1)
+        if (targetZ <= maximumDistance + 1)
         {
             targetPosition = new Vector3(targetX, targetY, targetZ);
         }
@@ -47,12 +43,13 @@ public class CameraFollowPlayer : MonoBehaviour
         {
             targetPosition = CalculateTargetPosition();
         }
-        
-        if (Vector3.Distance(targetPosition, transform.position) > leeway && !move)
+
+        if (Vector2.Distance(targetPosition, transform.position) > leeway && !move)
         {
+            
             move = true;
         }
-
+        Debug.Log(targetPosition);
         MoveCamera(targetPosition);
     }
 
@@ -62,7 +59,7 @@ public class CameraFollowPlayer : MonoBehaviour
         {
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
 
-            if (Vector3.Distance(targetPosition, transform.position) < 0.1f)
+            if (Vector2.Distance(targetPosition, transform.position) < 0.1f)
             {
                 move = false;
             }
@@ -72,7 +69,7 @@ public class CameraFollowPlayer : MonoBehaviour
     private Vector3 CalculateTargetPosition()
     {
         Vector3 targetPosition = new Vector3(playerTransform.position.x, playerTransform.position.y, targetZ);
-
+        
         if (targetPosition.x < minX)
             targetPosition.x = minX;
         if (targetPosition.x > maxX)
@@ -82,6 +79,7 @@ public class CameraFollowPlayer : MonoBehaviour
         if (targetPosition.y > maxY)
             targetPosition.y = maxY;
 
+        
         return targetPosition;
     }
 
@@ -91,15 +89,15 @@ public class CameraFollowPlayer : MonoBehaviour
         {
             if (targetZ < minimumDistance)
             {
-                targetZ++;
+                targetZ += 0.5f;
             }
-        } else if (val.ReadValue<Vector2>().y < 0)
+        }
+        else if (val.ReadValue<Vector2>().y < 0)
         {
             if (targetZ > maximumDistance)
             {
-                targetZ--;
+                targetZ -= 0.5f;
             }
         }
-        
     }
 }

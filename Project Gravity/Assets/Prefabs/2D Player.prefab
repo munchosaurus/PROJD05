@@ -1352,7 +1352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 3
   jumpCooldown: 0.5
-  maxVelocity: 5
+  maxVelocity: 4
   playerMovementAcceleration: 25
   playerMovementDecelleration: 15
   jumpForceMultiplier: 100
@@ -1547,6 +1547,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: aff80d19-98cc-4617-a088-521d3cf5d8be
     m_ActionName: PlayerControls/ChangePlayerInputStats[/Keyboard/g]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c3991b6a-6264-42ea-8cff-743b1dfc2e84
+    m_ActionName: PlayerControls/Zoom[/Mouse/scroll]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControls

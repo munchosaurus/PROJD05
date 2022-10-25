@@ -6,7 +6,7 @@ public class GravityGun : MonoBehaviour
 {
     private PlayerMovement _playerController;
     [SerializeField] private LayerMask groundMask;
-    [SerializeField] private float ImpactMultiplier;
+    [SerializeField] private float impactMultiplier;
     [SerializeField] private Material[] crosshairMaterials;
     [SerializeField] private LineRenderer _lineRenderer;
     private Vector3 _currentDirection;
@@ -32,6 +32,8 @@ public class GravityGun : MonoBehaviour
         _currentDirection = GetMousePositionOnPlane() - transform.position;
         _lineRenderer.SetPosition(0, transform.position);
 
+        Debug.Log(_currentDirection);
+        
         if (buttonPressed)
         {
             if (!_lineRenderer.gameObject.activeSelf)
@@ -66,18 +68,18 @@ public class GravityGun : MonoBehaviour
             if (Vector3.Distance(transform.position, gravityPoint) <=
                 Vector3.Distance(transform.position, groundPoint))
             {
-                crosshair.transform.position = gravityPoint * ImpactMultiplier;
+                crosshair.transform.position = gravityPoint * impactMultiplier;
                 crosshairMesh.material = crosshairMaterials[0];
             }
             else
             {
-                crosshair.transform.position = groundPoint * ImpactMultiplier;
+                crosshair.transform.position = groundPoint * impactMultiplier;
                 crosshairMesh.material = crosshairMaterials[1];
             }
         }
         else
         {
-            crosshair.transform.position = groundPoint * ImpactMultiplier;
+            crosshair.transform.position = groundPoint * impactMultiplier;
             crosshairMesh.material = crosshairMaterials[1];
         }
         _lineRenderer.SetPosition(1, crosshair.transform.position);
