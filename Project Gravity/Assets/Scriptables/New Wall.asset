@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad3f4937e7877b458d9363a9280d661, type: 3}
   m_Name: New Wall
   m_EditorClassIdentifier: 
-  wallPrefab: {fileID: 6098653093695181756, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
-  dimensions: {x: 19, y: 19, z: 1}
+  wallPrefab: {fileID: 1495554306845300774, guid: 5d7251648cc3b9843924abb88040d90e, type: 3}
+  dimensions: {x: 18, y: 18, z: 1}
   specialPrefabs: []
   specialPrefabPositions: []
