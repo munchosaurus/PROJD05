@@ -24,6 +24,9 @@ public class DynamicObjectMovement : MonoBehaviour
     [SerializeField] bool groundedDown;
     [SerializeField] private float friction;
 
+    private readonly float GRID_OFFSET = 0;
+    private readonly float OBJECT_Z = 1;
+
 
     // Start is called before the first frame update
     void Start()
@@ -143,7 +146,7 @@ public class DynamicObjectMovement : MonoBehaviour
                     groundedRight = true;
                     transform.position = new Vector3(
                         GetClosestGridCentre(transform.position.x),
-                        transform.position.y, 0);
+                        transform.position.y, OBJECT_Z);
                 }
             }
         }
@@ -159,7 +162,7 @@ public class DynamicObjectMovement : MonoBehaviour
                     groundedLeft = true;
                     transform.position = new Vector3(
                         GetClosestGridCentre(transform.position.x),
-                        transform.position.y, 0);
+                        transform.position.y, OBJECT_Z);
                 }
             }
         }
@@ -202,7 +205,7 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 transform.position = new Vector3(
                     transform.position.x,GetClosestGridCentre(
-                    transform.position.y), 0);
+                    transform.position.y), OBJECT_Z);
                 return true;
             }
         }
@@ -214,7 +217,7 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 transform.position = new Vector3(
                     transform.position.x,GetClosestGridCentre(
-                        transform.position.y), 0);
+                        transform.position.y), OBJECT_Z);
                 return true;
             }
         }
@@ -226,7 +229,7 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 transform.position = new Vector3(
                     GetClosestGridCentre(transform.position.x),
-                    transform.position.y, 0);
+                    transform.position.y, OBJECT_Z);
                 return true;
             }
         }
@@ -239,7 +242,7 @@ public class DynamicObjectMovement : MonoBehaviour
                 Debug.Log(Vector3.Distance(gameObject.transform.position, hit.point));
                 transform.position = new Vector3(
                     GetClosestGridCentre(transform.position.x),
-                    transform.position.y, 0);
+                    transform.position.y, OBJECT_Z);
                 return false;
             }
         }
@@ -253,24 +256,24 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             if (origin > 0)
             {
-                return (float) Math.Round(Math.Abs(origin)) + 0.5f;
+                return (float) Math.Round(Math.Abs(origin)) + GRID_OFFSET;
             }
 
             if (origin < 0)
             {
-                return -((float) Math.Round(Math.Abs(origin)) + 0.5f);
+                return -((float) Math.Round(Math.Abs(origin)) + GRID_OFFSET);
             }
         }
         else
         {
             if (origin > 0)
             {
-                return (float) Math.Round(Math.Abs(origin)) - 0.5f;
+                return (float) Math.Round(Math.Abs(origin)) - GRID_OFFSET;
             }
 
             if (origin < 0)
             {
-                return -((float) Math.Round(Math.Abs(origin)) - 0.5f);
+                return -((float) Math.Round(Math.Abs(origin)) - GRID_OFFSET);
             }
         }
 

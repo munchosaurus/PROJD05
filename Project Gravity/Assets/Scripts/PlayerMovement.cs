@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform levelTarget;
     private Vector3 boxCastDimensions;
 
+    private readonly float PLAYER_Z = 1;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -78,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 eulerRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0, 0, eulerRotation.z);
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        transform.position = new Vector3(transform.position.x, transform.position.y, PLAYER_Z);
     }
 
     private bool IsGoalReached()
