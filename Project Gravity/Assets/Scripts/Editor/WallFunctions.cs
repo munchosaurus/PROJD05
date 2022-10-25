@@ -49,12 +49,13 @@ public class WallFunctions : MonoBehaviour
                     Vector3 found = Array.Find(w.specialPrefabPositions, element => element.x == x && element.y == y);
                     GameObject go;
 
-                    if (Array.Exists(w.specialPrefabPositions, element => element == found))
+                    if (found.x == x && found.y == y)
                     {
                         go = PrefabUtility.InstantiatePrefab(w.specialPrefabs[(int)found.z]) as GameObject;
                     }
                     else
                     {
+                        
                         go = PrefabUtility.InstantiatePrefab(w.wallPrefab) as GameObject;
                     }
 
