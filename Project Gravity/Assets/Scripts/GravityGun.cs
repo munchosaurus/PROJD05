@@ -24,16 +24,14 @@ public class GravityGun : MonoBehaviour
 
     void FixedUpdate()
     {
-        /*if (crosshair == null)
+        if (crosshair == null)
         {
             return;
-        }*/
+        }
         
         _currentDirection = GetMousePositionOnPlane() - transform.position;
         _lineRenderer.SetPosition(0, transform.position);
 
-        Debug.Log(_currentDirection);
-        
         if (buttonPressed)
         {
             if (!_lineRenderer.gameObject.activeSelf)
@@ -61,10 +59,10 @@ public class GravityGun : MonoBehaviour
         Physics.Raycast(transform.position, _currentDirection, out groundHit, Mathf.Infinity, groundMask);
         Physics.Raycast(transform.position, _currentDirection, out gravityHit, Mathf.Infinity,
             _playerController.gravityChangeLayer);
-        Vector3 groundPoint = new Vector3(groundHit.point.x, groundHit.point.y, 0);
+        Vector3 groundPoint = new Vector3(groundHit.point.x, groundHit.point.y, 1);
         if (gravityHit.collider)
         {
-            Vector3 gravityPoint = new Vector3(gravityHit.point.x, gravityHit.point.y, 0);
+            Vector3 gravityPoint = new Vector3(gravityHit.point.x, gravityHit.point.y, 1);
             if (Vector3.Distance(transform.position, gravityPoint) <=
                 Vector3.Distance(transform.position, groundPoint))
             {
@@ -137,7 +135,7 @@ public class GravityGun : MonoBehaviour
     private Vector3 GetMousePositionOnPlane()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane xy = new Plane(Vector3.forward, Vector3.zero);
+        Plane xy = new Plane(Vector3.forward, new Vector3(0,0,1));
         xy.Raycast(ray, out float distance);
 
         return ray.GetPoint(distance);
