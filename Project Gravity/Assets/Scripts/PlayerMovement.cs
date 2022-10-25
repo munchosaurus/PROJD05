@@ -22,10 +22,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform levelTarget;
     private Vector3 boxCastDimensions;
 
-    // Start is called before the first frame update
-    void Awake()
+
+    public void ChangeInputSettings()
     {
-        _playerStats = gameObject.GetComponent<PlayerStats>();
+        if (_jumpForce == _playerStats.GetJumpForce() && _jumpCooldown == _playerStats.GetJumpCooldown())
+        {
+            SetAlternativeStats();
+        }
+        else
+        {
+            SetBaseStats();
+        }
+    }
+
+    private void SetBaseStats()
+    {
+        
         _jumpForce = _playerStats.GetJumpForce();
         _jumpCooldown = _playerStats.GetJumpCooldown();
         _maxVelocity = _playerStats.GetMaxVelocity();
@@ -33,9 +45,24 @@ public class PlayerMovement : MonoBehaviour
         _decelleration = _playerStats.GetPlayerMovementDecelleration();
         _jumpForceMultiplier = _playerStats.GetJumpForceMultiplier();
         _airMovementMultiplier = _playerStats.GetAirMovementMultiplier();
+    }
+
+    private void SetAlternativeStats()
+    {
+        _jumpForce = _playerStats.GetJumpForceAlternative();
+        _jumpCooldown = _playerStats.GetJumpCooldownAlternative();
+        _maxVelocity = _playerStats.GetMaxVelocityAlternative();
+        _acceleration = _playerStats.GetPlayerMovementAccelerationAlternative();
+        _decelleration = _playerStats.GetPlayerMovementDecellerationAlternative();
+        _jumpForceMultiplier = _playerStats.GetJumpForceMultiplierAlternative();
+        _airMovementMultiplier = _playerStats.GetAirMovementMultiplierAlternative();
+    }
+    // Start is called before the first frame update
+    void Awake()
+    {
+        _playerStats = gameObject.GetComponent<PlayerStats>();
+        SetBaseStats();
         boxCastDimensions = new Vector3(0.49f, 0.05f, 0.49f);
-
-
         Physics.gravity = new Vector3(0, -9.81f, 0);
         _playerRigidBody = GetComponent<Rigidbody>();
         _menu = gameObject.GetComponentInChildren<IngameMenu>();

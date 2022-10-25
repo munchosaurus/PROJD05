@@ -2811,12 +2811,91 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1061672191659828517, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061672191659828517, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionId
+      value: aff80d19-98cc-4617-a088-521d3cf5d8be
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061672191659828517, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionName
+      value: PlayerControls/ChangePlayerInputStats[/Keyboard/g]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061672191659828517, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061672191659828517, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061672191659828517, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1061672191659828516}
+    - target: {fileID: 1061672191659828517, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061672191659828517, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeInputSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061672191659828517, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerMovement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061672191659828517, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244639442256880407, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: jumpForceAlternative
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244639442256880407, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: maxVelocityAlternative
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244639442256880407, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: jumpCooldownAlternative
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244639442256880407, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: jumpForceMultiplierAlternative
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244639442256880407, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: airMovementMultiplierAlternative
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244639442256880407, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: playerMovementAccelerationAlternative
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244639442256880407, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: playerMovementDecellerationAlternative
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7406499542109578702, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
       propertyPath: m_Name
       value: 2D Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+--- !u!114 &1061672191659828516 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7406499542109578701, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+  m_PrefabInstance: {fileID: 1061672191659828515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603e81275b3d89c48a39f6723376e05d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2329171297325638255
 PrefabInstance:
   m_ObjectHideFlags: 0
