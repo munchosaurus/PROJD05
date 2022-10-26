@@ -6,7 +6,7 @@ public class GravityGun : MonoBehaviour
 {
     private PlayerMovement _playerController;
     [SerializeField] private LayerMask groundMask;
-    [SerializeField] private float ImpactMultiplier;
+    [SerializeField] private float impactMultiplier;
     [SerializeField] private Material[] crosshairMaterials;
     [SerializeField] private LineRenderer _lineRenderer;
     private Vector3 _currentDirection;
@@ -59,25 +59,25 @@ public class GravityGun : MonoBehaviour
         Physics.Raycast(transform.position, _currentDirection, out groundHit, Mathf.Infinity, groundMask);
         Physics.Raycast(transform.position, _currentDirection, out gravityHit, Mathf.Infinity,
             _playerController.gravityChangeLayer);
-        Vector3 groundPoint = new Vector3(groundHit.point.x, groundHit.point.y, 0);
+        Vector3 groundPoint = new Vector3(groundHit.point.x, groundHit.point.y, 1);
         if (gravityHit.collider)
         {
-            Vector3 gravityPoint = new Vector3(gravityHit.point.x, gravityHit.point.y, 0);
+            Vector3 gravityPoint = new Vector3(gravityHit.point.x, gravityHit.point.y, 1);
             if (Vector3.Distance(transform.position, gravityPoint) <=
                 Vector3.Distance(transform.position, groundPoint))
             {
-                crosshair.transform.position = gravityPoint * ImpactMultiplier;
+                crosshair.transform.position = gravityPoint * impactMultiplier;
                 crosshairMesh.material = crosshairMaterials[0];
             }
             else
             {
-                crosshair.transform.position = groundPoint * ImpactMultiplier;
+                crosshair.transform.position = groundPoint * impactMultiplier;
                 crosshairMesh.material = crosshairMaterials[1];
             }
         }
         else
         {
-            crosshair.transform.position = groundPoint * ImpactMultiplier;
+            crosshair.transform.position = groundPoint * impactMultiplier;
             crosshairMesh.material = crosshairMaterials[1];
         }
         _lineRenderer.SetPosition(1, crosshair.transform.position);
@@ -135,7 +135,7 @@ public class GravityGun : MonoBehaviour
     private Vector3 GetMousePositionOnPlane()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane xy = new Plane(Vector3.forward, Vector3.zero);
+        Plane xy = new Plane(Vector3.forward, new Vector3(0,0,1));
         xy.Raycast(ray, out float distance);
 
         return ray.GetPoint(distance);
