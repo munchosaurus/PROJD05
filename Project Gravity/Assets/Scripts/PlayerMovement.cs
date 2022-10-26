@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _playerStats = gameObject.GetComponent<PlayerStats>();
         SetBaseStats();
-        boxCastDimensions = new Vector3(0.49f, 0.05f, 0.49f);
+        boxCastDimensions = new Vector3(0.5f, 0.05f, 0.5f);
         Physics.gravity = new Vector3(0, -9.81f, 0);
         _playerRigidBody = GetComponent<Rigidbody>();
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
