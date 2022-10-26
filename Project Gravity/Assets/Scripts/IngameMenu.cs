@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IngameMenu : MonoBehaviour
 {
@@ -11,7 +13,10 @@ public class IngameMenu : MonoBehaviour
 
     private void Start()
     {
-        SetCustomCursor();
+        if (customCursor != null) 
+        {
+            SetCustomCursor();
+        }
     }
 
     void SetCustomCursor()
@@ -56,6 +61,19 @@ public class IngameMenu : MonoBehaviour
         {
             menus[index].SetActive(true);
         }
+
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings-1 && index == 1)
+        {
+            if (menus[index].transform.GetChild(0).GetComponent<Button>().IsInteractable())
+            {
+                menus[index].transform.GetChild(0).GetComponent<Button>().interactable = false;
+            }
+        }
+        
+        if (!menus[index].transform.GetChild(0).GetComponent<Button>().IsInteractable())
+        {
+            menus[index].transform.GetChild(0).GetComponent<Button>().interactable = true;
+        }
         
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         GameController.PauseGame();
@@ -73,7 +91,31 @@ public class IngameMenu : MonoBehaviour
             SetCustomCursor();
         }
         SceneManager.LoadScene(scene);
-        
+    }
+    
+    
+
+    public void Restart()
+    {
+        LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadNextScene()
+    {
+        if (SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCountInBuildSettings-1)
+        {
+            return;
+        }
+        LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
+
+    public void LoadPreviousScene()
+    {
+        if (SceneManager.GetActiveScene().buildIndex <= 1)
+        {
+            return;
+        }
+        LoadScene(SceneManager.GetActiveScene().buildIndex-1);
     }
 
     public void QuitGame()

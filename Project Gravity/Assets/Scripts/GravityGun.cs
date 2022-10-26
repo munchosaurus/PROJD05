@@ -1,14 +1,14 @@
 ﻿using System;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GravityGun : MonoBehaviour
 {
-    private PlayerMovement _playerController;
-    [SerializeField] private LayerMask groundMask;
-    [SerializeField] private float ImpactMultiplier;
     [SerializeField] private Material[] crosshairMaterials;
     [SerializeField] private LineRenderer _lineRenderer;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private LayerMask gravityMask;
     private Vector3 _currentDirection;
     private GameObject crosshair;
     private MeshRenderer crosshairMesh;
@@ -16,15 +16,15 @@ public class GravityGun : MonoBehaviour
 
     private void Awake()
     {
-        _playerController = gameObject.GetComponent<PlayerMovement>();
         crosshair = GameObject.FindGameObjectWithTag("Crosshair");
-        crosshairMesh = crosshair.GetComponentInChildren<MeshRenderer>();
+        crosshairMesh = crosshair.GetComponent<MeshRenderer>();
+        crosshairMesh.enabled = false;
         _lineRenderer = GameObject.FindWithTag("LineRenderer").GetComponent<LineRenderer>();
     }
 
     void FixedUpdate()
     {
-        if (crosshair == null)
+        if (crosshair == null || GameController.GetPlayerInputIsLocked())
         {
             return;
         }
@@ -39,16 +39,16 @@ public class GravityGun : MonoBehaviour
                 _lineRenderer.gameObject.SetActive(true);
             }
 
-            if (!crosshair.activeSelf)
+            if (crosshairMesh.enabled == false)
             {
-                crosshair.SetActive(true);
+                crosshairMesh.enabled = true;
             }
             SetCrosshair();
         }
         else
         {
             _lineRenderer.gameObject.SetActive(false);
-            crosshair.SetActive(false);
+            crosshairMesh.enabled = false;
         }
     }
 
@@ -58,26 +58,26 @@ public class GravityGun : MonoBehaviour
         RaycastHit gravityHit;
         Physics.Raycast(transform.position, _currentDirection, out groundHit, Mathf.Infinity, groundMask);
         Physics.Raycast(transform.position, _currentDirection, out gravityHit, Mathf.Infinity,
-            _playerController.gravityChangeLayer);
-        Vector3 groundPoint = new Vector3(groundHit.point.x, groundHit.point.y, 0);
+            gravityMask);
+        Vector3 groundPoint = new Vector3(groundHit.point.x, groundHit.point.y, 1);
         if (gravityHit.collider)
         {
-            Vector3 gravityPoint = new Vector3(gravityHit.point.x, gravityHit.point.y, 0);
+            Vector3 gravityPoint = new Vector3(gravityHit.point.x, gravityHit.point.y, 1);
             if (Vector3.Distance(transform.position, gravityPoint) <=
                 Vector3.Distance(transform.position, groundPoint))
             {
-                crosshair.transform.position = gravityPoint * ImpactMultiplier;
+                crosshair.transform.position = gravityPoint * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER;
                 crosshairMesh.material = crosshairMaterials[0];
             }
             else
             {
-                crosshair.transform.position = groundPoint * ImpactMultiplier;
+                crosshair.transform.position = groundPoint * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER;
                 crosshairMesh.material = crosshairMaterials[1];
             }
         }
         else
         {
-            crosshair.transform.position = groundPoint * ImpactMultiplier;
+            crosshair.transform.position = groundPoint * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER;
             crosshairMesh.material = crosshairMaterials[1];
         }
         _lineRenderer.SetPosition(1, crosshair.transform.position);
@@ -97,18 +97,18 @@ public class GravityGun : MonoBehaviour
     public void ShootGravityGun()
     {
         RaycastHit groundHit;
-        RaycastHit hit;
+        RaycastHit gravityHit;
 
         Physics.Raycast(transform.position, _currentDirection, out groundHit, Mathf.Infinity, groundMask);
-        if (Physics.Raycast(transform.position, _currentDirection, out hit, Mathf.Infinity,
-                _playerController.gravityChangeLayer,
+        if (Physics.Raycast(transform.position, _currentDirection, out gravityHit, Mathf.Infinity,
+                gravityMask,
                 QueryTriggerInteraction.Collide) && GravityController.GetCurrentFacing() !=
-            -hit.normal * GravityController.GetGravity())
+            -gravityHit.normal * GravityController.GetGravity())
         {
-            if (Vector3.Distance(transform.position, hit.point) <=
+            if (Vector3.Distance(transform.position, gravityHit.point) <=
                 Vector3.Distance(transform.position, groundHit.point))
             {
-                TriggerGravityGunEvent(hit);
+                TriggerGravityGunEvent(gravityHit);
             }
         }
     }
@@ -135,7 +135,7 @@ public class GravityGun : MonoBehaviour
     private Vector3 GetMousePositionOnPlane()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane xy = new Plane(Vector3.forward, Vector3.zero);
+        Plane xy = new Plane(Vector3.forward, new Vector3(0,0,1));
         xy.Raycast(ray, out float distance);
 
         return ray.GetPoint(distance);

@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
@@ -12,24 +8,27 @@ using Vector3 = UnityEngine.Vector3;
 public class DynamicObjectMovement : MonoBehaviour
 {
     [SerializeField] private Vector3 velocity;
-    [SerializeField] private LayerMask groundMask;
-    [SerializeField] private LayerMask magnetMask;
-    private Quaternion lockedRotation;
-    private Vector3 boxCastDimensions;
-    private bool isGrounded;
     [SerializeField] private Vector3 horizontalCast, verticalCast;
     [SerializeField] bool groundedRight;
     [SerializeField] bool groundedLeft;
     [SerializeField] bool groundedUp;
     [SerializeField] bool groundedDown;
     [SerializeField] private float friction;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private LayerMask magnetMask;
 
-
+    private readonly float GRID_OFFSET = 0;
+    private readonly float OBJECT_Z = 1;
+    private Quaternion lockedRotation;
+    private Vector3 boxCastDimensions;
+    private bool isGrounded;
+    
     // Start is called before the first frame update
     void Start()
     {
         velocity = Vector3.zero;
         lockedRotation = new Quaternion(0, 0, 0, 0);
+        
     }
 
     void FixedUpdate()
@@ -143,7 +142,7 @@ public class DynamicObjectMovement : MonoBehaviour
                     groundedRight = true;
                     transform.position = new Vector3(
                         GetClosestGridCentre(transform.position.x),
-                        transform.position.y, 0);
+                        transform.position.y, OBJECT_Z);
                 }
             }
         }
@@ -159,7 +158,7 @@ public class DynamicObjectMovement : MonoBehaviour
                     groundedLeft = true;
                     transform.position = new Vector3(
                         GetClosestGridCentre(transform.position.x),
-                        transform.position.y, 0);
+                        transform.position.y, OBJECT_Z);
                 }
             }
         }
@@ -196,50 +195,50 @@ public class DynamicObjectMovement : MonoBehaviour
     {
         RaycastHit hit;
         if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
-                transform.localScale.y / 2, magnetMask))
+                transform.localScale.y / 2, magnetMask, QueryTriggerInteraction.Collide))
         {
             if (CheckMagnet(Vector3.down, hit))
             {
                 transform.position = new Vector3(
                     transform.position.x,GetClosestGridCentre(
-                    transform.position.y), 0);
+                    transform.position.y), OBJECT_Z);
                 return true;
             }
         }
 
         if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
-                transform.localScale.y / 2, magnetMask))
+                transform.localScale.y / 2, magnetMask, QueryTriggerInteraction.Collide))
         {
             if (CheckMagnet(Vector3.up, hit))
             {
                 transform.position = new Vector3(
                     transform.position.x,GetClosestGridCentre(
-                        transform.position.y), 0);
+                        transform.position.y), OBJECT_Z);
                 return true;
             }
         }
 
         if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
-                transform.localScale.x / 2, magnetMask))
+                transform.localScale.x / 2, magnetMask, QueryTriggerInteraction.Collide))
         {
             if (CheckMagnet(Vector3.right, hit))
             {
                 transform.position = new Vector3(
                     GetClosestGridCentre(transform.position.x),
-                    transform.position.y, 0);
+                    transform.position.y, OBJECT_Z);
                 return true;
             }
         }
 
         if (Physics.BoxCast(transform.position, verticalCast, Vector3.left, out hit, transform.rotation,
-                transform.localScale.x / 2, magnetMask))
+                transform.localScale.x / 2, magnetMask, QueryTriggerInteraction.Collide))
         {
             if (CheckMagnet(Vector3.left, hit))
             {
                 Debug.Log(Vector3.Distance(gameObject.transform.position, hit.point));
                 transform.position = new Vector3(
                     GetClosestGridCentre(transform.position.x),
-                    transform.position.y, 0);
+                    transform.position.y, OBJECT_Z);
                 return false;
             }
         }
@@ -253,24 +252,24 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             if (origin > 0)
             {
-                return (float) Math.Round(Math.Abs(origin)) + 0.5f;
+                return (float) Math.Round(Math.Abs(origin)) + GRID_OFFSET;
             }
 
             if (origin < 0)
             {
-                return -((float) Math.Round(Math.Abs(origin)) + 0.5f);
+                return -((float) Math.Round(Math.Abs(origin)) + GRID_OFFSET);
             }
         }
         else
         {
             if (origin > 0)
             {
-                return (float) Math.Round(Math.Abs(origin)) - 0.5f;
+                return (float) Math.Round(Math.Abs(origin)) - GRID_OFFSET;
             }
 
             if (origin < 0)
             {
-                return -((float) Math.Round(Math.Abs(origin)) - 0.5f);
+                return -((float) Math.Round(Math.Abs(origin)) - GRID_OFFSET);
             }
         }
 

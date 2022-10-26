@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] public LayerMask gravityChangeLayer;
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform levelTarget;
+    [SerializeField] private LayerMask groundMask;
+    private InputAction.CallbackContext _movementKeyInfo;
+    private Rigidbody _playerRigidBody;
+    private PlayerStats _playerStats;
+    private IngameMenu _menu;
+    private Vector3 boxCastDimensions;
+    private float _jumpCooldownTimer;
     private float _airMovementMultiplier;
     private float _jumpForce;
     private float _jumpCooldown;
@@ -14,18 +22,21 @@ public class PlayerMovement : MonoBehaviour
     private float _acceleration;
     private float _decelleration;
     private float _jumpForceMultiplier;
-    private InputAction.CallbackContext _movementKeyInfo;
-    private Rigidbody _playerRigidBody;
-    private float _jumpCooldownTimer;
-    private PlayerStats _playerStats;
-    private IngameMenu _menu;
-    [SerializeField] private Transform levelTarget;
-    private Vector3 boxCastDimensions;
 
-    // Start is called before the first frame update
-    void Awake()
+    public void ChangeInputSettings()
     {
-        _playerStats = gameObject.GetComponent<PlayerStats>();
+        if (_jumpForce == _playerStats.GetJumpForce() && _jumpCooldown == _playerStats.GetJumpCooldown())
+        {
+            SetAlternativeStats();
+        }
+        else
+        {
+            SetBaseStats();
+        }
+    }
+
+    private void SetBaseStats()
+    {
         _jumpForce = _playerStats.GetJumpForce();
         _jumpCooldown = _playerStats.GetJumpCooldown();
         _maxVelocity = _playerStats.GetMaxVelocity();
@@ -33,13 +44,43 @@ public class PlayerMovement : MonoBehaviour
         _decelleration = _playerStats.GetPlayerMovementDecelleration();
         _jumpForceMultiplier = _playerStats.GetJumpForceMultiplier();
         _airMovementMultiplier = _playerStats.GetAirMovementMultiplier();
-        boxCastDimensions = new Vector3(0.49f, 0.05f, 0.49f);
+    }
 
-
+    private void SetAlternativeStats()
+    {
+        _jumpForce = _playerStats.GetJumpForceAlternative();
+        _jumpCooldown = _playerStats.GetJumpCooldownAlternative();
+        _maxVelocity = _playerStats.GetMaxVelocityAlternative();
+        _acceleration = _playerStats.GetPlayerMovementAccelerationAlternative();
+        _decelleration = _playerStats.GetPlayerMovementDecellerationAlternative();
+        _jumpForceMultiplier = _playerStats.GetJumpForceMultiplierAlternative();
+        _airMovementMultiplier = _playerStats.GetAirMovementMultiplierAlternative();
+    }
+    // Start is called before the first frame update
+    void Awake()
+    {
+        _playerStats = gameObject.GetComponent<PlayerStats>();
+        SetBaseStats();
+        boxCastDimensions = new Vector3(0.5f, 0.05f, 0.5f);
         Physics.gravity = new Vector3(0, -9.81f, 0);
         _playerRigidBody = GetComponent<Rigidbody>();
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
         levelTarget = GameObject.FindWithTag("Target").gameObject.transform;
+        StartCoroutine(SwitchInputLock());
+
+    }
+
+    private IEnumerator SwitchInputLock()
+    {
+        yield return new WaitForSeconds(Constants.LEVEL_LOAD_INPUT_PAUSE_TIME);
+        if (GameController.GetPlayerInputIsLocked())
+        {
+            GameController.SetInputLockState(false);
+        }
+        else
+        {
+            GameController.SetInputLockState(true);
+        }
     }
 
     // Update is called once per frame
@@ -78,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 eulerRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0, 0, eulerRotation.z);
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        transform.position = new Vector3(transform.position.x, transform.position.y, Constants.PLAYER_Z_VALUE);
     }
 
     private bool IsGoalReached()
@@ -89,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded()
     {
         return Physics.BoxCast(transform.position, boxCastDimensions, -transform.up, transform.rotation,
-            transform.localScale.y / 2, groundLayer);
+            transform.localScale.y / 2, groundMask);
     }
 
     // Called by input system

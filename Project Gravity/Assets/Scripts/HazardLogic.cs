@@ -6,39 +6,64 @@ using UnityEngine;
 public class HazardLogic : MonoBehaviour
 {
     [SerializeField] private IngameMenu menu;
-    [SerializeField] private string playerTag;
+    [SerializeField] private Vector3 horizontalCast, verticalCast;
+    [SerializeField] private LayerMask hazardMask;
+    [SerializeField] private float collisionVelocityThreshold;
+    private Rigidbody thisRigidBody;
     void Start()
     {
         menu = FindObjectOfType<IngameMenu>();
+        thisRigidBody = gameObject.GetComponent<Rigidbody>();
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    private void FixedUpdate()
     {
-        if (other.CompareTag(playerTag))
+        CheckForHazards();
+    }
+
+    
+    private void CheckForHazards()
+    {
+        //Debug.Log(thisRigidBody.velocity.y);
+        RaycastHit hit;
+        if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
+                transform.localScale.y / 2, hazardMask, QueryTriggerInteraction.Collide))
         {
-            if (menu != null)
+            if (menu != null && (thisRigidBody.velocity.y < -collisionVelocityThreshold || Physics.gravity.y < 0))
             {
+                Debug.Log(thisRigidBody.velocity.y);
+                // Game over
                 menu.Pause(2);
-            }
-            else
-            {
-                Debug.Log("Cannot find menu script");
             }
         }
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag(playerTag))
+        if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
+                transform.localScale.y / 2, hazardMask, QueryTriggerInteraction.Collide))
         {
-            if (menu != null)
+            if (menu != null && (thisRigidBody.velocity.y > collisionVelocityThreshold || Physics.gravity.y > 0))
             {
+                // Game over
                 menu.Pause(2);
             }
-            else
+        }
+
+        if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
+                transform.localScale.x / 2, hazardMask, QueryTriggerInteraction.Collide))
+        {
+            if (menu != null  && (thisRigidBody.velocity.x > collisionVelocityThreshold || Physics.gravity.x > 0))
             {
-                Debug.Log("Cannot find menu script");
+                // Game over
+                menu.Pause(2);
+            }
+        }
+
+        if (Physics.BoxCast(transform.position, verticalCast, Vector3.left, out hit, Quaternion.identity,
+                transform.localScale.x / 2, hazardMask, QueryTriggerInteraction.Collide))
+        {
+            if (menu != null && (thisRigidBody.velocity.y < -collisionVelocityThreshold || Physics.gravity.y < 0))
+            {
+                // Game over
+                menu.Pause(2);
             }
         }
     }
