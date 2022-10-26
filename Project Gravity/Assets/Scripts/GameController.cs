@@ -26,6 +26,7 @@ public static class GameController
 
     public static bool GetPlayerInputIsLocked()
     {
+        Debug.Log(_inputLocked);
         return _inputLocked;
     }
 }

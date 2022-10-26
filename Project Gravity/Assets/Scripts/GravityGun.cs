@@ -1,13 +1,14 @@
 ﻿using System;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GravityGun : MonoBehaviour
 {
-    [SerializeField] private LayerMask groundMask;
     [SerializeField] private Material[] crosshairMaterials;
     [SerializeField] private LineRenderer _lineRenderer;
-    private PlayerMovement _playerController;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private LayerMask gravityMask;
     private Vector3 _currentDirection;
     private GameObject crosshair;
     private MeshRenderer crosshairMesh;
@@ -15,7 +16,6 @@ public class GravityGun : MonoBehaviour
 
     private void Awake()
     {
-        _playerController = gameObject.GetComponent<PlayerMovement>();
         crosshair = GameObject.FindGameObjectWithTag("Crosshair");
         crosshairMesh = crosshair.GetComponent<MeshRenderer>();
         crosshairMesh.enabled = false;
@@ -58,7 +58,7 @@ public class GravityGun : MonoBehaviour
         RaycastHit gravityHit;
         Physics.Raycast(transform.position, _currentDirection, out groundHit, Mathf.Infinity, groundMask);
         Physics.Raycast(transform.position, _currentDirection, out gravityHit, Mathf.Infinity,
-            _playerController.gravityChangeLayer);
+            gravityMask);
         Vector3 groundPoint = new Vector3(groundHit.point.x, groundHit.point.y, 1);
         if (gravityHit.collider)
         {
@@ -97,18 +97,18 @@ public class GravityGun : MonoBehaviour
     public void ShootGravityGun()
     {
         RaycastHit groundHit;
-        RaycastHit hit;
+        RaycastHit gravityHit;
 
         Physics.Raycast(transform.position, _currentDirection, out groundHit, Mathf.Infinity, groundMask);
-        if (Physics.Raycast(transform.position, _currentDirection, out hit, Mathf.Infinity,
-                _playerController.gravityChangeLayer,
+        if (Physics.Raycast(transform.position, _currentDirection, out gravityHit, Mathf.Infinity,
+                gravityMask,
                 QueryTriggerInteraction.Collide) && GravityController.GetCurrentFacing() !=
-            -hit.normal * GravityController.GetGravity())
+            -gravityHit.normal * GravityController.GetGravity())
         {
-            if (Vector3.Distance(transform.position, hit.point) <=
+            if (Vector3.Distance(transform.position, gravityHit.point) <=
                 Vector3.Distance(transform.position, groundHit.point))
             {
-                TriggerGravityGunEvent(hit);
+                TriggerGravityGunEvent(gravityHit);
             }
         }
     }
