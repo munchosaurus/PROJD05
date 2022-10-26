@@ -4,11 +4,10 @@ using UnityEngine.InputSystem;
 
 public class GravityGun : MonoBehaviour
 {
-    private PlayerMovement _playerController;
     [SerializeField] private LayerMask groundMask;
-    [SerializeField] private float impactMultiplier;
     [SerializeField] private Material[] crosshairMaterials;
     [SerializeField] private LineRenderer _lineRenderer;
+    private PlayerMovement _playerController;
     private Vector3 _currentDirection;
     private GameObject crosshair;
     private MeshRenderer crosshairMesh;
@@ -18,13 +17,14 @@ public class GravityGun : MonoBehaviour
     {
         _playerController = gameObject.GetComponent<PlayerMovement>();
         crosshair = GameObject.FindGameObjectWithTag("Crosshair");
-        crosshairMesh = crosshair.GetComponentInChildren<MeshRenderer>();
+        crosshairMesh = crosshair.GetComponent<MeshRenderer>();
+        crosshairMesh.enabled = false;
         _lineRenderer = GameObject.FindWithTag("LineRenderer").GetComponent<LineRenderer>();
     }
 
     void FixedUpdate()
     {
-        if (crosshair == null)
+        if (crosshair == null || GameController.GetPlayerInputIsLocked())
         {
             return;
         }
@@ -39,16 +39,16 @@ public class GravityGun : MonoBehaviour
                 _lineRenderer.gameObject.SetActive(true);
             }
 
-            if (!crosshair.activeSelf)
+            if (crosshairMesh.enabled == false)
             {
-                crosshair.SetActive(true);
+                crosshairMesh.enabled = true;
             }
             SetCrosshair();
         }
         else
         {
             _lineRenderer.gameObject.SetActive(false);
-            crosshair.SetActive(false);
+            crosshairMesh.enabled = false;
         }
     }
 
@@ -66,18 +66,18 @@ public class GravityGun : MonoBehaviour
             if (Vector3.Distance(transform.position, gravityPoint) <=
                 Vector3.Distance(transform.position, groundPoint))
             {
-                crosshair.transform.position = gravityPoint * impactMultiplier;
+                crosshair.transform.position = gravityPoint * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER;
                 crosshairMesh.material = crosshairMaterials[0];
             }
             else
             {
-                crosshair.transform.position = groundPoint * impactMultiplier;
+                crosshair.transform.position = groundPoint * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER;
                 crosshairMesh.material = crosshairMaterials[1];
             }
         }
         else
         {
-            crosshair.transform.position = groundPoint * impactMultiplier;
+            crosshair.transform.position = groundPoint * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER;
             crosshairMesh.material = crosshairMaterials[1];
         }
         _lineRenderer.SetPosition(1, crosshair.transform.position);

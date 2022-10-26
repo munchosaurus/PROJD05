@@ -14,9 +14,6 @@ public class DynamicObjectMovement : MonoBehaviour
     [SerializeField] private Vector3 velocity;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask magnetMask;
-    private Quaternion lockedRotation;
-    private Vector3 boxCastDimensions;
-    private bool isGrounded;
     [SerializeField] private Vector3 horizontalCast, verticalCast;
     [SerializeField] bool groundedRight;
     [SerializeField] bool groundedLeft;
@@ -26,13 +23,16 @@ public class DynamicObjectMovement : MonoBehaviour
 
     private readonly float GRID_OFFSET = 0;
     private readonly float OBJECT_Z = 1;
-
-
+    private Quaternion lockedRotation;
+    private Vector3 boxCastDimensions;
+    private bool isGrounded;
+    
     // Start is called before the first frame update
     void Start()
     {
         velocity = Vector3.zero;
         lockedRotation = new Quaternion(0, 0, 0, 0);
+        
     }
 
     void FixedUpdate()

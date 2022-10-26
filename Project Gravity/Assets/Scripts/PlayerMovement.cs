@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public LayerMask gravityChangeLayer;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform levelTarget;
     private float _airMovementMultiplier;
     private float _jumpForce;
     private float _jumpCooldown;
@@ -19,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpCooldownTimer;
     private PlayerStats _playerStats;
     private IngameMenu _menu;
-    [SerializeField] private Transform levelTarget;
     private Vector3 boxCastDimensions;
 
     private readonly float PLAYER_Z = 1;
@@ -38,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void SetBaseStats()
     {
-        
         _jumpForce = _playerStats.GetJumpForce();
         _jumpCooldown = _playerStats.GetJumpCooldown();
         _maxVelocity = _playerStats.GetMaxVelocity();
@@ -68,6 +68,21 @@ public class PlayerMovement : MonoBehaviour
         _playerRigidBody = GetComponent<Rigidbody>();
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
         levelTarget = GameObject.FindWithTag("Target").gameObject.transform;
+        StartCoroutine(SwitchInputLock());
+
+    }
+
+    private IEnumerator SwitchInputLock()
+    {
+        yield return new WaitForSeconds(Constants.LEVEL_LOAD_INPUT_PAUSE_TIME);
+        if (GameController.GetPlayerInputIsLocked())
+        {
+            GameController.SetInputLockState(false);
+        }
+        else
+        {
+            GameController.SetInputLockState(true);
+        }
     }
 
     // Update is called once per frame

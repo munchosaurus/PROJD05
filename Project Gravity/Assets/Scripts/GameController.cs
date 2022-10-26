@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class GameController
 {
-    private static bool _inputLocked;
-    
+    private static bool _inputLocked = true;
+
     public static void PauseGame()
     {
         
@@ -16,7 +17,6 @@ public static class GameController
     public static void UnpauseGame()
     {
         Time.timeScale = 1;
-        SetInputLockState(false);
     }
 
     public static void SetInputLockState(bool locked)

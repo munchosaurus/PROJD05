@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,7 +12,10 @@ public class IngameMenu : MonoBehaviour
 
     private void Start()
     {
-        SetCustomCursor();
+        if (customCursor != null) 
+        {
+            SetCustomCursor();
+        }
     }
 
     void SetCustomCursor()
@@ -73,7 +77,6 @@ public class IngameMenu : MonoBehaviour
             SetCustomCursor();
         }
         SceneManager.LoadScene(scene);
-        
     }
 
     public void QuitGame()
