@@ -64,15 +64,15 @@ public class IngameMenu : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings-1 && index == 1)
         {
-            if (menus[index].transform.GetChild(1).GetComponent<Button>().IsInteractable())
+            if (menus[index].transform.GetChild(0).GetComponent<Button>().IsInteractable())
             {
-                menus[index].transform.GetChild(1).GetComponent<Button>().interactable = false;
+                menus[index].transform.GetChild(0).GetComponent<Button>().interactable = false;
             }
         }
         
-        if (!menus[index].transform.GetChild(1).GetComponent<Button>().IsInteractable())
+        if (!menus[index].transform.GetChild(0).GetComponent<Button>().IsInteractable())
         {
-            menus[index].transform.GetChild(1).GetComponent<Button>().interactable = true;
+            menus[index].transform.GetChild(0).GetComponent<Button>().interactable = true;
         }
         
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
