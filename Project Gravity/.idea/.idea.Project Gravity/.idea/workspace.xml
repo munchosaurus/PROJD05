@@ -3,18 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/2D Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/2D Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level_4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level_4.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Constants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Constants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DynamicObjectMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DynamicObjectMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EventSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EventSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GravityController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GravityController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GravityGun.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GravityGun.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HazardLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HazardLogic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +89,7 @@
       <workItem from="1666340529310" duration="3900000" />
       <workItem from="1666600221509" duration="6298000" />
       <workItem from="1666688278202" duration="9569000" />
-      <workItem from="1666776130902" duration="7234000" />
+      <workItem from="1666776130902" duration="8409000" />
     </task>
     <servers />
   </component>
