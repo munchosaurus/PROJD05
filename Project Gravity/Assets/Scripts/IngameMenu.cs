@@ -78,6 +78,31 @@ public class IngameMenu : MonoBehaviour
         }
         SceneManager.LoadScene(scene);
     }
+    
+    
+
+    public void Restart()
+    {
+        LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadNextScene()
+    {
+        if (SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCountInBuildSettings)
+        {
+            return;
+        }
+        LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
+
+    public void LoadPreviousScene()
+    {
+        if (SceneManager.GetActiveScene().buildIndex <= 1)
+        {
+            return;
+        }
+        LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
 
     public void QuitGame()
     {
