@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/UI.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/UI/Cursors.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/UI/Cursors/shadowedcursor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/UI/Cursors/shadowedcursor.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cursors.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cursors/shadowedcursor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cursors/shadowedcursor.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/2D Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/2D Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/IngameMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/IngameMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +89,7 @@
       <workItem from="1666340529310" duration="3900000" />
       <workItem from="1666600221509" duration="6298000" />
       <workItem from="1666688278202" duration="9569000" />
-      <workItem from="1666776130902" duration="11177000" />
+      <workItem from="1666776130902" duration="12267000" />
     </task>
     <servers />
   </component>
