@@ -12,7 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad3f4937e7877b458d9363a9280d661, type: 3}
   m_Name: New Wall
   m_EditorClassIdentifier: 
-  wallPrefab: {fileID: 1495554306845300774, guid: 5d7251648cc3b9843924abb88040d90e, type: 3}
-  dimensions: {x: 18, y: 18, z: 1}
-  specialPrefabs: []
-  specialPrefabPositions: []
+  wallPrefab: {fileID: 6098653093695181756, guid: 83426658413c0cc4e9b4a420fe3fdbeb, type: 3}
+  dimensions: {x: 29, y: 18, z: 1}
+  isGround: 0
+  specialPrefabs:
+  - {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+  specialPrefabPositions:
+  - {x: 9, y: 6, z: 0}
+  - {x: 9, y: 7, z: 0}
+  - {x: 9, y: 8, z: 0}
+  - {x: 9, y: 9, z: 0}
+  - {x: 9, y: 10, z: 0}
+  - {x: 12, y: 6, z: 0}
+  - {x: 12, y: 7, z: 0}
+  - {x: 12, y: 8, z: 0}
+  - {x: 12, y: 9, z: 0}
+  - {x: 12, y: 10, z: 0}
+  - {x: 15, y: 7, z: 0}
+  - {x: 15, y: 8, z: 0}
+  - {x: 15, y: 9, z: 0}
+  - {x: 15, y: 10, z: 0}
+  - {x: 15, y: 11, z: 0}
+  - {x: 18, y: 11, z: 0}
