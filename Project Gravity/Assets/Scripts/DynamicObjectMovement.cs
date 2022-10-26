@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
@@ -12,27 +8,27 @@ using Vector3 = UnityEngine.Vector3;
 public class DynamicObjectMovement : MonoBehaviour
 {
     [SerializeField] private Vector3 velocity;
-    [SerializeField] private LayerMask groundMask;
-    [SerializeField] private LayerMask magnetMask;
-    private Quaternion lockedRotation;
-    private Vector3 boxCastDimensions;
-    private bool isGrounded;
     [SerializeField] private Vector3 horizontalCast, verticalCast;
     [SerializeField] bool groundedRight;
     [SerializeField] bool groundedLeft;
     [SerializeField] bool groundedUp;
     [SerializeField] bool groundedDown;
     [SerializeField] private float friction;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private LayerMask magnetMask;
 
     private readonly float GRID_OFFSET = 0;
     private readonly float OBJECT_Z = 1;
-
-
+    private Quaternion lockedRotation;
+    private Vector3 boxCastDimensions;
+    private bool isGrounded;
+    
     // Start is called before the first frame update
     void Start()
     {
         velocity = Vector3.zero;
         lockedRotation = new Quaternion(0, 0, 0, 0);
+        
     }
 
     void FixedUpdate()

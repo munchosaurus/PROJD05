@@ -4,8 +4,6 @@ using UnityEngine;
 
 public static class GravityController
 {
-    private static readonly float GRAVITY = 9.81f;
-
     private static bool _isHorizontal = true;
     private static Vector3 _currentFacing;
     private static Guid _gravityGunEventGuid;
@@ -40,12 +38,12 @@ public static class GravityController
 
     public static void SetNewGravity()
     {
-        Physics.gravity = -_currentFacing * GRAVITY;
+        Physics.gravity = -_currentFacing * Constants.GRAVITY;
     }
 
     public static float GetGravity()
     {
-        return GRAVITY;
+        return Constants.GRAVITY;
     }
 
     private static void OnGravityGunHit(GravityGunEvent gravityGunEvent)
