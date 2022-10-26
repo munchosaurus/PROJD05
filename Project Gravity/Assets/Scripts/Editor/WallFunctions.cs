@@ -19,6 +19,14 @@ public class WallFunctions : MonoBehaviour
         {
             GenerateWallWithoutSpecials(context, parent.transform);
         }
+
+        if (context.isGround)
+        {
+            SetupBoxCollider(context, parent);
+
+            Debug.Log(LayerMask.NameToLayer("Ground"));
+            parent.layer = LayerMask.NameToLayer("Ground");
+        }
     }
 
     static void GenerateWallWithoutSpecials(Wall w, Transform parent)
@@ -46,11 +54,11 @@ public class WallFunctions : MonoBehaviour
             {
                 for (int y = 0; y < w.dimensions.y; y++)
                 {
-                    Vector3 found = Array.Find(w.specialPrefabPositions, element => element.x == x && element.y == y);
                     GameObject go;
 
-                    if (found.x == x && found.y == y)
+                    if (IsSpecial(w, x, y))
                     {
+                        Vector3 found = Array.Find(w.specialPrefabPositions, element => element.x == x && element.y == y);
                         go = PrefabUtility.InstantiatePrefab(w.specialPrefabs[(int)found.z]) as GameObject;
                     }
                     else
@@ -65,5 +73,30 @@ public class WallFunctions : MonoBehaviour
                 }
             }
         }
+    }
+
+    static bool IsSpecial(Wall w, int x, int y)
+    {
+        bool isSpecial = false;
+
+        foreach(Vector3 v in w.specialPrefabPositions)
+        {
+            if(v.x == x && v.y == y)
+            {
+                isSpecial = true;
+            }
+        }
+
+        return isSpecial;
+    }
+
+    static void SetupBoxCollider(Wall context, GameObject parent)
+    {
+        BoxCollider boxCol = parent.AddComponent<BoxCollider>();
+        float boxColXpos = context.dimensions.x / 2 - 0.5f;
+        float boxColYpos = context.dimensions.y / 2 - 0.5f;
+        float boxColZpos = context.dimensions.z / 2 - 0.5f;
+        boxCol.center = new Vector3(boxColXpos, boxColYpos, boxColZpos);
+        boxCol.size = new Vector3(context.dimensions.x, context.dimensions.y, context.dimensions.z);
     }
 }
