@@ -195,7 +195,7 @@ public class DynamicObjectMovement : MonoBehaviour
     {
         RaycastHit hit;
         if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
-                transform.localScale.y / 2, magnetMask))
+                transform.localScale.y / 2, magnetMask, QueryTriggerInteraction.Collide))
         {
             if (CheckMagnet(Vector3.down, hit))
             {
@@ -207,7 +207,7 @@ public class DynamicObjectMovement : MonoBehaviour
         }
 
         if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
-                transform.localScale.y / 2, magnetMask))
+                transform.localScale.y / 2, magnetMask, QueryTriggerInteraction.Collide))
         {
             if (CheckMagnet(Vector3.up, hit))
             {
@@ -219,7 +219,7 @@ public class DynamicObjectMovement : MonoBehaviour
         }
 
         if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
-                transform.localScale.x / 2, magnetMask))
+                transform.localScale.x / 2, magnetMask, QueryTriggerInteraction.Collide))
         {
             if (CheckMagnet(Vector3.right, hit))
             {
@@ -231,7 +231,7 @@ public class DynamicObjectMovement : MonoBehaviour
         }
 
         if (Physics.BoxCast(transform.position, verticalCast, Vector3.left, out hit, transform.rotation,
-                transform.localScale.x / 2, magnetMask))
+                transform.localScale.x / 2, magnetMask, QueryTriggerInteraction.Collide))
         {
             if (CheckMagnet(Vector3.left, hit))
             {
