@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class CameraFollowPlayer : MonoBehaviour
 {
-    [SerializeField] private Transform playerTransform;
     [SerializeField] private float leeway = 2.0f;
     [SerializeField] private float smoothTime = 0.3f;
     [SerializeField] private float minX, maxX, minY, maxY;
@@ -14,6 +13,8 @@ public class CameraFollowPlayer : MonoBehaviour
     [SerializeField] private float targetZ;
     [SerializeField] private float targetX;
     [SerializeField] private float targetY;
+
+    private Transform playerTransform;
     private Vector3 offSet;
     private Vector3 velocity = Vector3.zero;
     private bool move;
@@ -25,6 +26,7 @@ public class CameraFollowPlayer : MonoBehaviour
     {
         // JUST FOR TESTING, EACH LEVEL WILL HAVE ITS OWN LOAD OF TARGET FOR CAMERA
         targetZ = minimumDistance;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -35,18 +37,14 @@ public class CameraFollowPlayer : MonoBehaviour
 
     private void UpdateCamera()
     {
-        if (targetZ <= maximumDistance + 1)
-        {
-            targetPosition = new Vector3(targetX, targetY, targetZ);
-        }
-        else
-        {
-            targetPosition = CalculateTargetPosition();
-        }
+        //if (targetZ <= maximumDistance + 1)
+        //{
+        //    targetPosition = new Vector3(targetX, targetY, targetZ);
+        //}
+        targetPosition = CalculateTargetPosition();
 
-        if (Vector2.Distance(targetPosition, transform.position) > leeway && !move)
+        if ((Vector2.Distance(targetPosition, transform.position) > leeway || Mathf.Abs(transform.position.z - targetZ) > 0.1f) && !move)
         {
-            
             move = true;
         }
        
@@ -59,11 +57,16 @@ public class CameraFollowPlayer : MonoBehaviour
         {
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
 
-            if (Vector2.Distance(targetPosition, transform.position) < 0.1f)
+            if (Vector2.Distance(targetPosition, transform.position) <= 0 || transform.position.z <= targetZ + 0.1f )
             {
                 move = false;
             }
         }
+        //else if (targetZ < maximumDistance + 0.1f && (Mathf.Abs(transform.position.x - targetX) > 0.1f || Mathf.Abs(transform.position.y - targetY) > 0.1f))
+        //{
+        //    targetPosition = new Vector3(targetX, targetY, targetZ);
+        //    transform.position = transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+        //}
     }
 
     private Vector3 CalculateTargetPosition()

@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2110725554297923200}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -98,15 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b783762f3fd30bd4192f45d1d0c0f0b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 1049751914841088714, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
   leeway: 1
   smoothTime: 0.3
-  minX: -3
-  maxX: 3
-  minY: 3
-  maxY: 9
-  maximumDistance: -50
-  minimumDistance: -40
+  minX: 9.5
+  maxX: 9.5
+  minY: 9.5
+  maxY: 9.5
+  maximumDistance: -40
+  minimumDistance: -38
   targetZ: 0
   targetX: 0
   targetY: 5
