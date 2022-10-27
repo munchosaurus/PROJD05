@@ -54,15 +54,15 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             if (isHorizontal)
             {
-                if (otherObject.GetComponentInParent<Rigidbody>().velocity.x != 0)
+                if (Math.Abs(otherObject.GetComponentInParent<Rigidbody>().velocity.x) > 0.1f)
                 {
-                    velocity.y = otherObject.GetComponentInParent<Rigidbody>().velocity.x;
+                    velocity.x = otherObject.GetComponentInParent<Rigidbody>().velocity.x;
                     return true;
                 } 
             }
             else
             {
-                if (otherObject.GetComponentInParent<Rigidbody>().velocity.y != 0)
+                if (Math.Abs(otherObject.GetComponentInParent<Rigidbody>().velocity.y) > 0.1f)
                 {
                     velocity.y = otherObject.GetComponentInParent<Rigidbody>().velocity.y;
                     return true;
@@ -75,7 +75,7 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.x) < velocity.x && otherObject.GetComponent<DynamicObjectMovement>().velocity.x != 0)
                 {
-                    velocity.y = otherObject.GetComponentInParent<Rigidbody>().velocity.x;
+                    velocity.x = otherObject.GetComponentInParent<Rigidbody>().velocity.x;
                     return true;
                 } 
             }
