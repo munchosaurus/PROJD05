@@ -64,7 +64,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 3597618059847582156, guid: 67f67543a76e7d54d950d515ed23a660, type: 3}
-  - {fileID: 4876016769225002412, guid: 67f67543a76e7d54d950d515ed23a660, type: 3}
+  - {fileID: 2100000, guid: 11febb239d95af7499497157699ce9fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,12 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 128
-  magnetMask:
-    serializedVersion: 2
-    m_Bits: 512
   horizontalCast: {x: 0.05, y: 0.49, z: 0.49}
   verticalCast: {x: 0.49, y: 0.05, z: 0.49}
   groundedRight: 0
@@ -112,6 +106,12 @@ MonoBehaviour:
   groundedUp: 0
   groundedDown: 0
   friction: 50
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
+  magnetMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!65 &1743645562809522923
 BoxCollider:
   m_ObjectHideFlags: 0

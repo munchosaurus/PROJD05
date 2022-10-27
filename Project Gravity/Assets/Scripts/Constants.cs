@@ -30,5 +30,8 @@ public static class Constants
 
     // Gravity
     public const float GRAVITY = 9.81f;
+    
+    // UI
+    public const float GRAVITY_ARROW_ROTATION_SPEED = 5f;
 
 }

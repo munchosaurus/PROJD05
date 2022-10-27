@@ -24,7 +24,6 @@ public class HazardLogic : MonoBehaviour
     
     private void CheckForHazards()
     {
-        //Debug.Log(thisRigidBody.velocity.y);
         RaycastHit hit;
         if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
                 transform.localScale.y / 2, hazardMask, QueryTriggerInteraction.Collide))
@@ -60,7 +59,7 @@ public class HazardLogic : MonoBehaviour
         if (Physics.BoxCast(transform.position, verticalCast, Vector3.left, out hit, Quaternion.identity,
                 transform.localScale.x / 2, hazardMask, QueryTriggerInteraction.Collide))
         {
-            if (menu != null && (thisRigidBody.velocity.y < -collisionVelocityThreshold || Physics.gravity.y < 0))
+            if (menu != null && (thisRigidBody.velocity.x < -collisionVelocityThreshold || Physics.gravity.x < 0))
             {
                 // Game over
                 menu.Pause(2);
