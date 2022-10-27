@@ -17,6 +17,7 @@ public static class GameController
     public static void UnpauseGame()
     {
         Time.timeScale = 1;
+        SetInputLockState(false);
     }
 
     public static void SetInputLockState(bool locked)

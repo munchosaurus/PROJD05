@@ -21,7 +21,7 @@ public class IngameMenu : MonoBehaviour
 
     void SetCustomCursor()
     {
-        Cursor.SetCursor(customCursor, new Vector2(3, 3), CursorMode.ForceSoftware);
+        Cursor.SetCursor(customCursor, new Vector2(customCursor.width/2, customCursor.height/2), CursorMode.Auto);
     }
 
     public void ChangePauseState()
@@ -66,6 +66,7 @@ public class IngameMenu : MonoBehaviour
         {
             if (menus[index].transform.GetChild(0).GetComponent<Button>().IsInteractable())
             {
+                Debug.Log("hej");
                 menus[index].transform.GetChild(0).GetComponent<Button>().interactable = false;
             }
         }

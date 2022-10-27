@@ -31578,9 +31578,29 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a0d032f038aba17469b6a49263f4fa82, type: 3}
+    - target: {fileID: 5558133775299111569, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: verticalCast.x
+      value: 0.485
+      objectReference: {fileID: 0}
+    - target: {fileID: 5558133775299111569, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: verticalCast.z
+      value: 0.485
+      objectReference: {fileID: 0}
+    - target: {fileID: 5558133775299111569, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: horizontalCast.y
+      value: 0.485
+      objectReference: {fileID: 0}
+    - target: {fileID: 5558133775299111569, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: horizontalCast.z
+      value: 0.485
+      objectReference: {fileID: 0}
     - target: {fileID: 7406499542109578702, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
       propertyPath: m_Name
       value: 2D Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9064548699281237096, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
+      propertyPath: m_Interactable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 951e36172b7c3334c88343fee5c1aa53, type: 3}
