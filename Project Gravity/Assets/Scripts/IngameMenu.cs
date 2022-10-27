@@ -66,16 +66,14 @@ public class IngameMenu : MonoBehaviour
         {
             if (menus[index].transform.GetChild(0).GetComponent<Button>().IsInteractable())
             {
-                Debug.Log("hej");
                 menus[index].transform.GetChild(0).GetComponent<Button>().interactable = false;
             }
+            else
+            {
+                menus[index].transform.GetChild(0).GetComponent<Button>().interactable = true;
+            }
         }
-        
-        if (!menus[index].transform.GetChild(0).GetComponent<Button>().IsInteractable())
-        {
-            menus[index].transform.GetChild(0).GetComponent<Button>().interactable = true;
-        }
-        
+
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         GameController.PauseGame();
     }
