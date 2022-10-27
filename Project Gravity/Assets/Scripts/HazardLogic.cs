@@ -56,7 +56,7 @@ public class HazardLogic : MonoBehaviour
             }
         }
 
-        if (Physics.BoxCast(transform.position, verticalCast, Vector3.left, out hit, Quaternion.identity,
+        if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
                 transform.localScale.x / 2, hazardMask, QueryTriggerInteraction.Collide))
         {
             if (menu != null && (thisRigidBody.velocity.x < -collisionVelocityThreshold || Physics.gravity.x < 0))
