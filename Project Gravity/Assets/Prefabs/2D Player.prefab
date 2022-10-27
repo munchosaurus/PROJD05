@@ -178,7 +178,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.99, z: 1}
+  m_Size: {x: 0.98, y: 0.98, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7406499542109578702
 GameObject:
@@ -751,6 +751,22 @@ PrefabInstance:
     - target: {fileID: 8135044467534177198, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135044467534177198, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -1014.4152
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135044467534177198, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -651.1661
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135044467534177198, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -507.20758
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135044467534177198, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 325.583
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
