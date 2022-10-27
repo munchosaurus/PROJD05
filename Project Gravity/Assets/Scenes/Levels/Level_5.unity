@@ -812,6 +812,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -2231,72 +2235,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2272794006740107932, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
   m_PrefabInstance: {fileID: 112335474}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &120715070
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 183645832}
-    m_Modifications:
-    - target: {fileID: 1495554306845300774, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_Name
-      value: BuildingBlock_Cube_TARGET
-      objectReference: {fileID: 0}
-    - target: {fileID: 1495554306845300774, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2272794006740107932, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_RootOrder
-      value: 324
-      objectReference: {fileID: 0}
-    - target: {fileID: 2272794006740107932, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2272794006740107932, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2272794006740107932, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2272794006740107932, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2272794006740107932, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2272794006740107932, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2272794006740107932, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2272794006740107932, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2272794006740107932, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2272794006740107932, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
---- !u!4 &120715071 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2272794006740107932, guid: 86c0ba6832e4cdc4e847a3edec027a0b, type: 3}
-  m_PrefabInstance: {fileID: 120715070}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &136690815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2428,6 +2366,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -2490,6 +2432,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -3603,7 +3549,6 @@ Transform:
   - {fileID: 572285598}
   - {fileID: 1104320867}
   - {fileID: 625649048}
-  - {fileID: 120715071}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3862,6 +3807,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -5367,6 +5316,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -5886,9 +5839,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 376f03dcfd3e5e34ea75d6cc69a8fc3a, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2272794006740107932, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_RootOrder
@@ -6010,6 +5971,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -6258,6 +6223,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -6675,6 +6644,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -7729,6 +7702,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -7915,6 +7892,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -8163,6 +8144,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -8411,6 +8396,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -12875,6 +12864,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -13619,6 +13612,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -15107,6 +15104,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -15355,6 +15356,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -15541,6 +15546,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -15665,6 +15674,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -15789,6 +15802,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -16896,6 +16913,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -17961,6 +17982,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -18023,6 +18048,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -18147,6 +18176,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -18519,6 +18552,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -18829,6 +18866,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -19070,63 +19111,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2272794006740107932, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
   m_PrefabInstance: {fileID: 1048284536}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1048382234
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 294012833879436019, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
-      propertyPath: m_Name
-      value: EventSystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 294012833879436046, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 294012833879436046, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 294012833879436046, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 294012833879436046, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 294012833879436046, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 294012833879436046, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 294012833879436046, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 294012833879436046, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 294012833879436046, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 294012833879436046, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 294012833879436046, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
 --- !u!1001 &1051345818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20622,6 +20606,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -20870,6 +20858,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -20932,6 +20924,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -21304,6 +21300,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -21924,6 +21924,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -22105,6 +22109,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -23345,6 +23353,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -23469,6 +23481,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -24444,6 +24460,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -26740,6 +26760,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -28557,6 +28581,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -29129,7 +29157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8396303370207750296, guid: f0d733965700cec48b966762db7ace2a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8396303370207750296, guid: f0d733965700cec48b966762db7ace2a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -29916,6 +29944,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -30040,6 +30072,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -30536,13 +30572,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
       objectReference: {fileID: 0}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2272794006740107932, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_RootOrder
@@ -30726,6 +30766,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -31031,6 +31075,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -31093,6 +31141,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -31820,6 +31872,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -32316,6 +32372,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -32378,6 +32438,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -33184,6 +33248,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -33618,6 +33686,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -34943,6 +35015,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -35067,6 +35143,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -35191,6 +35271,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -36240,6 +36324,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -36364,6 +36452,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -36426,6 +36518,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -36488,6 +36584,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
@@ -37466,6 +37566,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 183645832}
     m_Modifications:
+    - target: {fileID: 1135393948550724083, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a71e80ed6f3c022488a83bb82532db08, type: 2}
     - target: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_Hazard
