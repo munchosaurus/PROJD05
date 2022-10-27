@@ -13,6 +13,11 @@ public class IngameMenu : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            return;
+        }
+        
         if (customCursor != null) 
         {
             SetCustomCursor();
