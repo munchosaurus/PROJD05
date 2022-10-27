@@ -89,6 +89,7 @@ public class GravityGun : MonoBehaviour
 
     private void TriggerGravityGunEvent(RaycastHit hit)
     {
+        Debug.Log("jajamän");
         Event gravityGunEvent = new GravityGunEvent()
         {
             TargetGameObject = hit.transform.gameObject,
@@ -107,7 +108,7 @@ public class GravityGun : MonoBehaviour
         if (Physics.Raycast(transform.position, _currentDirection, out gravityHit, Mathf.Infinity,
                 gravityMask,
                 QueryTriggerInteraction.Collide) && GravityController.GetCurrentFacing() !=
-            -gravityHit.normal * GravityController.GetGravity())
+            -gravityHit.normal)
         {
             if (Vector3.Distance(transform.position, gravityHit.point) <=
                 Vector3.Distance(transform.position, groundHit.point))

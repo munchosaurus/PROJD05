@@ -1,7 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _playerRigidBody;
     private PlayerStats _playerStats;
     private IngameMenu _menu;
+    private Vector3 groundCheckDimensions;
     private Vector3 boxCastDimensions;
     private float _jumpCooldownTimer;
     private float _airMovementMultiplier;
@@ -22,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private float _acceleration;
     private float _decelleration;
     private float _jumpForceMultiplier;
+    private const float GRID_CLAMP_THRESHOLD = 0.02f;
 
     public void ChangeInputSettings()
     {
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         
-        if (_jumpForce == _playerStats.GetJumpForce() && _jumpCooldown == _playerStats.GetJumpCooldown())
+        if (_decelleration == _playerStats.GetPlayerMovementDecelleration())
         {
             SetAlternativeStats();
         }
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         GameController.SetInputLockState(true);
         _playerStats = gameObject.GetComponent<PlayerStats>();
         SetBaseStats();
-        boxCastDimensions = new Vector3(0.5f, 0.05f, 0.5f);
+        groundCheckDimensions = new Vector3(0.5f, 0.05f, 0.5f);
         Physics.gravity = new Vector3(0, -9.81f, 0);
         _playerRigidBody = GetComponent<Rigidbody>();
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
@@ -126,6 +126,35 @@ public class PlayerMovement : MonoBehaviour
         Vector3 eulerRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0, 0, eulerRotation.z);
         transform.position = new Vector3(transform.position.x, transform.position.y, Constants.PLAYER_Z_VALUE);
+
+        if (_playerRigidBody.velocity.magnitude == 0)
+        {
+            ClampToGrid();
+        }
+    }
+
+    private void ClampToGrid()
+    {
+        Vector3 newPosition = transform.position;
+        if (GravityController.IsGravityHorizontal())
+        {
+            if (Math.Abs(gameObject.transform.position.y - Math.Round(gameObject.transform.position.y)) < GRID_CLAMP_THRESHOLD)
+            {
+                newPosition.y = Mathf.Round(transform.position.y);
+            }
+        }
+        else
+        {
+            if (Math.Abs(gameObject.transform.position.x - Math.Round(gameObject.transform.position.x)) < GRID_CLAMP_THRESHOLD)
+            {
+                newPosition.x = Mathf.Round(transform.position.x);
+            }
+        }
+        
+        if (transform.position != newPosition)
+        {
+            transform.position = newPosition;
+        }
     }
 
     private bool IsGoalReached()
@@ -135,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics.BoxCast(transform.position, boxCastDimensions, -transform.up, transform.rotation,
+        return Physics.BoxCast(transform.position, groundCheckDimensions, -transform.up, transform.rotation,
             transform.localScale.y / 2, groundMask);
     }
 
@@ -172,22 +201,22 @@ public class PlayerMovement : MonoBehaviour
         {
             if (GravityController.IsGravityHorizontal())
             {
-                MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x * _airMovementMultiplier);
+                MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y * _airMovementMultiplier);
             }
             else
             {
-                MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y * _airMovementMultiplier);
+                MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x * _airMovementMultiplier);
             }
         }
         else
         {
             if (GravityController.IsGravityHorizontal())
             {
-                MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x);
+                MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y);
             }
             else
             {
-                MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y);
+                MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x);
             }
             ClampMoveSpeed();
         }
@@ -207,7 +236,50 @@ public class PlayerMovement : MonoBehaviour
 
     private bool ShouldAddMoreMoveForce(float moveCoefficient)
     {
+        Debug.Log(moveCoefficient);
+        Vector3 dir = new Vector3();
+        if (GravityController.IsGravityHorizontal())
+        {
+            boxCastDimensions = new Vector3(0.47f, 0.01f, 0.47f);
+            if (moveCoefficient > 0)
+            {
+                dir = Vector3.up;
+            }
+            else if (moveCoefficient < 0)
+            {
+                dir = Vector3.down;
+            }
+        }
+        else
+        {
+            boxCastDimensions = new Vector3(0.01f,0.47f, 0.47f);
+            if (moveCoefficient > 0)
+            {
+                dir = Vector3.right;
+            }
+            else if (moveCoefficient < 0)
+            {
+                dir = Vector3.left;
+            }
+        }
+        
+        if (moveCoefficient != 0)
+        {
+            return _playerRigidBody.velocity.magnitude < _maxVelocity && !BoxCast(dir);
+        }
+
         return moveCoefficient != 0 && _playerRigidBody.velocity.magnitude < _maxVelocity;
+    }
+
+    private bool BoxCast(Vector3 direction)
+    {
+        RaycastHit hit;
+        Physics.BoxCast(transform.position, boxCastDimensions, direction, out hit, Quaternion.identity,
+            transform.localScale.y / 2, groundMask);
+        ExtDebug.DrawBoxCastOnHit(transform.position, boxCastDimensions, Quaternion.identity, direction,
+            hit.distance, Color.red);
+
+        return hit.collider;
     }
 
     private void ClampMoveSpeed()
@@ -220,6 +292,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void RotateToPlane()
     {
-        transform.rotation = Quaternion.LookRotation(transform.forward, GravityController.GetCurrentFacing());
+        transform.rotation = Quaternion.LookRotation(transform.forward, -GravityController.GetCurrentFacing());
     }
 }

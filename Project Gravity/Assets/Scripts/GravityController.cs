@@ -4,26 +4,19 @@ using UnityEngine;
 
 public static class GravityController
 {
-    private static bool _isHorizontal = true;
     private static Vector3 _currentFacing;
     private static Guid _gravityGunEventGuid;
 
     // Gets initiated by the EventSystem.
     public static void Init()
     {
-        _currentFacing = new Vector3(0f, 1f, 0f);
-        _isHorizontal = true;
+        _currentFacing = new Vector3(0f, -1f, 0f);
         EventSystem.Current.RegisterListener<GravityGunEvent>(OnGravityGunHit, ref _gravityGunEventGuid);
     }
 
     public static bool IsGravityHorizontal()
     {
-        return _isHorizontal;
-    }
-
-    public static void SetHorizontal(bool horizontal)
-    {
-        _isHorizontal = horizontal;
+        return Physics.gravity.y == 0;
     }
 
     public static Vector3 GetCurrentFacing()
@@ -36,9 +29,9 @@ public static class GravityController
         _currentFacing = newFacing;
     }
 
-    public static void SetNewGravity()
+    public static void SetNewGravity(Vector3 direction)
     {
-        Physics.gravity = -_currentFacing * Constants.GRAVITY;
+        Physics.gravity = direction * Constants.GRAVITY;
     }
 
     public static float GetGravity()
@@ -50,10 +43,9 @@ public static class GravityController
     {
         try
         {
-            SetCurrentFacing(gravityGunEvent.hitNormal);
-            SetNewGravity();
+            SetCurrentFacing(-gravityGunEvent.hitNormal);
+            SetNewGravity(-gravityGunEvent.hitNormal);
             gravityGunEvent.SourceGameObject.GetComponent<PlayerMovement>().RotateToPlane();
-            SetHorizontal(_isHorizontal = _currentFacing.y != 0);
         }
         catch
         {

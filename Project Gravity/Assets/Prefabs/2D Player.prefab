@@ -1897,12 +1897,12 @@ MonoBehaviour:
   playerMovementDecelleration: 15
   jumpForceMultiplier: 100
   airMovementMultiplier: 0.2
-  jumpForceAlternative: 5
-  jumpCooldownAlternative: 0.7
+  jumpForceAlternative: 3
+  jumpCooldownAlternative: 0.5
   maxVelocityAlternative: 7
   playerMovementAccelerationAlternative: 40
   playerMovementDecellerationAlternative: 25
-  jumpForceMultiplierAlternative: 110
+  jumpForceMultiplierAlternative: 100
   airMovementMultiplierAlternative: 0.5
 --- !u!114 &5558133775299111569
 MonoBehaviour:

@@ -235,7 +235,6 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             if (CheckMagnet(Vector3.left, hit))
             {
-                Debug.Log(Vector3.Distance(gameObject.transform.position, hit.point));
                 transform.position = new Vector3(
                     GetClosestGridCentre(transform.position.x),
                     transform.position.y, OBJECT_Z);
