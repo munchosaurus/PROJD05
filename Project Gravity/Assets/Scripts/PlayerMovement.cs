@@ -236,7 +236,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool ShouldAddMoreMoveForce(float moveCoefficient)
     {
-        Debug.Log(moveCoefficient);
         Vector3 dir = new Vector3();
         if (GravityController.IsGravityHorizontal())
         {
