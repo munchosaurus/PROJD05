@@ -48,7 +48,7 @@ Material:
     - _Strength: 30
     - _TwirlStrength: 10
     m_Colors:
-    - _Color: {r: 33.89676, g: 11.358076, b: 27.330372, a: 1}
+    - _Color: {r: 5.737407, g: 25.332664, b: 32.873795, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6195596915165288868
 MonoBehaviour:
