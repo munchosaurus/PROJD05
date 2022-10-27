@@ -25,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void ChangeInputSettings()
     {
+        if (!IsGrounded())
+        {
+            return;
+        }
+        
         if (_jumpForce == _playerStats.GetJumpForce() && _jumpCooldown == _playerStats.GetJumpCooldown())
         {
             SetAlternativeStats();

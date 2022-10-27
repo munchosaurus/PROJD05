@@ -547,6 +547,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1049751914841088714}
     m_Modifications:
+<<<<<<< HEAD
     - target: {fileID: 466837971735210512, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -663,6 +664,8 @@ PrefabInstance:
       propertyPath: m_ReferenceResolution.y
       value: 1080
       objectReference: {fileID: 0}
+=======
+>>>>>>> main
     - target: {fileID: 6967305992549457403, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
       propertyPath: m_Name
       value: Menu
@@ -751,6 +754,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 6967305992782864587, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
       propertyPath: m_text
       value: Main menu
@@ -799,6 +803,8 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 2
       objectReference: {fileID: 0}
+=======
+>>>>>>> main
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
 --- !u!114 &2124406989537400889 stripped
