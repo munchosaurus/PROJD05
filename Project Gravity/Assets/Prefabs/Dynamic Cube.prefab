@@ -108,7 +108,7 @@ MonoBehaviour:
   friction: 50
   groundMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 2176
   magnetMask:
     serializedVersion: 2
     m_Bits: 512

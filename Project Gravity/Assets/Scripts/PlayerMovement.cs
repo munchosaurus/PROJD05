@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        
+
         if (_decelleration == _playerStats.GetPlayerMovementDecelleration())
         {
             SetAlternativeStats();
@@ -61,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
         _jumpForceMultiplier = _playerStats.GetJumpForceMultiplierAlternative();
         _airMovementMultiplier = _playerStats.GetAirMovementMultiplierAlternative();
     }
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -73,7 +74,6 @@ public class PlayerMovement : MonoBehaviour
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
         levelTarget = GameObject.FindWithTag("Target").gameObject.transform;
         StartCoroutine(SwitchInputLock());
-
     }
 
     private IEnumerator SwitchInputLock()
@@ -136,21 +136,22 @@ public class PlayerMovement : MonoBehaviour
     private void ClampToGrid()
     {
         Vector3 newPosition = transform.position;
-        if (GravityController.IsGravityHorizontal())
+        // if (GravityController.IsGravityHorizontal())
+        // {
+        //     if (Math.Abs(gameObject.transform.position.y - Math.Round(gameObject.transform.position.y)) < GRID_CLAMP_THRESHOLD)
+        //     {
+        //         newPosition.y = Mathf.Round(transform.position.y);
+        //     }
+        // }
+        // else
+        // {
+        if (Math.Abs(gameObject.transform.position.x - Math.Round(gameObject.transform.position.x)) <
+            GRID_CLAMP_THRESHOLD && !GravityController.IsGravityHorizontal())
         {
-            if (Math.Abs(gameObject.transform.position.y - Math.Round(gameObject.transform.position.y)) < GRID_CLAMP_THRESHOLD)
-            {
-                newPosition.y = Mathf.Round(transform.position.y);
-            }
+            newPosition.x = Mathf.Round(transform.position.x);
         }
-        else
-        {
-            if (Math.Abs(gameObject.transform.position.x - Math.Round(gameObject.transform.position.x)) < GRID_CLAMP_THRESHOLD)
-            {
-                newPosition.x = Mathf.Round(transform.position.x);
-            }
-        }
-        
+        //}
+
         if (transform.position != newPosition)
         {
             transform.position = newPosition;
@@ -218,6 +219,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x);
             }
+
             ClampMoveSpeed();
         }
     }
@@ -251,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            boxCastDimensions = new Vector3(0.01f,0.47f, 0.47f);
+            boxCastDimensions = new Vector3(0.01f, 0.47f, 0.47f);
             if (moveCoefficient > 0)
             {
                 dir = Vector3.right;
@@ -261,7 +263,7 @@ public class PlayerMovement : MonoBehaviour
                 dir = Vector3.left;
             }
         }
-        
+
         if (moveCoefficient != 0)
         {
             return _playerRigidBody.velocity.magnitude < _maxVelocity && !BoxCast(dir);

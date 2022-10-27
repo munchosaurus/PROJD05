@@ -9,7 +9,7 @@ public class GravityCompass : MonoBehaviour
     
     public Quaternion RotateToPlane()
     {
-        return Quaternion.LookRotation(transform.forward, GravityController.GetCurrentFacing());
+        return Quaternion.LookRotation(transform.forward, -GravityController.GetCurrentFacing());
     }
     
 }
