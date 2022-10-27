@@ -71,6 +71,7 @@ public class IngameMenu : MonoBehaviour
         {
             if (menus[index].transform.GetChild(0).GetComponent<Button>().IsInteractable())
             {
+                Debug.Log("hej");
                 menus[index].transform.GetChild(0).GetComponent<Button>().interactable = false;
             }
             else

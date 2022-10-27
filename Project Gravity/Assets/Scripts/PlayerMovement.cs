@@ -64,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        GameController.SetInputLockState(true);
         _playerStats = gameObject.GetComponent<PlayerStats>();
         SetBaseStats();
         boxCastDimensions = new Vector3(0.5f, 0.05f, 0.5f);
