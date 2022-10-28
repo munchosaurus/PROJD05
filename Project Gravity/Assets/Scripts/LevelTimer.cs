@@ -49,11 +49,11 @@ public class LevelTimer : MonoBehaviour
         {
             timeToDisplay = 0;
         }
-
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-
-        text.text = $"{minutes:00}:{seconds:00}";
+        float milliSeconds = timeToDisplay % 1 * 1000;
+        
+        text.text = $"{minutes:00}:{seconds:00}:{milliSeconds:000}";
         
     }
 }
