@@ -136,15 +136,6 @@ public class PlayerMovement : MonoBehaviour
     private void ClampToGrid()
     {
         Vector3 newPosition = transform.position;
-        // if (GravityController.IsGravityHorizontal())
-        // {
-        //     if (Math.Abs(gameObject.transform.position.y - Math.Round(gameObject.transform.position.y)) < GRID_CLAMP_THRESHOLD)
-        //     {
-        //         newPosition.y = Mathf.Round(transform.position.y);
-        //     }
-        // }
-        // else
-        // {
         if (Math.Abs(gameObject.transform.position.x - Math.Round(gameObject.transform.position.x)) <
             GRID_CLAMP_THRESHOLD && !GravityController.IsGravityHorizontal())
         {

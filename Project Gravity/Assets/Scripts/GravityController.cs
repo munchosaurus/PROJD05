@@ -45,7 +45,7 @@ public static class GravityController
         {
             SetCurrentFacing(-gravityGunEvent.hitNormal);
             SetNewGravity(-gravityGunEvent.hitNormal);
-            gravityGunEvent.SourceGameObject.GetComponent<PlayerMovement>().RotateToPlane();
+            gravityGunEvent.SourceGameObject.GetComponent<PlayerInput>().RotateToPlane();
         }
         catch
         {

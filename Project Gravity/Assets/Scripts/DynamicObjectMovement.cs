@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DynamicObjectMovement : MonoBehaviour
 {
-    [SerializeField] private Vector3 velocity;
+    public Vector3 velocity;
     [SerializeField] private Vector3 horizontalCast, verticalCast;
     [SerializeField] bool groundedRight;
     [SerializeField] bool groundedLeft;
@@ -46,21 +46,21 @@ public class DynamicObjectMovement : MonoBehaviour
 
     private bool ShouldInheritMovement(GameObject otherObject, bool isHorizontal)
     {
-        if (otherObject.GetComponentInParent<Rigidbody>() != null)
+        if (otherObject.GetComponentInParent<PlayerInput>() != null)
         {
             if (isHorizontal)
             {
-                if (Math.Abs(otherObject.GetComponentInParent<Rigidbody>().velocity.x) > 0.1f)
+                if (Math.Abs(otherObject.GetComponentInParent<PlayerInput>().velocity.x) > 0.1f)
                 {
-                    velocity.x = otherObject.GetComponentInParent<Rigidbody>().velocity.x;
+                    velocity.x = otherObject.GetComponentInParent<PlayerInput>().velocity.x;
                     return true;
                 } 
             }
             else
             {
-                if (Math.Abs(otherObject.GetComponentInParent<Rigidbody>().velocity.y) > 0.1f)
+                if (Math.Abs(otherObject.GetComponentInParent<PlayerInput>().velocity.y) > 0.1f)
                 {
-                    velocity.y = otherObject.GetComponentInParent<Rigidbody>().velocity.y;
+                    velocity.y = otherObject.GetComponentInParent<PlayerInput>().velocity.y;
                     return true;
                 } 
             }
@@ -71,7 +71,7 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.x) < velocity.x && otherObject.GetComponent<DynamicObjectMovement>().velocity.x != 0)
                 {
-                    velocity.x = otherObject.GetComponentInParent<Rigidbody>().velocity.x;
+                    velocity.x = otherObject.GetComponent<DynamicObjectMovement>().velocity.x;
                     return true;
                 } 
             }
@@ -79,7 +79,7 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.y) < velocity.y && otherObject.GetComponent<DynamicObjectMovement>().velocity.y != 0)
                 {
-                    velocity.y = otherObject.GetComponentInParent<Rigidbody>().velocity.y;
+                    velocity.y = otherObject.GetComponent<DynamicObjectMovement>().velocity.y;
                     return true;
                 } 
             }

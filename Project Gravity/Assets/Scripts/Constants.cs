@@ -29,7 +29,7 @@ public static class Constants
     public const float PLAYER_Z_VALUE = 1f;
 
     // Gravity
-    public const float GRAVITY = 9.81f;
+    public const float GRAVITY = 15f;
     
     // UI
     public const float GRAVITY_ARROW_ROTATION_SPEED = 5f;
