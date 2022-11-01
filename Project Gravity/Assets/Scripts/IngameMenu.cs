@@ -71,7 +71,6 @@ public class IngameMenu : MonoBehaviour
         {
             if (menus[index].transform.GetChild(0).GetComponent<Button>().IsInteractable())
             {
-                Debug.Log("hej");
                 menus[index].transform.GetChild(0).GetComponent<Button>().interactable = false;
             }
             else
@@ -86,7 +85,6 @@ public class IngameMenu : MonoBehaviour
 
     public void LoadScene(int scene)
     {
-        Unpause();
         if (scene == 0)
         {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
@@ -95,6 +93,7 @@ public class IngameMenu : MonoBehaviour
         {
             SetCustomCursor();
         }
+        Unpause();
         SceneManager.LoadScene(scene);
     }
     

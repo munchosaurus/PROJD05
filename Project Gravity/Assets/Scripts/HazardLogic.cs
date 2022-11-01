@@ -9,11 +9,11 @@ public class HazardLogic : MonoBehaviour
     [SerializeField] private Vector3 horizontalCast, verticalCast;
     [SerializeField] private LayerMask hazardMask;
     [SerializeField] private float collisionVelocityThreshold;
-    private Rigidbody thisRigidBody;
+    private PlayerInput _playerInput;
     void Start()
     {
         menu = FindObjectOfType<IngameMenu>();
-        thisRigidBody = gameObject.GetComponent<Rigidbody>();
+        _playerInput = gameObject.GetComponent<PlayerInput>();
     }
 
     private void FixedUpdate()
@@ -28,9 +28,8 @@ public class HazardLogic : MonoBehaviour
         if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
                 transform.localScale.y / 2, hazardMask, QueryTriggerInteraction.Collide))
         {
-            if (menu != null && (thisRigidBody.velocity.y < -collisionVelocityThreshold || Physics.gravity.y < 0))
+            if (menu != null && (_playerInput.velocity.y < -collisionVelocityThreshold || Physics.gravity.y < 0))
             {
-                Debug.Log(thisRigidBody.velocity.y);
                 // Game over
                 menu.Pause(2);
             }
@@ -39,7 +38,7 @@ public class HazardLogic : MonoBehaviour
         if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
                 transform.localScale.y / 2, hazardMask, QueryTriggerInteraction.Collide))
         {
-            if (menu != null && (thisRigidBody.velocity.y > collisionVelocityThreshold || Physics.gravity.y > 0))
+            if (menu != null && (_playerInput.velocity.y > collisionVelocityThreshold || Physics.gravity.y > 0))
             {
                 // Game over
                 menu.Pause(2);
@@ -49,7 +48,7 @@ public class HazardLogic : MonoBehaviour
         if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
                 transform.localScale.x / 2, hazardMask, QueryTriggerInteraction.Collide))
         {
-            if (menu != null  && (thisRigidBody.velocity.x > collisionVelocityThreshold || Physics.gravity.x > 0))
+            if (menu != null  && (_playerInput.velocity.x > collisionVelocityThreshold || Physics.gravity.x > 0))
             {
                 // Game over
                 menu.Pause(2);
@@ -59,7 +58,7 @@ public class HazardLogic : MonoBehaviour
         if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
                 transform.localScale.x / 2, hazardMask, QueryTriggerInteraction.Collide))
         {
-            if (menu != null && (thisRigidBody.velocity.x < -collisionVelocityThreshold || Physics.gravity.x < 0))
+            if (menu != null && (_playerInput.velocity.x < -collisionVelocityThreshold || Physics.gravity.x < 0))
             {
                 // Game over
                 menu.Pause(2);

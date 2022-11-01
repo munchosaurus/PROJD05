@@ -2,31 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.HighDefinition;
 
 public class CameraFollowPlayer : MonoBehaviour
 {
-    [SerializeField] private float leeway = 2.0f;
-    [SerializeField] private float smoothTime = 0.3f;
-    [SerializeField] private float minX, maxX, minY, maxY;
-    [SerializeField] private float maximumDistance;
-    [SerializeField] private float minimumDistance;
-    [SerializeField] private float targetZ;
-    [SerializeField] private float targetX;
-    [SerializeField] private float targetY;
+    
+    private float leeway;
+    private float smoothTime;
+    private float minX, maxX, minY, maxY;
+    private float maximumDistance;
+    private float minimumDistance;
+    private float targetX;
+    private float targetY;
+    private float targetZ;
+    private LevelSettings _levelSettings;
 
-    private Transform playerTransform;
-    private Vector3 offSet;
-    private Vector3 velocity = Vector3.zero;
-    private bool move;
+    private Transform _playerTransform;
+    private Vector3 _velocity = Vector3.zero;
+    private bool _move;
 
     private Vector3 targetPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        // JUST FOR TESTING, EACH LEVEL WILL HAVE ITS OWN LOAD OF TARGET FOR CAMERA
-        targetZ = minimumDistance;
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        _levelSettings = (LevelSettings) FindObjectOfType (typeof(LevelSettings));
+        SetupCameraSettings();
+        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    void SetupCameraSettings()
+    {
+        leeway = _levelSettings.GetLevelLeeway();
+        smoothTime = _levelSettings.GetLevelSmoothTime();
+        minX = _levelSettings.GetLevelMinX();
+        maxX = _levelSettings.GetLevelMaxX();
+        minY = _levelSettings.GetLevelMinY();
+        maxY = _levelSettings.GetLevelMaxY();
+        maximumDistance = _levelSettings.GetLevelCameraMaximumDistance();
+        minimumDistance = _levelSettings.GetLevelCameraMinimumDistance();
+        targetX = _levelSettings.GetLevelXTargetValue();
+        targetY = _levelSettings.GetLevelYTargetValue();
+        targetZ = _levelSettings.GetLevelZTargetValue();
     }
 
     // Update is called once per frame
@@ -37,15 +54,11 @@ public class CameraFollowPlayer : MonoBehaviour
 
     private void UpdateCamera()
     {
-        //if (targetZ <= maximumDistance + 1)
-        //{
-        //    targetPosition = new Vector3(targetX, targetY, targetZ);
-        //}
         targetPosition = CalculateTargetPosition();
 
-        if ((Vector2.Distance(targetPosition, transform.position) > leeway || Mathf.Abs(transform.position.z - targetZ) > 0.1f) && !move)
+        if ((Vector2.Distance(targetPosition, transform.position) > leeway || Mathf.Abs(transform.position.z - targetZ) > 0.1f) && !_move)
         {
-            move = true;
+            _move = true;
         }
        
         MoveCamera(targetPosition);
@@ -53,13 +66,13 @@ public class CameraFollowPlayer : MonoBehaviour
 
     private void MoveCamera(Vector3 targetPosition)
     {
-        if (move)
+        if (_move)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity, smoothTime);
 
             if (Vector2.Distance(targetPosition, transform.position) <= 0 || transform.position.z <= targetZ + 0.1f )
             {
-                move = false;
+                _move = false;
             }
         }
         //else if (targetZ < maximumDistance + 0.1f && (Mathf.Abs(transform.position.x - targetX) > 0.1f || Mathf.Abs(transform.position.y - targetY) > 0.1f))
@@ -71,7 +84,7 @@ public class CameraFollowPlayer : MonoBehaviour
 
     private Vector3 CalculateTargetPosition()
     {
-        Vector3 targetPosition = new Vector3(playerTransform.position.x, playerTransform.position.y, targetZ);
+        Vector3 targetPosition = new Vector3(_playerTransform.position.x, _playerTransform.position.y, targetZ);
         
         if (targetPosition.x < minX)
             targetPosition.x = minX;

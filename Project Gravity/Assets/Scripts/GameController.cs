@@ -9,7 +9,6 @@ public static class GameController
 
     public static void PauseGame()
     {
-        
         Time.timeScale = 0;
         SetInputLockState(true);
     }

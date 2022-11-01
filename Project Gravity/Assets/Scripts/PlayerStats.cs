@@ -15,51 +15,51 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float jumpForceMultiplier;
     [SerializeField] private float airMovementMultiplier;
 
-    [Header("Alternative stats")] [SerializeField]
-    private float jumpForceAlternative;
+    // [Header("Alternative stats")] [SerializeField]
+    // private float jumpForceAlternative;
+    //
+    // [SerializeField] private float jumpCooldownAlternative;
+    // [SerializeField] private float maxVelocityAlternative;
+    // [SerializeField] private float playerMovementAccelerationAlternative;
+    // [SerializeField] private float playerMovementDecellerationAlternative;
+    // [SerializeField] private float jumpForceMultiplierAlternative;
+    // [SerializeField] private float airMovementMultiplierAlternative;
 
-    [SerializeField] private float jumpCooldownAlternative;
-    [SerializeField] private float maxVelocityAlternative;
-    [SerializeField] private float playerMovementAccelerationAlternative;
-    [SerializeField] private float playerMovementDecellerationAlternative;
-    [SerializeField] private float jumpForceMultiplierAlternative;
-    [SerializeField] private float airMovementMultiplierAlternative;
-
-    public float GetJumpForceAlternative()
-    {
-        return jumpForceAlternative;
-    }
-
-    public float GetJumpCooldownAlternative()
-    {
-        return jumpCooldownAlternative;
-    }
-
-    public float GetMaxVelocityAlternative()
-    {
-        return maxVelocityAlternative;
-    }
-
-    public float GetPlayerMovementAccelerationAlternative()
-    {
-        return playerMovementAccelerationAlternative;
-    }
-
-    public float GetPlayerMovementDecellerationAlternative()
-    {
-        return playerMovementDecellerationAlternative;
-    }
-
-    public float GetJumpForceMultiplierAlternative()
-    {
-        return jumpForceMultiplierAlternative;
-    }
-
-
-    public float GetAirMovementMultiplierAlternative()
-    {
-        return airMovementMultiplierAlternative;
-    }
+    // public float GetJumpForceAlternative()
+    // {
+    //     return jumpForceAlternative;
+    // }
+    //
+    // public float GetJumpCooldownAlternative()
+    // {
+    //     return jumpCooldownAlternative;
+    // }
+    //
+    // public float GetMaxVelocityAlternative()
+    // {
+    //     return maxVelocityAlternative;
+    // }
+    //
+    // public float GetPlayerMovementAccelerationAlternative()
+    // {
+    //     return playerMovementAccelerationAlternative;
+    // }
+    //
+    // public float GetPlayerMovementDecellerationAlternative()
+    // {
+    //     return playerMovementDecellerationAlternative;
+    // }
+    //
+    // public float GetJumpForceMultiplierAlternative()
+    // {
+    //     return jumpForceMultiplierAlternative;
+    // }
+    //
+    //
+    // public float GetAirMovementMultiplierAlternative()
+    // {
+    //     return airMovementMultiplierAlternative;
+    // }
     
     public float GetJumpForce()
     {
