@@ -364,7 +364,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.98, y: 0.98, z: 1}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1946085346806778852
 GameObject:
@@ -2395,20 +2395,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca8a86641514f38ac986cf78b85167e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 3
-  jumpCooldown: 0.5
-  maxVelocity: 4
-  playerMovementAcceleration: 25
+  jumpForce: 8
+  jumpCooldown: 1
+  maxVelocity: 8
+  playerMovementAcceleration: 40
   playerMovementDecelleration: 15
   jumpForceMultiplier: 100
-  airMovementMultiplier: 0.2
-  jumpForceAlternative: 3
-  jumpCooldownAlternative: 0.5
-  maxVelocityAlternative: 7
-  playerMovementAccelerationAlternative: 40
-  playerMovementDecellerationAlternative: 25
-  jumpForceMultiplierAlternative: 100
-  airMovementMultiplierAlternative: 0.5
+  airMovementMultiplier: 0.1
 --- !u!114 &5558133775299111569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2659,13 +2652,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
-  horizontalCast: {x: 0, y: 0, z: 0}
-  verticalCast: {x: 0, y: 0, z: 0}
+  horizontalCast: {x: 0.05, y: 0.49, z: 0.49}
+  verticalCast: {x: 0.49, y: 0.05, z: 0.49}
   groundedRight: 0
   groundedLeft: 0
   groundedUp: 0
   groundedDown: 0
-  friction: 10
+  friction: 100
   groundMask:
     serializedVersion: 2
     m_Bits: 128

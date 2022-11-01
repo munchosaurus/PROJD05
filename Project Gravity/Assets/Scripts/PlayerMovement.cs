@@ -53,13 +53,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void SetAlternativeStats()
     {
-        _jumpForce = _playerStats.GetJumpForceAlternative();
-        _jumpCooldown = _playerStats.GetJumpCooldownAlternative();
-        _maxVelocity = _playerStats.GetMaxVelocityAlternative();
-        _acceleration = _playerStats.GetPlayerMovementAccelerationAlternative();
-        _decelleration = _playerStats.GetPlayerMovementDecellerationAlternative();
-        _jumpForceMultiplier = _playerStats.GetJumpForceMultiplierAlternative();
-        _airMovementMultiplier = _playerStats.GetAirMovementMultiplierAlternative();
+        // _jumpForce = _playerStats.GetJumpForceAlternative();
+        // _jumpCooldown = _playerStats.GetJumpCooldownAlternative();
+        // _maxVelocity = _playerStats.GetMaxVelocityAlternative();
+        // _acceleration = _playerStats.GetPlayerMovementAccelerationAlternative();
+        // _decelleration = _playerStats.GetPlayerMovementDecellerationAlternative();
+        // _jumpForceMultiplier = _playerStats.GetJumpForceMultiplierAlternative();
+        // _airMovementMultiplier = _playerStats.GetAirMovementMultiplierAlternative();
     }
 
     // Start is called before the first frame update

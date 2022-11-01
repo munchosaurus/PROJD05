@@ -27,6 +27,8 @@ public static class Constants
     public const float PLAYER_AIR_MOVEMENT_MULTIPLIER = 0.2f;
     public const float PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER = 1f;
     public const float PLAYER_Z_VALUE = 1f;
+    public const float PLAYER_AIR_SPEED_DAMPER = 0.1f;
+    public const float PLAYER_AIR_MOVEMENT_WINDOW = 1f;
 
     // Gravity
     public const float GRAVITY = 15f;

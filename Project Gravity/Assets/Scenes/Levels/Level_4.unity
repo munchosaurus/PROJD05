@@ -20643,42 +20643,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 452547624, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 452547624, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: friction
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: verticalCast.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: verticalCast.y
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: verticalCast.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: horizontalCast.x
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: horizontalCast.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: horizontalCast.z
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 1049751914841088714, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -20722,22 +20686,6 @@ PrefabInstance:
     - target: {fileID: 1049751914841088714, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4244639442256880407, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: jumpForce
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4244639442256880407, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: maxVelocity
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4244639442256880407, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: airMovementMultiplier
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4244639442256880407, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: playerMovementAcceleration
-      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7406499542109578702, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_Name
