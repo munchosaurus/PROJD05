@@ -9,14 +9,12 @@ public static class GameController
 
     public static void PauseGame()
     {
-        Debug.Log("Nu pausas jag");
         Time.timeScale = 0;
         SetInputLockState(true);
     }
 
     public static void UnpauseGame()
     {
-        Debug.Log("Jag unpausas");
         Time.timeScale = 1;
         SetInputLockState(false);
     }

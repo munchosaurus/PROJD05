@@ -50,7 +50,6 @@ public class PlayerInput : MonoBehaviour
     {
         if (GameController.GetPlayerInputIsLocked())
         {
-            Debug.Log("Appears to be locked");
             return;
         }
 
