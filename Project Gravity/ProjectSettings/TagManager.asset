@@ -9,6 +9,7 @@ TagManager:
   - Target
   - Crosshair
   - LineRenderer
+  - AimingDirector
   layers:
   - Default
   - TransparentFX
