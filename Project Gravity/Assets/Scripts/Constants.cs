@@ -31,7 +31,7 @@ public static class Constants
     public const float PLAYER_AIR_MOVEMENT_WINDOW = 1f;
 
     // Gravity
-    public const float GRAVITY = 15f;
+    public const float GRAVITY = 20f;
     
     // UI
     public const float GRAVITY_ARROW_ROTATION_SPEED = 5f;

@@ -441,7 +441,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (GravityController.IsGravityHorizontal())
             {
-                if (_movementKeyInfo.ReadValue<Vector2>().y == 0 && velocity.y != 0)
+                if (_movementKeyInfo.ReadValue<Vector2>().y == 0 && velocity.y != 0 || !hasJumped)
                 {
                     velocity.y *= Constants.PLAYER_AIR_SPEED_DAMPER * Time.fixedDeltaTime;
                 }
@@ -459,7 +459,7 @@ public class PlayerInput : MonoBehaviour
             }
             else
             {
-                if (_movementKeyInfo.ReadValue<Vector2>().x == 0 && velocity.x != 0)
+                if (_movementKeyInfo.ReadValue<Vector2>().x == 0 && velocity.x != 0 || !hasJumped)
                 {
                     velocity.x *= Constants.PLAYER_AIR_SPEED_DAMPER * Time.fixedDeltaTime;
                 }
