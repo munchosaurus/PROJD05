@@ -3,6 +3,7 @@
 public static class Constants
 {
     // Add new constants to use here.
+    // Level settings
     public const float LEVEL_LOAD_INPUT_PAUSE_TIME = 1f;
     public const float LEVEL_DEFAULT_CAMERA_LEEWAY = 1f;
     public const float LEVEL_DEFAULT_CAMERA_MOVEMENT_SMOOTHTIME = 0.3f;
@@ -10,11 +11,11 @@ public static class Constants
     public const float LEVEL_DEFAULT_CAMERA_MAXIMUM_X = 9.5f;
     public const float LEVEL_DEFAULT_CAMERA_MINIMUM_Y = 9.5f;
     public const float LEVEL_DEFAULT_CAMERA_MAXIMUM_Y = 9.5f;
-    public const float LEVEL_DEFAULT_CAMERA_MAMIMUM_DISTANCE = -40f;
+    public const float LEVEL_DEFAULT_CAMERA_MAXIMUM_DISTANCE = -40f;
     public const float LEVEL_DEFAULT_CAMERA_MINIMUM_DISTANCE = -38f;
     public const float LEVEL_DEFAULT_CAMERA_TARGET_X = 0; 
     public const float LEVEL_DEFAULT_CAMERA_TARGET_Y = 0; 
-    public const float LEVEL_DEFAULT_CAMERA_TARGET_Z = 0; 
+    public const float LEVEL_DEFAULT_CAMERA_TARGET_Z = -38f; 
     
     
     // Add finished player input settings here:

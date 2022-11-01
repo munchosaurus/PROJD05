@@ -1934,7 +1934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timePressure: 0
-  levelTimer: 90
+  levelTimer: 0
   text: {fileID: 7723872939631677414}
 --- !u!1 &5521943470485136481
 GameObject:

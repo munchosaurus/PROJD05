@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     public Vector3 velocity;
+    
     [SerializeField] private Vector3 horizontalCast, verticalCast;
     [SerializeField] bool groundedRight;
     [SerializeField] bool groundedLeft;
@@ -13,14 +14,9 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] bool groundedDown;
     [SerializeField] private float friction;
     [SerializeField] private LayerMask groundMask;
-
-    private readonly float GRID_OFFSET = 0;
+    [SerializeField] private Transform levelTarget;
     private readonly float OBJECT_Z = 1;
     private Vector3 _boxCastDimensions;
-
-    // from playermovement
-    [SerializeField] private Transform levelTarget;
-
     private InputAction.CallbackContext _movementKeyInfo;
     private IngameMenu _menu;
     private PlayerStats _playerStats;
@@ -54,6 +50,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (GameController.GetPlayerInputIsLocked())
         {
+            Debug.Log("Appears to be locked");
             return;
         }
 
