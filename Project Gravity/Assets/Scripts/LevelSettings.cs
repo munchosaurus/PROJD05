@@ -24,6 +24,11 @@ public class LevelSettings : MonoBehaviour
     [SerializeField] private float silverTimeMinimum;
     [SerializeField] private float silverTimeMaximum;
 
+    [Header("Key card settings")] [SerializeField]
+    private bool keycardsExistInLevel;
+
+    [SerializeField] private int numberOfKeyCards;
+
 
     void Awake()
     {
@@ -122,5 +127,15 @@ public class LevelSettings : MonoBehaviour
     public float GetLevelTimeLimit()
     {
         return timeLimit;
+    }
+
+    public bool GetKeycardInLevel()
+    {
+        return keycardsExistInLevel;
+    }
+
+    public int GetNumberOfKeycardsInLevel()
+    {
+        return numberOfKeyCards;
     }
 }

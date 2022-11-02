@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -18,7 +21,7 @@ public class PlayerInput : MonoBehaviour
     private readonly float OBJECT_Z = 1;
     private Vector3 _boxCastDimensions;
     private InputAction.CallbackContext _movementKeyInfo;
-    private IngameMenu _menu;
+    
     private PlayerStats _playerStats;
     private Vector3 _groundCheckDimensions;
     private float _jumpCooldownTimer;
@@ -29,8 +32,9 @@ public class PlayerInput : MonoBehaviour
     private float _acceleration;
     private const float GRID_CLAMP_THRESHOLD = 0.02f;
     private bool hasJumped;
-    private const float DISTANCE_TO_FINISHED_THRESHOLD = 0.5f;
+
     private const float MAXIMUM_AIR_MOVEMENT_MULTIPLIER = 0.666f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,8 +44,6 @@ public class PlayerInput : MonoBehaviour
         _playerStats = gameObject.GetComponent<PlayerStats>();
         SetBaseStats();
         _groundCheckDimensions = new Vector3(0.5f, 0.05f, 0.5f);
-        _menu = gameObject.GetComponentInChildren<IngameMenu>();
-        levelTarget = GameObject.FindWithTag("Target").gameObject.transform;
         StartCoroutine(SwitchInputLock());
         velocity = Vector3.zero;
     }
@@ -60,23 +62,7 @@ public class PlayerInput : MonoBehaviour
 
 
         velocity += Physics.gravity * Time.fixedDeltaTime;
-
-
-        if (IsGoalReached())
-        {
-            if (!_menu.interactText.activeSelf)
-            {
-                _menu.interactText.SetActive(true);
-            }
-        }
-        else
-        {
-            if (_menu.interactText.activeSelf)
-            {
-                _menu.interactText.SetActive(false);
-            }
-        }
-
+        
         MovePlayer();
         CheckForCollisions();
         ApplyFriction();
@@ -141,17 +127,6 @@ public class PlayerInput : MonoBehaviour
             transform.localScale.y / 2, groundMask);
     }
 
-    // Called by input system
-    public void Interact()
-    {
-        if (IsGoalReached())
-        {
-            // TODO: SAVE HIGHSCORE AFTER FETCHING TIMER IN LEVELTIMER
-            _menu.interactText.SetActive(false);
-            _menu.Pause(1);
-        }
-    }
-
     /*
      * Called by input system, adds _jumpForce to the velocity that is opposite to the
      * gravity in case the player is grounded and has passed the jump cool down.
@@ -202,13 +177,7 @@ public class PlayerInput : MonoBehaviour
     {
         _movementKeyInfo = movement;
     }
-
-    private bool IsGoalReached()
-    {
-        return (Vector3.Distance(gameObject.transform.position, levelTarget.position) <
-            DISTANCE_TO_FINISHED_THRESHOLD && IsGrounded());
-    }
-
+    
     private bool ShouldInheritMovement(GameObject otherObject, bool isHorizontal)
     {
         if (otherObject.GetComponent<DynamicObjectMovement>() != null)

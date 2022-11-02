@@ -2419,6 +2419,8 @@ GameObject:
   - component: {fileID: 5558133775299111569}
   - component: {fileID: 1061672191659828517}
   - component: {fileID: 816275455}
+  - component: {fileID: 1027020949}
+  - component: {fileID: 5736146823932097086}
   m_Layer: 0
   m_Name: Player_noRB
   m_TagString: Player
@@ -2751,6 +2753,32 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   levelTarget: {fileID: 0}
+--- !u!114 &1027020949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406499542109578702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f775f3c4072186844a320261f81a5cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyCardsCompleted: 0
+--- !u!114 &5736146823932097086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406499542109578702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee35e1a31437455f9c58f37b069b736a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableGameObjects: []
 --- !u!1 &8639306054269957531
 GameObject:
   m_ObjectHideFlags: 0
