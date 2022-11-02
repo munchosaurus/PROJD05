@@ -10,6 +10,7 @@ TagManager:
   - Crosshair
   - LineRenderer
   - AimingDirector
+  - Keycard
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - GravityMagnet
   - Hazard
   - Player
-  - 
+  - Interactable
   - 
   - 
   - 
