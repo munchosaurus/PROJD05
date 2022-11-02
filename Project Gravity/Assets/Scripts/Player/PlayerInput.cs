@@ -32,7 +32,6 @@ public class PlayerInput : MonoBehaviour
     private float _acceleration;
     private const float GRID_CLAMP_THRESHOLD = 0.02f;
     private bool hasJumped;
-
     private const float MAXIMUM_AIR_MOVEMENT_MULTIPLIER = 0.666f;
 
 
@@ -73,7 +72,6 @@ public class PlayerInput : MonoBehaviour
 
         Vector3 eulerRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0, 0, eulerRotation.z);
-        transform.position = new Vector3(transform.position.x, transform.position.y, Constants.PLAYER_Z_VALUE);
 
         if (velocity.magnitude == 0)
         {
