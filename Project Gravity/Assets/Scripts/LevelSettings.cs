@@ -129,7 +129,7 @@ public class LevelSettings : MonoBehaviour
         return timeLimit;
     }
 
-    public bool GetKeycardInLevel()
+    public bool KeycardsExistInLevel()
     {
         return keycardsExistInLevel;
     }

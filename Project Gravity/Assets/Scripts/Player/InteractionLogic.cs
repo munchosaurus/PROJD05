@@ -28,7 +28,7 @@ public class InteractionLogic : MonoBehaviour
     
     private IEnumerator FetchInteractablesInScene()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         InteractableObject[] ints = FindObjectsOfType<InteractableObject>();
         for (int i = 0; i < ints.Length; i++)
         {

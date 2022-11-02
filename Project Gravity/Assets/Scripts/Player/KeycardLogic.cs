@@ -14,7 +14,7 @@ public class KeycardLogic : MonoBehaviour
     void Start()
     {
         _levelSettings = FindObjectOfType<LevelSettings>();
-        if (_levelSettings.GetKeycardInLevel())
+        if (_levelSettings.KeycardsExistInLevel())
         {
             keyCards = new GameObject[_levelSettings.GetNumberOfKeycardsInLevel()];
             keyCards = GameObject.FindGameObjectsWithTag("Keycard");
