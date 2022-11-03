@@ -5,12 +5,11 @@ using UnityEngine.InputSystem;
 
 public class GravityGun : MonoBehaviour
 {
-    [SerializeField] private Material[] crosshairMaterials;
     [SerializeField] private Material[] lineMaterials;
-    [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask gravityMask;
-    [SerializeField] private GameObject aimDirector;
+    private LineRenderer _lineRenderer;
+    private GameObject aimDirector;
     private Vector3 _currentDirection;
     private GameObject crosshair;
     private MeshRenderer crosshairMesh;
@@ -28,7 +27,7 @@ public class GravityGun : MonoBehaviour
         {
             return;
         }
-        
+
         _currentDirection = GetMousePositionOnPlane() - transform.position;
         _lineRenderer.SetPosition(0, transform.position);
 
@@ -38,7 +37,7 @@ public class GravityGun : MonoBehaviour
             {
                 _lineRenderer.gameObject.SetActive(true);
             }
-            
+
             SetCrosshair();
         }
         else
@@ -57,8 +56,8 @@ public class GravityGun : MonoBehaviour
         Vector3 linePosition;
         if (gravityHit.collider)
         {
-            if ((float)Math.Round(Vector3.Distance(transform.position, gravityHit.point), 2) >
-                (float)Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
+            if ((float) Math.Round(Vector3.Distance(transform.position, gravityHit.point), 2) >
+                (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
             {
                 DisableAimDirector();
                 _lineRenderer.material = lineMaterials[0];
@@ -67,10 +66,7 @@ public class GravityGun : MonoBehaviour
             else
             {
                 _lineRenderer.material = lineMaterials[1];
-                if (gravityHit.normal != -GravityController.GetCurrentFacing())
-                {
-                    EnableAimDirector(gravityHit);
-                }
+                EnableAimDirector(gravityHit);
                 linePosition = gravityHit.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER;
             }
         }
@@ -80,6 +76,7 @@ public class GravityGun : MonoBehaviour
             _lineRenderer.material = lineMaterials[0];
             linePosition = groundHit.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER;
         }
+
         _lineRenderer.SetPosition(1, linePosition);
     }
 
@@ -89,7 +86,7 @@ public class GravityGun : MonoBehaviour
         {
             aimDirector.GetComponent<SpriteRenderer>().enabled = true;
         }
-        
+
         aimDirector.transform.position = new Vector3(hit.point.x,
             hit.point.y - 1, 2);
 
@@ -105,7 +102,8 @@ public class GravityGun : MonoBehaviour
                 aimDirector.transform.position = new Vector3(hit.point.x + 0.5f,
                     hit.point.y, 2);
             }
-        } else if (hit.normal.y != 0)
+        }
+        else if (hit.normal.y != 0)
         {
             if (hit.point.y > transform.position.y)
             {
@@ -120,7 +118,6 @@ public class GravityGun : MonoBehaviour
         }
 
         aimDirector.transform.rotation = Quaternion.LookRotation(transform.forward, hit.normal);
-
     }
 
     private void DisableAimDirector()
@@ -153,12 +150,12 @@ public class GravityGun : MonoBehaviour
                 QueryTriggerInteraction.Collide) && GravityController.GetCurrentFacing() !=
             -gravityHit.normal)
         {
-            if ((float)Math.Round(Vector3.Distance(transform.position, gravityHit.point), 2) >
-                (float)Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
+            if ((float) Math.Round(Vector3.Distance(transform.position, gravityHit.point), 2) >
+                (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
             {
                 return;
-                
             }
+
             TriggerGravityGunEvent(gravityHit);
         }
     }
@@ -184,7 +181,7 @@ public class GravityGun : MonoBehaviour
     private Vector3 GetMousePositionOnPlane()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane xy = new Plane(Vector3.forward, new Vector3(0,0,1));
+        Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 1));
         xy.Raycast(ray, out float distance);
 
         return ray.GetPoint(distance);
