@@ -23,7 +23,6 @@ public class Trampoline : MonoBehaviour
     private void Start()
     {
         initialSpot = board.transform.position;
-        Debug.Log(initialSpot);
         _playerCheckDimensions = new Vector3(0.05f, 0.01f, 0.5f);
         _playerInput = FindObjectOfType<PlayerInput>();
         counter = trampolineCooldown;
@@ -39,46 +38,6 @@ public class Trampoline : MonoBehaviour
         {
             DetectPlayer();
         }
-        
-        // if (isMoving)
-        // {
-        //     switch (transform.localEulerAngles.z)
-        //     {
-        //         case 0:
-        //             board.position += new Vector3(0, trampolineMovementSpeed * Time.fixedDeltaTime, 0);
-        //             break;
-        //         case 90: 
-        //             board.position += new Vector3(-trampolineMovementSpeed * Time.fixedDeltaTime, 0, 0);
-        //             break;
-        //         case 180:
-        //             board.position += new Vector3(0, -trampolineMovementSpeed * Time.fixedDeltaTime, 0);
-        //             break;
-        //         case 270:
-        //             board.position += new Vector3(trampolineMovementSpeed * Time.fixedDeltaTime, 0, 0);
-        //             break;
-        //     }
-        // }
-        // else if (board.position != initialSpot)
-        // {
-        //     board.position = Vector3.MoveTowards(transform.position, initialSpot, 2 * Time.fixedDeltaTime);
-        //     
-            // switch (transform.localEulerAngles.z)
-            // {
-            //     case 0:
-            //         board.position -= new Vector3(0, trampolineMovementSpeed * Time.fixedDeltaTime, 0);
-            //         break;
-            //     case 90: 
-            //         board.position -= new Vector3(-trampolineMovementSpeed * Time.fixedDeltaTime, 0 , 0);
-            //         break;
-            //     case 180:
-            //         board.position -= new Vector3(0, -trampolineMovementSpeed * Time.fixedDeltaTime, 0);
-            //         break;
-            //     case 270:
-            //         board.position -= new Vector3(trampolineMovementSpeed * Time.fixedDeltaTime, 0, 0);
-            //         break;
-            // }
-    //     }
-    //
     }
     
     
@@ -112,9 +71,9 @@ public class Trampoline : MonoBehaviour
                 }
                 else if (hit.normal.y < 0)
                 {
-                    GetComponent<Animator>().Play("Trampoline");
+                    //GetComponent<Animator>().Play("Trampoline");
                     _playerInput.velocity.y += trampolinePower;
-                    //StartCoroutine(ShootBoard());
+                    StartCoroutine(ShootBoard());
                 }
             }
             
@@ -125,9 +84,9 @@ public class Trampoline : MonoBehaviour
 
     private IEnumerator ShootBoard()
     {
-        isMoving = true;
-        yield return new WaitForSeconds(0.2f);
-        isMoving = false;
+        GetComponent<Animator>().SetBool("isMoving", true);
+        yield return new WaitForSeconds(1f);
+        GetComponent<Animator>().SetBool("isMoving", false);
     }
     
 }
