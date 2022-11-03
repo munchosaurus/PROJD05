@@ -19,9 +19,10 @@ public class PlayerInput : MonoBehaviour
 
     private Vector3 _boxCastDimensions;
     private InputAction.CallbackContext _movementKeyInfo;
-    
-    [Header("Movement settings")]
-    [SerializeField] private Vector3 _groundCheckDimensions; 
+
+    [Header("Movement settings")] [SerializeField]
+    private Vector3 _groundCheckDimensions;
+
     [SerializeField] private float _airMovementMultiplier;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _jumpCooldown;
@@ -118,27 +119,29 @@ public class PlayerInput : MonoBehaviour
         {
             if (GravityController.IsGravityHorizontal())
             {
-                if (Physics.gravity.x > 0)
+                if (Physics.gravity.x > 0 && !groundedLeft)
                 {
                     velocity.x -= _jumpForce;
                 }
-                else
+
+                if (Physics.gravity.x < 0 && !groundedRight)
                 {
                     velocity.x += _jumpForce;
                 }
             }
             else
             {
-                if (Physics.gravity.y > 0)
+                if (Physics.gravity.y > 0 && !groundedDown)
                 {
                     velocity.y -= _jumpForce;
                 }
-                else
+
+                if (Physics.gravity.y < 0 && !groundedUp)
                 {
                     velocity.y += _jumpForce;
                 }
             }
-            
+
             _jumpCooldownTimer = _jumpCooldown;
         }
     }
@@ -155,9 +158,10 @@ public class PlayerInput : MonoBehaviour
     {
         if (otherObject.GetComponent<DynamicObjectMovement>() != null)
         {
+            Debug.Log(otherObject.GetComponent<DynamicObjectMovement>().velocity);
             if (isHorizontal)
             {
-                if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.x) < velocity.x &&
+                if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.x) < Math.Abs(velocity.x) &&
                     otherObject.GetComponent<DynamicObjectMovement>().velocity.x != 0)
                 {
                     velocity.x = otherObject.GetComponent<DynamicObjectMovement>().velocity.x;
@@ -166,7 +170,7 @@ public class PlayerInput : MonoBehaviour
             }
             else
             {
-                if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.y) < velocity.y &&
+                if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.y) < Math.Abs(velocity.y) &&
                     otherObject.GetComponent<DynamicObjectMovement>().velocity.y != 0)
                 {
                     velocity.y = otherObject.GetComponent<DynamicObjectMovement>().velocity.y;

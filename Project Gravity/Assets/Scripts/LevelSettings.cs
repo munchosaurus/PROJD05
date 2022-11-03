@@ -29,7 +29,7 @@ public class LevelSettings : MonoBehaviour
 
     [SerializeField] private int numberOfKeyCards;
 
-    [Header("Key card settings")] [SerializeField]
+    [Header("Level lock settings")] [SerializeField]
     private bool unlockAllLevels;
 
 
