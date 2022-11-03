@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class PlayerInput : MonoBehaviour
 {
     public Vector3 velocity;
-    
+
     [SerializeField] private Vector3 horizontalCast, verticalCast;
     [SerializeField] bool groundedRight;
     [SerializeField] bool groundedLeft;
@@ -19,7 +19,7 @@ public class PlayerInput : MonoBehaviour
 
     private Vector3 _boxCastDimensions;
     private InputAction.CallbackContext _movementKeyInfo;
-    
+
     private PlayerStats _playerStats;
     private Vector3 _groundCheckDimensions;
     private float _jumpCooldownTimer;
@@ -29,6 +29,7 @@ public class PlayerInput : MonoBehaviour
     private float _maxVelocity;
     private float _acceleration;
     private const float GRID_CLAMP_THRESHOLD = 0.02f;
+
     private readonly float OBJECT_Z = 1;
     //private bool hasJumped;
 
@@ -62,7 +63,7 @@ public class PlayerInput : MonoBehaviour
         MovePlayer();
         CheckForCollisions();
         ApplyCollisions();
-        
+
         //ApplyFriction();
         //ClampAirMovement();
 
@@ -155,7 +156,7 @@ public class PlayerInput : MonoBehaviour
             }
 
             // StartCoroutine(SetJumpStatusToTrue());
-             _jumpCooldownTimer = _jumpCooldown;
+            _jumpCooldownTimer = _jumpCooldown;
         }
     }
 
@@ -173,7 +174,7 @@ public class PlayerInput : MonoBehaviour
     {
         _movementKeyInfo = movement;
     }
-    
+
     private bool ShouldInheritMovement(GameObject otherObject, bool isHorizontal)
     {
         if (otherObject.GetComponent<DynamicObjectMovement>() != null)
