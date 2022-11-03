@@ -29,6 +29,9 @@ public class LevelSettings : MonoBehaviour
 
     [SerializeField] private int numberOfKeyCards;
 
+    [Header("Key card settings")] [SerializeField]
+    private bool unlockAllLevels;
+
 
     void Awake()
     {
@@ -137,5 +140,10 @@ public class LevelSettings : MonoBehaviour
     public int GetNumberOfKeycardsInLevel()
     {
         return numberOfKeyCards;
+    }
+
+    public bool GetLevelsAreUnlocked()
+    {
+        return unlockAllLevels;
     }
 }

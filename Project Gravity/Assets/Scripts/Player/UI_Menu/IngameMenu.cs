@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,7 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private GameObject[] menus;
     [SerializeField] public GameObject interactText;
     [SerializeField] private Texture2D customCursor;
+    [SerializeField] private int previousMenu;
 
     private void Start()
     {
@@ -94,6 +96,7 @@ public class IngameMenu : MonoBehaviour
             SetCustomCursor();
         }
         Unpause();
+        LevelCompletionTracker.AddCompletedLevel(scene);
         SceneManager.LoadScene(scene);
     }
     
@@ -125,5 +128,50 @@ public class IngameMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void OpenLevelSelector(int index)
+    {
+        previousMenu = index;
+        for (int i = 0; i < menus.Length - 1; i++)
+        {
+            if (menus[i].activeSelf)
+            {
+                menus[i].SetActive(false);
+            }
+        }
+        if (!menus[3].activeSelf)
+        {
+            menus[3].SetActive(true);
+        }
+
+        for (int i = 0; i < menus[3].GetComponentsInChildren<Button>().Length - 1; i++)
+        {
+            if (i >= SceneManager.sceneCountInBuildSettings - 1)
+            {
+                menus[3].transform.GetChild(i).GetComponent<Button>().interactable = false;
+                continue;
+            }
+            
+            if (!FindObjectOfType<LevelSettings>().GetLevelsAreUnlocked())
+            {
+                if (LevelCompletionTracker.unlockedLevels.Count > 0)
+                {
+                    if (!LevelCompletionTracker.unlockedLevels.Contains(i+1))
+                    {
+                        menus[3].transform.GetChild(i).GetComponent<Button>().interactable = false;
+                    }
+                }
+            }
+        }
+    }
+
+    public void CloseLevelSelector()
+    {
+        if (menus[3].activeSelf)
+        {
+            menus[3].SetActive(false);
+        }
+        Pause(previousMenu);
     }
 }
