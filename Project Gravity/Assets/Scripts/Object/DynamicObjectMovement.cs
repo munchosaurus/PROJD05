@@ -18,6 +18,7 @@ public class DynamicObjectMovement : MonoBehaviour
     private Quaternion lockedRotation;
     private Vector3 boxCastDimensions;
     private bool isGrounded;
+    public bool lockedToMagnet;
     
     // Start is called before the first frame update
     void Start()
@@ -31,17 +32,31 @@ public class DynamicObjectMovement : MonoBehaviour
     {
         velocity += Physics.gravity * Time.fixedDeltaTime;
         transform.rotation = lockedRotation;
-
-        if (CheckForMagnets())
-        {
-            return;
-        }
-
+        
         CheckForCollisions();
         ApplyFriction();
         ApplyCollisions();
+        
+        if (lockedToMagnet)
+        {
+            
+            return;
+        }
 
         transform.position += velocity * Time.fixedDeltaTime;
+    }
+
+    public void MoveToMagnet(Vector3 location)
+    {
+        
+        if (Vector3.Distance(transform.position, location) < 0.01f)
+        {
+            velocity = Vector3.zero;
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position,location, velocity.magnitude / 2 * Time.fixedDeltaTime);
+        }
     }
 
     private bool ShouldInheritMovement(GameObject otherObject, bool isHorizontal)
@@ -98,7 +113,7 @@ public class DynamicObjectMovement : MonoBehaviour
         if (velocity.y < 0)
         {
             if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
-                    transform.localScale.y / 2, groundMask))
+                    transform.localScale.y, groundMask))
             {
                 ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.down,
                     hit.distance, Color.green);
@@ -113,7 +128,7 @@ public class DynamicObjectMovement : MonoBehaviour
         else if (velocity.y > 0)
         {
             if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
-                    transform.localScale.y / 2, groundMask))
+                    transform.localScale.y, groundMask))
             {
                 ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.up,
                     hit.distance, Color.green);
@@ -129,7 +144,7 @@ public class DynamicObjectMovement : MonoBehaviour
         if (velocity.x > 0)
         {
             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
-                    transform.localScale.x / 2, groundMask))
+                    transform.localScale.x, groundMask))
             {
                 ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.right,
                     hit.distance, Color.green);
@@ -145,7 +160,7 @@ public class DynamicObjectMovement : MonoBehaviour
         else if (velocity.x < 0)
         {
             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, transform.rotation,
-                    transform.localScale.x / 2, groundMask))
+                    transform.localScale.x, groundMask))
             {
                 ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.left,
                     hit.distance, Color.green);
@@ -160,86 +175,86 @@ public class DynamicObjectMovement : MonoBehaviour
         }
     }
 
-    private bool CheckMagnet(Vector3 direction, RaycastHit hit)
-    {
-        try
-        {
-            if (hit.collider.gameObject.GetComponent<GravityMagnet>().IsTriggered())
-            {
-                Vector3 boxCastDraw = horizontalCast;
-                if (direction.x != 0)
-                {
-                    boxCastDraw = verticalCast;
-                }
-                ExtDebug.DrawBoxCastOnHit(transform.position, boxCastDraw, transform.rotation, direction,
-                    hit.distance, Color.red);
-                velocity.x = 0;
-                velocity.y = 0;
-                return true;
-            }
-
-            return false;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
-
-    private bool CheckForMagnets()
-    {
-        RaycastHit hit;
-        if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
-                transform.localScale.y / 2, magnetMask, QueryTriggerInteraction.Collide))
-        {
-            if (CheckMagnet(Vector3.down, hit))
-            {
-                transform.position = new Vector3(
-                    transform.position.x,GetClosestGridCentre(
-                    transform.position.y), OBJECT_Z);
-                return true;
-            }
-        }
-
-        if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
-                transform.localScale.y / 2, magnetMask, QueryTriggerInteraction.Collide))
-        {
-            if (CheckMagnet(Vector3.up, hit))
-            {
-                transform.position = new Vector3(
-                    transform.position.x,GetClosestGridCentre(
-                        transform.position.y), OBJECT_Z);
-                return true;
-            }
-        }
-
-        if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
-                transform.localScale.x / 2, magnetMask, QueryTriggerInteraction.Collide))
-        {
-            if (CheckMagnet(Vector3.right, hit))
-            {
-                transform.position = new Vector3(
-                    GetClosestGridCentre(transform.position.x),
-                    transform.position.y, OBJECT_Z);
-                return true;
-            }
-        }
-
-        if (Physics.BoxCast(transform.position, verticalCast, Vector3.left, out hit, transform.rotation,
-                transform.localScale.x / 2, magnetMask, QueryTriggerInteraction.Collide))
-        {
-            if (CheckMagnet(Vector3.left, hit))
-            {
-                transform.position = new Vector3(
-                    GetClosestGridCentre(transform.position.x),
-                    transform.position.y, OBJECT_Z);
-                return false;
-            }
-        }
-
-        return false;
-    }
+    // private bool CheckMagnet(Vector3 direction, RaycastHit hit)
+    // {
+    //     try
+    //     {
+    //         if (hit.collider.gameObject.GetComponent<GravityMagnet>().IsTriggered())
+    //         {
+    //             Vector3 boxCastDraw = horizontalCast;
+    //             if (direction.x != 0)
+    //             {
+    //                 boxCastDraw = verticalCast;
+    //             }
+    //             ExtDebug.DrawBoxCastOnHit(transform.position, boxCastDraw, transform.rotation, direction,
+    //                 hit.distance, Color.red);
+    //             velocity.x = 0;
+    //             velocity.y = 0;
+    //             return true;
+    //         }
+    //
+    //         return false;
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         Console.WriteLine(e);
+    //         throw;
+    //     }
+    // }
+    //
+    // private bool CheckForMagnets()
+    // {
+    //     RaycastHit hit;
+    //     if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
+    //             transform.localScale.y / 2, magnetMask, QueryTriggerInteraction.Collide))
+    //     {
+    //         if (CheckMagnet(Vector3.down, hit))
+    //         {
+    //             transform.position = new Vector3(
+    //                 transform.position.x,GetClosestGridCentre(
+    //                 transform.position.y), OBJECT_Z);
+    //             return true;
+    //         }
+    //     }
+    //
+    //     if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
+    //             transform.localScale.y / 2, magnetMask, QueryTriggerInteraction.Collide))
+    //     {
+    //         if (CheckMagnet(Vector3.up, hit))
+    //         {
+    //             transform.position = new Vector3(
+    //                 transform.position.x,GetClosestGridCentre(
+    //                     transform.position.y), OBJECT_Z);
+    //             return true;
+    //         }
+    //     }
+    //
+    //     if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
+    //             transform.localScale.x / 2, magnetMask, QueryTriggerInteraction.Collide))
+    //     {
+    //         if (CheckMagnet(Vector3.right, hit))
+    //         {
+    //             transform.position = new Vector3(
+    //                 GetClosestGridCentre(transform.position.x),
+    //                 transform.position.y, OBJECT_Z);
+    //             return true;
+    //         }
+    //     }
+    //
+    //     if (Physics.BoxCast(transform.position, verticalCast, Vector3.left, out hit, transform.rotation,
+    //             transform.localScale.x / 2, magnetMask, QueryTriggerInteraction.Collide))
+    //     {
+    //         if (CheckMagnet(Vector3.left, hit))
+    //         {
+    //             transform.position = new Vector3(
+    //                 GetClosestGridCentre(transform.position.x),
+    //                 transform.position.y, OBJECT_Z);
+    //             return false;
+    //         }
+    //     }
+    //
+    //     return false;
+    // }
 
     private float GetClosestGridCentre(float origin)
     {
