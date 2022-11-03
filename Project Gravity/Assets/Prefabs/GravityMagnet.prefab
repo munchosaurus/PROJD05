@@ -90,7 +90,7 @@ MonoBehaviour:
   gravityMagnet:
     serializedVersion: 2
     m_Bits: 512
-  magnetRange: 2
+  magnetRange: 1
 --- !u!64 &202206083
 MeshCollider:
   m_ObjectHideFlags: 0
