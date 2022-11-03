@@ -49,30 +49,33 @@ public class Trampoline : MonoBehaviour
                 transform.localScale.y/5, playerLayer))
         {
             ExtDebug.DrawBoxCastBox(startingPoint.position, _playerCheckDimensions, transform.rotation, transform.up, transform.localScale.y/5, Color.red);
-            if (hit.normal.x != 0)
+            if (hit.normal.x != 0.00f)
             {
                 if (hit.normal.x > 0)
                 {
-                    _playerInput.velocity.x -= trampolinePower;
+                    Debug.Log("nu triggar X och - på velocity");
+                    _playerInput.velocity.x = -trampolinePower;
                     StartCoroutine(ShootBoard());
                 }
                 else
                 {
-                    _playerInput.velocity.x += trampolinePower;
+                    Debug.Log("nu triggar X och + på velocity");
+                    _playerInput.velocity.x = trampolinePower;
                     StartCoroutine(ShootBoard());
                 }
             } 
-            if (hit.normal.y != 0)
+            if (hit.normal.y != 0.00f)
             {
                 if (hit.normal.y > 0)
                 {
-                    _playerInput.velocity.y -= trampolinePower;
+                    Debug.Log("nu triggar Y och - på velocity");
+                    _playerInput.velocity.y = -trampolinePower;
                     StartCoroutine(ShootBoard());
                 }
                 else if (hit.normal.y < 0)
                 {
-                    //GetComponent<Animator>().Play("Trampoline");
-                    _playerInput.velocity.y += trampolinePower;
+                    Debug.Log("nu triggar Y och + på velocity");
+                    _playerInput.velocity.y = trampolinePower;
                     StartCoroutine(ShootBoard());
                 }
             }
