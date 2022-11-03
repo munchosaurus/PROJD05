@@ -19,9 +19,10 @@ public class PlayerInput : MonoBehaviour
 
     private Vector3 _boxCastDimensions;
     private InputAction.CallbackContext _movementKeyInfo;
-    
-    [Header("Movement settings")]
-    [SerializeField] private Vector3 _groundCheckDimensions; 
+
+    [Header("Movement settings")] [SerializeField]
+    private Vector3 _groundCheckDimensions;
+
     [SerializeField] private float _airMovementMultiplier;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _jumpCooldown;
@@ -118,27 +119,29 @@ public class PlayerInput : MonoBehaviour
         {
             if (GravityController.IsGravityHorizontal())
             {
-                if (Physics.gravity.x > 0)
+                if (Physics.gravity.x > 0 && !groundedLeft)
                 {
                     velocity.x -= _jumpForce;
                 }
-                else
+
+                if (Physics.gravity.x < 0 && !groundedRight)
                 {
                     velocity.x += _jumpForce;
                 }
             }
             else
             {
-                if (Physics.gravity.y > 0)
+                if (Physics.gravity.y > 0 && !groundedDown)
                 {
                     velocity.y -= _jumpForce;
                 }
-                else
+
+                if (Physics.gravity.y < 0 && !groundedUp)
                 {
                     velocity.y += _jumpForce;
                 }
             }
-            
+
             _jumpCooldownTimer = _jumpCooldown;
         }
     }
