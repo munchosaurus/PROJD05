@@ -19,19 +19,18 @@ public class PlayerInput : MonoBehaviour
 
     private Vector3 _boxCastDimensions;
     private InputAction.CallbackContext _movementKeyInfo;
-
-    private PlayerStats _playerStats;
-    private Vector3 _groundCheckDimensions;
-    private float _jumpCooldownTimer;
-    private float _airMovementMultiplier;
-    private float _jumpForce;
-    private float _jumpCooldown;
-    private float _maxVelocity;
-    private float _acceleration;
+    
+    [Header("Movement settings")]
+    [SerializeField] private Vector3 _groundCheckDimensions; 
+    [SerializeField] private float _airMovementMultiplier;
+    [SerializeField] private float _jumpForce;
+    [SerializeField] private float _jumpCooldown;
+    [SerializeField] private float _maxVelocity;
+    [SerializeField] private float _acceleration;
     private const float GRID_CLAMP_THRESHOLD = 0.02f;
+    private float _jumpCooldownTimer;
 
     private readonly float OBJECT_Z = 1;
-    //private bool hasJumped;
 
 
     // Start is called before the first frame update
@@ -39,9 +38,6 @@ public class PlayerInput : MonoBehaviour
     {
         GameController.SetInputLockState(true);
         Physics.gravity = new Vector3(0, -Constants.GRAVITY, 0);
-        _playerStats = gameObject.GetComponent<PlayerStats>();
-        SetBaseStats();
-        _groundCheckDimensions = new Vector3(0.5f, 0.05f, 0.5f);
         StartCoroutine(SwitchInputLock());
         velocity = Vector3.zero;
     }
@@ -63,9 +59,6 @@ public class PlayerInput : MonoBehaviour
         MovePlayer();
         CheckForCollisions();
         ApplyCollisions();
-
-        //ApplyFriction();
-        //ClampAirMovement();
 
         transform.position += velocity * Time.fixedDeltaTime;
 
@@ -92,15 +85,6 @@ public class PlayerInput : MonoBehaviour
         {
             GameController.SetInputLockState(true);
         }
-    }
-
-    private void SetBaseStats()
-    {
-        _jumpForce = _playerStats.GetJumpForce();
-        _jumpCooldown = _playerStats.GetJumpCooldown();
-        _maxVelocity = _playerStats.GetMaxVelocity();
-        _acceleration = _playerStats.GetPlayerMovementAcceleration();
-        _airMovementMultiplier = _playerStats.GetAirMovementMultiplier();
     }
 
     private void ClampToGrid()
@@ -154,18 +138,10 @@ public class PlayerInput : MonoBehaviour
                     velocity.y += _jumpForce;
                 }
             }
-
-            // StartCoroutine(SetJumpStatusToTrue());
+            
             _jumpCooldownTimer = _jumpCooldown;
         }
     }
-
-    // private IEnumerator SetJumpStatusToTrue()
-    // {
-    //     hasJumped = true;
-    //     yield return new WaitForSeconds(Constants.PLAYER_AIR_MOVEMENT_WINDOW);
-    //     hasJumped = false;
-    // }
 
     /*
      * Sets the movement float, will be read by MovePlayer
@@ -308,59 +284,14 @@ public class PlayerInput : MonoBehaviour
     {
         if ((groundedDown && velocity.y < 0) || (groundedUp && velocity.y > 0))
         {
-            //hasJumped = false;
             velocity.y = 0;
         }
 
         if ((groundedLeft && velocity.x < 0) || (groundedRight && velocity.x > 0))
         {
-            //hasJumped = false;
             velocity.x = 0;
         }
     }
-
-    // private void ApplyFriction()
-    // {
-    //     if (groundedDown || groundedUp)
-    //     {
-    //         if (velocity.x > 0)
-    //         {
-    //             velocity.x -= friction * Time.fixedDeltaTime;
-    //             if (velocity.x < 0)
-    //             {
-    //                 velocity.x = 0;
-    //             }
-    //         }
-    //         else if (velocity.x < 0)
-    //         {
-    //             velocity.x += friction * Time.fixedDeltaTime;
-    //             if (velocity.x > 0)
-    //             {
-    //                 velocity.x = 0;
-    //             }
-    //         }
-    //     }
-    //
-    //     if (groundedLeft || groundedRight)
-    //     {
-    //         if (velocity.y > 0)
-    //         {
-    //             velocity.y -= friction * Time.fixedDeltaTime;
-    //             if (velocity.y < 0)
-    //             {
-    //                 velocity.y = 0;
-    //             }
-    //         }
-    //         else if (velocity.y < 0)
-    //         {
-    //             velocity.y += friction * Time.fixedDeltaTime;
-    //             if (velocity.y > 0)
-    //             {
-    //                 velocity.y = 0;
-    //             }
-    //         }
-    //     }
-    // }
 
     private void MovePlayer()
     {
@@ -387,54 +318,6 @@ public class PlayerInput : MonoBehaviour
             }
         }
     }
-
-    /*
-     * Makes sure that when the player isn't grounded and hasn't jumped,
-     * the player object will have its movement quickly lowered to near 0, also clamps player to two thirds of the
-     * maximum movement speed if there is any input
-     */
-    // private void ClampAirMovement()
-    // {
-    //     if (!IsGrounded())
-    //     {
-    //         if (GravityController.IsGravityHorizontal())
-    //         {
-    //             if (_movementKeyInfo.ReadValue<Vector2>().y == 0 && velocity.y != 0 || !hasJumped)
-    //             {
-    //                 velocity.y *= Constants.PLAYER_AIR_SPEED_DAMPER * Time.fixedDeltaTime;
-    //             }
-    //             else if (Math.Abs(velocity.y) > Math.Abs(_maxVelocity * MAXIMUM_AIR_MOVEMENT_MULTIPLIER))
-    //             {
-    //                 if (velocity.y > 0)
-    //                 {
-    //                     velocity.y = _maxVelocity * MAXIMUM_AIR_MOVEMENT_MULTIPLIER;
-    //                 }
-    //                 else if (velocity.y < 0)
-    //                 {
-    //                     velocity.y = -_maxVelocity * MAXIMUM_AIR_MOVEMENT_MULTIPLIER;
-    //                 }
-    //             }
-    //         }
-    //         else
-    //         {
-    //             if (_movementKeyInfo.ReadValue<Vector2>().x == 0 && velocity.x != 0 || !hasJumped)
-    //             {
-    //                 velocity.x *= Constants.PLAYER_AIR_SPEED_DAMPER * Time.fixedDeltaTime;
-    //             }
-    //             else if (Math.Abs(velocity.x) > Math.Abs(_maxVelocity * MAXIMUM_AIR_MOVEMENT_MULTIPLIER))
-    //             {
-    //                 if (velocity.x > 0)
-    //                 {
-    //                     velocity.x = _maxVelocity * MAXIMUM_AIR_MOVEMENT_MULTIPLIER;
-    //                 }
-    //                 else if (velocity.x < 0)
-    //                 {
-    //                     velocity.x = -_maxVelocity * MAXIMUM_AIR_MOVEMENT_MULTIPLIER;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
 
     private void MoveHorizontal(float direction)
     {
@@ -512,32 +395,6 @@ public class PlayerInput : MonoBehaviour
 
         return hit.collider;
     }
-
-    // private void ClampMoveSpeed(bool isGravityHorizontal)
-    // {
-    //     if (isGravityHorizontal)
-    //     {
-    //         if (velocity.y > _maxVelocity)
-    //         {
-    //             velocity.y = _maxVelocity;
-    //         }
-    //         else if (velocity.y < -_maxVelocity)
-    //         {
-    //             velocity.y = -_maxVelocity;
-    //         }
-    //
-    //         return;
-    //     }
-    //
-    //     if (velocity.x > _maxVelocity)
-    //     {
-    //         velocity.x = _maxVelocity;
-    //     }
-    //     else if (velocity.x < -_maxVelocity)
-    //     {
-    //         velocity.x = -_maxVelocity;
-    //     }
-    // }
 
     public void RotateToPlane()
     {

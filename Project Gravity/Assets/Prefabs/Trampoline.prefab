@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3678146857292080628}
   - component: {fileID: 3678146857292080629}
+  - component: {fileID: 1122070473}
   m_Layer: 0
   m_Name: Trampoline
   m_TagString: Untagged
@@ -138,6 +139,26 @@ MonoBehaviour:
   counter: 0
   board: {fileID: 3678146856901237836}
   trampolineMovementSpeed: 10
+--- !u!95 &1122070473
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3678146857292080627}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a44e3fd4022ba2e488b8a2deb5979ad3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3678146857949838066
 GameObject:
   m_ObjectHideFlags: 0

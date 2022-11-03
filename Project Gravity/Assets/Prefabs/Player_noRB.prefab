@@ -2415,10 +2415,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1049751914841088714}
   - component: {fileID: 1921015880380027198}
-  - component: {fileID: 4244639442256880407}
+  - component: {fileID: 816275455}
   - component: {fileID: 5558133775299111569}
   - component: {fileID: 1061672191659828517}
-  - component: {fileID: 816275455}
   - component: {fileID: 1027020949}
   - component: {fileID: 5736146823932097086}
   m_Layer: 0
@@ -2473,7 +2472,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   aimDirector: {fileID: 0}
---- !u!114 &4244639442256880407
+--- !u!114 &816275455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2482,16 +2481,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 7406499542109578702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eca8a86641514f38ac986cf78b85167e, type: 3}
+  m_Script: {fileID: 11500000, guid: c86c45dcfd0841df958053af2bc2ffe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 10
-  jumpCooldown: 1
-  maxVelocity: 5
-  playerMovementAcceleration: 40
-  playerMovementDecelleration: 15
-  jumpForceMultiplier: 100
-  airMovementMultiplier: 0.7
+  velocity: {x: 0, y: 0, z: 0}
+  horizontalCast: {x: 0.05, y: 0.49, z: 0.49}
+  verticalCast: {x: 0.49, y: 0.05, z: 0.49}
+  groundedRight: 0
+  groundedLeft: 0
+  groundedUp: 0
+  groundedDown: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _groundCheckDimensions: {x: 0.5, y: 0.05, z: 0.5}
+  _airMovementMultiplier: 0.7
+  _jumpForce: 10
+  _jumpCooldown: 1
+  _maxVelocity: 5
+  _acceleration: 40
 --- !u!114 &5558133775299111569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2729,29 +2737,6 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &816275455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7406499542109578702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c86c45dcfd0841df958053af2bc2ffe4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
-  horizontalCast: {x: 0.05, y: 0.49, z: 0.49}
-  verticalCast: {x: 0.49, y: 0.05, z: 0.49}
-  groundedRight: 0
-  groundedLeft: 0
-  groundedUp: 0
-  groundedDown: 0
-  friction: 1
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &1027020949
 MonoBehaviour:
   m_ObjectHideFlags: 0
