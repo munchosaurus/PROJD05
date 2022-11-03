@@ -30,8 +30,12 @@ public class DynamicObjectMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        velocity += Physics.gravity * Time.fixedDeltaTime;
-        transform.rotation = lockedRotation;
+
+        if (!lockedToMagnet)
+        {
+            velocity += Physics.gravity * Time.fixedDeltaTime;
+            transform.rotation = lockedRotation;
+        }
         
         CheckForCollisions();
         ApplyFriction();
@@ -39,7 +43,6 @@ public class DynamicObjectMovement : MonoBehaviour
         
         if (lockedToMagnet)
         {
-            
             return;
         }
 
