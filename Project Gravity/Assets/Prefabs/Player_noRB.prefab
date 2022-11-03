@@ -2487,11 +2487,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 10
   jumpCooldown: 1
-  maxVelocity: 8
+  maxVelocity: 5
   playerMovementAcceleration: 40
   playerMovementDecelleration: 15
   jumpForceMultiplier: 100
-  airMovementMultiplier: 0.1
+  airMovementMultiplier: 0.7
 --- !u!114 &5558133775299111569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2570,8 +2570,8 @@ MonoBehaviour:
     m_ActionName: PlayerControls/Jump[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 816275455}
-        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+      - m_Target: {fileID: 5736146823932097086}
+        m_TargetAssemblyTypeName: InteractionLogic, Assembly-CSharp
         m_MethodName: Interact
         m_Mode: 1
         m_Arguments:
@@ -2748,11 +2748,10 @@ MonoBehaviour:
   groundedLeft: 0
   groundedUp: 0
   groundedDown: 0
-  friction: 100
+  friction: 1
   groundMask:
     serializedVersion: 2
     m_Bits: 128
-  levelTarget: {fileID: 0}
 --- !u!114 &1027020949
 MonoBehaviour:
   m_ObjectHideFlags: 0
