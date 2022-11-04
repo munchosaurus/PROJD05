@@ -152,16 +152,17 @@ public class IngameMenu : MonoBehaviour
                 menus[3].transform.GetChild(i).GetComponent<Button>().interactable = false;
                 continue;
             }
+
+            if (LevelCompletionTracker.unlockedLevels.Count < 1)
+            {
+                LevelCompletionTracker.AddCompletedLevel(1);
+            }
             
             if (!FindObjectOfType<LevelSettings>().GetLevelsAreUnlocked())
-            {
-                if (LevelCompletionTracker.unlockedLevels.Count > 0)
-                {
-                    if (!LevelCompletionTracker.unlockedLevels.Contains(i+1))
+            {   if (!LevelCompletionTracker.unlockedLevels.Contains(i+1))
                     {
                         menus[3].transform.GetChild(i).GetComponent<Button>().interactable = false;
                     }
-                }
             }
         }
     }

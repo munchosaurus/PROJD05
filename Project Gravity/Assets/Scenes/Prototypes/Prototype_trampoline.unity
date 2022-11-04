@@ -15515,6 +15515,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_noRB
       objectReference: {fileID: 0}
+    - target: {fileID: 7723872939631677414, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7723872939631677414, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
 --- !u!1001 &950496228

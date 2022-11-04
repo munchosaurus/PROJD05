@@ -11,6 +11,9 @@ public class LevelTimer : MonoBehaviour
     [SerializeField] private bool timePressure;
     [SerializeField] private float levelTimer;
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private float minutes;
+    [SerializeField] private float seconds;
+    [SerializeField] private float milliSeconds;
 
     private void Start()
     {
@@ -69,11 +72,9 @@ public class LevelTimer : MonoBehaviour
         {
             timeToDisplay = 0;
         }
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        float milliSeconds = timeToDisplay % 1 * 100;
-        
+        minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        milliSeconds = Mathf.Floor(timeToDisplay % 1 * 100);
         text.text = $"{minutes:00}:{seconds:00}:{milliSeconds:00}";
-        
     }
 }
