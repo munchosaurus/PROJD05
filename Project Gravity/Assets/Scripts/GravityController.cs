@@ -7,6 +7,7 @@ public static class GravityController
 {
     private static Vector3 _currentFacing;
     private static Guid _gravityGunEventGuid;
+    static int gravityLayer = LayerMask.NameToLayer("GravityChange");
 
     // Gets initiated by the EventSystem.
     public static void Init()
@@ -42,16 +43,18 @@ public static class GravityController
 
     private static void OnGravityGunHit(GravityGunEvent gravityGunEvent)
     {
-        try
+        if (gravityGunEvent.TargetGameObject.layer == gravityLayer)
         {
-            SetCurrentFacing(-gravityGunEvent.hitNormal);
-            SetNewGravity(-gravityGunEvent.hitNormal);
-            gravityGunEvent.SourceGameObject.GetComponent<PlayerInput>().RotateToPlane();
+            try
+            {
+                SetCurrentFacing(-gravityGunEvent.hitNormal);
+                SetNewGravity(-gravityGunEvent.hitNormal);
+                gravityGunEvent.SourceGameObject.GetComponent<PlayerInput>().RotateToPlane();
+            }
+            catch
+            {
+                Debug.Log("Failed to properly run listening method OnGravityGunHit");
+            }
         }
-        catch
-        {
-            Debug.Log("Failed to properly run listening method OnGravityGunHit");
-        }
-        
     } 
 }

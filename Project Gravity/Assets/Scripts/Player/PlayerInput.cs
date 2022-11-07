@@ -158,7 +158,6 @@ public class PlayerInput : MonoBehaviour
     {
         if (otherObject.GetComponent<DynamicObjectMovement>() != null)
         {
-            Debug.Log(otherObject.GetComponent<DynamicObjectMovement>().velocity);
             if (isHorizontal)
             {
                 if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.x) < Math.Abs(velocity.x) &&

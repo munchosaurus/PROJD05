@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class GravityMagnet : MonoBehaviour
@@ -10,7 +11,14 @@ public class GravityMagnet : MonoBehaviour
     [SerializeField] public Vector3 detectionDirection;
     [SerializeField] private LayerMask gravityMagnet;
     [SerializeField] private float magnetRange;
+    private static Guid _gravityGunEventGuid;
+    private readonly float magnetCoolDown = 2f;
 
+
+    private void Start()
+    {
+        EventSystem.Current.RegisterListener<GravityGunEvent>(ToggleMagnet, ref _gravityGunEventGuid);
+    }
 
     private void FixedUpdate()
     {
@@ -24,13 +32,35 @@ public class GravityMagnet : MonoBehaviour
         }
     }
 
-    private void ToggleMagnet()
+    private void ToggleMagnet(GravityGunEvent gravityGunEvent)
     {
-        dynamicObjectMovement.lockedToMagnet = false;
-        dynamicObjectMovement = null;
-        triggered = !triggered;
+        Debug.Log(gravityGunEvent.TargetGameObject.GetInstanceID());
+        if (gravityGunEvent.TargetGameObject.layer == gameObject.layer)
+        {
+            if (gameObject.GetInstanceID() == gravityGunEvent.TargetGameObject.GetInstanceID())
+            {
+                if (dynamicObjectMovement == null)
+                {
+                    triggered = !triggered;
+                }
+                else
+                {
+                    dynamicObjectMovement.lockedToMagnet = false;
+                    dynamicObjectMovement = null;
+                    triggered = !triggered;
+                }
+            } else if (dynamicObjectMovement != null)
+            {
+                if (gravityGunEvent.TargetGameObject.GetInstanceID() == dynamicObjectMovement.gameObject.transform.GetChild(0).gameObject.GetInstanceID())
+                {
+                    dynamicObjectMovement.lockedToMagnet = false;
+                    dynamicObjectMovement = null;
+                    triggered = !triggered;
+                }
+            }
+        }
     }
-    
+
     private void CheckForBoxes()
     {
         RaycastHit hit;

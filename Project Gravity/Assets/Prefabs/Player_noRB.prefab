@@ -4045,6 +4045,9 @@ MonoBehaviour:
   timePressure: 0
   levelTimer: 0
   text: {fileID: 7723872939631677414}
+  minutes: 0
+  seconds: 0
+  milliSeconds: 0
 --- !u!1 &5521943470485136481
 GameObject:
   m_ObjectHideFlags: 0
@@ -5026,6 +5029,7 @@ GameObject:
   - component: {fileID: 1061672191659828517}
   - component: {fileID: 1027020949}
   - component: {fileID: 5736146823932097086}
+  - component: {fileID: 5582691149501798657}
   m_Layer: 0
   m_Name: Player_noRB
   m_TagString: Player
@@ -5067,6 +5071,7 @@ MonoBehaviour:
   lineMaterials:
   - {fileID: 2100000, guid: ebd68e582f5d51b4986f096efc233b42, type: 2}
   - {fileID: 2100000, guid: 261cf4127f2808943abb10e0f4ed3438, type: 2}
+  - {fileID: 2100000, guid: cc21de56af0d25e418f145ce0461c12e, type: 2}
   groundMask:
     serializedVersion: 2
     m_Bits: 128
@@ -5364,6 +5369,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableGameObjects: []
+--- !u!81 &5582691149501798657
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406499542109578702}
+  m_Enabled: 1
 --- !u!1 &7695867681817821839
 GameObject:
   m_ObjectHideFlags: 0
