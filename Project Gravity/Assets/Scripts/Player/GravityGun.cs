@@ -49,15 +49,12 @@ public class GravityGun : MonoBehaviour
 
     private void SetCrosshair()
     {
-        RaycastHit groundHit;
-        RaycastHit gravityHit;
-        RaycastHit magnetHit;
-        Physics.Raycast(transform.position, _currentDirection, out groundHit, Mathf.Infinity, groundMask);
-        Physics.Raycast(transform.position, _currentDirection, out gravityHit, Mathf.Infinity,
+        Physics.Raycast(transform.position, _currentDirection, out var groundHit, Mathf.Infinity, groundMask);
+        Physics.Raycast(transform.position, _currentDirection, out var gravityHit, Mathf.Infinity,
             gravityMask);
-        Physics.Raycast(transform.position, _currentDirection, out magnetHit, Mathf.Infinity,
+        Physics.Raycast(transform.position, _currentDirection, out var magnetHit, Mathf.Infinity,
             magnetMask);
-        Vector3 linePosition = groundHit.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER;
+        Vector3 linePosition;
         if (gravityHit.collider)
         {
             if (magnetHit.collider)

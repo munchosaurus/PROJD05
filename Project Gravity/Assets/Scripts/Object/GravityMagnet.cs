@@ -34,7 +34,6 @@ public class GravityMagnet : MonoBehaviour
 
     private void ToggleMagnet(GravityGunEvent gravityGunEvent)
     {
-        Debug.Log(gravityGunEvent.TargetGameObject.GetInstanceID());
         if (gravityGunEvent.TargetGameObject.layer == gameObject.layer)
         {
             if (gameObject.GetInstanceID() == gravityGunEvent.TargetGameObject.GetInstanceID())
@@ -72,7 +71,6 @@ public class GravityMagnet : MonoBehaviour
                 
                 if (hit.collider.GetComponentInParent<DynamicObjectMovement>() != null)
                 {
-                    Debug.Log("Found it");
                     detectionDirection = Vector3.down;
                     dynamicObjectMovement = hit.collider.GetComponentInParent<DynamicObjectMovement>();
                     dynamicObjectMovement.lockedToMagnet = true;
