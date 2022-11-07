@@ -11,6 +11,7 @@ public class GravityMagnet : MonoBehaviour
     [SerializeField] public Vector3 detectionDirection;
     [SerializeField] private LayerMask gravityMagnet;
     [SerializeField] private float magnetRange;
+    [SerializeField] private float magnetSpeed;
     private static Guid _gravityGunEventGuid;
     private readonly float magnetCoolDown = 2f;
 
@@ -27,7 +28,7 @@ public class GravityMagnet : MonoBehaviour
             CheckForBoxes();
             if (dynamicObjectMovement != null)
             {
-                dynamicObjectMovement.MoveToMagnet(transform.position + detectionDirection);
+                dynamicObjectMovement.MoveToMagnet(transform.position + detectionDirection, magnetSpeed);
             }
         }
     }

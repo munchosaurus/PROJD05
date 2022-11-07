@@ -48,16 +48,24 @@ public class DynamicObjectMovement : MonoBehaviour
         transform.position += velocity * Time.fixedDeltaTime;
     }
 
-    public void MoveToMagnet(Vector3 location)
+    public void MoveToMagnet(Vector3 location, float magnetSpeed)
     {
+        Debug.Log(location);
         if (Vector3.Distance(transform.position, location) < 0.01f)
         {
             velocity = Vector3.zero;
         }
         else
         {
-            transform.position =
-                Vector3.MoveTowards(transform.position, location, velocity.magnitude / 2 * Time.fixedDeltaTime);
+            if (velocity.magnitude < 0.01f)
+            {
+                velocity.x += 0.03f;
+            }
+            else
+            {
+                transform.position =
+                    Vector3.MoveTowards(transform.position, location, magnetSpeed * Time.fixedDeltaTime);
+            }
         }
     }
 
