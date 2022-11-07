@@ -108,6 +108,12 @@ public class PlayerInput : MonoBehaviour
         return Physics.BoxCast(transform.position, _groundCheckDimensions, -transform.up, transform.rotation,
             transform.localScale.y / 2, groundMask);
     }
+    
+    public bool IsRoofed()
+    {
+        return Physics.BoxCast(transform.position, _groundCheckDimensions, transform.up, transform.rotation,
+            transform.localScale.y / 2, groundMask);
+    }
 
     /*
      * Called by input system, adds _jumpForce to the velocity that is opposite to the
@@ -115,7 +121,7 @@ public class PlayerInput : MonoBehaviour
      */
     public void Jump()
     {
-        if (_jumpCooldownTimer <= 0 && IsGrounded())
+        if (_jumpCooldownTimer <= 0 && IsGrounded() && !IsRoofed())
         {
             if (GravityController.IsGravityHorizontal())
             {
