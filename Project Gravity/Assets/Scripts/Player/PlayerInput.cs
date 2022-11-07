@@ -30,6 +30,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private float _acceleration;
     private const float GRID_CLAMP_THRESHOLD = 0.02f;
     private float _jumpCooldownTimer;
+    private AudioSource _audioSource;
 
     private readonly float OBJECT_Z = 1;
 
@@ -39,6 +40,7 @@ public class PlayerInput : MonoBehaviour
     {
         GameController.SetInputLockState(true);
         Physics.gravity = new Vector3(0, -Constants.GRAVITY, 0);
+        _audioSource = GetComponent<AudioSource>();
         StartCoroutine(SwitchInputLock());
         velocity = Vector3.zero;
     }
@@ -108,7 +110,7 @@ public class PlayerInput : MonoBehaviour
         return Physics.BoxCast(transform.position, _groundCheckDimensions, -transform.up, transform.rotation,
             transform.localScale.y / 2, groundMask);
     }
-    
+
     public bool IsRoofed()
     {
         return Physics.BoxCast(transform.position, _groundCheckDimensions, transform.up, transform.rotation,
@@ -334,8 +336,17 @@ public class PlayerInput : MonoBehaviour
         {
             if (direction == 0 || (velocity.x > 0 && direction < 0) || (velocity.x < 0 && direction > 0))
             {
+                _audioSource.mute = true;
                 velocity.x = 0;
             }
+            else
+            {
+                _audioSource.mute = false;
+            }
+        }
+        else
+        {
+            _audioSource.mute = true;
         }
 
         if (ShouldAddMoreMoveForce(direction))
@@ -348,8 +359,17 @@ public class PlayerInput : MonoBehaviour
         {
             if (direction == 0 || (velocity.y > 0 && direction < 0) || (velocity.y < 0 && direction > 0))
             {
+                _audioSource.mute = true;
                 velocity.y = 0;
             }
+            else
+            {
+                _audioSource.mute = false;
+            }
+        }
+        else
+        {
+            _audioSource.mute = true;
         }
 
         if (ShouldAddMoreMoveForce(direction))
