@@ -3986,8 +3986,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5029,7 +5029,6 @@ GameObject:
   - component: {fileID: 1061672191659828517}
   - component: {fileID: 1027020949}
   - component: {fileID: 5736146823932097086}
-  - component: {fileID: 5582691149501798657}
   m_Layer: 0
   m_Name: Player_noRB
   m_TagString: Player
@@ -5348,14 +5347,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableGameObjects: []
---- !u!81 &5582691149501798657
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7406499542109578702}
-  m_Enabled: 1
 --- !u!1 &7695867681817821839
 GameObject:
   m_ObjectHideFlags: 0

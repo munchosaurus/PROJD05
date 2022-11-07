@@ -11,3 +11,8 @@ public class GravityGunEvent : Event
 {
     public Vector3 hitNormal;
 }
+
+public class TrampolineEvent : Event
+{
+    
+}

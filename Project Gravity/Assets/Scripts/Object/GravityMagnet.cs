@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GravityMagnet : MonoBehaviour
 {
-    [SerializeField] private bool triggered;
+    public bool triggered;
     [SerializeField] public bool upTriggered, downTriggered, leftTriggered, rightTriggered;
     [SerializeField] private Vector3 horizontalCast, verticalCast;
     [SerializeField] public DynamicObjectMovement dynamicObjectMovement;
