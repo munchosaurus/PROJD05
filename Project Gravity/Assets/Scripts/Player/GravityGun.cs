@@ -1,5 +1,6 @@
 ﻿using System;
 using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -243,7 +244,21 @@ public class GravityGun : MonoBehaviour
                     else
                     {
                         // Condition where magnet is closer than ground
-                        TriggerGravityGunEvent(magnetHit);
+                        if (magnetHit.transform.GetComponent<DynamicObjectMovement>() != null)
+                        {
+                            if (magnetHit.transform.GetComponent<DynamicObjectMovement>().lockedToMagnet)
+                            {
+                                TriggerGravityGunEvent(magnetHit);
+                            }
+                            else
+                            {
+                                TriggerGravityGunEvent(groundHit);
+                            }
+                        }
+                        else
+                        {
+                            TriggerGravityGunEvent(magnetHit);
+                        }
                     }
                 }
                 else
@@ -280,7 +295,21 @@ public class GravityGun : MonoBehaviour
             else
             {
                 // Condition where magnet is closer than ground
-                TriggerGravityGunEvent(magnetHit);
+                if (magnetHit.transform.GetComponentInParent<DynamicObjectMovement>() != null)
+                {
+                    if (magnetHit.transform.GetComponentInParent<DynamicObjectMovement>().lockedToMagnet)
+                    {
+                        TriggerGravityGunEvent(magnetHit);
+                    }
+                    else
+                    {
+                        TriggerGravityGunEvent(groundHit);
+                    }
+                }
+                else
+                {
+                    TriggerGravityGunEvent(magnetHit);
+                }
             }
         }
         else
@@ -294,6 +323,11 @@ public class GravityGun : MonoBehaviour
 
     public void Aim(InputAction.CallbackContext val)
     {
+        if (GameController.GetPlayerInputIsLocked())
+        {
+            return;
+        }
+        
         if (val.performed)
         {
             buttonPressed = true;
