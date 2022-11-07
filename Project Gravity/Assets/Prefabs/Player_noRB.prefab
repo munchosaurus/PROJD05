@@ -5078,6 +5078,9 @@ MonoBehaviour:
   gravityMask:
     serializedVersion: 2
     m_Bits: 64
+  magnetMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &816275455
 MonoBehaviour:
   m_ObjectHideFlags: 0
