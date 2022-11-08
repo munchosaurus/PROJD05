@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,17 +11,20 @@ public class GravityGun : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask gravityMask;
     [SerializeField] private LayerMask magnetMask;
+    [SerializeField] private LayerMask lavaMask;
     private LineRenderer _lineRenderer;
     private GameObject aimDirector;
     private Vector3 _currentDirection;
     private GameObject crosshair;
     private MeshRenderer crosshairMesh;
     private bool buttonPressed;
+    private int _magnetLayer;
 
     private void Awake()
     {
         aimDirector = GameObject.FindGameObjectWithTag("AimingDirector");
         _lineRenderer = GameObject.FindWithTag("LineRenderer").GetComponent<LineRenderer>();
+        _magnetLayer = LayerMask.NameToLayer("GravityMagnet");
     }
 
     void FixedUpdate()
@@ -220,6 +224,32 @@ public class GravityGun : MonoBehaviour
         };
         EventSystem.Current.FireEvent(gravityGunEvent);
     }
+    
+    private RaycastHit GetRayCastHitToUse(List<RaycastHit> hits)
+    {
+        var closest = hits[0];
+        if (hits.Count > 1)
+        {
+            for (int i = 1; i < hits.Count; i++)
+            {
+                if (!((float) Math.Round(Vector3.Distance(transform.position, hits[i].point), 2) >
+                    (float) Math.Round(Vector3.Distance(transform.position, closest.point), 2)))
+                {
+                    closest = hits[i];
+                }
+            }
+        }
+
+        if (closest.collider.gameObject.layer != _magnetLayer) return closest;
+        if (closest.transform.parent == null) return closest;
+        if (closest.transform.GetComponentInParent<DynamicObjectMovement>() == null) return closest;
+        if (!closest.transform.GetComponentInParent<DynamicObjectMovement>().lockedToMagnet)
+        {
+            closest = hits[0];
+        }
+
+        return closest;
+    }
 
     public void ShootGravityGun()
     {
@@ -228,96 +258,27 @@ public class GravityGun : MonoBehaviour
             gravityMask);
         Physics.Raycast(transform.position, _currentDirection, out var magnetHit, Mathf.Infinity,
             magnetMask);
+        Physics.Raycast(transform.position, _currentDirection, out var lavaHit, Mathf.Infinity,
+            lavaMask);
+        var hits = new List<RaycastHit>();
+        hits.Add(groundHit);
+        
         if (gravityHit.collider)
         {
-            if (magnetHit.collider)
-            {
-                if ((float) Math.Round(Vector3.Distance(transform.position, gravityHit.point), 2) >
-                    (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
-                {
-                    if ((float) Math.Round(Vector3.Distance(transform.position, magnetHit.point), 2) >
-                        (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
-                    {
-                        // Condition where ground is closest
-                        TriggerGravityGunEvent(groundHit);
-                    }
-                    else
-                    {
-                        // Condition where magnet is closer than ground
-                        if (magnetHit.transform.GetComponent<DynamicObjectMovement>() != null)
-                        {
-                            if (magnetHit.transform.GetComponent<DynamicObjectMovement>().lockedToMagnet)
-                            {
-                                TriggerGravityGunEvent(magnetHit);
-                            }
-                            else
-                            {
-                                TriggerGravityGunEvent(groundHit);
-                            }
-                        }
-                        else
-                        {
-                            TriggerGravityGunEvent(magnetHit);
-                        }
-                    }
-                }
-                else
-                {
-                    // Condition where gravity is closer than ground (will also be closer than magnet since magnet and ground are in same pos)
-                    TriggerGravityGunEvent(gravityHit);
-                }
-            }
-            else
-            {
-                // Where no magnet exists 
-                if ((float) Math.Round(Vector3.Distance(transform.position, gravityHit.point), 2) >
-                    (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
-                {
-                    // Condition where ground is closer than gravity and magnet
-                    TriggerGravityGunEvent(groundHit);
-                }
-                else
-                {
-                    // Condition where gravity is closer than ground and magnet
-                    TriggerGravityGunEvent(gravityHit);
-                }
-            }
-        }
-        else if (magnetHit.collider)
-        {
-            // Where no gravity exists but magnet does
-            if ((float) Math.Round(Vector3.Distance(transform.position, magnetHit.point), 2) >
-                (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
-            {
-                // Condition where ground is closer than both magnet and gravity
-                TriggerGravityGunEvent(groundHit);
-            }
-            else
-            {
-                // Condition where magnet is closer than ground
-                if (magnetHit.transform.GetComponentInParent<DynamicObjectMovement>() != null)
-                {
-                    if (magnetHit.transform.GetComponentInParent<DynamicObjectMovement>().lockedToMagnet)
-                    {
-                        TriggerGravityGunEvent(magnetHit);
-                    }
-                    else
-                    {
-                        TriggerGravityGunEvent(groundHit);
-                    }
-                }
-                else
-                {
-                    TriggerGravityGunEvent(magnetHit);
-                }
-            }
-        }
-        else
-        {
-            // Where only ground is hit
-            TriggerGravityGunEvent(groundHit);
+            hits.Add(gravityHit);
         }
 
+        if (magnetHit.collider)
+        {
+            hits.Add(magnetHit);
+        }
+
+        if (lavaHit.collider)
+        {
+            hits.Add(lavaHit);
+        }
+        
+        TriggerGravityGunEvent(GetRayCastHitToUse(hits));
         DisableAimDirector();
     }
 
@@ -327,7 +288,7 @@ public class GravityGun : MonoBehaviour
         {
             return;
         }
-        
+
         if (val.performed)
         {
             buttonPressed = true;

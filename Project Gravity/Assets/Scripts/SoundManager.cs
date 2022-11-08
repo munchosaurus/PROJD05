@@ -8,7 +8,8 @@ public class SoundManager : MonoBehaviour
 {
     [Header("Hit sounds")] [SerializeField]
     private AudioClip groundHitClip;
-    
+
+    [SerializeField] private AudioClip lavaHitClip;
     [SerializeField] private AudioClip gravityHitClip;
 
     [Header("Magnet activation sounds")] [SerializeField]
@@ -27,6 +28,7 @@ public class SoundManager : MonoBehaviour
     private static int gravityLayer;
     private static int groundLayer;
     private static int magnetLayer;
+    private static int lavaLayer;
 
     [Header("Speaker prefab")] [SerializeField]
     private GameObject speakerPrefab;
@@ -39,6 +41,7 @@ public class SoundManager : MonoBehaviour
         gravityLayer = LayerMask.NameToLayer("GravityChange");
         groundLayer = LayerMask.NameToLayer("Ground");
         magnetLayer = LayerMask.NameToLayer("GravityMagnet");
+        lavaLayer = LayerMask.NameToLayer("Hazard");
     }
 
     private void Start()
@@ -69,6 +72,11 @@ public class SoundManager : MonoBehaviour
         else if (gravityGunEvent.TargetGameObject.layer == magnetLayer)
         {
             PlayMagnetToggle(gravityGunEvent, speaker);
+        } else if (gravityGunEvent.TargetGameObject.layer == lavaLayer)
+        {
+            clipLength = lavaHitClip.length;
+            speaker.GetComponent<AudioSource>().PlayOneShot(lavaHitClip);
+            StartCoroutine(DestroyAfterTime(speaker, clipLength));
         }
         else
         {

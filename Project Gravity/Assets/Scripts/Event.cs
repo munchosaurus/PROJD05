@@ -16,3 +16,9 @@ public class TrampolineEvent : Event
 {
     
 }
+
+public class ObjectFoundMagnetEvent : Event
+{
+    
+}
+
