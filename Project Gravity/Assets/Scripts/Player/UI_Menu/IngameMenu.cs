@@ -62,6 +62,7 @@ public class IngameMenu : MonoBehaviour
 
     public void Pause(int index)
     {
+        gameObject.transform.parent.GetComponent<AudioSource>().mute = true;
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         gameObject.SetActive(true);
         if (!menus[index].activeSelf)

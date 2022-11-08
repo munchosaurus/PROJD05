@@ -20687,10 +20687,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1921015880380027198, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: lavaMask.m_Bits
-      value: 1024
-      objectReference: {fileID: 0}
     - target: {fileID: 7406499542109578702, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_Name
       value: Player_noRB
