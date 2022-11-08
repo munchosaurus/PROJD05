@@ -13,8 +13,7 @@ public class DynamicObjectMovement : MonoBehaviour
     [SerializeField] private float friction;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask magnetMask;
-
-    private readonly float GRID_OFFSET = 0;
+    
     private readonly float OBJECT_Z = 1;
     private Quaternion lockedRotation;
     private Vector3 boxCastDimensions;
@@ -44,13 +43,11 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             return;
         }
-
         transform.position += velocity * Time.fixedDeltaTime;
     }
 
     public void MoveToMagnet(Vector3 location, float magnetSpeed)
     {
-        Debug.Log(location);
         if (Vector3.Distance(transform.position, location) < 0.01f)
         {
             velocity = Vector3.zero;
@@ -75,7 +72,13 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             if (isHorizontal)
             {
-                if (Math.Abs(otherObject.GetComponentInParent<PlayerInput>().velocity.x) > 0.1f)
+                // if (Math.Abs(otherObject.GetComponentInParent<PlayerInput>().velocity.x) > 0.1f)
+                // {
+                //     velocity.x = otherObject.GetComponentInParent<PlayerInput>().velocity.x;
+                //     return true;
+                // }
+                if (Math.Abs(otherObject.GetComponentInParent<PlayerInput>().velocity.x) < velocity.x &&
+                    otherObject.GetComponentInParent<PlayerInput>().velocity.x != 0)
                 {
                     velocity.x = otherObject.GetComponentInParent<PlayerInput>().velocity.x;
                     return true;
@@ -83,7 +86,13 @@ public class DynamicObjectMovement : MonoBehaviour
             }
             else
             {
-                if (Math.Abs(otherObject.GetComponentInParent<PlayerInput>().velocity.y) > 0.1f)
+                // if (Math.Abs(otherObject.GetComponentInParent<PlayerInput>().velocity.y) > 0.1f)
+                // {
+                //     velocity.y = otherObject.GetComponentInParent<PlayerInput>().velocity.y;
+                //     return true;
+                // }
+                if (Math.Abs(otherObject.GetComponentInParent<PlayerInput>().velocity.y) < velocity.y &&
+                    otherObject.GetComponentInParent<PlayerInput>().velocity.y != 0)
                 {
                     velocity.y = otherObject.GetComponentInParent<PlayerInput>().velocity.y;
                     return true;
@@ -125,7 +134,7 @@ public class DynamicObjectMovement : MonoBehaviour
         if (velocity.y < 0)
         {
             if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
-                    transform.localScale.y, groundMask))
+                    transform.localScale.y / 2, groundMask))
             {
                 ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.down,
                     hit.distance, Color.green);
@@ -140,7 +149,7 @@ public class DynamicObjectMovement : MonoBehaviour
         else if (velocity.y > 0)
         {
             if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
-                    transform.localScale.y, groundMask))
+                    transform.localScale.y / 2, groundMask))
             {
                 ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.up,
                     hit.distance, Color.green);
@@ -156,7 +165,7 @@ public class DynamicObjectMovement : MonoBehaviour
         if (velocity.x > 0)
         {
             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
-                    transform.localScale.x, groundMask))
+                    transform.localScale.x / 2, groundMask))
             {
                 ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.right,
                     hit.distance, Color.green);
@@ -172,7 +181,7 @@ public class DynamicObjectMovement : MonoBehaviour
         else if (velocity.x < 0)
         {
             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, transform.rotation,
-                    transform.localScale.x, groundMask))
+                    transform.localScale.x / 2, groundMask))
             {
                 ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.left,
                     hit.distance, Color.green);
@@ -193,24 +202,24 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             if (origin > 0)
             {
-                return (float) Math.Round(Math.Abs(origin)) + GRID_OFFSET;
+                return (float) Math.Round(Math.Abs(origin));
             }
 
             if (origin < 0)
             {
-                return -((float) Math.Round(Math.Abs(origin)) + GRID_OFFSET);
+                return -((float) Math.Round(Math.Abs(origin)));
             }
         }
         else
         {
             if (origin > 0)
             {
-                return (float) Math.Round(Math.Abs(origin)) - GRID_OFFSET;
+                return (float) Math.Round(Math.Abs(origin));
             }
 
             if (origin < 0)
             {
-                return -((float) Math.Round(Math.Abs(origin)) - GRID_OFFSET);
+                return -((float) Math.Round(Math.Abs(origin)));
             }
         }
 
