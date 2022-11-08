@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InteractableObject : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class InteractableObject : MonoBehaviour
         {
             case Interactable.InteractableType.Target:
                 FindObjectOfType<IngameMenu>().Pause(1);
+                
                 break;
             case Interactable.InteractableType.Keycard:
                 FindObjectOfType<KeycardLogic>().AddCollectedKeyCard(gameObject.GetInstanceID());

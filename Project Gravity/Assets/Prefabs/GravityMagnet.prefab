@@ -78,7 +78,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0254c1e3257534fbdbccfbc977cd9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggered: 0
+  triggered: 1
+  upTriggered: 1
+  downTriggered: 1
+  leftTriggered: 1
+  rightTriggered: 1
+  horizontalCast: {x: 0.05, y: 0.49, z: 0.49}
+  verticalCast: {x: 0.49, y: 0.05, z: 0.49}
+  dynamicObjectMovement: {fileID: 0}
+  detectionDirection: {x: 0, y: 0, z: 0}
+  gravityMagnet:
+    serializedVersion: 2
+    m_Bits: 512
+  magnetRange: 2
 --- !u!64 &202206083
 MeshCollider:
   m_ObjectHideFlags: 0

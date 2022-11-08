@@ -20,18 +20,19 @@ public class PlayerInput : MonoBehaviour
     private Vector3 _boxCastDimensions;
     private InputAction.CallbackContext _movementKeyInfo;
 
-    private PlayerStats _playerStats;
+    [Header("Movement settings")] [SerializeField]
     private Vector3 _groundCheckDimensions;
-    private float _jumpCooldownTimer;
-    private float _airMovementMultiplier;
-    private float _jumpForce;
-    private float _jumpCooldown;
-    private float _maxVelocity;
-    private float _acceleration;
+
+    [SerializeField] private float _airMovementMultiplier;
+    [SerializeField] private float _jumpForce;
+    [SerializeField] private float _jumpCooldown;
+    [SerializeField] private float _maxVelocity;
+    [SerializeField] private float _acceleration;
     private const float GRID_CLAMP_THRESHOLD = 0.02f;
+    private float _jumpCooldownTimer;
+    private AudioSource _audioSource;
 
     private readonly float OBJECT_Z = 1;
-    //private bool hasJumped;
 
 
     // Start is called before the first frame update
@@ -39,9 +40,7 @@ public class PlayerInput : MonoBehaviour
     {
         GameController.SetInputLockState(true);
         Physics.gravity = new Vector3(0, -Constants.GRAVITY, 0);
-        _playerStats = gameObject.GetComponent<PlayerStats>();
-        SetBaseStats();
-        _groundCheckDimensions = new Vector3(0.5f, 0.05f, 0.5f);
+        _audioSource = GetComponent<AudioSource>();
         StartCoroutine(SwitchInputLock());
         velocity = Vector3.zero;
     }
@@ -63,9 +62,6 @@ public class PlayerInput : MonoBehaviour
         MovePlayer();
         CheckForCollisions();
         ApplyCollisions();
-
-        //ApplyFriction();
-        //ClampAirMovement();
 
         transform.position += velocity * Time.fixedDeltaTime;
 
@@ -94,15 +90,6 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void SetBaseStats()
-    {
-        _jumpForce = _playerStats.GetJumpForce();
-        _jumpCooldown = _playerStats.GetJumpCooldown();
-        _maxVelocity = _playerStats.GetMaxVelocity();
-        _acceleration = _playerStats.GetPlayerMovementAcceleration();
-        _airMovementMultiplier = _playerStats.GetAirMovementMultiplier();
-    }
-
     private void ClampToGrid()
     {
         Vector3 newPosition = transform.position;
@@ -111,6 +98,12 @@ public class PlayerInput : MonoBehaviour
         {
             newPosition.x = Mathf.Round(transform.position.x);
         }
+
+        // if (Math.Abs(gameObject.transform.position.y - Math.Round(gameObject.transform.position.y)) <
+        //     GRID_CLAMP_THRESHOLD && GravityController.IsGravityHorizontal())
+        // {
+        //     newPosition.y = Mathf.Round(transform.position.y);
+        // }
 
         if (transform.position != newPosition)
         {
@@ -124,48 +117,48 @@ public class PlayerInput : MonoBehaviour
             transform.localScale.y / 2, groundMask);
     }
 
+    public bool IsRoofed()
+    {
+        return Physics.BoxCast(transform.position, _groundCheckDimensions, transform.up, transform.rotation,
+            transform.localScale.y / 2, groundMask);
+    }
+
     /*
      * Called by input system, adds _jumpForce to the velocity that is opposite to the
      * gravity in case the player is grounded and has passed the jump cool down.
      */
     public void Jump()
     {
-        if (_jumpCooldownTimer <= 0 && IsGrounded())
+        if (_jumpCooldownTimer <= 0 && IsGrounded() && !IsRoofed())
         {
             if (GravityController.IsGravityHorizontal())
             {
-                if (Physics.gravity.x > 0)
+                if (Physics.gravity.x > 0 && !groundedLeft)
                 {
                     velocity.x -= _jumpForce;
                 }
-                else
+
+                if (Physics.gravity.x < 0 && !groundedRight)
                 {
                     velocity.x += _jumpForce;
                 }
             }
             else
             {
-                if (Physics.gravity.y > 0)
+                if (Physics.gravity.y > 0 && !groundedDown)
                 {
                     velocity.y -= _jumpForce;
                 }
-                else
+
+                if (Physics.gravity.y < 0 && !groundedUp)
                 {
                     velocity.y += _jumpForce;
                 }
             }
 
-            // StartCoroutine(SetJumpStatusToTrue());
             _jumpCooldownTimer = _jumpCooldown;
         }
     }
-
-    // private IEnumerator SetJumpStatusToTrue()
-    // {
-    //     hasJumped = true;
-    //     yield return new WaitForSeconds(Constants.PLAYER_AIR_MOVEMENT_WINDOW);
-    //     hasJumped = false;
-    // }
 
     /*
      * Sets the movement float, will be read by MovePlayer
@@ -177,30 +170,22 @@ public class PlayerInput : MonoBehaviour
 
     private bool ShouldInheritMovement(GameObject otherObject, bool isHorizontal)
     {
-        if (otherObject.GetComponent<DynamicObjectMovement>() != null)
+        if (otherObject.GetComponent<DynamicObjectMovement>() == null) return false;
+        var dynamicObjectMovement = otherObject.GetComponent<DynamicObjectMovement>();
+        if (isHorizontal)
         {
-            if (isHorizontal)
-            {
-                if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.x) < velocity.x &&
-                    otherObject.GetComponent<DynamicObjectMovement>().velocity.x != 0)
-                {
-                    velocity.x = otherObject.GetComponent<DynamicObjectMovement>().velocity.x;
-                    return true;
-                }
-            }
-            else
-            {
-                if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.y) < velocity.y &&
-                    otherObject.GetComponent<DynamicObjectMovement>().velocity.y != 0)
-                {
-                    velocity.y = otherObject.GetComponent<DynamicObjectMovement>().velocity.y;
-                    return true;
-                }
-            }
+            if (!(Math.Abs(dynamicObjectMovement.velocity.x) < Math.Abs(velocity.x)) ||
+                dynamicObjectMovement.velocity.x == 0) return false;
+            velocity.x = dynamicObjectMovement.velocity.x;
+            return true;
         }
 
-        return false;
+        if (!(Math.Abs(dynamicObjectMovement.velocity.y) < Math.Abs(velocity.y)) ||
+            dynamicObjectMovement.velocity.y == 0) return false;
+        velocity.y = dynamicObjectMovement.velocity.y;
+        return true;
     }
+
 
     private void CheckForCollisions()
     {
@@ -209,67 +194,81 @@ public class PlayerInput : MonoBehaviour
         groundedLeft = false;
         groundedRight = false;
         RaycastHit hit;
-        if (velocity.y < 0)
+        switch (velocity.y)
         {
-            if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
-                    transform.localScale.y / 2, groundMask))
+            case < 0:
             {
-                ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, Quaternion.identity, Vector3.down,
-                    hit.distance, Color.green);
-                if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
+                        transform.localScale.y / 2, groundMask))
                 {
-                    groundedDown = true;
-                    transform.position = new Vector3(transform.position.x,
-                        GetClosestGridCentre(transform.position.y), transform.position.z);
+                    ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, Quaternion.identity, Vector3.down,
+                        hit.distance, Color.green);
+                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                    {
+                        groundedDown = true;
+                        transform.position = new Vector3(transform.position.x,
+                            GetClosestGridCentre(transform.position.y), transform.position.z);
+                    }
                 }
+
+                break;
             }
-        }
-        else if (velocity.y > 0)
-        {
-            if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
-                    transform.localScale.y / 2, groundMask))
+            case > 0:
             {
-                ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, Quaternion.identity, Vector3.up,
-                    hit.distance, Color.green);
-                if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
+                        transform.localScale.y / 2, groundMask))
                 {
-                    groundedUp = true;
-                    transform.position = new Vector3(transform.position.x,
-                        GetClosestGridCentre(transform.position.y), transform.position.z);
+                    ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, Quaternion.identity, Vector3.up,
+                        hit.distance, Color.green);
+                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                    {
+                        groundedUp = true;
+                        transform.position = new Vector3(transform.position.x,
+                            GetClosestGridCentre(transform.position.y), transform.position.z);
+                    }
                 }
+
+                break;
             }
         }
 
-        if (velocity.x > 0)
+        switch (velocity.x)
         {
-            if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
-                    transform.localScale.x / 2, groundMask))
+            case > 0:
             {
-                ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, Quaternion.identity, Vector3.right,
-                    hit.distance, Color.green);
-                if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
+                        transform.localScale.x / 2, groundMask))
                 {
-                    groundedRight = true;
-                    transform.position = new Vector3(
-                        GetClosestGridCentre(transform.position.x),
-                        transform.position.y, OBJECT_Z);
+                    ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, Quaternion.identity, Vector3.right,
+                        hit.distance, Color.green);
+                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                    {
+                        groundedRight = true;
+                        transform.position = new Vector3(
+                            GetClosestGridCentre(transform.position.x),
+                            transform.position.y, OBJECT_Z);
+                    }
                 }
+
+                break;
             }
-        }
-        else if (velocity.x < 0)
-        {
-            if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
-                    transform.localScale.x / 2, groundMask))
+            case < 0:
             {
-                ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, Quaternion.identity, Vector3.left,
-                    hit.distance, Color.green);
-                if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
+                        transform.localScale.x / 2, groundMask))
                 {
-                    groundedLeft = true;
-                    transform.position = new Vector3(
-                        GetClosestGridCentre(transform.position.x),
-                        transform.position.y, OBJECT_Z);
+                    ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, Quaternion.identity, Vector3.left,
+                        hit.distance, Color.green);
+                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                    {
+                        groundedLeft = true;
+                        transform.position = new Vector3(
+                            GetClosestGridCentre(transform.position.x),
+                            transform.position.y, OBJECT_Z);
+                    }
                 }
+
+                break;
             }
         }
     }
@@ -308,59 +307,14 @@ public class PlayerInput : MonoBehaviour
     {
         if ((groundedDown && velocity.y < 0) || (groundedUp && velocity.y > 0))
         {
-            //hasJumped = false;
             velocity.y = 0;
         }
 
         if ((groundedLeft && velocity.x < 0) || (groundedRight && velocity.x > 0))
         {
-            //hasJumped = false;
             velocity.x = 0;
         }
     }
-
-    // private void ApplyFriction()
-    // {
-    //     if (groundedDown || groundedUp)
-    //     {
-    //         if (velocity.x > 0)
-    //         {
-    //             velocity.x -= friction * Time.fixedDeltaTime;
-    //             if (velocity.x < 0)
-    //             {
-    //                 velocity.x = 0;
-    //             }
-    //         }
-    //         else if (velocity.x < 0)
-    //         {
-    //             velocity.x += friction * Time.fixedDeltaTime;
-    //             if (velocity.x > 0)
-    //             {
-    //                 velocity.x = 0;
-    //             }
-    //         }
-    //     }
-    //
-    //     if (groundedLeft || groundedRight)
-    //     {
-    //         if (velocity.y > 0)
-    //         {
-    //             velocity.y -= friction * Time.fixedDeltaTime;
-    //             if (velocity.y < 0)
-    //             {
-    //                 velocity.y = 0;
-    //             }
-    //         }
-    //         else if (velocity.y < 0)
-    //         {
-    //             velocity.y += friction * Time.fixedDeltaTime;
-    //             if (velocity.y > 0)
-    //             {
-    //                 velocity.y = 0;
-    //             }
-    //         }
-    //     }
-    // }
 
     private void MovePlayer()
     {
@@ -388,62 +342,23 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    /*
-     * Makes sure that when the player isn't grounded and hasn't jumped,
-     * the player object will have its movement quickly lowered to near 0, also clamps player to two thirds of the
-     * maximum movement speed if there is any input
-     */
-    // private void ClampAirMovement()
-    // {
-    //     if (!IsGrounded())
-    //     {
-    //         if (GravityController.IsGravityHorizontal())
-    //         {
-    //             if (_movementKeyInfo.ReadValue<Vector2>().y == 0 && velocity.y != 0 || !hasJumped)
-    //             {
-    //                 velocity.y *= Constants.PLAYER_AIR_SPEED_DAMPER * Time.fixedDeltaTime;
-    //             }
-    //             else if (Math.Abs(velocity.y) > Math.Abs(_maxVelocity * MAXIMUM_AIR_MOVEMENT_MULTIPLIER))
-    //             {
-    //                 if (velocity.y > 0)
-    //                 {
-    //                     velocity.y = _maxVelocity * MAXIMUM_AIR_MOVEMENT_MULTIPLIER;
-    //                 }
-    //                 else if (velocity.y < 0)
-    //                 {
-    //                     velocity.y = -_maxVelocity * MAXIMUM_AIR_MOVEMENT_MULTIPLIER;
-    //                 }
-    //             }
-    //         }
-    //         else
-    //         {
-    //             if (_movementKeyInfo.ReadValue<Vector2>().x == 0 && velocity.x != 0 || !hasJumped)
-    //             {
-    //                 velocity.x *= Constants.PLAYER_AIR_SPEED_DAMPER * Time.fixedDeltaTime;
-    //             }
-    //             else if (Math.Abs(velocity.x) > Math.Abs(_maxVelocity * MAXIMUM_AIR_MOVEMENT_MULTIPLIER))
-    //             {
-    //                 if (velocity.x > 0)
-    //                 {
-    //                     velocity.x = _maxVelocity * MAXIMUM_AIR_MOVEMENT_MULTIPLIER;
-    //                 }
-    //                 else if (velocity.x < 0)
-    //                 {
-    //                     velocity.x = -_maxVelocity * MAXIMUM_AIR_MOVEMENT_MULTIPLIER;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
     private void MoveHorizontal(float direction)
     {
         if (IsGrounded())
         {
             if (direction == 0 || (velocity.x > 0 && direction < 0) || (velocity.x < 0 && direction > 0))
             {
+                _audioSource.mute = true;
                 velocity.x = 0;
             }
+            else
+            {
+                _audioSource.mute = false;
+            }
+        }
+        else
+        {
+            _audioSource.mute = true;
         }
 
         if (ShouldAddMoreMoveForce(direction))
@@ -456,8 +371,17 @@ public class PlayerInput : MonoBehaviour
         {
             if (direction == 0 || (velocity.y > 0 && direction < 0) || (velocity.y < 0 && direction > 0))
             {
+                _audioSource.mute = true;
                 velocity.y = 0;
             }
+            else
+            {
+                _audioSource.mute = false;
+            }
+        }
+        else
+        {
+            _audioSource.mute = true;
         }
 
         if (ShouldAddMoreMoveForce(direction))
@@ -466,8 +390,8 @@ public class PlayerInput : MonoBehaviour
 
     private bool ShouldAddMoreMoveForce(float moveCoefficient)
     {
-        Vector3 dir = new Vector3();
-        float magnitude = velocity.x + moveCoefficient;
+        var dir = new Vector3();
+        var magnitude = velocity.x + moveCoefficient;
         if (GravityController.IsGravityHorizontal())
         {
             magnitude = velocity.y + moveCoefficient;
@@ -512,32 +436,6 @@ public class PlayerInput : MonoBehaviour
 
         return hit.collider;
     }
-
-    // private void ClampMoveSpeed(bool isGravityHorizontal)
-    // {
-    //     if (isGravityHorizontal)
-    //     {
-    //         if (velocity.y > _maxVelocity)
-    //         {
-    //             velocity.y = _maxVelocity;
-    //         }
-    //         else if (velocity.y < -_maxVelocity)
-    //         {
-    //             velocity.y = -_maxVelocity;
-    //         }
-    //
-    //         return;
-    //     }
-    //
-    //     if (velocity.x > _maxVelocity)
-    //     {
-    //         velocity.x = _maxVelocity;
-    //     }
-    //     else if (velocity.x < -_maxVelocity)
-    //     {
-    //         velocity.x = -_maxVelocity;
-    //     }
-    // }
 
     public void RotateToPlane()
     {
