@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2329171297432399974}
   - component: {fileID: 2329171297432399970}
   - component: {fileID: 202206083}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Logic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
   gravityMagnet:
     serializedVersion: 2
     m_Bits: 512
-  magnetRange: 1
+  magnetRange: 2
 --- !u!64 &202206083
 MeshCollider:
   m_ObjectHideFlags: 0

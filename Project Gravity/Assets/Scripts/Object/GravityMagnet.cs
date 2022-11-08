@@ -1,16 +1,25 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class GravityMagnet : MonoBehaviour
 {
-    [SerializeField] private bool triggered;
+    public bool triggered;
     [SerializeField] public bool upTriggered, downTriggered, leftTriggered, rightTriggered;
     [SerializeField] private Vector3 horizontalCast, verticalCast;
     [SerializeField] public DynamicObjectMovement dynamicObjectMovement;
     [SerializeField] public Vector3 detectionDirection;
     [SerializeField] private LayerMask gravityMagnet;
     [SerializeField] private float magnetRange;
+    [SerializeField] private float magnetSpeed;
+    private static Guid _gravityGunEventGuid;
+    private readonly float magnetCoolDown = 2f;
 
+
+    private void Start()
+    {
+        EventSystem.Current.RegisterListener<GravityGunEvent>(ToggleMagnet, ref _gravityGunEventGuid);
+    }
 
     private void FixedUpdate()
     {
@@ -19,18 +28,39 @@ public class GravityMagnet : MonoBehaviour
             CheckForBoxes();
             if (dynamicObjectMovement != null)
             {
-                dynamicObjectMovement.MoveToMagnet(transform.position + detectionDirection);
+                dynamicObjectMovement.MoveToMagnet(transform.position + detectionDirection, magnetSpeed);
             }
         }
     }
 
-    private void ToggleMagnet()
+    private void ToggleMagnet(GravityGunEvent gravityGunEvent)
     {
-        dynamicObjectMovement.lockedToMagnet = false;
-        dynamicObjectMovement = null;
-        triggered = !triggered;
+        if (gravityGunEvent.TargetGameObject.layer == gameObject.layer)
+        {
+            if (gameObject.GetInstanceID() == gravityGunEvent.TargetGameObject.GetInstanceID())
+            {
+                if (dynamicObjectMovement == null)
+                {
+                    triggered = !triggered;
+                }
+                else
+                {
+                    dynamicObjectMovement.lockedToMagnet = false;
+                    dynamicObjectMovement = null;
+                    triggered = !triggered;
+                }
+            } else if (dynamicObjectMovement != null)
+            {
+                if (gravityGunEvent.TargetGameObject.GetInstanceID() == dynamicObjectMovement.gameObject.transform.GetChild(0).gameObject.GetInstanceID())
+                {
+                    dynamicObjectMovement.lockedToMagnet = false;
+                    dynamicObjectMovement = null;
+                    triggered = !triggered;
+                }
+            }
+        }
     }
-    
+
     private void CheckForBoxes()
     {
         RaycastHit hit;
@@ -42,7 +72,6 @@ public class GravityMagnet : MonoBehaviour
                 
                 if (hit.collider.GetComponentInParent<DynamicObjectMovement>() != null)
                 {
-                    Debug.Log("Found it");
                     detectionDirection = Vector3.down;
                     dynamicObjectMovement = hit.collider.GetComponentInParent<DynamicObjectMovement>();
                     dynamicObjectMovement.lockedToMagnet = true;

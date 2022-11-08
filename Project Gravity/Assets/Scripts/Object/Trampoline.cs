@@ -43,7 +43,14 @@ public class Trampoline : MonoBehaviour
                 transform.localScale.y/5, playerLayer))
         {
             ExtDebug.DrawBoxCastBox(startingPoint.position, _playerCheckDimensions, transform.rotation, transform.up, transform.localScale.y/5, Color.red);
-
+            
+            Event trampolineEvent = new TrampolineEvent()
+            {
+                TargetGameObject = hit.transform.gameObject,
+                SourceGameObject = gameObject
+            };
+            EventSystem.Current.FireEvent(trampolineEvent);
+            
             _playerInput.velocity = transform.up * trampolinePower;
             StartCoroutine(ShootBoard());
             counter = 0;

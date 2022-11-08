@@ -30,6 +30,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private float _acceleration;
     private const float GRID_CLAMP_THRESHOLD = 0.02f;
     private float _jumpCooldownTimer;
+    private AudioSource _audioSource;
 
     private readonly float OBJECT_Z = 1;
 
@@ -39,6 +40,7 @@ public class PlayerInput : MonoBehaviour
     {
         GameController.SetInputLockState(true);
         Physics.gravity = new Vector3(0, -Constants.GRAVITY, 0);
+        _audioSource = GetComponent<AudioSource>();
         StartCoroutine(SwitchInputLock());
         velocity = Vector3.zero;
     }
@@ -97,6 +99,12 @@ public class PlayerInput : MonoBehaviour
             newPosition.x = Mathf.Round(transform.position.x);
         }
 
+        // if (Math.Abs(gameObject.transform.position.y - Math.Round(gameObject.transform.position.y)) <
+        //     GRID_CLAMP_THRESHOLD && GravityController.IsGravityHorizontal())
+        // {
+        //     newPosition.y = Mathf.Round(transform.position.y);
+        // }
+
         if (transform.position != newPosition)
         {
             transform.position = newPosition;
@@ -109,13 +117,19 @@ public class PlayerInput : MonoBehaviour
             transform.localScale.y / 2, groundMask);
     }
 
+    public bool IsRoofed()
+    {
+        return Physics.BoxCast(transform.position, _groundCheckDimensions, transform.up, transform.rotation,
+            transform.localScale.y / 2, groundMask);
+    }
+
     /*
      * Called by input system, adds _jumpForce to the velocity that is opposite to the
      * gravity in case the player is grounded and has passed the jump cool down.
      */
     public void Jump()
     {
-        if (_jumpCooldownTimer <= 0 && IsGrounded())
+        if (_jumpCooldownTimer <= 0 && IsGrounded() && !IsRoofed())
         {
             if (GravityController.IsGravityHorizontal())
             {
@@ -156,31 +170,22 @@ public class PlayerInput : MonoBehaviour
 
     private bool ShouldInheritMovement(GameObject otherObject, bool isHorizontal)
     {
-        if (otherObject.GetComponent<DynamicObjectMovement>() != null)
+        if (otherObject.GetComponent<DynamicObjectMovement>() == null) return false;
+        var dynamicObjectMovement = otherObject.GetComponent<DynamicObjectMovement>();
+        if (isHorizontal)
         {
-            Debug.Log(otherObject.GetComponent<DynamicObjectMovement>().velocity);
-            if (isHorizontal)
-            {
-                if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.x) < Math.Abs(velocity.x) &&
-                    otherObject.GetComponent<DynamicObjectMovement>().velocity.x != 0)
-                {
-                    velocity.x = otherObject.GetComponent<DynamicObjectMovement>().velocity.x;
-                    return true;
-                }
-            }
-            else
-            {
-                if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.y) < Math.Abs(velocity.y) &&
-                    otherObject.GetComponent<DynamicObjectMovement>().velocity.y != 0)
-                {
-                    velocity.y = otherObject.GetComponent<DynamicObjectMovement>().velocity.y;
-                    return true;
-                }
-            }
+            if (!(Math.Abs(dynamicObjectMovement.velocity.x) < Math.Abs(velocity.x)) ||
+                dynamicObjectMovement.velocity.x == 0) return false;
+            velocity.x = dynamicObjectMovement.velocity.x;
+            return true;
         }
 
-        return false;
+        if (!(Math.Abs(dynamicObjectMovement.velocity.y) < Math.Abs(velocity.y)) ||
+            dynamicObjectMovement.velocity.y == 0) return false;
+        velocity.y = dynamicObjectMovement.velocity.y;
+        return true;
     }
+
 
     private void CheckForCollisions()
     {
@@ -189,67 +194,81 @@ public class PlayerInput : MonoBehaviour
         groundedLeft = false;
         groundedRight = false;
         RaycastHit hit;
-        if (velocity.y < 0)
+        switch (velocity.y)
         {
-            if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
-                    transform.localScale.y / 2, groundMask))
+            case < 0:
             {
-                ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, Quaternion.identity, Vector3.down,
-                    hit.distance, Color.green);
-                if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
+                        transform.localScale.y / 2, groundMask))
                 {
-                    groundedDown = true;
-                    transform.position = new Vector3(transform.position.x,
-                        GetClosestGridCentre(transform.position.y), transform.position.z);
+                    ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, Quaternion.identity, Vector3.down,
+                        hit.distance, Color.green);
+                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                    {
+                        groundedDown = true;
+                        transform.position = new Vector3(transform.position.x,
+                            GetClosestGridCentre(transform.position.y), transform.position.z);
+                    }
                 }
+
+                break;
             }
-        }
-        else if (velocity.y > 0)
-        {
-            if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
-                    transform.localScale.y / 2, groundMask))
+            case > 0:
             {
-                ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, Quaternion.identity, Vector3.up,
-                    hit.distance, Color.green);
-                if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
+                        transform.localScale.y / 2, groundMask))
                 {
-                    groundedUp = true;
-                    transform.position = new Vector3(transform.position.x,
-                        GetClosestGridCentre(transform.position.y), transform.position.z);
+                    ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, Quaternion.identity, Vector3.up,
+                        hit.distance, Color.green);
+                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                    {
+                        groundedUp = true;
+                        transform.position = new Vector3(transform.position.x,
+                            GetClosestGridCentre(transform.position.y), transform.position.z);
+                    }
                 }
+
+                break;
             }
         }
 
-        if (velocity.x > 0)
+        switch (velocity.x)
         {
-            if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
-                    transform.localScale.x / 2, groundMask))
+            case > 0:
             {
-                ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, Quaternion.identity, Vector3.right,
-                    hit.distance, Color.green);
-                if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
+                        transform.localScale.x / 2, groundMask))
                 {
-                    groundedRight = true;
-                    transform.position = new Vector3(
-                        GetClosestGridCentre(transform.position.x),
-                        transform.position.y, OBJECT_Z);
+                    ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, Quaternion.identity, Vector3.right,
+                        hit.distance, Color.green);
+                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                    {
+                        groundedRight = true;
+                        transform.position = new Vector3(
+                            GetClosestGridCentre(transform.position.x),
+                            transform.position.y, OBJECT_Z);
+                    }
                 }
+
+                break;
             }
-        }
-        else if (velocity.x < 0)
-        {
-            if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
-                    transform.localScale.x / 2, groundMask))
+            case < 0:
             {
-                ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, Quaternion.identity, Vector3.left,
-                    hit.distance, Color.green);
-                if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
+                        transform.localScale.x / 2, groundMask))
                 {
-                    groundedLeft = true;
-                    transform.position = new Vector3(
-                        GetClosestGridCentre(transform.position.x),
-                        transform.position.y, OBJECT_Z);
+                    ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, Quaternion.identity, Vector3.left,
+                        hit.distance, Color.green);
+                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                    {
+                        groundedLeft = true;
+                        transform.position = new Vector3(
+                            GetClosestGridCentre(transform.position.x),
+                            transform.position.y, OBJECT_Z);
+                    }
                 }
+
+                break;
             }
         }
     }
@@ -329,8 +348,17 @@ public class PlayerInput : MonoBehaviour
         {
             if (direction == 0 || (velocity.x > 0 && direction < 0) || (velocity.x < 0 && direction > 0))
             {
+                _audioSource.mute = true;
                 velocity.x = 0;
             }
+            else
+            {
+                _audioSource.mute = false;
+            }
+        }
+        else
+        {
+            _audioSource.mute = true;
         }
 
         if (ShouldAddMoreMoveForce(direction))
@@ -343,8 +371,17 @@ public class PlayerInput : MonoBehaviour
         {
             if (direction == 0 || (velocity.y > 0 && direction < 0) || (velocity.y < 0 && direction > 0))
             {
+                _audioSource.mute = true;
                 velocity.y = 0;
             }
+            else
+            {
+                _audioSource.mute = false;
+            }
+        }
+        else
+        {
+            _audioSource.mute = true;
         }
 
         if (ShouldAddMoreMoveForce(direction))
@@ -353,8 +390,8 @@ public class PlayerInput : MonoBehaviour
 
     private bool ShouldAddMoreMoveForce(float moveCoefficient)
     {
-        Vector3 dir = new Vector3();
-        float magnitude = velocity.x + moveCoefficient;
+        var dir = new Vector3();
+        var magnitude = velocity.x + moveCoefficient;
         if (GravityController.IsGravityHorizontal())
         {
             magnitude = velocity.y + moveCoefficient;

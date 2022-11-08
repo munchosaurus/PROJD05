@@ -9387,7 +9387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2329171296038169127, guid: 20b1aedec502eb64a98136e90d7d0229, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2329171296038169127, guid: 20b1aedec502eb64a98136e90d7d0229, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9427,7 +9427,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2329171297432399970, guid: 20b1aedec502eb64a98136e90d7d0229, type: 3}
       propertyPath: magnetRange
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2329171297432399970, guid: 20b1aedec502eb64a98136e90d7d0229, type: 3}
+      propertyPath: magnetSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2329171297432399970, guid: 20b1aedec502eb64a98136e90d7d0229, type: 3}
       propertyPath: downTriggered
@@ -10586,10 +10590,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 953350191, guid: a663feaaee8f33a499bf2c7295e3b0cc, type: 3}
-      propertyPath: isDefault
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8737704364896298532, guid: a663feaaee8f33a499bf2c7295e3b0cc, type: 3}
       propertyPath: m_RootOrder
       value: 0
