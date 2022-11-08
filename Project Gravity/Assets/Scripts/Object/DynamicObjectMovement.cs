@@ -14,7 +14,6 @@ public class DynamicObjectMovement : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask magnetMask;
 
-    private readonly float GRID_OFFSET = 0;
     private readonly float OBJECT_Z = 1;
     private Quaternion lockedRotation;
     private Vector3 boxCastDimensions;
@@ -50,7 +49,6 @@ public class DynamicObjectMovement : MonoBehaviour
 
     public void MoveToMagnet(Vector3 location, float magnetSpeed)
     {
-        Debug.Log(location);
         if (Vector3.Distance(transform.position, location) < 0.01f)
         {
             velocity = Vector3.zero;
@@ -71,45 +69,28 @@ public class DynamicObjectMovement : MonoBehaviour
 
     private bool ShouldInheritMovement(GameObject otherObject, bool isHorizontal)
     {
+        var otherMovement = new Vector3();
         if (otherObject.GetComponentInParent<PlayerInput>() != null)
         {
-            if (isHorizontal)
-            {
-                if (Math.Abs(otherObject.GetComponentInParent<PlayerInput>().velocity.x) > 0.1f)
-                {
-                    velocity.x = otherObject.GetComponentInParent<PlayerInput>().velocity.x;
-                    return true;
-                }
-            }
-            else
-            {
-                if (Math.Abs(otherObject.GetComponentInParent<PlayerInput>().velocity.y) > 0.1f)
-                {
-                    velocity.y = otherObject.GetComponentInParent<PlayerInput>().velocity.y;
-                    return true;
-                }
-            }
+            otherMovement = otherObject.GetComponentInParent<PlayerInput>().velocity;
         }
         else if (otherObject.GetComponent<DynamicObjectMovement>() != null)
         {
+            otherMovement = otherObject.GetComponent<DynamicObjectMovement>().velocity;
+        }
+
+        if (otherMovement.magnitude > 0)
+        {
             if (isHorizontal)
             {
-                if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.x) < velocity.x &&
-                    otherObject.GetComponent<DynamicObjectMovement>().velocity.x != 0)
-                {
-                    velocity.x = otherObject.GetComponent<DynamicObjectMovement>().velocity.x;
-                    return true;
-                }
+                if (!(Math.Abs(otherMovement.x) < velocity.x) || otherMovement.x == 0) return false;
+                velocity.x = otherMovement.x;
+                return true;
             }
-            else
-            {
-                if (Math.Abs(otherObject.GetComponent<DynamicObjectMovement>().velocity.y) < velocity.y &&
-                    otherObject.GetComponent<DynamicObjectMovement>().velocity.y != 0)
-                {
-                    velocity.y = otherObject.GetComponent<DynamicObjectMovement>().velocity.y;
-                    return true;
-                }
-            }
+
+            if (!(Math.Abs(otherMovement.y) < velocity.y) || otherMovement.y == 0) return false;
+            velocity.y = otherMovement.y;
+            return true;
         }
 
         return false;
@@ -122,67 +103,81 @@ public class DynamicObjectMovement : MonoBehaviour
         groundedLeft = false;
         groundedRight = false;
         RaycastHit hit;
-        if (velocity.y < 0)
+        switch (velocity.y)
         {
-            if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
-                    transform.localScale.y, groundMask))
+            case < 0:
             {
-                ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.down,
-                    hit.distance, Color.green);
-                if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
+                        transform.localScale.y / 2, groundMask))
                 {
-                    groundedDown = true;
-                    transform.position = new Vector3(transform.position.x,
-                        GetClosestGridCentre(transform.position.y), transform.position.z);
+                    ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.down,
+                        hit.distance, Color.green);
+                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                    {
+                        groundedDown = true;
+                        transform.position = new Vector3(transform.position.x,
+                            GetClosestGridCentre(transform.position.y), transform.position.z);
+                    }
                 }
+
+                break;
             }
-        }
-        else if (velocity.y > 0)
-        {
-            if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
-                    transform.localScale.y, groundMask))
+            case > 0:
             {
-                ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.up,
-                    hit.distance, Color.green);
-                if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
+                        transform.localScale.y / 2, groundMask))
                 {
-                    groundedUp = true;
-                    transform.position = new Vector3(transform.position.x,
-                        GetClosestGridCentre(transform.position.y), transform.position.z);
+                    ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.up,
+                        hit.distance, Color.green);
+                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                    {
+                        groundedUp = true;
+                        transform.position = new Vector3(transform.position.x,
+                            GetClosestGridCentre(transform.position.y), transform.position.z);
+                    }
                 }
+
+                break;
             }
         }
 
-        if (velocity.x > 0)
+        switch (velocity.x)
         {
-            if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
-                    transform.localScale.x, groundMask))
+            case > 0:
             {
-                ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.right,
-                    hit.distance, Color.green);
-                if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
+                        transform.localScale.x / 2, groundMask))
                 {
-                    groundedRight = true;
-                    transform.position = new Vector3(
-                        GetClosestGridCentre(transform.position.x),
-                        transform.position.y, OBJECT_Z);
+                    ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.right,
+                        hit.distance, Color.green);
+                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                    {
+                        groundedRight = true;
+                        transform.position = new Vector3(
+                            GetClosestGridCentre(transform.position.x),
+                            transform.position.y, OBJECT_Z);
+                    }
                 }
+
+                break;
             }
-        }
-        else if (velocity.x < 0)
-        {
-            if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, transform.rotation,
-                    transform.localScale.x, groundMask))
+            case < 0:
             {
-                ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.left,
-                    hit.distance, Color.green);
-                if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, transform.rotation,
+                        transform.localScale.x / 2, groundMask))
                 {
-                    groundedLeft = true;
-                    transform.position = new Vector3(
-                        GetClosestGridCentre(transform.position.x),
-                        transform.position.y, OBJECT_Z);
+                    ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.left,
+                        hit.distance, Color.green);
+                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                    {
+                        groundedLeft = true;
+                        transform.position = new Vector3(
+                            GetClosestGridCentre(transform.position.x),
+                            transform.position.y, OBJECT_Z);
+                    }
                 }
+
+                break;
             }
         }
     }
@@ -193,24 +188,24 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             if (origin > 0)
             {
-                return (float) Math.Round(Math.Abs(origin)) + GRID_OFFSET;
+                return (float) Math.Round(Math.Abs(origin));
             }
 
             if (origin < 0)
             {
-                return -((float) Math.Round(Math.Abs(origin)) + GRID_OFFSET);
+                return -((float) Math.Round(Math.Abs(origin)));
             }
         }
         else
         {
             if (origin > 0)
             {
-                return (float) Math.Round(Math.Abs(origin)) - GRID_OFFSET;
+                return (float) Math.Round(Math.Abs(origin));
             }
 
             if (origin < 0)
             {
-                return -((float) Math.Round(Math.Abs(origin)) - GRID_OFFSET);
+                return -((float) Math.Round(Math.Abs(origin)));
             }
         }
 
