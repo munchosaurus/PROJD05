@@ -39,28 +39,31 @@ public class LevelTimer : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_levelSettings == null)
+        if (!GameController.IsPaused())
         {
-            Debug.Log("Cannot find levelsettings in scene, are you sure you have added?");
-            return;
-        }
-        if (timePressure)
-        {
-            if (levelTimer > 0)
+            if (_levelSettings == null)
             {
-                levelTimer -= Time.deltaTime;
+                Debug.Log("Cannot find levelsettings in scene, are you sure you have added?");
+                return;
+            }
+            if (timePressure)
+            {
+                if (levelTimer > 0)
+                {
+                    levelTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    if (_ingameMenu != null && !GameController.GetPlayerInputIsLocked())
+                    {
+                        _ingameMenu.Pause(2);
+                    }
+                }
             }
             else
             {
-                if (_ingameMenu != null && !GameController.GetPlayerInputIsLocked())
-                {
-                    _ingameMenu.Pause(2);
-                }
+                levelTimer += Time.deltaTime;
             }
-        }
-        else
-        {
-            levelTimer += Time.deltaTime;
         }
         
         DisplayTime(levelTimer);

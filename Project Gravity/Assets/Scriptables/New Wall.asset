@@ -12,25 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad3f4937e7877b458d9363a9280d661, type: 3}
   m_Name: New Wall
   m_EditorClassIdentifier: 
-  wallPrefab: {fileID: 6098653093695181756, guid: 83426658413c0cc4e9b4a420fe3fdbeb, type: 3}
-  dimensions: {x: 29, y: 18, z: 1}
-  isGround: 0
+  wallPrefab: {fileID: 6098653093695181756, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+  dimensions: {x: 20, y: 1, z: 3}
+  isGround: 1
   specialPrefabs:
-  - {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+  - {fileID: 3027047513118980189, guid: b9d7f8512fbe8fa4cb77b135d4d0e9dd, type: 3}
   specialPrefabPositions:
-  - {x: 9, y: 6, z: 0}
-  - {x: 9, y: 7, z: 0}
-  - {x: 9, y: 8, z: 0}
-  - {x: 9, y: 9, z: 0}
-  - {x: 9, y: 10, z: 0}
-  - {x: 12, y: 6, z: 0}
-  - {x: 12, y: 7, z: 0}
-  - {x: 12, y: 8, z: 0}
-  - {x: 12, y: 9, z: 0}
-  - {x: 12, y: 10, z: 0}
-  - {x: 15, y: 7, z: 0}
-  - {x: 15, y: 8, z: 0}
-  - {x: 15, y: 9, z: 0}
-  - {x: 15, y: 10, z: 0}
-  - {x: 15, y: 11, z: 0}
-  - {x: 18, y: 11, z: 0}
+  - {x: 5, y: 0, z: 0}
+  - {x: 6, y: 0, z: 0}
+  - {x: 13, y: 0, z: 0}
+  - {x: 14, y: 0, z: 0}

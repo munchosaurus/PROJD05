@@ -19,6 +19,12 @@ public static class GameController
         SetInputLockState(false);
     }
 
+    // Added for tutorial
+    public static bool IsPaused()
+    {
+        return Time.timeScale == 0;
+    }
+
     public static void SetInputLockState(bool locked)
     {
         _inputLocked = locked;

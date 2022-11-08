@@ -28,6 +28,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private float _jumpCooldown;
     [SerializeField] private float _maxVelocity;
     [SerializeField] private float _acceleration;
+    [SerializeField] private bool isTutorialLevel;
     private const float GRID_CLAMP_THRESHOLD = 0.02f;
     private float _jumpCooldownTimer;
     private AudioSource _audioSource;
@@ -38,10 +39,15 @@ public class PlayerInput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameController.SetInputLockState(true);
+        if (!isTutorialLevel)
+        {
+            GameController.PauseGame();
+            StartCoroutine(SwitchInputLock());
+        }
+
         Physics.gravity = new Vector3(0, -Constants.GRAVITY, 0);
         _audioSource = GetComponent<AudioSource>();
-        StartCoroutine(SwitchInputLock());
+
         velocity = Vector3.zero;
     }
 
@@ -79,14 +85,14 @@ public class PlayerInput : MonoBehaviour
      */
     private IEnumerator SwitchInputLock()
     {
-        yield return new WaitForSeconds(Constants.LEVEL_LOAD_INPUT_PAUSE_TIME);
-        if (GameController.GetPlayerInputIsLocked())
+        yield return new WaitForSecondsRealtime(Constants.LEVEL_LOAD_INPUT_PAUSE_TIME);
+        if (GameController.IsPaused())
         {
-            GameController.SetInputLockState(false);
+            GameController.UnpauseGame();
         }
         else
         {
-            GameController.SetInputLockState(true);
+            GameController.PauseGame();
         }
     }
 
