@@ -17782,18 +17782,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: _roofCheckDimensions.x
-      value: 0.499
-      objectReference: {fileID: 0}
-    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: _roofCheckDimensions.y
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: _roofCheckDimensions.z
-      value: 0.499
-      objectReference: {fileID: 0}
     - target: {fileID: 1049751914841088714, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_RootOrder
       value: 23
@@ -26811,42 +26799,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2110725554297923196, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
-      propertyPath: maxX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110725554297923196, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
-      propertyPath: maxY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110725554297923196, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
-      propertyPath: minX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110725554297923196, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
-      propertyPath: minY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110725554297923196, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
-      propertyPath: leeway
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110725554297923196, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
-      propertyPath: targetY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110725554297923196, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
-      propertyPath: smoothTime
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110725554297923196, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
-      propertyPath: maximumDistance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110725554297923196, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
-      propertyPath: minimumDistance
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2110725554297923197, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
       propertyPath: m_RootOrder
       value: 1
