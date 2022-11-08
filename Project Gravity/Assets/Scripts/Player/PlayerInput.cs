@@ -98,6 +98,12 @@ public class PlayerInput : MonoBehaviour
         {
             newPosition.x = Mathf.Round(transform.position.x);
         }
+        
+        // if (Math.Abs(gameObject.transform.position.y - Math.Round(gameObject.transform.position.y)) <
+        //     GRID_CLAMP_THRESHOLD && GravityController.IsGravityHorizontal())
+        // {
+        //     newPosition.y = Mathf.Round(transform.position.y);
+        // }
 
         if (transform.position != newPosition)
         {
