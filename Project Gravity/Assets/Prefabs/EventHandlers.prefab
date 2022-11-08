@@ -45,13 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundHitClip: {fileID: 8300000, guid: e8cd119cf35e13a45bec783f7658f2a3, type: 3}
+  lavaHitClip: {fileID: 8300000, guid: 920b8f1cdfd8d774594a68527449727e, type: 3}
   gravityHitClip: {fileID: 8300000, guid: e3db21ac2dc538f4ca0e369394061c92, type: 3}
   magnetActivationClip: {fileID: 8300000, guid: ac85e1a5430acb64a8883aac72e9056d, type: 3}
   magnetDeactivationClip: {fileID: 8300000, guid: f0ea1b21f5612d14fba90e42533db8a5, type: 3}
-  playerOnGroundSound: {fileID: 0}
-  playerOnMagnetSound: {fileID: 0}
-  playerOnLavaSound: {fileID: 0}
-  playerOnTrampolineSound: {fileID: 8300000, guid: 6003632ee6439c14580b118a39000fce, type: 3}
+  playerCollidesWithGroundClip: {fileID: 0}
+  playerCollidesWithObjectClip: {fileID: 0}
+  playerCollidesWithMagnetClip: {fileID: 0}
+  playerCollidesWithGravityPlateClip: {fileID: 0}
+  playerCollidesWithLavaClip: {fileID: 0}
+  playerCollidesWithTrampolineSound: {fileID: 0}
+  objectCollidesWithGroundClip: {fileID: 0}
   speakerPrefab: {fileID: 2555149493256999958, guid: 121b74d34e7654f4d8b858455a3f5744, type: 3}
 --- !u!1 &953350190
 GameObject:
