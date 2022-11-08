@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -16,12 +17,15 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] bool groundedUp;
     [SerializeField] bool groundedDown;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private LayerMask soundCollisionMask;
 
     private Vector3 _boxCastDimensions;
     private InputAction.CallbackContext _movementKeyInfo;
 
     [Header("Movement settings")] [SerializeField]
     private Vector3 _groundCheckDimensions;
+
+    [SerializeField] private Vector3 _roofCheckDimensions;
 
     [SerializeField] private float _airMovementMultiplier;
     [SerializeField] private float _jumpForce;
@@ -75,8 +79,8 @@ public class PlayerInput : MonoBehaviour
     }
 
     /*
-     * Turns the player input off for as many seconds as there are set in Constants.LEVEL_LOAD_INPUT_PAUSE_TIME
-     */
+    * Turns the player input off for as many seconds as there are set in Constants.LEVEL_LOAD_INPUT_PAUSE_TIME
+    */
     private IEnumerator SwitchInputLock()
     {
         yield return new WaitForSeconds(Constants.LEVEL_LOAD_INPUT_PAUSE_TIME);
@@ -119,7 +123,7 @@ public class PlayerInput : MonoBehaviour
 
     public bool IsRoofed()
     {
-        return Physics.BoxCast(transform.position, _groundCheckDimensions, transform.up, transform.rotation,
+        return Physics.BoxCast(transform.position, _roofCheckDimensions, transform.up, transform.rotation,
             transform.localScale.y / 2, groundMask);
     }
 
@@ -160,9 +164,9 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    /*
-     * Sets the movement float, will be read by MovePlayer
-     */
+/*
+ * Sets the movement float, will be read by MovePlayer
+ */
     public void SetMovementInput(InputAction.CallbackContext movement)
     {
         _movementKeyInfo = movement;
@@ -186,6 +190,41 @@ public class PlayerInput : MonoBehaviour
         return true;
     }
 
+    private void CheckCollisionInMovement(Vector3 direction)
+    {
+        List<int> layers = new List<int>();
+        RaycastHit[] raycastHits = new RaycastHit[0];
+        if (direction.y != 0 && Math.Abs(velocity.y) > Constants.GRAVITY * Time.fixedDeltaTime)
+        {
+            raycastHits = Physics.BoxCastAll(transform.position, verticalCast, direction,
+                Quaternion.identity,
+                transform.localScale.y / 2, soundCollisionMask, QueryTriggerInteraction.UseGlobal);
+            foreach (var collision in raycastHits)
+            {
+                layers.Add(collision.collider.gameObject.layer);
+            }
+        }
+        else if (direction.x != 0 && Math.Abs(velocity.x) > Constants.GRAVITY * Time.fixedDeltaTime)
+        {
+            raycastHits = Physics.BoxCastAll(transform.position, horizontalCast, direction,
+                Quaternion.identity,
+                transform.localScale.y / 2, soundCollisionMask, QueryTriggerInteraction.UseGlobal);
+            foreach (var collision in raycastHits)
+            {
+                layers.Add(collision.collider.gameObject.layer);
+            }
+        }
+
+        if (layers.Count > 0)
+        {
+            Event collisionEvent = new CollisionEvent()
+            {
+                SourceGameObject = gameObject,
+                Layers = layers
+            };
+            EventSystem.Current.FireEvent(collisionEvent);
+        }
+    }
 
     private void CheckForCollisions()
     {
@@ -201,14 +240,14 @@ public class PlayerInput : MonoBehaviour
                 if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
                         transform.localScale.y / 2, groundMask))
                 {
-                    ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, Quaternion.identity, Vector3.down,
-                        hit.distance, Color.green);
                     if (!ShouldInheritMovement(hit.collider.gameObject, false))
                     {
                         groundedDown = true;
                         transform.position = new Vector3(transform.position.x,
                             GetClosestGridCentre(transform.position.y), transform.position.z);
                     }
+
+                    CheckCollisionInMovement(Vector3.down);
                 }
 
                 break;
@@ -218,14 +257,14 @@ public class PlayerInput : MonoBehaviour
                 if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
                         transform.localScale.y / 2, groundMask))
                 {
-                    ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, Quaternion.identity, Vector3.up,
-                        hit.distance, Color.green);
                     if (!ShouldInheritMovement(hit.collider.gameObject, false))
                     {
                         groundedUp = true;
                         transform.position = new Vector3(transform.position.x,
                             GetClosestGridCentre(transform.position.y), transform.position.z);
                     }
+
+                    CheckCollisionInMovement(Vector3.up);
                 }
 
                 break;
@@ -239,8 +278,6 @@ public class PlayerInput : MonoBehaviour
                 if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
                         transform.localScale.x / 2, groundMask))
                 {
-                    ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, Quaternion.identity, Vector3.right,
-                        hit.distance, Color.green);
                     if (!ShouldInheritMovement(hit.collider.gameObject, true))
                     {
                         groundedRight = true;
@@ -248,6 +285,8 @@ public class PlayerInput : MonoBehaviour
                             GetClosestGridCentre(transform.position.x),
                             transform.position.y, OBJECT_Z);
                     }
+
+                    CheckCollisionInMovement(Vector3.right);
                 }
 
                 break;
@@ -257,8 +296,6 @@ public class PlayerInput : MonoBehaviour
                 if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
                         transform.localScale.x / 2, groundMask))
                 {
-                    ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, Quaternion.identity, Vector3.left,
-                        hit.distance, Color.green);
                     if (!ShouldInheritMovement(hit.collider.gameObject, true))
                     {
                         groundedLeft = true;
@@ -266,6 +303,8 @@ public class PlayerInput : MonoBehaviour
                             GetClosestGridCentre(transform.position.x),
                             transform.position.y, OBJECT_Z);
                     }
+
+                    CheckCollisionInMovement(Vector3.left);
                 }
 
                 break;

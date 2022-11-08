@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DynamicObjectMovement : MonoBehaviour
@@ -96,6 +97,50 @@ public class DynamicObjectMovement : MonoBehaviour
         return false;
     }
 
+    private void CheckCollisionInMovement(Vector3 direction)
+    {
+        RaycastHit[] raycastHits;
+        if (direction.y != 0 && Math.Abs(velocity.y) > Constants.GRAVITY * Time.fixedDeltaTime)
+        {
+            raycastHits = Physics.BoxCastAll(transform.position, verticalCast, direction,
+                Quaternion.identity,
+                transform.localScale.y / 2, groundMask, QueryTriggerInteraction.UseGlobal);
+            foreach (var collision in raycastHits)
+            {
+                if (collision.transform.gameObject.GetComponentInParent<PlayerInput>())
+                {
+                    return;
+                }
+            }
+
+            Event collisionEvent = new CollisionEvent()
+            {
+                SourceGameObject = gameObject,
+            };
+            EventSystem.Current.FireEvent(collisionEvent);
+        }
+        else if (direction.x != 0 && Math.Abs(velocity.x) > Constants.GRAVITY * Time.fixedDeltaTime)
+        {
+            raycastHits = Physics.BoxCastAll(transform.position, horizontalCast, direction,
+                Quaternion.identity,
+                transform.localScale.y / 2, groundMask, QueryTriggerInteraction.UseGlobal);
+            foreach (var collision in raycastHits)
+            {
+                if (collision.transform.gameObject.GetComponentInParent<PlayerInput>())
+                {
+                    return;
+                }
+            }
+
+            Event collisionEvent = new CollisionEvent()
+            {
+                SourceGameObject = gameObject,
+            };
+            EventSystem.Current.FireEvent(collisionEvent);
+        }
+    }
+
+
     private void CheckForCollisions()
     {
         groundedDown = false;
@@ -110,14 +155,14 @@ public class DynamicObjectMovement : MonoBehaviour
                 if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
                         transform.localScale.y / 2, groundMask))
                 {
-                    ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.down,
-                        hit.distance, Color.green);
                     if (!ShouldInheritMovement(hit.collider.gameObject, false))
                     {
                         groundedDown = true;
                         transform.position = new Vector3(transform.position.x,
                             GetClosestGridCentre(transform.position.y), transform.position.z);
                     }
+
+                    CheckCollisionInMovement(Vector3.down);
                 }
 
                 break;
@@ -135,6 +180,8 @@ public class DynamicObjectMovement : MonoBehaviour
                         transform.position = new Vector3(transform.position.x,
                             GetClosestGridCentre(transform.position.y), transform.position.z);
                     }
+
+                    CheckCollisionInMovement(Vector3.up);
                 }
 
                 break;
@@ -157,6 +204,8 @@ public class DynamicObjectMovement : MonoBehaviour
                             GetClosestGridCentre(transform.position.x),
                             transform.position.y, OBJECT_Z);
                     }
+
+                    CheckCollisionInMovement(Vector3.right);
                 }
 
                 break;
@@ -175,6 +224,8 @@ public class DynamicObjectMovement : MonoBehaviour
                             GetClosestGridCentre(transform.position.x),
                             transform.position.y, OBJECT_Z);
                     }
+
+                    CheckCollisionInMovement(Vector3.left);
                 }
 
                 break;

@@ -11,6 +11,7 @@ TagManager:
   - LineRenderer
   - AimingDirector
   - Keycard
+  - CollisionSpeaker
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Player
   - Interactable
   - Trampoline
-  - 
+  - Moveable
   - 
   - 
   - 
