@@ -5081,6 +5081,9 @@ MonoBehaviour:
   magnetMask:
     serializedVersion: 2
     m_Bits: 512
+  lavaMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &816275455
 MonoBehaviour:
   m_ObjectHideFlags: 0
