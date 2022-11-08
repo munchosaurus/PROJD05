@@ -16,12 +16,15 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] bool groundedUp;
     [SerializeField] bool groundedDown;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private LayerMask soundCollisionMask;
 
     private Vector3 _boxCastDimensions;
     private InputAction.CallbackContext _movementKeyInfo;
 
     [Header("Movement settings")] [SerializeField]
     private Vector3 _groundCheckDimensions;
+
+    [SerializeField] private Vector3 _roofCheckDimensions;
 
     [SerializeField] private float _airMovementMultiplier;
     [SerializeField] private float _jumpForce;
@@ -74,9 +77,46 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.root.GetComponent<DynamicObjectMovement>())
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("GravityMagnet"))
+            {
+                return;
+            }
+            
+            Event collisionEvent = new CollisionEvent()
+            {
+                TargetGameObject = other.transform.gameObject,
+                SourceGameObject = gameObject
+            };
+            EventSystem.Current.FireEvent(collisionEvent);
+        }
+        else if (other.transform.GetComponent<GravityMagnet>())
+        {
+            Event collisionEvent = new CollisionEvent()
+            {
+                TargetGameObject = other.transform.gameObject,
+                SourceGameObject = gameObject
+            };
+            EventSystem.Current.FireEvent(collisionEvent);
+        }
+        else if (other.gameObject.layer != LayerMask.NameToLayer("Hazard"))
+        {
+            Event collisionEvent = new CollisionEvent()
+            {
+                TargetGameObject = other.transform.gameObject,
+                SourceGameObject = gameObject
+            };
+            EventSystem.Current.FireEvent(collisionEvent);
+        }
+
+    }
+    
     /*
-     * Turns the player input off for as many seconds as there are set in Constants.LEVEL_LOAD_INPUT_PAUSE_TIME
-     */
+    * Turns the player input off for as many seconds as there are set in Constants.LEVEL_LOAD_INPUT_PAUSE_TIME
+    */
     private IEnumerator SwitchInputLock()
     {
         yield return new WaitForSeconds(Constants.LEVEL_LOAD_INPUT_PAUSE_TIME);
@@ -119,7 +159,9 @@ public class PlayerInput : MonoBehaviour
 
     public bool IsRoofed()
     {
-        return Physics.BoxCast(transform.position, _groundCheckDimensions, transform.up, transform.rotation,
+        Debug.Log(Physics.BoxCast(transform.position, _roofCheckDimensions, transform.up, transform.rotation,
+            transform.localScale.y / 2, groundMask));
+        return Physics.BoxCast(transform.position, _roofCheckDimensions, transform.up, transform.rotation,
             transform.localScale.y / 2, groundMask);
     }
 
@@ -160,9 +202,9 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    /*
-     * Sets the movement float, will be read by MovePlayer
-     */
+/*
+ * Sets the movement float, will be read by MovePlayer
+ */
     public void SetMovementInput(InputAction.CallbackContext movement)
     {
         _movementKeyInfo = movement;
@@ -201,8 +243,6 @@ public class PlayerInput : MonoBehaviour
                 if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
                         transform.localScale.y / 2, groundMask))
                 {
-                    ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, Quaternion.identity, Vector3.down,
-                        hit.distance, Color.green);
                     if (!ShouldInheritMovement(hit.collider.gameObject, false))
                     {
                         groundedDown = true;
@@ -218,8 +258,6 @@ public class PlayerInput : MonoBehaviour
                 if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
                         transform.localScale.y / 2, groundMask))
                 {
-                    ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, Quaternion.identity, Vector3.up,
-                        hit.distance, Color.green);
                     if (!ShouldInheritMovement(hit.collider.gameObject, false))
                     {
                         groundedUp = true;
@@ -239,8 +277,6 @@ public class PlayerInput : MonoBehaviour
                 if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
                         transform.localScale.x / 2, groundMask))
                 {
-                    ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, Quaternion.identity, Vector3.right,
-                        hit.distance, Color.green);
                     if (!ShouldInheritMovement(hit.collider.gameObject, true))
                     {
                         groundedRight = true;
@@ -257,8 +293,6 @@ public class PlayerInput : MonoBehaviour
                 if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
                         transform.localScale.x / 2, groundMask))
                 {
-                    ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, Quaternion.identity, Vector3.left,
-                        hit.distance, Color.green);
                     if (!ShouldInheritMovement(hit.collider.gameObject, true))
                     {
                         groundedLeft = true;

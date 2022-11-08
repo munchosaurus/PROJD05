@@ -27,3 +27,8 @@ public class PlayerDeathEvent : Event
     public float DeathTime;
 }
 
+public class CollisionEvent : Event
+{
+    
+}
+

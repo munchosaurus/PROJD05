@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -32,6 +33,7 @@ public class SoundManager : MonoBehaviour
     private static int magnetLayer;
     private static int lavaLayer;
     private static int playerLayer;
+    private static int moveableLayer;
 
     [Header("Speaker prefab")] [SerializeField]
     private GameObject speakerPrefab;
@@ -39,6 +41,7 @@ public class SoundManager : MonoBehaviour
     private static Guid _gravityGunEventGuid;
     private static Guid _trampolineEventGuid;
     private static Guid _playerDeathEventGuid;
+    private static Guid _collisionEventGuid;
 
     private void Awake()
     {
@@ -47,6 +50,7 @@ public class SoundManager : MonoBehaviour
         groundLayer = LayerMask.NameToLayer("Ground");
         magnetLayer = LayerMask.NameToLayer("GravityMagnet");
         lavaLayer = LayerMask.NameToLayer("Hazard");
+        moveableLayer = LayerMask.NameToLayer("Moveable");
     }
 
     private void Start()
@@ -54,6 +58,41 @@ public class SoundManager : MonoBehaviour
         EventSystem.Current.RegisterListener<GravityGunEvent>(PlayGunHitSound, ref _gravityGunEventGuid);
         EventSystem.Current.RegisterListener<TrampolineEvent>(PlayTrampolineSound, ref _trampolineEventGuid);
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathEventGuid);
+        EventSystem.Current.RegisterListener<CollisionEvent>(PlayCollisionSound, ref _collisionEventGuid);
+    }
+
+    private void PlayCollisionSound(CollisionEvent collisionEvent)
+    {
+        if (collisionEvent.SourceGameObject.CompareTag("Player"))
+        {
+            PlayPlayerCollisionSound(collisionEvent);
+        }
+    }
+
+    private void PlayPlayerCollisionSound(CollisionEvent collisionEvent)
+    {
+        var sources = collisionEvent.SourceGameObject.GetComponentsInChildren<AudioSource>();
+        AudioClip audioClip = null;
+        if (collisionEvent.TargetGameObject.layer == groundLayer)
+        {
+            audioClip = playerCollidesWithGroundClip;
+        }
+        else if (collisionEvent.TargetGameObject.layer == magnetLayer)
+        {
+            audioClip = playerCollidesWithMagnetClip;
+        }
+        else if (collisionEvent.TargetGameObject.layer == moveableLayer)
+        {
+            audioClip = playerCollidesWithObjectClip;
+        }
+
+        foreach (var source in sources)
+        {
+            if (source.gameObject.name == ("CollisionSoundPlayer"))
+            {
+                source.PlayOneShot(audioClip);
+            }
+        }
     }
 
     private void OnPlayerDeath(PlayerDeathEvent playerDeathEvent)
@@ -86,7 +125,8 @@ public class SoundManager : MonoBehaviour
         else if (gravityGunEvent.TargetGameObject.layer == magnetLayer)
         {
             PlayMagnetToggle(gravityGunEvent, speaker);
-        } else if (gravityGunEvent.TargetGameObject.layer == lavaLayer)
+        }
+        else if (gravityGunEvent.TargetGameObject.layer == lavaLayer)
         {
             clipLength = lavaHitClip.length;
             speaker.GetComponent<AudioSource>().PlayOneShot(lavaHitClip);
