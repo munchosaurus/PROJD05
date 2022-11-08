@@ -38,6 +38,7 @@ public class SoundManager : MonoBehaviour
 
     private static Guid _gravityGunEventGuid;
     private static Guid _trampolineEventGuid;
+    private static Guid _playerDeathEventGuid;
 
     private void Awake()
     {
@@ -52,6 +53,15 @@ public class SoundManager : MonoBehaviour
     {
         EventSystem.Current.RegisterListener<GravityGunEvent>(PlayGunHitSound, ref _gravityGunEventGuid);
         EventSystem.Current.RegisterListener<TrampolineEvent>(PlayTrampolineSound, ref _trampolineEventGuid);
+        EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathEventGuid);
+    }
+
+    private void OnPlayerDeath(PlayerDeathEvent playerDeathEvent)
+    {
+        var speaker = Instantiate(speakerPrefab, playerDeathEvent.SourceGameObject.transform.position,
+            Quaternion.identity);
+        speaker.GetComponent<AudioSource>().PlayOneShot(playerCollidesWithLavaClip);
+        StartCoroutine(DestroyAfterTime(speaker, playerCollidesWithLavaClip.length));
     }
 
     private void PlayTrampolineSound(TrampolineEvent trampolineEvent)

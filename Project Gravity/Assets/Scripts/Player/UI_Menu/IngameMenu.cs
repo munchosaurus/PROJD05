@@ -12,6 +12,7 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] public GameObject interactText;
     [SerializeField] private Texture2D customCursor;
     [SerializeField] private int previousMenu;
+    private static Guid _playerDeathGuid;
 
     private void Start()
     {
@@ -19,6 +20,8 @@ public class IngameMenu : MonoBehaviour
         {
             return;
         }
+        
+        EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
         
         if (customCursor != null) 
         {
@@ -84,6 +87,18 @@ public class IngameMenu : MonoBehaviour
 
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         GameController.PauseGame();
+    }
+
+    private void OnPlayerDeath(PlayerDeathEvent playerDeathEvent)
+    {
+        StartCoroutine(OpenMenuAfterPlayerDeath(playerDeathEvent));
+    }
+
+    private IEnumerator OpenMenuAfterPlayerDeath(PlayerDeathEvent playerDeathEvent)
+    {
+        GameController.PauseGame();
+        yield return new WaitForSecondsRealtime(playerDeathEvent.DeathTime);
+        Pause(2);
     }
 
     public void LoadScene(int scene)

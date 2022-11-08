@@ -31,7 +31,15 @@ public class HazardLogic : MonoBehaviour
             if (menu != null && (_playerInput.velocity.y < -collisionVelocityThreshold || Physics.gravity.y < 0))
             {
                 // Game over
-                menu.Pause(2);
+                // menu.Pause(2);
+                Event playerDeathEvent = new PlayerDeathEvent()
+                {
+                    TargetGameObject = hit.transform.gameObject,
+                    SourceGameObject = gameObject,
+                    DeathTime = Constants.PLAYER_DEATH_TIME
+                };
+                EventSystem.Current.FireEvent(playerDeathEvent);
+                return;
             }
         }
 
@@ -41,7 +49,15 @@ public class HazardLogic : MonoBehaviour
             if (menu != null && (_playerInput.velocity.y > collisionVelocityThreshold || Physics.gravity.y > 0))
             {
                 // Game over
-                menu.Pause(2);
+                // menu.Pause(2);
+                Event playerDeathEvent = new PlayerDeathEvent()
+                {
+                    TargetGameObject = hit.transform.gameObject,
+                    SourceGameObject = gameObject,
+                    DeathTime = Constants.PLAYER_DEATH_TIME
+                };
+                EventSystem.Current.FireEvent(playerDeathEvent);
+                return;
             }
         }
 
@@ -51,7 +67,15 @@ public class HazardLogic : MonoBehaviour
             if (menu != null  && (_playerInput.velocity.x > collisionVelocityThreshold || Physics.gravity.x > 0))
             {
                 // Game over
-                menu.Pause(2);
+                // menu.Pause(2);
+                Event playerDeathEvent = new PlayerDeathEvent()
+                {
+                    TargetGameObject = hit.transform.gameObject,
+                    SourceGameObject = gameObject,
+                    DeathTime = Constants.PLAYER_DEATH_TIME
+                };
+                EventSystem.Current.FireEvent(playerDeathEvent);
+                return;
             }
         }
 
@@ -61,7 +85,15 @@ public class HazardLogic : MonoBehaviour
             if (menu != null && (_playerInput.velocity.x < -collisionVelocityThreshold || Physics.gravity.x < 0))
             {
                 // Game over
-                menu.Pause(2);
+                // menu.Pause(2);
+                Event playerDeathEvent = new PlayerDeathEvent()
+                {
+                    TargetGameObject = hit.transform.gameObject,
+                    SourceGameObject = gameObject,
+                    DeathTime = Constants.PLAYER_DEATH_TIME
+                };
+                EventSystem.Current.FireEvent(playerDeathEvent);
+                return;
             }
         }
     }
