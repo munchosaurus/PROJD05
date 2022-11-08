@@ -67,23 +67,45 @@ public class SoundManager : MonoBehaviour
         {
             PlayPlayerCollisionSound(collisionEvent);
         }
+        else if (collisionEvent.SourceGameObject.GetComponent<DynamicObjectMovement>())
+        {
+            PlayObjectCollisionSound(collisionEvent);
+        }
+    }
+
+    private void PlayObjectCollisionSound(CollisionEvent collisionEvent)
+    {
+        try
+        {
+            collisionEvent.SourceGameObject.GetComponent<AudioSource>().PlayOneShot(objectCollidesWithGroundClip);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     private void PlayPlayerCollisionSound(CollisionEvent collisionEvent)
     {
         var sources = collisionEvent.SourceGameObject.GetComponentsInChildren<AudioSource>();
         AudioClip audioClip = null;
-        if (collisionEvent.TargetGameObject.layer == groundLayer)
+        if (collisionEvent.Layers.Contains(lavaLayer))
         {
-            audioClip = playerCollidesWithGroundClip;
+            return;
         }
-        else if (collisionEvent.TargetGameObject.layer == magnetLayer)
+
+        if (collisionEvent.Layers.Contains(moveableLayer))
+        {
+            audioClip = playerCollidesWithObjectClip;
+        }
+        else if (collisionEvent.Layers.Contains(magnetLayer))
         {
             audioClip = playerCollidesWithMagnetClip;
         }
-        else if (collisionEvent.TargetGameObject.layer == moveableLayer)
+        else if (collisionEvent.Layers.Contains(groundLayer))
         {
-            audioClip = playerCollidesWithObjectClip;
+            audioClip = playerCollidesWithGroundClip;
         }
 
         foreach (var source in sources)

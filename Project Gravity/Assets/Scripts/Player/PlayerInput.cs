@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -77,43 +78,6 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.root.GetComponent<DynamicObjectMovement>())
-        {
-            if (other.gameObject.layer == LayerMask.NameToLayer("GravityMagnet"))
-            {
-                return;
-            }
-            
-            Event collisionEvent = new CollisionEvent()
-            {
-                TargetGameObject = other.transform.gameObject,
-                SourceGameObject = gameObject
-            };
-            EventSystem.Current.FireEvent(collisionEvent);
-        }
-        else if (other.transform.GetComponent<GravityMagnet>())
-        {
-            Event collisionEvent = new CollisionEvent()
-            {
-                TargetGameObject = other.transform.gameObject,
-                SourceGameObject = gameObject
-            };
-            EventSystem.Current.FireEvent(collisionEvent);
-        }
-        else if (other.gameObject.layer != LayerMask.NameToLayer("Hazard"))
-        {
-            Event collisionEvent = new CollisionEvent()
-            {
-                TargetGameObject = other.transform.gameObject,
-                SourceGameObject = gameObject
-            };
-            EventSystem.Current.FireEvent(collisionEvent);
-        }
-
-    }
-    
     /*
     * Turns the player input off for as many seconds as there are set in Constants.LEVEL_LOAD_INPUT_PAUSE_TIME
     */
@@ -159,8 +123,6 @@ public class PlayerInput : MonoBehaviour
 
     public bool IsRoofed()
     {
-        Debug.Log(Physics.BoxCast(transform.position, _roofCheckDimensions, transform.up, transform.rotation,
-            transform.localScale.y / 2, groundMask));
         return Physics.BoxCast(transform.position, _roofCheckDimensions, transform.up, transform.rotation,
             transform.localScale.y / 2, groundMask);
     }
@@ -228,6 +190,41 @@ public class PlayerInput : MonoBehaviour
         return true;
     }
 
+    private void CheckCollisionInMovement(Vector3 direction)
+    {
+        List<int> layers = new List<int>();
+        RaycastHit[] raycastHits = new RaycastHit[0];
+        if (direction.y != 0 && Math.Abs(velocity.y) > Constants.GRAVITY * Time.fixedDeltaTime)
+        {
+            raycastHits = Physics.BoxCastAll(transform.position, verticalCast, direction,
+                Quaternion.identity,
+                transform.localScale.y / 2, soundCollisionMask, QueryTriggerInteraction.UseGlobal);
+            foreach (var collision in raycastHits)
+            {
+                layers.Add(collision.collider.gameObject.layer);
+            }
+        }
+        else if (direction.x != 0 && Math.Abs(velocity.x) > Constants.GRAVITY * Time.fixedDeltaTime)
+        {
+            raycastHits = Physics.BoxCastAll(transform.position, horizontalCast, direction,
+                Quaternion.identity,
+                transform.localScale.y / 2, soundCollisionMask, QueryTriggerInteraction.UseGlobal);
+            foreach (var collision in raycastHits)
+            {
+                layers.Add(collision.collider.gameObject.layer);
+            }
+        }
+
+        if (layers.Count > 0)
+        {
+            Event collisionEvent = new CollisionEvent()
+            {
+                SourceGameObject = gameObject,
+                Layers = layers
+            };
+            EventSystem.Current.FireEvent(collisionEvent);
+        }
+    }
 
     private void CheckForCollisions()
     {
@@ -249,6 +246,8 @@ public class PlayerInput : MonoBehaviour
                         transform.position = new Vector3(transform.position.x,
                             GetClosestGridCentre(transform.position.y), transform.position.z);
                     }
+
+                    CheckCollisionInMovement(Vector3.down);
                 }
 
                 break;
@@ -264,6 +263,8 @@ public class PlayerInput : MonoBehaviour
                         transform.position = new Vector3(transform.position.x,
                             GetClosestGridCentre(transform.position.y), transform.position.z);
                     }
+
+                    CheckCollisionInMovement(Vector3.up);
                 }
 
                 break;
@@ -284,6 +285,8 @@ public class PlayerInput : MonoBehaviour
                             GetClosestGridCentre(transform.position.x),
                             transform.position.y, OBJECT_Z);
                     }
+
+                    CheckCollisionInMovement(Vector3.right);
                 }
 
                 break;
@@ -300,6 +303,8 @@ public class PlayerInput : MonoBehaviour
                             GetClosestGridCentre(transform.position.x),
                             transform.position.y, OBJECT_Z);
                     }
+
+                    CheckCollisionInMovement(Vector3.left);
                 }
 
                 break;

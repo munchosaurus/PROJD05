@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 // Add new Events as soon as needed
 public abstract class Event
@@ -14,12 +15,10 @@ public class GravityGunEvent : Event
 
 public class TrampolineEvent : Event
 {
-    
 }
 
 public class ObjectFoundMagnetEvent : Event
 {
-    
 }
 
 public class PlayerDeathEvent : Event
@@ -29,6 +28,5 @@ public class PlayerDeathEvent : Event
 
 public class CollisionEvent : Event
 {
-    
+    public List<int> Layers;
 }
-
