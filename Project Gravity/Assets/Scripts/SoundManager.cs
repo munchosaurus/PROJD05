@@ -18,17 +18,20 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip magnetDeactivationClip;
 
     [Header("Collision sounds")] [SerializeField]
-    private AudioClip playerOnGroundSound;
+    private AudioClip playerCollidesWithGroundClip;
 
-    [SerializeField] private AudioClip playerOnMagnetSound;
-    [SerializeField] private AudioClip playerOnLavaSound;
-    [SerializeField] private AudioClip playerOnTrampolineSound;
-
+    [SerializeField] private AudioClip playerCollidesWithObjectClip;
+    [SerializeField] private AudioClip playerCollidesWithMagnetClip;
+    [SerializeField] private AudioClip playerCollidesWithGravityPlateClip;
+    [SerializeField] private AudioClip playerCollidesWithLavaClip;
+    [SerializeField] private AudioClip playerCollidesWithTrampolineSound;
+    [SerializeField] private AudioClip objectCollidesWithGroundClip;
 
     private static int gravityLayer;
     private static int groundLayer;
     private static int magnetLayer;
     private static int lavaLayer;
+    private static int playerLayer;
 
     [Header("Speaker prefab")] [SerializeField]
     private GameObject speakerPrefab;
@@ -39,6 +42,7 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         gravityLayer = LayerMask.NameToLayer("GravityChange");
+        playerLayer = LayerMask.NameToLayer("Player");
         groundLayer = LayerMask.NameToLayer("Ground");
         magnetLayer = LayerMask.NameToLayer("GravityMagnet");
         lavaLayer = LayerMask.NameToLayer("Hazard");
@@ -54,8 +58,8 @@ public class SoundManager : MonoBehaviour
     {
         var speaker = Instantiate(speakerPrefab, trampolineEvent.SourceGameObject.transform.position,
             Quaternion.identity);
-        speaker.GetComponent<AudioSource>().PlayOneShot(playerOnTrampolineSound);
-        StartCoroutine(DestroyAfterTime(speaker, playerOnTrampolineSound.length));
+        speaker.GetComponent<AudioSource>().PlayOneShot(playerCollidesWithTrampolineSound);
+        StartCoroutine(DestroyAfterTime(speaker, playerCollidesWithTrampolineSound.length));
     }
 
     private void PlayGunHitSound(GravityGunEvent gravityGunEvent)

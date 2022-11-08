@@ -261,6 +261,8 @@ public class GravityGun : MonoBehaviour
         Physics.Raycast(transform.position, _currentDirection, out var lavaHit, Mathf.Infinity,
             lavaMask);
         var hits = new List<RaycastHit>();
+        
+        // Ground needs to be added first for the sake of logic later
         hits.Add(groundHit);
         
         if (gravityHit.collider)
