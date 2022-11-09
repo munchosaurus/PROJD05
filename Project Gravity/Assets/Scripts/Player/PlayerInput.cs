@@ -237,7 +237,6 @@ public class PlayerInput : MonoBehaviour
 
         if (layers.Count > 0)
         {
-            Debug.Log(layers.Count);
             Event collisionEvent = new CollisionEvent()
             {
                 SourceGameObject = gameObject,
