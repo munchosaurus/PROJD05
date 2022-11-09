@@ -102,6 +102,9 @@ public class SoundManager : MonoBehaviour
         else if (collisionEvent.Layers.Contains(magnetLayer))
         {
             audioClip = playerCollidesWithMagnetClip;
+        } else if (collisionEvent.Layers.Contains(gravityLayer))
+        {
+            audioClip = playerCollidesWithGravityPlateClip;
         }
         else if (collisionEvent.Layers.Contains(groundLayer))
         {

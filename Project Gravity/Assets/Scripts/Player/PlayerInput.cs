@@ -194,29 +194,50 @@ public class PlayerInput : MonoBehaviour
     {
         List<int> layers = new List<int>();
         RaycastHit[] raycastHits = new RaycastHit[0];
-        if (direction.y != 0 && Math.Abs(velocity.y) > Constants.GRAVITY * Time.fixedDeltaTime)
+        if (direction.y != 0 && Math.Abs(velocity.y) > Constants.COLLISION_SPEED_THRESHOLD)
         {
             raycastHits = Physics.BoxCastAll(transform.position, verticalCast, direction,
                 Quaternion.identity,
                 transform.localScale.y / 2, soundCollisionMask, QueryTriggerInteraction.UseGlobal);
             foreach (var collision in raycastHits)
             {
-                layers.Add(collision.collider.gameObject.layer);
+                if (collision.transform.GetComponentInParent<DynamicObjectMovement>())
+                {
+                    if (collision.transform.GetComponentInParent<DynamicObjectMovement>().velocity.magnitude < Constants.COLLISION_SPEED_THRESHOLD)
+                    {
+                        layers.Add(collision.collider.gameObject.layer);
+                    }
+                }
+                else
+                {
+                    layers.Add(collision.collider.gameObject.layer);
+                }
             }
         }
-        else if (direction.x != 0 && Math.Abs(velocity.x) > Constants.GRAVITY * Time.fixedDeltaTime)
+        else if (direction.x != 0 && Math.Abs(velocity.x) > Constants.COLLISION_SPEED_THRESHOLD)
         {
             raycastHits = Physics.BoxCastAll(transform.position, horizontalCast, direction,
                 Quaternion.identity,
                 transform.localScale.y / 2, soundCollisionMask, QueryTriggerInteraction.UseGlobal);
             foreach (var collision in raycastHits)
             {
-                layers.Add(collision.collider.gameObject.layer);
+                if (collision.transform.GetComponentInParent<DynamicObjectMovement>())
+                {
+                    if (collision.transform.GetComponentInParent<DynamicObjectMovement>().velocity.magnitude < Constants.COLLISION_SPEED_THRESHOLD)
+                    {
+                        layers.Add(collision.collider.gameObject.layer);
+                    }
+                }
+                else
+                {
+                    layers.Add(collision.collider.gameObject.layer);
+                }
             }
         }
 
         if (layers.Count > 0)
         {
+            Debug.Log(layers.Count);
             Event collisionEvent = new CollisionEvent()
             {
                 SourceGameObject = gameObject,

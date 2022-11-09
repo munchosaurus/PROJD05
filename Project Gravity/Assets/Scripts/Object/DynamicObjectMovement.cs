@@ -100,7 +100,7 @@ public class DynamicObjectMovement : MonoBehaviour
     private void CheckCollisionInMovement(Vector3 direction)
     {
         RaycastHit[] raycastHits;
-        if (direction.y != 0 && Math.Abs(velocity.y) > Constants.GRAVITY * Time.fixedDeltaTime)
+        if (direction.y != 0 && Math.Abs(velocity.y) > Constants.COLLISION_SPEED_THRESHOLD)
         {
             raycastHits = Physics.BoxCastAll(transform.position, verticalCast, direction,
                 Quaternion.identity,
@@ -109,7 +109,20 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 if (collision.transform.gameObject.GetComponentInParent<PlayerInput>())
                 {
-                    return;
+                    if (Math.Abs(collision.transform.gameObject.GetComponentInParent<PlayerInput>().velocity.y) >
+                        Constants.COLLISION_SPEED_THRESHOLD)
+                    {
+                        return;
+                    }
+                }
+                else if (collision.transform.gameObject.GetComponentInParent<DynamicObjectMovement>())
+                {
+                    if (Math.Abs(
+                            collision.transform.gameObject.GetComponentInParent<DynamicObjectMovement>().velocity.y) >
+                        Constants.COLLISION_SPEED_THRESHOLD)
+                    {
+                        return;
+                    }
                 }
             }
 
@@ -119,7 +132,7 @@ public class DynamicObjectMovement : MonoBehaviour
             };
             EventSystem.Current.FireEvent(collisionEvent);
         }
-        else if (direction.x != 0 && Math.Abs(velocity.x) > Constants.GRAVITY * Time.fixedDeltaTime)
+        else if (direction.x != 0 && Math.Abs(velocity.x) > Constants.COLLISION_SPEED_THRESHOLD)
         {
             raycastHits = Physics.BoxCastAll(transform.position, horizontalCast, direction,
                 Quaternion.identity,
@@ -128,7 +141,20 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 if (collision.transform.gameObject.GetComponentInParent<PlayerInput>())
                 {
-                    return;
+                    if (Math.Abs(collision.transform.gameObject.GetComponentInParent<PlayerInput>().velocity.x) >
+                        Constants.COLLISION_SPEED_THRESHOLD)
+                    {
+                        return;
+                    }
+                }
+                else if (collision.transform.gameObject.GetComponentInParent<DynamicObjectMovement>())
+                {
+                    if (Math.Abs(
+                            collision.transform.gameObject.GetComponentInParent<DynamicObjectMovement>().velocity.x) >
+                        Constants.COLLISION_SPEED_THRESHOLD)
+                    {
+                        return;
+                    }
                 }
             }
 

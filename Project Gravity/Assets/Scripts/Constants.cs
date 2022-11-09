@@ -39,5 +39,8 @@ public static class Constants
     
     // Death timer
     public const float PLAYER_DEATH_TIME = 1f;
+    
+    // Global speeds
+    public const float COLLISION_SPEED_THRESHOLD = 5;
 
 }
