@@ -29,11 +29,9 @@ public class PlayerInput : MonoBehaviour
 
     [SerializeField] private float _airMovementMultiplier;
     [SerializeField] private float _jumpForce;
-    [SerializeField] private float _jumpCooldown;
     [SerializeField] private float _maxVelocity;
     [SerializeField] private float _acceleration;
     private const float GRID_CLAMP_THRESHOLD = 0.02f;
-    private float _jumpCooldownTimer;
     private AudioSource _audioSource;
 
     private readonly float OBJECT_Z = 1;
@@ -55,12 +53,6 @@ public class PlayerInput : MonoBehaviour
         {
             return;
         }
-
-        if (_jumpCooldownTimer > 0)
-        {
-            _jumpCooldownTimer -= Time.deltaTime;
-        }
-
 
         velocity += Physics.gravity * Time.fixedDeltaTime;
         MovePlayer();
@@ -131,42 +123,48 @@ public class PlayerInput : MonoBehaviour
      * Called by input system, adds _jumpForce to the velocity that is opposite to the
      * gravity in case the player is grounded and has passed the jump cool down.
      */
-    public void Jump()
+    public void Jump(InputAction.CallbackContext context)
     {
-        if (_jumpCooldownTimer <= 0 && IsGrounded() && !IsRoofed())
+        if (GameController.GetPlayerInputIsLocked())
         {
-            if (GravityController.IsGravityHorizontal())
+            return;
+        }
+        
+        if (context.started)
+        {
+            if (IsGrounded() && !IsRoofed())
             {
-                if (Physics.gravity.x > 0 && !groundedLeft)
+                if (GravityController.IsGravityHorizontal())
                 {
-                    velocity.x -= _jumpForce;
-                }
+                    if (Physics.gravity.x > 0 && !groundedLeft)
+                    {
+                        velocity.x -= _jumpForce;
+                    }
 
-                if (Physics.gravity.x < 0 && !groundedRight)
+                    if (Physics.gravity.x < 0 && !groundedRight)
+                    {
+                        velocity.x += _jumpForce;
+                    }
+                }
+                else
                 {
-                    velocity.x += _jumpForce;
+                    if (Physics.gravity.y > 0 && !groundedDown)
+                    {
+                        velocity.y -= _jumpForce;
+                    }
+
+                    if (Physics.gravity.y < 0 && !groundedUp)
+                    {
+                        velocity.y += _jumpForce;
+                    }
                 }
             }
-            else
-            {
-                if (Physics.gravity.y > 0 && !groundedDown)
-                {
-                    velocity.y -= _jumpForce;
-                }
-
-                if (Physics.gravity.y < 0 && !groundedUp)
-                {
-                    velocity.y += _jumpForce;
-                }
-            }
-
-            _jumpCooldownTimer = _jumpCooldown;
         }
     }
 
-/*
- * Sets the movement float, will be read by MovePlayer
- */
+    /*
+     * Sets the movement float, will be read by MovePlayer
+     */
     public void SetMovementInput(InputAction.CallbackContext movement)
     {
         _movementKeyInfo = movement;
@@ -203,7 +201,8 @@ public class PlayerInput : MonoBehaviour
             {
                 if (collision.transform.GetComponentInParent<DynamicObjectMovement>())
                 {
-                    if (collision.transform.GetComponentInParent<DynamicObjectMovement>().velocity.magnitude < Constants.COLLISION_SPEED_THRESHOLD)
+                    if (collision.transform.GetComponentInParent<DynamicObjectMovement>().velocity.magnitude <
+                        Constants.COLLISION_SPEED_THRESHOLD)
                     {
                         layers.Add(collision.collider.gameObject.layer);
                     }
@@ -223,7 +222,8 @@ public class PlayerInput : MonoBehaviour
             {
                 if (collision.transform.GetComponentInParent<DynamicObjectMovement>())
                 {
-                    if (collision.transform.GetComponentInParent<DynamicObjectMovement>().velocity.magnitude < Constants.COLLISION_SPEED_THRESHOLD)
+                    if (collision.transform.GetComponentInParent<DynamicObjectMovement>().velocity.magnitude <
+                        Constants.COLLISION_SPEED_THRESHOLD)
                     {
                         layers.Add(collision.collider.gameObject.layer);
                     }

@@ -20,7 +20,6 @@ public static class Constants
     
     // Add finished player input settings here:
     public const float PLAYER_JUMP_FORCE = 10f;
-    public const float PLAYER_JUMP_COOLDOWN = 1f;
     public const float PLAYER_MAX_WALKING_VELOCITY = 8f;
     public const float PLAYER_MOVEMENT_ACCELERATION = 40f;
     public const float PLAYER_MOVEMENT_DECELERATION = 15f;
