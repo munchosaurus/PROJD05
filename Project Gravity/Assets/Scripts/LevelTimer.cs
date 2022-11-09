@@ -55,6 +55,11 @@ public class LevelTimer : MonoBehaviour
                 if (_ingameMenu != null && !GameController.GetPlayerInputIsLocked())
                 {
                     _ingameMenu.Pause(2);
+                    // Event playerDeathEvent = new PlayerDeathEvent()
+                    // {
+                    //     DeathTime = Constants.PLAYER_DEATH_TIME
+                    // };
+                    // EventSystem.Current.FireEvent(playerDeathEvent);
                 }
             }
         }

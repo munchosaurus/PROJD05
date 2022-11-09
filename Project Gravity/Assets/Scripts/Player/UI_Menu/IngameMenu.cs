@@ -91,14 +91,14 @@ public class IngameMenu : MonoBehaviour
 
     private void OnPlayerDeath(PlayerDeathEvent playerDeathEvent)
     {
-        StartCoroutine(OpenMenuAfterPlayerDeath(playerDeathEvent));
+        StartCoroutine(RestartWhenDead(playerDeathEvent));
     }
 
-    private IEnumerator OpenMenuAfterPlayerDeath(PlayerDeathEvent playerDeathEvent)
+    private IEnumerator RestartWhenDead(PlayerDeathEvent playerDeathEvent)
     {
         GameController.PauseGame();
         yield return new WaitForSecondsRealtime(playerDeathEvent.DeathTime);
-        Pause(2);
+        Restart();
     }
 
     public void LoadScene(int scene)

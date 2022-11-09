@@ -10,10 +10,12 @@ public class HazardLogic : MonoBehaviour
     [SerializeField] private LayerMask hazardMask;
     [SerializeField] private float collisionVelocityThreshold;
     private PlayerInput _playerInput;
+    private static Guid _playerDeathEventGuid;
     void Start()
     {
         menu = FindObjectOfType<IngameMenu>();
         _playerInput = gameObject.GetComponent<PlayerInput>();
+        EventSystem.Current.RegisterListener<PlayerDeathEvent>(MuteMovementSound, ref _playerDeathEventGuid);
     }
 
     private void FixedUpdate()
@@ -30,8 +32,6 @@ public class HazardLogic : MonoBehaviour
         {
             if (menu != null && (_playerInput.velocity.y < -collisionVelocityThreshold || Physics.gravity.y < 0))
             {
-                // Game over
-                // menu.Pause(2);
                 Event playerDeathEvent = new PlayerDeathEvent()
                 {
                     TargetGameObject = hit.transform.gameObject,
@@ -48,8 +48,6 @@ public class HazardLogic : MonoBehaviour
         {
             if (menu != null && (_playerInput.velocity.y > collisionVelocityThreshold || Physics.gravity.y > 0))
             {
-                // Game over
-                // menu.Pause(2);
                 Event playerDeathEvent = new PlayerDeathEvent()
                 {
                     TargetGameObject = hit.transform.gameObject,
@@ -66,8 +64,6 @@ public class HazardLogic : MonoBehaviour
         {
             if (menu != null  && (_playerInput.velocity.x > collisionVelocityThreshold || Physics.gravity.x > 0))
             {
-                // Game over
-                // menu.Pause(2);
                 Event playerDeathEvent = new PlayerDeathEvent()
                 {
                     TargetGameObject = hit.transform.gameObject,
@@ -84,8 +80,6 @@ public class HazardLogic : MonoBehaviour
         {
             if (menu != null && (_playerInput.velocity.x < -collisionVelocityThreshold || Physics.gravity.x < 0))
             {
-                // Game over
-                // menu.Pause(2);
                 Event playerDeathEvent = new PlayerDeathEvent()
                 {
                     TargetGameObject = hit.transform.gameObject,
@@ -93,8 +87,12 @@ public class HazardLogic : MonoBehaviour
                     DeathTime = Constants.PLAYER_DEATH_TIME
                 };
                 EventSystem.Current.FireEvent(playerDeathEvent);
-                return;
             }
         }
+    }
+
+    private void MuteMovementSound(PlayerDeathEvent playerDeathEvent)
+    {
+        GetComponent<AudioSource>().mute = true;
     }
 }
