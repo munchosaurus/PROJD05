@@ -49,13 +49,13 @@ MonoBehaviour:
   gravityHitClip: {fileID: 8300000, guid: e3db21ac2dc538f4ca0e369394061c92, type: 3}
   magnetActivationClip: {fileID: 8300000, guid: ac85e1a5430acb64a8883aac72e9056d, type: 3}
   magnetDeactivationClip: {fileID: 8300000, guid: f0ea1b21f5612d14fba90e42533db8a5, type: 3}
-  playerCollidesWithGroundClip: {fileID: 0}
-  playerCollidesWithObjectClip: {fileID: 0}
-  playerCollidesWithMagnetClip: {fileID: 0}
-  playerCollidesWithGravityPlateClip: {fileID: 0}
-  playerCollidesWithLavaClip: {fileID: 0}
-  playerCollidesWithTrampolineSound: {fileID: 0}
-  objectCollidesWithGroundClip: {fileID: 0}
+  playerCollidesWithGroundClip: {fileID: 8300000, guid: 19d38e9d8d34ab14684208d4bbcc95ed, type: 3}
+  playerCollidesWithObjectClip: {fileID: 8300000, guid: 5101edee98c40784b8f9e0372f933beb, type: 3}
+  playerCollidesWithMagnetClip: {fileID: 8300000, guid: b36ee8f16ef0bf94682be1f360b4c4a7, type: 3}
+  playerCollidesWithGravityPlateClip: {fileID: 8300000, guid: 4e8936f35bca16445972a65f8b51c124, type: 3}
+  playerCollidesWithLavaClip: {fileID: 8300000, guid: f1eaa0ee6939d044ebbc41426d501954, type: 3}
+  playerCollidesWithTrampolineSound: {fileID: 8300000, guid: 6003632ee6439c14580b118a39000fce, type: 3}
+  objectCollidesWithGroundClip: {fileID: 8300000, guid: b11b70009dd4c7f49b9eca938f17bb77, type: 3}
   speakerPrefab: {fileID: 2555149493256999958, guid: 121b74d34e7654f4d8b858455a3f5744, type: 3}
 --- !u!1 &953350190
 GameObject:

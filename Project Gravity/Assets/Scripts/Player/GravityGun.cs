@@ -220,7 +220,7 @@ public class GravityGun : MonoBehaviour
         {
             TargetGameObject = hit.transform.gameObject,
             SourceGameObject = gameObject,
-            hitNormal = hit.normal
+            HitNormal = hit.normal
         };
         EventSystem.Current.FireEvent(gravityGunEvent);
     }
