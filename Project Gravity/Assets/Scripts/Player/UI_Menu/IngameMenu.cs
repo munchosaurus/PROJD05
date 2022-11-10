@@ -30,6 +30,11 @@ public class IngameMenu : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            return;
+        }
+        
         volumeSlider.onValueChanged.AddListener(delegate { OnVolumeValueChanged(); });
         speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
         
@@ -37,11 +42,6 @@ public class IngameMenu : MonoBehaviour
         OnVolumeValueChanged(); 
         speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
-        
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            return;
-        }
         
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
 
@@ -73,9 +73,24 @@ public class IngameMenu : MonoBehaviour
 
     public void ChangePauseState()
     {
-        if (menus[0].activeSelf)
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
+            Debug.Log("Nice try David");
             return;
+        }
+        
+        if (menus[0].gameObject.activeSelf)
+        {
+            Unpause();
+            return;
+        } 
+        
+        for (int i = 0; i < menus.Length; i++)
+        {
+            if (menus[i].activeSelf)
+            {
+                return;
+            }
         }
 
         Pause(0);
