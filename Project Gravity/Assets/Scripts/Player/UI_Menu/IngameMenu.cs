@@ -32,8 +32,12 @@ public class IngameMenu : MonoBehaviour
     {
         volumeSlider.onValueChanged.AddListener(delegate { OnVolumeValueChanged(); });
         speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
-        OnVolumeValueChanged();
-        OnSpeedValueChanged();
+
+        volumeSlider.value = GameController.GlobalVolumeMultiplier;
+        speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
+        
+        volumeText.text = Mathf.Round(volumeSlider.value * 100.0f) + "%";
+        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
 
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
@@ -60,7 +64,7 @@ public class IngameMenu : MonoBehaviour
     {
         GameController.GlobalSpeedMultiplier = speedSlider.value / 100;
         GravityController.SetNewGravity(GravityController.GetCurrentFacing());
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";;
+        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
     }
 
     void SetCustomCursor()
