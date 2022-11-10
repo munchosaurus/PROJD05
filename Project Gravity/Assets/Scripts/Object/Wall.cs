@@ -8,5 +8,7 @@ public class Wall : ScriptableObject
     public bool isGround;
     public GameObject[] specialPrefabs;
     public Vector3[] specialPrefabPositions;
+    public GameObject[] emblems;
+    public Vector3[] emblemPositions;
     //public LayerMask[] specialLayerMasks;
 }

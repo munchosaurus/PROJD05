@@ -7687,7 +7687,7 @@ MonoBehaviour:
   _groundCheckDimensions: {x: 0.5, y: 0.05, z: 0.5}
   _roofCheckDimensions: {x: 0.499, y: 0.05, z: 0.499}
   _airMovementMultiplier: 0.7
-  _jumpForce: 10
+  _jumpForce: 8
   _maxVelocity: 5
   _acceleration: 10
   isTutorialLevel: 0
