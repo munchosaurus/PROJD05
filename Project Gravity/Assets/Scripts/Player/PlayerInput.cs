@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -48,10 +49,8 @@ public class PlayerInput : MonoBehaviour
             StartCoroutine(SwitchInputLock());
         }
         
-        Physics.gravity = new Vector3(0, -Constants.GRAVITY, 0);
         _audioSource = GetComponent<AudioSource>();
         walkingDefaultVolume = _audioSource.volume;
-        Debug.Log("Default volume = " + walkingDefaultVolume);
 
         velocity = Vector3.zero;
     }
@@ -147,24 +146,24 @@ public class PlayerInput : MonoBehaviour
                 {
                     if (Physics.gravity.x > 0 && !groundedLeft)
                     {
-                        velocity.x -= _jumpForce;
+                        velocity.x -= _jumpForce * GameController.GlobalSpeedMultiplier;
                     }
 
                     if (Physics.gravity.x < 0 && !groundedRight)
                     {
-                        velocity.x += _jumpForce;
+                        velocity.x += _jumpForce * GameController.GlobalSpeedMultiplier;
                     }
                 }
                 else
                 {
                     if (Physics.gravity.y > 0 && !groundedDown)
                     {
-                        velocity.y -= _jumpForce;
+                        velocity.y -= _jumpForce * GameController.GlobalSpeedMultiplier;
                     }
 
                     if (Physics.gravity.y < 0 && !groundedUp)
                     {
-                        velocity.y += _jumpForce;
+                        velocity.y += _jumpForce * GameController.GlobalSpeedMultiplier;
                     }
                 }
             }
@@ -201,7 +200,7 @@ public class PlayerInput : MonoBehaviour
     {
         List<int> layers = new List<int>();
         RaycastHit[] raycastHits = new RaycastHit[0];
-        if (direction.y != 0 && Math.Abs(velocity.y) > Constants.COLLISION_SPEED_THRESHOLD)
+        if (direction.y != 0 && Math.Abs(velocity.y) > Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
         {
             raycastHits = Physics.BoxCastAll(transform.position, verticalCast, direction,
                 Quaternion.identity,
@@ -211,7 +210,7 @@ public class PlayerInput : MonoBehaviour
                 if (collision.transform.GetComponentInParent<DynamicObjectMovement>())
                 {
                     if (collision.transform.GetComponentInParent<DynamicObjectMovement>().velocity.magnitude <
-                        Constants.COLLISION_SPEED_THRESHOLD)
+                        Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
                     {
                         layers.Add(collision.collider.gameObject.layer);
                     }
@@ -222,7 +221,7 @@ public class PlayerInput : MonoBehaviour
                 }
             }
         }
-        else if (direction.x != 0 && Math.Abs(velocity.x) > Constants.COLLISION_SPEED_THRESHOLD)
+        else if (direction.x != 0 && Math.Abs(velocity.x) > Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
         {
             raycastHits = Physics.BoxCastAll(transform.position, horizontalCast, direction,
                 Quaternion.identity,
@@ -232,7 +231,7 @@ public class PlayerInput : MonoBehaviour
                 if (collision.transform.GetComponentInParent<DynamicObjectMovement>())
                 {
                     if (collision.transform.GetComponentInParent<DynamicObjectMovement>().velocity.magnitude <
-                        Constants.COLLISION_SPEED_THRESHOLD)
+                        Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
                     {
                         layers.Add(collision.collider.gameObject.layer);
                     }
@@ -421,8 +420,7 @@ public class PlayerInput : MonoBehaviour
             }
             else
             {
-                Debug.Log(GameController.GlobalVolumeMultiplier);
-                _audioSource.volume = GameController.GlobalVolumeMultiplier * walkingDefaultVolume;
+                //_audioSource.volume = GameController.GlobalVolumeMultiplier * walkingDefaultVolume;
                 _audioSource.mute = false;
             }
         }
@@ -432,7 +430,10 @@ public class PlayerInput : MonoBehaviour
         }
 
         if (ShouldAddMoreMoveForce(direction))
-            velocity.x += direction * _acceleration * Time.fixedDeltaTime;
+        {
+            velocity.x += GameController.GlobalSpeedMultiplier * (direction * _acceleration * Time.fixedDeltaTime);
+        }
+            
     }
 
     private void MoveVertical(float direction)
@@ -455,8 +456,11 @@ public class PlayerInput : MonoBehaviour
             _audioSource.mute = true;
         }
 
-        if (ShouldAddMoreMoveForce(direction))
-            velocity.y += direction * _acceleration * Time.fixedDeltaTime;
+        if (ShouldAddMoreMoveForce(direction * GameController.GlobalSpeedMultiplier))
+        {
+            velocity.y += GameController.GlobalSpeedMultiplier * (direction * _acceleration * Time.fixedDeltaTime);
+        }
+        
     }
 
     private bool ShouldAddMoreMoveForce(float moveCoefficient)
@@ -491,10 +495,10 @@ public class PlayerInput : MonoBehaviour
 
         if (moveCoefficient != 0)
         {
-            return Math.Abs(magnitude) < _maxVelocity && !BoxCast(dir);
+            return Math.Abs(magnitude) < _maxVelocity * GameController.GlobalSpeedMultiplier && !BoxCast(dir);
         }
 
-        return moveCoefficient != 0 && Math.Abs(magnitude) < _maxVelocity;
+        return moveCoefficient != 0 && Math.Abs(magnitude) < _maxVelocity * GameController.GlobalSpeedMultiplier;
     }
 
     private bool BoxCast(Vector3 direction)

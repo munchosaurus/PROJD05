@@ -33,12 +33,7 @@ public static class GravityController
 
     public static void SetNewGravity(Vector3 direction)
     {
-        Physics.gravity = direction * Constants.GRAVITY;
-    }
-
-    public static float GetGravity()
-    {
-        return Constants.GRAVITY;
+        Physics.gravity = GameController.GlobalSpeedMultiplier * (Constants.GRAVITY * direction);
     }
 
     private static void OnGravityGunHit(GravityGunEvent gravityGunEvent)

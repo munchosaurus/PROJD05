@@ -39,6 +39,7 @@ public class LevelSettings : MonoBehaviour
         {
             SetDefaultCameraValues();
         }
+        Physics.gravity = new Vector3(0, -Constants.GRAVITY * GameController.GlobalSpeedMultiplier, 0);
     }
 
     void SetDefaultCameraValues()

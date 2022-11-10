@@ -91,11 +91,6 @@ public class SoundManager : MonoBehaviour
 
     private void PlayPlayerCollisionSound(CollisionEvent collisionEvent)
     {
-        foreach (var VARIABLE in collisionEvent.Layers)
-        {
-            Debug.Log(VARIABLE);
-        }
-        
         var sources = collisionEvent.SourceGameObject.GetComponentsInChildren<AudioSource>();
         AudioClip audioClip = null;
         if (collisionEvent.Layers.Contains(lavaLayer))
@@ -153,10 +148,8 @@ public class SoundManager : MonoBehaviour
     {
         var speaker = Instantiate(speakerPrefab, gravityGunEvent.TargetGameObject.transform.position,
             Quaternion.identity);
-        Debug.Log(speaker.GetComponent<AudioSource>().volume);
         speaker.GetComponent<AudioSource>().volume =
             speaker.GetComponent<AudioSource>().volume * GameController.GlobalVolumeMultiplier;
-        Debug.Log(speaker.GetComponent<AudioSource>().volume);
         float clipLength;
         if (gravityGunEvent.TargetGameObject.layer == gravityLayer)
         {
