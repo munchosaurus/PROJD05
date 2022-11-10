@@ -20,7 +20,6 @@ public static class Constants
     
     // Add finished player input settings here:
     public const float PLAYER_JUMP_FORCE = 10f;
-    public const float PLAYER_JUMP_COOLDOWN = 1f;
     public const float PLAYER_MAX_WALKING_VELOCITY = 8f;
     public const float PLAYER_MOVEMENT_ACCELERATION = 40f;
     public const float PLAYER_MOVEMENT_DECELERATION = 15f;
@@ -36,5 +35,11 @@ public static class Constants
     
     // UI
     public const float GRAVITY_ARROW_ROTATION_SPEED = 5f;
+    
+    // Death timer
+    public const float PLAYER_DEATH_TIME = 1f;
+    
+    // Global speeds
+    public const float COLLISION_SPEED_THRESHOLD = 5;
 
 }
