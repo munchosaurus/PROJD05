@@ -32,6 +32,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private float _maxVelocity;
     [SerializeField] private float _acceleration;
     [SerializeField] private bool isTutorialLevel;
+    private float walkingDefaultVolume;
     private const float GRID_CLAMP_THRESHOLD = 0.02f;
     private AudioSource _audioSource;
 
@@ -46,9 +47,11 @@ public class PlayerInput : MonoBehaviour
             GameController.PauseGame();
             StartCoroutine(SwitchInputLock());
         }
-
+        
         Physics.gravity = new Vector3(0, -Constants.GRAVITY, 0);
         _audioSource = GetComponent<AudioSource>();
+        walkingDefaultVolume = _audioSource.volume;
+        Debug.Log("Default volume = " + walkingDefaultVolume);
 
         velocity = Vector3.zero;
     }
@@ -418,6 +421,8 @@ public class PlayerInput : MonoBehaviour
             }
             else
             {
+                Debug.Log(GameController.GlobalVolumeMultiplier);
+                _audioSource.volume = GameController.GlobalVolumeMultiplier * walkingDefaultVolume;
                 _audioSource.mute = false;
             }
         }
@@ -441,6 +446,7 @@ public class PlayerInput : MonoBehaviour
             }
             else
             {
+                _audioSource.volume = GameController.GlobalVolumeMultiplier * walkingDefaultVolume;
                 _audioSource.mute = false;
             }
         }

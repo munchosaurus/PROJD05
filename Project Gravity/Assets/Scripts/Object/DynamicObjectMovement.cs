@@ -15,6 +15,7 @@ public class DynamicObjectMovement : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask magnetMask;
 
+    public float collisionDefaultVolume;
     private readonly float OBJECT_Z = 1;
     private Quaternion lockedRotation;
     private Vector3 boxCastDimensions;
@@ -24,6 +25,7 @@ public class DynamicObjectMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        collisionDefaultVolume = GetComponent<AudioSource>().volume;
         velocity = Vector3.zero;
         lockedRotation = new Quaternion(0, 0, 0, 0);
     }
