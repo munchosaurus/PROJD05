@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections;
+using System.Globalization;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class IngameMenu : MonoBehaviour
 {
@@ -12,26 +15,60 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] public GameObject interactText;
     [SerializeField] private Texture2D customCursor;
     [SerializeField] private int previousMenu;
+
+    [Header("Volume settings game objects")] [SerializeField]
+    private Slider volumeSlider;
+    
+    [SerializeField] private TMP_Text volumeText;
+    
+    [Header("Speed settings game objects")] [SerializeField]
+    private Slider speedSlider;
+
+    [SerializeField] private TMP_Text speedText;
     private static Guid _playerDeathGuid;
+    public AudioMixer globalMixer;
 
     private void Start()
     {
+        volumeSlider.onValueChanged.AddListener(delegate { OnVolumeValueChanged(); });
+        speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
+        
+        volumeSlider.value = GameController.GlobalVolumeMultiplier;
+        OnVolumeValueChanged(); 
+        speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
+        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
+        
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             return;
         }
         
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
-        
-        if (customCursor != null) 
+
+        if (customCursor != null)
         {
             SetCustomCursor();
         }
     }
 
+    public void OnVolumeValueChanged()
+    {
+        GameController.GlobalVolumeMultiplier = volumeSlider.value;
+        
+        globalMixer.SetFloat("Master", Mathf.Log(GameController.GlobalVolumeMultiplier) * 20f);
+        volumeText.text = Mathf.Round(volumeSlider.value * 100.0f) + "%";
+    }
+
+    private void OnSpeedValueChanged()
+    {
+        GameController.GlobalSpeedMultiplier = speedSlider.value / 100;
+        GravityController.SetNewGravity(GravityController.GetCurrentFacing());
+        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
+    }
+
     void SetCustomCursor()
     {
-        Cursor.SetCursor(customCursor, new Vector2(customCursor.width/2, customCursor.height/2), CursorMode.Auto);
+        Cursor.SetCursor(customCursor, new Vector2(customCursor.width / 2, customCursor.height / 2), CursorMode.Auto);
     }
 
     public void ChangePauseState()
@@ -58,7 +95,7 @@ public class IngameMenu : MonoBehaviour
         {
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
-        
+
         SetCustomCursor();
         GameController.UnpauseGame();
     }
@@ -73,7 +110,7 @@ public class IngameMenu : MonoBehaviour
             menus[index].SetActive(true);
         }
 
-        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings-1 && index == 1)
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1 && index == 1)
         {
             if (menus[index].transform.GetChild(0).GetComponent<Button>().IsInteractable())
             {
@@ -111,12 +148,12 @@ public class IngameMenu : MonoBehaviour
         {
             SetCustomCursor();
         }
+
         Unpause();
         LevelCompletionTracker.AddCompletedLevel(scene);
         SceneManager.LoadScene(scene);
     }
-    
-    
+
 
     public void Restart()
     {
@@ -125,11 +162,12 @@ public class IngameMenu : MonoBehaviour
 
     public void LoadNextScene()
     {
-        if (SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCountInBuildSettings-1)
+        if (SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCountInBuildSettings - 1)
         {
             return;
         }
-        LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+
+        LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void LoadPreviousScene()
@@ -138,7 +176,8 @@ public class IngameMenu : MonoBehaviour
         {
             return;
         }
-        LoadScene(SceneManager.GetActiveScene().buildIndex-1);
+
+        LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     public void QuitGame()
@@ -156,6 +195,7 @@ public class IngameMenu : MonoBehaviour
                 menus[i].SetActive(false);
             }
         }
+
         if (!menus[3].activeSelf)
         {
             menus[3].SetActive(true);
@@ -173,22 +213,51 @@ public class IngameMenu : MonoBehaviour
             {
                 LevelCompletionTracker.AddCompletedLevel(1);
             }
-            
+
             if (!FindObjectOfType<LevelSettings>().GetLevelsAreUnlocked())
-            {   if (!LevelCompletionTracker.unlockedLevels.Contains(i+1))
-                    {
-                        menus[3].transform.GetChild(i).GetComponent<Button>().interactable = false;
-                    }
+            {
+                if (!LevelCompletionTracker.unlockedLevels.Contains(i + 1))
+                {
+                    menus[3].transform.GetChild(i).GetComponent<Button>().interactable = false;
+                }
             }
         }
     }
 
+    public void OpenOptionsMenu(int index)
+    {
+        previousMenu = index;
+        for (int i = 0; i < menus.Length - 1; i++)
+        {
+            if (menus[i].activeSelf)
+            {
+                menus[i].SetActive(false);
+            }
+        }
+
+        if (!menus[4].activeSelf)
+        {
+            menus[4].SetActive(true);
+        }
+    }
+
+    public void CloseOptionsMenu()
+    {
+        if (menus[4].activeSelf)
+        {
+            menus[4].SetActive(false);
+        }
+
+        Pause(previousMenu);
+    }
+    
     public void CloseLevelSelector()
     {
         if (menus[3].activeSelf)
         {
             menus[3].SetActive(false);
         }
+
         Pause(previousMenu);
     }
 }

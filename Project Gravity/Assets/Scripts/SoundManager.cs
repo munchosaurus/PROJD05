@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SoundManager : MonoBehaviour
 {
@@ -77,6 +78,8 @@ public class SoundManager : MonoBehaviour
     {
         try
         {
+            collisionEvent.SourceGameObject.GetComponent<AudioSource>().volume = collisionEvent.SourceGameObject
+                .GetComponent<DynamicObjectMovement>().collisionDefaultVolume * GameController.GlobalVolumeMultiplier;
             collisionEvent.SourceGameObject.GetComponent<AudioSource>().PlayOneShot(objectCollidesWithGroundClip);
         }
         catch (Exception e)
@@ -115,6 +118,7 @@ public class SoundManager : MonoBehaviour
         {
             if (source.gameObject.name == ("CollisionSoundPlayer"))
             {
+                source.volume = 0.5f * GameController.GlobalVolumeMultiplier;
                 source.PlayOneShot(audioClip);
             }
         }
@@ -124,6 +128,8 @@ public class SoundManager : MonoBehaviour
     {
         var speaker = Instantiate(speakerPrefab, playerDeathEvent.SourceGameObject.transform.position,
             Quaternion.identity);
+        speaker.GetComponent<AudioSource>().volume =
+            speaker.GetComponent<AudioSource>().volume * GameController.GlobalVolumeMultiplier;
         speaker.GetComponent<AudioSource>().PlayOneShot(playerCollidesWithLavaClip);
         StartCoroutine(DestroyAfterTime(speaker, playerCollidesWithLavaClip.length));
     }
@@ -132,6 +138,8 @@ public class SoundManager : MonoBehaviour
     {
         var speaker = Instantiate(speakerPrefab, trampolineEvent.SourceGameObject.transform.position,
             Quaternion.identity);
+        speaker.GetComponent<AudioSource>().volume =
+            speaker.GetComponent<AudioSource>().volume * GameController.GlobalVolumeMultiplier;
         speaker.GetComponent<AudioSource>().PlayOneShot(playerCollidesWithTrampolineSound);
         StartCoroutine(DestroyAfterTime(speaker, playerCollidesWithTrampolineSound.length));
     }
@@ -140,6 +148,8 @@ public class SoundManager : MonoBehaviour
     {
         var speaker = Instantiate(speakerPrefab, gravityGunEvent.TargetGameObject.transform.position,
             Quaternion.identity);
+        speaker.GetComponent<AudioSource>().volume =
+            speaker.GetComponent<AudioSource>().volume * GameController.GlobalVolumeMultiplier;
         float clipLength;
         if (gravityGunEvent.TargetGameObject.layer == gravityLayer)
         {
