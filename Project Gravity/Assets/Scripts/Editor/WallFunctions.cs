@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class WallFunctions : MonoBehaviour
 {
+    private const float EMBLEM_Z_POS = -0.6f;
+
     [MenuItem("CONTEXT/Wall/Generate Wall")]
     static void GenerateWall(MenuCommand command)
     {
@@ -26,6 +28,11 @@ public class WallFunctions : MonoBehaviour
 
             Debug.Log(LayerMask.NameToLayer("Ground"));
             parent.layer = LayerMask.NameToLayer("Ground");
+        }
+
+        if(context.emblems.Length > 0)
+        {
+            AddEmblems(context, parent.transform);
         }
     }
 
@@ -98,5 +105,16 @@ public class WallFunctions : MonoBehaviour
         float boxColZpos = context.dimensions.z / 2 - 0.5f;
         boxCol.center = new Vector3(boxColXpos, boxColYpos, boxColZpos);
         boxCol.size = new Vector3(context.dimensions.x, context.dimensions.y, context.dimensions.z);
+    }
+
+    static void AddEmblems(Wall w, Transform parent)
+    {
+        GameObject go;
+        foreach(Vector3 v in w.emblemPositions)
+        {
+            go = PrefabUtility.InstantiatePrefab(w.emblems[(int)v.z]) as GameObject;
+            go.transform.position = new Vector3(v.x, v.y, EMBLEM_Z_POS);
+            go.transform.parent = parent;
+        }
     }
 }

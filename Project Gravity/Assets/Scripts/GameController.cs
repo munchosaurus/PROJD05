@@ -6,6 +6,8 @@ using UnityEngine;
 public static class GameController
 {
     private static bool _inputLocked = true;
+    public static float GlobalVolumeMultiplier = 1f;
+    public static float GlobalSpeedMultiplier = 1f;
 
     public static void PauseGame()
     {

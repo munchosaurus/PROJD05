@@ -13,12 +13,9 @@ MonoBehaviour:
   m_Name: New Wall
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 6098653093695181756, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
-  dimensions: {x: 20, y: 1, z: 3}
+  dimensions: {x: 6, y: 1, z: 3}
   isGround: 1
-  specialPrefabs:
-  - {fileID: 3027047513118980189, guid: b9d7f8512fbe8fa4cb77b135d4d0e9dd, type: 3}
-  specialPrefabPositions:
-  - {x: 5, y: 0, z: 0}
-  - {x: 6, y: 0, z: 0}
-  - {x: 13, y: 0, z: 0}
-  - {x: 14, y: 0, z: 0}
+  specialPrefabs: []
+  specialPrefabPositions: []
+  emblems: []
+  emblemPositions: []

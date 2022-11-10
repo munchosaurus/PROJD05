@@ -7,31 +7,36 @@ public class Tutorial : MonoBehaviour
 {
     [SerializeField] GameObject[] panels;
     int activeIndex = 0;
-    bool done = false;
+    bool canChange= false;
 
-    private void Awake()
+    IEnumerator CountDownToChangeAllowed()
     {
-        GameController.PauseGame();
+        canChange = false;
+        yield return new WaitForSecondsRealtime(1f);
+        canChange = true;
+    }
+
+    public void BeginTutorial()
+    {
         panels[activeIndex].SetActive(true);
+        StartCoroutine(CountDownToChangeAllowed());
     }
 
     public void ChangeActivePanel(InputAction.CallbackContext cbc)
     {
-        if (cbc.canceled)
+        if (cbc.started && canChange)
         {
-            if (!done)
-            {
-                panels[activeIndex++].SetActive(false);
+            panels[activeIndex++].SetActive(false);
 
-                if (activeIndex < panels.Length)
-                {
-                    panels[activeIndex].SetActive(true);
-                }
-                else
-                {
-                    done = true;
-                    GameController.UnpauseGame();
-                }
+            if (activeIndex < panels.Length)
+            {
+                panels[activeIndex].SetActive(true);
+                StartCoroutine(CountDownToChangeAllowed());
+            }
+            else
+            {
+                canChange = false;
+                GameController.UnpauseGame();
             }
         }
     }
