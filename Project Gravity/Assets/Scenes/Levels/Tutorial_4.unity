@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 26715056}
   - component: {fileID: 26715055}
   m_Layer: 5
-  m_Name: Gravity Object
+  m_Name: Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -473,7 +473,7 @@ AudioSource:
   m_GameObject: {fileID: 26715051}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 03449f5ef8b7b5849a3d81db028eb968, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
