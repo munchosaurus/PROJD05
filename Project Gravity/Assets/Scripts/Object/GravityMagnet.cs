@@ -13,7 +13,7 @@ public class GravityMagnet : MonoBehaviour
     [SerializeField] private float magnetRange;
     [SerializeField] private float magnetSpeed;
     private static Guid _gravityGunEventGuid;
-    private readonly float magnetCoolDown = 2f;
+    //private readonly float magnetCoolDown = 2f;
 
 
     private void Start()

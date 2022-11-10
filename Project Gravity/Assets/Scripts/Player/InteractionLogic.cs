@@ -72,26 +72,26 @@ public class InteractionLogic : MonoBehaviour
     {
         if (IsInteractableCloseEnough(GetClosestInteractable()))
         {
-            if (GetClosestInteractable().GetComponent<InteractableObject>().interactable.interactableType == Interactable.InteractableType.Target)
-            {
-                if(!IsGoalReached())
-                    return;
-            }
+            // if (GetClosestInteractable().GetComponent<InteractableObject>().interactable.interactableType == Interactable.InteractableType.Target)
+            // {
+            //     return;
+            // }
             
             if (!_menu.interactText.activeSelf)
             {
-                _menu.interactText.SetActive(true);
+                Interact();
+                //_menu.interactText.SetActive(true);
             }
         }
-        else
-        {
-            if (_menu.interactText.activeSelf)
-            {
-                _menu.interactText.SetActive(false);
-            }
-        }
+        // else
+        // {
+        //     if (_menu.interactText.activeSelf)
+        //     {
+        //         _menu.interactText.SetActive(false);
+        //     }
+        // }
     }
-    
+
     public void Interact()
     {
         if (IsInteractableCloseEnough(GetClosestInteractable()))
@@ -106,6 +106,4 @@ public class InteractionLogic : MonoBehaviour
             GetClosestInteractable().GetComponent<InteractableObject>().Interact();
         }
     }
-    
-    
 }

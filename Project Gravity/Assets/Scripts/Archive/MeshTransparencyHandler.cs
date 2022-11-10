@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MeshTransparencyHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject camera;
+    [SerializeField] private new GameObject camera;
     [SerializeField] private CinemachineFreeLook cameraSettings;
     private GameObject graphicsTransform;
 

@@ -7,7 +7,7 @@ public class PlayerController3D : MonoBehaviour
 {
     [SerializeField] private LayerMask gravityChangeLayer;
     private readonly float GRAVITY = 9.8f;
-    public Transform camera;
+    public new Transform camera;
     public float speed = 6f;
     // Keep in mind that that the vectors are the opposite value to how they are added
     public float turnSmoothTime = 0.05f;
