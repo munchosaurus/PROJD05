@@ -32,6 +32,7 @@ public class IngameMenu : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
             return;
         }
         
