@@ -30,20 +30,17 @@ public class IngameMenu : MonoBehaviour
 
     private void Start()
     {
+        volumeSlider.onValueChanged.AddListener(delegate { OnVolumeValueChanged(); });
+        speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
+        OnVolumeValueChanged();
+        OnSpeedValueChanged();
+
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
             return;
         }
-        
-        volumeSlider.onValueChanged.AddListener(delegate { OnVolumeValueChanged(); });
-        speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
-        
-        volumeSlider.value = GameController.GlobalVolumeMultiplier;
-        OnVolumeValueChanged(); 
-        speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
-        
+
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
 
         if (customCursor != null)
@@ -55,7 +52,6 @@ public class IngameMenu : MonoBehaviour
     public void OnVolumeValueChanged()
     {
         GameController.GlobalVolumeMultiplier = volumeSlider.value;
-        
         globalMixer.SetFloat("Master", Mathf.Log(GameController.GlobalVolumeMultiplier) * 20f);
         volumeText.text = Mathf.Round(volumeSlider.value * 100.0f) + "%";
     }
@@ -64,7 +60,7 @@ public class IngameMenu : MonoBehaviour
     {
         GameController.GlobalSpeedMultiplier = speedSlider.value / 100;
         GravityController.SetNewGravity(GravityController.GetCurrentFacing());
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
+        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";;
     }
 
     void SetCustomCursor()
@@ -99,14 +95,16 @@ public class IngameMenu : MonoBehaviour
 
     public void Unpause()
     {
-        for (int i = 0; i < menus.Length; i++)
+        if (menus.Length > 0)
         {
-            if (menus[i].activeSelf)
+            for (int i = 0; i < menus.Length; i++)
             {
-                menus[i].SetActive(false);
+                if (menus[i].activeSelf)
+                {
+                    menus[i].SetActive(false);
+                }
             }
         }
-
         if (gameObject.transform.GetChild(0).gameObject.activeSelf)
         {
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
