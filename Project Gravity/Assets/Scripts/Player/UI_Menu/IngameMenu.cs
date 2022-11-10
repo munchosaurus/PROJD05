@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class IngameMenu : MonoBehaviour
 {
@@ -15,26 +16,33 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private Texture2D customCursor;
     [SerializeField] private int previousMenu;
 
-    // [Header("Volume settings game objects")] [SerializeField]
-    // private Slider volumeSlider;
-    //
-    // [SerializeField] private TMP_Text volumeText;
+    [Header("Volume settings game objects")] [SerializeField]
+    private Slider volumeSlider;
+    
+    [SerializeField] private TMP_Text volumeText;
     
     [Header("Speed settings game objects")] [SerializeField]
     private Slider speedSlider;
 
     [SerializeField] private TMP_Text speedText;
     private static Guid _playerDeathGuid;
+    public AudioMixer globalMixer;
 
     private void Start()
     {
+        volumeSlider.onValueChanged.AddListener(delegate { OnVolumeValueChanged(); });
+        speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
+        
+        volumeSlider.value = GameController.GlobalVolumeMultiplier;
+        OnVolumeValueChanged(); 
+        speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
+        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
+        
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             return;
         }
-
-        // volumeSlider.onValueChanged.AddListener(delegate { OnVolumeChanged(); });
-        speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
+        
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
 
         if (customCursor != null)
@@ -43,13 +51,12 @@ public class IngameMenu : MonoBehaviour
         }
     }
 
-    private void Awake()
+    public void OnVolumeValueChanged()
     {
-        // volumeSlider.value = GameController.GlobalVolumeMultiplier * 50;
-        // volumeText.text = (volumeSlider.value).ToString(CultureInfo.InvariantCulture);
-        speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
+        GameController.GlobalVolumeMultiplier = volumeSlider.value;
         
+        globalMixer.SetFloat("Master", Mathf.Log(GameController.GlobalVolumeMultiplier) * 20f);
+        volumeText.text = Mathf.Round(volumeSlider.value * 100.0f) + "%";
     }
 
     private void OnSpeedValueChanged()
@@ -58,12 +65,6 @@ public class IngameMenu : MonoBehaviour
         GravityController.SetNewGravity(GravityController.GetCurrentFacing());
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
     }
-    
-    // private void OnVolumeChanged()
-    // {
-    //     GameController.GlobalVolumeMultiplier = volumeSlider.value / 50;
-    //     volumeText.text = (volumeSlider.value).ToString(CultureInfo.InvariantCulture);
-    // }
 
     void SetCustomCursor()
     {
