@@ -8,10 +8,9 @@ public class Tutorial : MonoBehaviour
     [SerializeField] GameObject[] panels;
     int activeIndex = 0;
     bool done = false;
-
-    private void Awake()
+    
+    public void BeginTutorial()
     {
-        GameController.PauseGame();
         panels[activeIndex].SetActive(true);
     }
 

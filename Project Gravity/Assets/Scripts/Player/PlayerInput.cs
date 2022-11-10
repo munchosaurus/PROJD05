@@ -39,11 +39,9 @@ public class PlayerInput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!isTutorialLevel)
-        {
-            GameController.PauseGame();
-            StartCoroutine(SwitchInputLock());
-        }
+
+        GameController.PauseGame();
+        StartCoroutine(SwitchInputLock());
 
         Physics.gravity = new Vector3(0, -Constants.GRAVITY, 0);
         _audioSource = GetComponent<AudioSource>();
@@ -86,13 +84,21 @@ public class PlayerInput : MonoBehaviour
     private IEnumerator SwitchInputLock()
     {
         yield return new WaitForSecondsRealtime(Constants.LEVEL_LOAD_INPUT_PAUSE_TIME);
-        if (GameController.IsPaused())
+
+        if (isTutorialLevel)
         {
-            GameController.UnpauseGame();
+            GameObject.Find("Tutorial").GetComponent<Tutorial>().BeginTutorial();
         }
         else
         {
-            GameController.PauseGame();
+            if (GameController.IsPaused())
+            {
+                GameController.UnpauseGame();
+            }
+            else
+            {
+                GameController.PauseGame();
+            }
         }
     }
 
