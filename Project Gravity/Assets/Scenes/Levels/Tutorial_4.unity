@@ -16132,6 +16132,14 @@ PrefabInstance:
       propertyPath: isTutorialLevel
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: _groundCheckDimensions.x
+      value: 0.499
+      objectReference: {fileID: 0}
+    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: _groundCheckDimensions.z
+      value: 0.499
+      objectReference: {fileID: 0}
     - target: {fileID: 1049751914841088714, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_RootOrder
       value: 14
