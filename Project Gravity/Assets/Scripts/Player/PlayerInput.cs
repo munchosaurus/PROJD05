@@ -39,7 +39,6 @@ public class PlayerInput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         GameController.PauseGame();
         StartCoroutine(SwitchInputLock());
 
@@ -62,7 +61,6 @@ public class PlayerInput : MonoBehaviour
         ApplyCollisions();
 
         transform.position += velocity * Time.fixedDeltaTime;
-
         Vector3 eulerRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0, 0, eulerRotation.z);
 
@@ -139,7 +137,7 @@ public class PlayerInput : MonoBehaviour
         {
             return;
         }
-        
+
         if (context.started)
         {
             if (IsGrounded() && !IsRoofed())
@@ -202,7 +200,8 @@ public class PlayerInput : MonoBehaviour
     {
         List<int> layers = new List<int>();
         RaycastHit[] raycastHits = new RaycastHit[0];
-        if (direction.y != 0 && Math.Abs(velocity.y) > Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
+        if (direction.y != 0 && Math.Abs(velocity.y) >
+            Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
         {
             raycastHits = Physics.BoxCastAll(transform.position, verticalCast, direction,
                 Quaternion.identity,
@@ -223,7 +222,8 @@ public class PlayerInput : MonoBehaviour
                 }
             }
         }
-        else if (direction.x != 0 && Math.Abs(velocity.x) > Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
+        else if (direction.x != 0 && Math.Abs(velocity.x) >
+                 Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
         {
             raycastHits = Physics.BoxCastAll(transform.position, horizontalCast, direction,
                 Quaternion.identity,
@@ -374,15 +374,59 @@ public class PlayerInput : MonoBehaviour
 
     private void ApplyCollisions()
     {
-        if ((groundedDown && velocity.y < 0) || (groundedUp && velocity.y > 0))
+        RaycastHit hit;
+        Vector3 nextPos = transform.position + (velocity * Time.fixedDeltaTime);
+        if (velocity.y < 0)
         {
-            velocity.y = 0;
+            if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
+                    Mathf.Abs(transform.position.y - nextPos.y) + 0.5f, groundMask))
+            {
+                if (transform.position.y - nextPos.y < transform.position.y - hit.point.y)
+                {
+                    
+                    transform.position = new Vector3(transform.position.x, hit.point.y + 0.5f, transform.position.z);
+                    velocity.y = 0;
+                }
+            }
         }
-
-        if ((groundedLeft && velocity.x < 0) || (groundedRight && velocity.x > 0))
+        else if (velocity.y > 0)
         {
-            velocity.x = 0;
+            if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
+                    Mathf.Abs(transform.position.y - nextPos.y) + 0.5f, groundMask))
+            {
+                if (Math.Abs(transform.position.y - nextPos.y) < Math.Abs(transform.position.y - hit.point.y))
+                {
+                    transform.position = new Vector3(transform.position.x, hit.point.y - 0.5f, transform.position.z);
+                    velocity.y = 0;
+                }
+            }
         }
+        
+        if (velocity.x < 0)
+        {
+            if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
+                    Mathf.Abs(transform.position.x - nextPos.x) + 0.5f, groundMask))
+            {
+                if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.y))
+                {
+                    transform.position = new Vector3(hit.point.x + 0.5f, transform.position.y , transform.position.z);
+                    velocity.x = 0;
+                }
+            }
+        }
+        else if (velocity.x > 0)
+        {
+            if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
+                    Mathf.Abs(transform.position.x - nextPos.x) + 0.5f, groundMask))
+            {
+                if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.x))
+                {
+                    transform.position = new Vector3(hit.point.x - 0.5f, transform.position.y , transform.position.z);
+                    velocity.x = 0;
+                }
+            }
+        }
+        
     }
 
     private void MovePlayer()
@@ -435,7 +479,6 @@ public class PlayerInput : MonoBehaviour
         {
             velocity.x += GameController.GlobalSpeedMultiplier * (direction * _acceleration * Time.fixedDeltaTime);
         }
-            
     }
 
     private void MoveVertical(float direction)
@@ -462,7 +505,6 @@ public class PlayerInput : MonoBehaviour
         {
             velocity.y += GameController.GlobalSpeedMultiplier * (direction * _acceleration * Time.fixedDeltaTime);
         }
-        
     }
 
     private bool ShouldAddMoreMoveForce(float moveCoefficient)

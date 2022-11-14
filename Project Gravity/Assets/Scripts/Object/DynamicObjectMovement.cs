@@ -46,7 +46,6 @@ public class DynamicObjectMovement : MonoBehaviour
         }
 
         CheckForCollisions();
-        //ApplyFriction();
         ApplyCollisions();
 
         transform.position += velocity * Time.fixedDeltaTime;
