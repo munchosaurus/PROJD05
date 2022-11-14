@@ -21,6 +21,9 @@ public class DynamicObjectMovement : MonoBehaviour
     private Vector3 boxCastDimensions;
     private bool isGrounded;
     public bool lockedToMagnet;
+    private Vector3 magnetPosition;
+
+    private float magnetVel;
 
     // Start is called before the first frame update
     void Start()
@@ -37,36 +40,38 @@ public class DynamicObjectMovement : MonoBehaviour
             velocity += Physics.gravity * Time.fixedDeltaTime;
             transform.rotation = lockedRotation;
         }
+        else
+        {
+            MoveToMagnet();
+        }
 
         CheckForCollisions();
-        ApplyFriction();
+        //ApplyFriction();
         ApplyCollisions();
-
-        if (lockedToMagnet)
-        {
-            return;
-        }
 
         transform.position += velocity * Time.fixedDeltaTime;
     }
 
-    public void MoveToMagnet(Vector3 location, float magnetSpeed)
+    public void SetMagnetPosition(Vector3 targetPos, float magnetSpeed)
     {
-        if (Vector3.Distance(transform.position, location) < 0.01f)
+        magnetPosition = targetPos;
+        magnetVel = magnetSpeed;
+    }
+
+    public void MoveToMagnet()
+    {
+        Vector3 nextPos = Vector3.MoveTowards(transform.position, magnetPosition, magnetVel * Time.fixedDeltaTime);
+        if (nextPos == transform.position)
         {
             velocity = Vector3.zero;
         }
         else
         {
-            if (velocity.magnitude < 0.01f)
-            {
-                velocity.x += 0.03f;
-            }
-            else
-            {
-                transform.position =
-                    Vector3.MoveTowards(transform.position, location, magnetSpeed * Time.fixedDeltaTime);
-            }
+            float speedX = (Math.Abs(nextPos.x) - Math.Abs(transform.position.x)) * 50;
+            float speedY = (Math.Abs(nextPos.y) - Math.Abs(transform.position.y)) * 50;
+
+            velocity.x = speedX;
+            velocity.y = speedY;
         }
     }
 

@@ -15,6 +15,7 @@ public class GravityMagnet : MonoBehaviour
     private static Guid _gravityGunEventGuid;
     //private readonly float magnetCoolDown = 2f;
 
+    
 
     private void Start()
     {
@@ -26,10 +27,10 @@ public class GravityMagnet : MonoBehaviour
         if (triggered)
         {
             CheckForBoxes();
-            if (dynamicObjectMovement != null)
-            {
-                dynamicObjectMovement.MoveToMagnet(transform.position + detectionDirection, magnetSpeed);
-            }
+            // if (dynamicObjectMovement != null)
+            // {
+            //     dynamicObjectMovement.SetMagnetPosition(transform.position + detectionDirection, magnetSpeed);
+            // }
         }
     }
 
@@ -75,6 +76,7 @@ public class GravityMagnet : MonoBehaviour
                     detectionDirection = Vector3.down;
                     dynamicObjectMovement = hit.collider.GetComponentInParent<DynamicObjectMovement>();
                     dynamicObjectMovement.lockedToMagnet = true;
+                    dynamicObjectMovement.SetMagnetPosition(transform.position + detectionDirection, magnetSpeed);
                     return;
                 }
             }
@@ -92,6 +94,7 @@ public class GravityMagnet : MonoBehaviour
                     detectionDirection = Vector3.up;
                     dynamicObjectMovement = hit.collider.GetComponentInParent<DynamicObjectMovement>();
                     dynamicObjectMovement.lockedToMagnet = true;
+                    dynamicObjectMovement.SetMagnetPosition(transform.position + detectionDirection, magnetSpeed);
                     return;
                 }
             }
@@ -108,6 +111,7 @@ public class GravityMagnet : MonoBehaviour
                     detectionDirection = Vector3.right;
                     dynamicObjectMovement = hit.collider.GetComponentInParent<DynamicObjectMovement>();
                     dynamicObjectMovement.lockedToMagnet = true;
+                    dynamicObjectMovement.SetMagnetPosition(transform.position + detectionDirection, magnetSpeed);
                     return;
                 }
             }
@@ -126,6 +130,7 @@ public class GravityMagnet : MonoBehaviour
                     detectionDirection = Vector3.left;
                     dynamicObjectMovement = hit.collider.GetComponentInParent<DynamicObjectMovement>();
                     dynamicObjectMovement.lockedToMagnet = true;
+                    dynamicObjectMovement.SetMagnetPosition(transform.position + detectionDirection, magnetSpeed);
                     return;
                 }
             }
