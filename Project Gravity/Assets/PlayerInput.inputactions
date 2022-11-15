@@ -339,9 +339,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AnyKey",
+                    "name": "Unpause",
                     "type": "Button",
-                    "id": "f3d98b3c-53ef-4041-bce0-ad7404a28d62",
+                    "id": "e227bb51-42e2-4733-8484-6f57e2633818",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NextTutorialPage",
+                    "type": "Button",
+                    "id": "11b23daa-961d-4f97-9f3d-584de3a83af8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -769,34 +778,23 @@
                 },
                 {
                     "name": "",
-                    "id": "a7e9a76a-57af-4b44-8d2e-2917db74ab7f",
-                    "path": "<Keyboard>/anyKey",
+                    "id": "3e1d1034-5f6a-486b-ae55-c8131f5966ea",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AnyKey",
+                    "action": "Unpause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "4491c22c-739c-4a6f-b068-22c166be174d",
-                    "path": "<Mouse>/press",
+                    "id": "c82dc5b5-a7ea-4db1-b38f-b2e8730f0bcc",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AnyKey",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ed733354-f41c-41a5-b925-a04498cd66ac",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AnyKey",
+                    "action": "NextTutorialPage",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

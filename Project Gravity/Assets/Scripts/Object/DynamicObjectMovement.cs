@@ -16,7 +16,7 @@ public class DynamicObjectMovement : MonoBehaviour
     [SerializeField] private LayerMask magnetMask;
 
     public float collisionDefaultVolume;
-    private readonly float OBJECT_Z = 1;
+    //private readonly float OBJECT_Z = 1;
     private Quaternion lockedRotation;
     private Vector3 boxCastDimensions;
     private bool isGrounded;

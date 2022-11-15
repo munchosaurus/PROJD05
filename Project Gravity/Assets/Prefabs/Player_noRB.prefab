@@ -7979,7 +7979,6 @@ MonoBehaviour:
   _jumpForce: 8
   _maxVelocity: 5
   _acceleration: 10
-  isTutorialLevel: 0
 --- !u!114 &5558133775299111569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8077,7 +8076,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2124406989537400889}
         m_TargetAssemblyTypeName: IngameMenu, Assembly-CSharp
         m_MethodName: ChangePauseState
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8185,9 +8184,37 @@ MonoBehaviour:
     m_ActionId: fe3ada87-d875-4073-817b-f13fe2e5c4ce
     m_ActionName: MenuControls/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f3d98b3c-53ef-4041-bce0-ad7404a28d62
-    m_ActionName: MenuControls/AnyKey[/Keyboard/anyKey,/Mouse/press,/Mouse/rightButton]
+      m_Calls:
+      - m_Target: {fileID: 2124406989537400889}
+        m_TargetAssemblyTypeName: IngameMenu, Assembly-CSharp
+        m_MethodName: ClosePauseScreen
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e227bb51-42e2-4733-8484-6f57e2633818
+    m_ActionName: MenuControls/Unpause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: 0193349f806171a42bd7c58c26247f2d, type: 3}
+        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 11b23daa-961d-4f97-9f3d-584de3a83af8
+    m_ActionName: MenuControls/NextTutorialPage[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControls

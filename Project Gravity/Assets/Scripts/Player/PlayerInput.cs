@@ -28,13 +28,12 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _maxVelocity;
     [SerializeField] private float _acceleration;
-    [SerializeField] private bool isTutorialLevel;
     private AudioSource _audioSource;
     private float walkingDefaultVolume;
     private const float GridClampThreshold = 0.02f;
     private const float PlayerCollisionGridClamp = 0.5f;
 
-    private readonly float OBJECT_Z = 1;
+    //private readonly float OBJECT_Z = 1;
 
 
     // Start is called before the first frame update
@@ -78,8 +77,12 @@ public class PlayerInput : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(Constants.LEVEL_LOAD_INPUT_PAUSE_TIME);
 
-        if (isTutorialLevel)
+        if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.tutorialIsOn)
         {
+            if (GetComponent<UnityEngine.InputSystem.PlayerInput>().currentActionMap.name.Equals("PlayerControls"))
+            {
+                FindObjectOfType<IngameMenu>().ToggleActionMap();
+            }
             GameObject.Find("Tutorial").GetComponent<Tutorial>().BeginTutorial();
         }
         else

@@ -32,6 +32,8 @@ public class LevelSettings : MonoBehaviour
     [Header("Level lock settings")] [SerializeField]
     private bool unlockAllLevels;
 
+    [SerializeField] private bool isTutorialLevel;
+
 
     void Awake()
     {
@@ -58,6 +60,11 @@ public class LevelSettings : MonoBehaviour
 
     }
 
+    public bool IsTutorialLevel()
+    {
+        return isTutorialLevel;
+    }
+    
     public float GetLevelLeeway()
     {
         return leeway;

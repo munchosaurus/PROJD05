@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 
 public class IngameMenu : MonoBehaviour
 {
@@ -27,7 +28,23 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private TMP_Text speedText;
     private static Guid _playerDeathGuid;
     public AudioMixer globalMixer;
+    private UnityEngine.InputSystem.PlayerInput _playerInput;
 
+    public void ToggleActionMap()
+    {
+        if (_playerInput != null)
+        {
+            if (_playerInput.currentActionMap.name.Equals("PlayerControls"))
+            {
+                _playerInput.SwitchCurrentActionMap("MenuControls");
+            }
+            else
+            {
+                _playerInput.SwitchCurrentActionMap("PlayerControls");
+            }
+        }
+    }
+    
     private void Start()
     {
         volumeSlider.onValueChanged.AddListener(delegate { OnVolumeValueChanged(); });
@@ -39,6 +56,8 @@ public class IngameMenu : MonoBehaviour
         volumeText.text = Mathf.Round(volumeSlider.value * 100.0f) + "%";
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
 
+        _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
+        
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
@@ -47,6 +66,16 @@ public class IngameMenu : MonoBehaviour
 
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
 
+        if (FindObjectOfType<LevelSettings>().IsTutorialLevel())
+        {
+            _playerInput.SwitchCurrentActionMap("MenuControls");
+        }
+        else
+        {
+            _playerInput.SwitchCurrentActionMap("PlayerControls");
+        }
+        
+        
         if (customCursor != null)
         {
             SetCustomCursor();
@@ -72,29 +101,43 @@ public class IngameMenu : MonoBehaviour
         Cursor.SetCursor(customCursor, new Vector2(customCursor.width / 2, customCursor.height / 2), CursorMode.Auto);
     }
 
-    public void ChangePauseState()
+    public void ChangePauseState(InputAction.CallbackContext context)
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+        if (context.started)
         {
-            Debug.Log("Nice try David");
-            return;
-        }
-        
-        if (menus[0].gameObject.activeSelf)
-        {
-            Unpause();
-            return;
-        } 
-        
-        for (int i = 0; i < menus.Length; i++)
-        {
-            if (menus[i].activeSelf)
+            if (SceneManager.GetActiveScene().buildIndex == 0)
             {
+                Debug.Log("Nice try David");
                 return;
             }
-        }
+        
+            if (menus[0].gameObject.activeSelf)
+            {
+                Unpause();
+                return;
+            } 
+        
+            for (int i = 0; i < menus.Length; i++)
+            {
+                if (menus[i].activeSelf)
+                {
+                    return;
+                }
+            }
 
-        Pause(0);
+            Pause(0);
+        }
+    }
+
+    public void ClosePauseScreen(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (gameObject.transform.GetChild(0).gameObject.activeSelf && menus[0].gameObject.activeSelf)
+            {
+                Unpause();
+            }
+        }
     }
 
     public void Unpause()
@@ -114,6 +157,7 @@ public class IngameMenu : MonoBehaviour
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
 
+        ToggleActionMap();
         SetCustomCursor();
         GameController.UnpauseGame();
     }
@@ -140,6 +184,7 @@ public class IngameMenu : MonoBehaviour
             }
         }
 
+        ToggleActionMap();
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         GameController.PauseGame();
     }

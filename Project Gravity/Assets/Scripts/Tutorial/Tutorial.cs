@@ -36,7 +36,7 @@ public class Tutorial : MonoBehaviour
             else
             {
                 canChange = false;
-                GameController.UnpauseGame();
+                FindObjectOfType<IngameMenu>().Unpause();
             }
         }
     }
