@@ -30,3 +30,8 @@ public class CollisionEvent : Event
 {
     public List<int> Layers;
 }
+
+public class WinningEvent : Event
+{
+    
+}

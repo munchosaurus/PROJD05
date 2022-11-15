@@ -1307,6 +1307,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1146322828}
     m_Modifications:
+    - target: {fileID: 100975322, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_Name
+      value: Toggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 304263987, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 304263987, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 304263987, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 912952041, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 912952041, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041891639, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041891639, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1493355080, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1493355080, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1493355080, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6967305991878695776, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6967305992549457403, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
       propertyPath: m_Name
       value: Main menu

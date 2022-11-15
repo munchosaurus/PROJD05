@@ -25,7 +25,7 @@ public class InteractionLogic : MonoBehaviour
             ToggleInteraction();
         }
     }
-    
+
     private IEnumerator FetchInteractablesInScene()
     {
         yield return new WaitForSeconds(0.5f);
@@ -35,7 +35,7 @@ public class InteractionLogic : MonoBehaviour
             interactableGameObjects.Add(ints[i].GameObject());
         }
     }
-    
+
     private bool IsGoalReached()
     {
         return _playerInput.IsGrounded() && GetComponent<KeycardLogic>().keyCardsCompleted;
@@ -46,7 +46,7 @@ public class InteractionLogic : MonoBehaviour
         return Vector3.Distance(gameObject.transform.position, interactable.position) <
             DISTANCE_TO_INTERACT_THRESHOLD && _playerInput.IsGrounded();
     }
-    
+
     Transform GetClosestInteractable()
     {
         Transform tMin = null;
@@ -58,6 +58,7 @@ public class InteractionLogic : MonoBehaviour
             {
                 continue;
             }
+
             float dist = Vector3.Distance(t.transform.position, currentPos);
             if (dist < minDist)
             {
@@ -65,45 +66,52 @@ public class InteractionLogic : MonoBehaviour
                 minDist = dist;
             }
         }
+
         return tMin;
     }
 
     private void ToggleInteraction()
     {
-        if (IsInteractableCloseEnough(GetClosestInteractable()))
+        if (IsInteractableCloseEnough(GetClosestInteractable()) && !_menu.interactText.activeSelf)
         {
-            // if (GetClosestInteractable().GetComponent<InteractableObject>().interactable.interactableType == Interactable.InteractableType.Target)
-            // {
-            //     return;
-            // }
-            
-            if (!_menu.interactText.activeSelf)
+            switch (GetClosestInteractable().GetComponent<InteractableObject>().interactable.interactableType)
             {
-                Interact();
-                //_menu.interactText.SetActive(true);
+                case Interactable.InteractableType.Target:
+                    Interact();
+                    break;
+                case Interactable.InteractableType.Keycard:
+                    _menu.interactText.SetActive(true);
+                    break;
+                case Interactable.InteractableType.Lever:
+                    //whatever
+                    break;
             }
         }
-        // else
-        // {
-        //     if (_menu.interactText.activeSelf)
-        //     {
-        //         _menu.interactText.SetActive(false);
-        //     }
-        // }
     }
 
     public void Interact()
     {
         if (IsInteractableCloseEnough(GetClosestInteractable()))
         {
-            if (GetClosestInteractable().GetComponent<InteractableObject>().interactable.interactableType == Interactable.InteractableType.Target)
+            switch (GetClosestInteractable().GetComponent<InteractableObject>().interactable.interactableType)
             {
-                if (!IsGoalReached())
-                {
-                    return;
-                }
+                case Interactable.InteractableType.Target:
+                    if (IsGoalReached())
+                    {
+                        WinningEvent winningEvent = new WinningEvent()
+                        {
+                        };
+                        EventSystem.Current.FireEvent(winningEvent);
+                    }
+
+                    break;
+                case Interactable.InteractableType.Keycard:
+                    _menu.interactText.SetActive(true);
+                    break;
+                case Interactable.InteractableType.Lever:
+                    //whatever
+                    break;
             }
-            GetClosestInteractable().GetComponent<InteractableObject>().Interact();
         }
     }
 }

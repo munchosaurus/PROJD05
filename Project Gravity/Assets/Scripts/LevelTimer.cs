@@ -80,4 +80,9 @@ public class LevelTimer : MonoBehaviour
         milliSeconds = Mathf.Floor(timeToDisplay % 1 * 100);
         text.text = $"{minutes:00}:{seconds:00}:{milliSeconds:00}";
     }
+
+    public float GetTimePassed()
+    {
+        return levelTimer;
+    }
 }

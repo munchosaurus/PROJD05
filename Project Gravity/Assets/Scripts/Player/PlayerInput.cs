@@ -77,12 +77,9 @@ public class PlayerInput : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(Constants.LEVEL_LOAD_INPUT_PAUSE_TIME);
 
-        if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.tutorialIsOn)
+        if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
         {
-            if (GetComponent<UnityEngine.InputSystem.PlayerInput>().currentActionMap.name.Equals("PlayerControls"))
-            {
-                FindObjectOfType<IngameMenu>().ToggleActionMap();
-            }
+            FindObjectOfType<IngameMenu>().ToggleActionMap(true);
             GameObject.Find("Tutorial").GetComponent<Tutorial>().BeginTutorial();
         }
         else

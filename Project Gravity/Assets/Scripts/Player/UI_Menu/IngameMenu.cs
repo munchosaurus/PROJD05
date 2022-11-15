@@ -16,48 +16,64 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] public GameObject interactText;
     [SerializeField] private Texture2D customCursor;
     [SerializeField] private int previousMenu;
+    [SerializeField] private TMP_Text levelRecordText;
 
     [Header("Volume settings game objects")] [SerializeField]
     private Slider volumeSlider;
-    
+
     [SerializeField] private TMP_Text volumeText;
-    
+
     [Header("Speed settings game objects")] [SerializeField]
     private Slider speedSlider;
 
     [SerializeField] private TMP_Text speedText;
     private static Guid _playerDeathGuid;
+    private static Guid _playerSucceedsGuid;
     public AudioMixer globalMixer;
     private UnityEngine.InputSystem.PlayerInput _playerInput;
 
-    public void ToggleActionMap()
+    [Header("Tutorial toggle")] [SerializeField]
+    private Toggle tutorialToggle;
+
+    public void ToggleActionMap(bool paused)
     {
-        if (_playerInput != null)
+        if (paused)
         {
-            if (_playerInput.currentActionMap.name.Equals("PlayerControls"))
+            if (_playerInput != null)
             {
                 _playerInput.SwitchCurrentActionMap("MenuControls");
             }
-            else
+        }
+        else
+        {
+            if (_playerInput != null)
             {
                 _playerInput.SwitchCurrentActionMap("PlayerControls");
             }
         }
     }
-    
+
+    public void OnTutorialToggleValueChanged()
+    {
+        GameController.TutorialIsOn = tutorialToggle.isOn;
+    }
+
     private void Start()
     {
+        EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
         volumeSlider.onValueChanged.AddListener(delegate { OnVolumeValueChanged(); });
         speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
+        tutorialToggle.onValueChanged.AddListener(delegate { OnTutorialToggleValueChanged(); });
 
         volumeSlider.value = GameController.GlobalVolumeMultiplier;
         speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
-        
+        tutorialToggle.isOn = GameController.TutorialIsOn;
+
         volumeText.text = Mathf.Round(volumeSlider.value * 100.0f) + "%";
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
 
         _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
-        
+
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
@@ -66,7 +82,7 @@ public class IngameMenu : MonoBehaviour
 
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
 
-        if (FindObjectOfType<LevelSettings>().IsTutorialLevel())
+        if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
         {
             _playerInput.SwitchCurrentActionMap("MenuControls");
         }
@@ -74,8 +90,8 @@ public class IngameMenu : MonoBehaviour
         {
             _playerInput.SwitchCurrentActionMap("PlayerControls");
         }
-        
-        
+
+
         if (customCursor != null)
         {
             SetCustomCursor();
@@ -110,13 +126,13 @@ public class IngameMenu : MonoBehaviour
                 Debug.Log("Nice try David");
                 return;
             }
-        
+
             if (menus[0].gameObject.activeSelf)
             {
                 Unpause();
                 return;
-            } 
-        
+            }
+
             for (int i = 0; i < menus.Length; i++)
             {
                 if (menus[i].activeSelf)
@@ -152,12 +168,13 @@ public class IngameMenu : MonoBehaviour
                 }
             }
         }
+
         if (gameObject.transform.GetChild(0).gameObject.activeSelf)
         {
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
 
-        ToggleActionMap();
+        ToggleActionMap(false);
         SetCustomCursor();
         GameController.UnpauseGame();
     }
@@ -184,7 +201,7 @@ public class IngameMenu : MonoBehaviour
             }
         }
 
-        ToggleActionMap();
+        ToggleActionMap(true);
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         GameController.PauseGame();
     }
@@ -199,6 +216,19 @@ public class IngameMenu : MonoBehaviour
         GameController.PauseGame();
         yield return new WaitForSecondsRealtime(playerDeathEvent.DeathTime);
         Restart();
+    }
+
+    public void OnPlayerSucceedsLevel(WinningEvent winningEvent)
+    {
+        LevelCompletionTracker.SetLevelBest(SceneManager.GetActiveScene().buildIndex, FindObjectOfType<LevelTimer>().GetTimePassed());
+
+        float bestTime = LevelCompletionTracker.levelRecords[SceneManager.GetActiveScene().buildIndex];
+        
+        float minutes = Mathf.FloorToInt(bestTime / 60);
+        float seconds = Mathf.FloorToInt(bestTime % 60);
+        float milliSeconds = Mathf.Floor(bestTime % 1 * 100);
+        levelRecordText.text = $"{minutes:00}:{seconds:00}:{milliSeconds:00}";
+        Pause(1);
     }
 
     public void LoadScene(int scene)
@@ -313,7 +343,7 @@ public class IngameMenu : MonoBehaviour
 
         Pause(previousMenu);
     }
-    
+
     public void CloseLevelSelector()
     {
         if (menus[3].activeSelf)

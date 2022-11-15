@@ -24,8 +24,6 @@ public class InteractableObject : MonoBehaviour
         switch (interactable.interactableType)
         {
             case Interactable.InteractableType.Target:
-                FindObjectOfType<IngameMenu>().Pause(1);
-                
                 break;
             case Interactable.InteractableType.Keycard:
                 FindObjectOfType<KeycardLogic>().AddCollectedKeyCard(gameObject.GetInstanceID());
