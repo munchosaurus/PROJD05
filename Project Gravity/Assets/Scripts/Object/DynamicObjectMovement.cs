@@ -7,11 +7,11 @@ public class DynamicObjectMovement : MonoBehaviour
 {
     public Vector3 velocity;
     [SerializeField] private Vector3 horizontalCast, verticalCast;
-    [SerializeField] bool groundedRight;
-    [SerializeField] bool groundedLeft;
-    [SerializeField] bool groundedUp;
-    [SerializeField] bool groundedDown;
-    [SerializeField] private float friction;
+    // [SerializeField] bool groundedRight;
+    // [SerializeField] bool groundedLeft;
+    // [SerializeField] bool groundedUp;
+    // [SerializeField] bool groundedDown;
+    // [SerializeField] private float friction;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask magnetMask;
 
@@ -22,6 +22,7 @@ public class DynamicObjectMovement : MonoBehaviour
     private bool isGrounded;
     public bool lockedToMagnet;
     private Vector3 magnetPosition;
+    private const float ObjectCollisionGridClamp = 0.5f;
 
     private float magnetVel;
 
@@ -45,7 +46,7 @@ public class DynamicObjectMovement : MonoBehaviour
             MoveToMagnet();
         }
 
-        CheckForCollisions();
+        //CheckForCollisions();
         ApplyCollisions();
 
         transform.position += velocity * Time.fixedDeltaTime;
@@ -173,179 +174,157 @@ public class DynamicObjectMovement : MonoBehaviour
     }
 
 
-    private void CheckForCollisions()
-    {
-        groundedDown = false;
-        groundedUp = false;
-        groundedLeft = false;
-        groundedRight = false;
-        RaycastHit hit;
-        switch (velocity.y)
-        {
-            case < 0:
-            {
-                if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
-                        transform.localScale.y / 2, groundMask))
-                {
-                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
-                    {
-                        groundedDown = true;
-                        transform.position = new Vector3(transform.position.x,
-                            GetClosestGridCentre(transform.position.y), transform.position.z);
-                    }
+    // private void CheckForCollisions()
+    // {
+    //     groundedDown = false;
+    //     groundedUp = false;
+    //     groundedLeft = false;
+    //     groundedRight = false;
+    //     RaycastHit hit;
+    //     switch (velocity.y)
+    //     {
+    //         case < 0:
+    //         {
+    //             if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, transform.rotation,
+    //                     transform.localScale.y / 2, groundMask))
+    //             {
+    //                 if (!ShouldInheritMovement(hit.collider.gameObject, false))
+    //                 {
+    //                     groundedDown = true;
+    //                     // transform.position = new Vector3(transform.position.x,
+    //                     //     GetClosestGridCentre(transform.position.y), transform.position.z);
+    //                 }
+    //
+    //             }
+    //
+    //             break;
+    //         }
+    //         case > 0:
+    //         {
+    //             if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
+    //                     transform.localScale.y / 2, groundMask))
+    //             {
+    //                 ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.up,
+    //                     hit.distance, Color.green);
+    //                 if (!ShouldInheritMovement(hit.collider.gameObject, false))
+    //                 {
+    //                     groundedUp = true;
+    //                     // transform.position = new Vector3(transform.position.x,
+    //                     //     GetClosestGridCentre(transform.position.y), transform.position.z);
+    //                 }
+    //
+    //                 //CheckCollisionInMovement(Vector3.up);
+    //             }
+    //
+    //             break;
+    //         }
+    //     }
+    //
+    //     switch (velocity.x)
+    //     {
+    //         case > 0:
+    //         {
+    //             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
+    //                     transform.localScale.x / 2, groundMask))
+    //             {
+    //                 ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.right,
+    //                     hit.distance, Color.green);
+    //                 if (!ShouldInheritMovement(hit.collider.gameObject, true))
+    //                 {
+    //                     groundedRight = true;
+    //                     // transform.position = new Vector3(
+    //                     //     GetClosestGridCentre(transform.position.x),
+    //                     //     transform.position.y, OBJECT_Z);
+    //                 }
+    //
+    //                 // CheckCollisionInMovement(Vector3.right);
+    //             }
+    //
+    //             break;
+    //         }
+    //         case < 0:
+    //         {
+    //             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, transform.rotation,
+    //                     transform.localScale.x / 2, groundMask))
+    //             {
+    //                 ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.left,
+    //                     hit.distance, Color.green);
+    //                 if (!ShouldInheritMovement(hit.collider.gameObject, true))
+    //                 {
+    //                     groundedLeft = true;
+    //                     // transform.position = new Vector3(
+    //                     //     GetClosestGridCentre(transform.position.x),
+    //                     //     transform.position.y, OBJECT_Z);
+    //                 }
+    //             }
+    //
+    //             break;
+    //         }
+    //     }
+    // }
 
-                    CheckCollisionInMovement(Vector3.down);
-                }
-
-                break;
-            }
-            case > 0:
-            {
-                if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, transform.rotation,
-                        transform.localScale.y / 2, groundMask))
-                {
-                    ExtDebug.DrawBoxCastOnHit(transform.position, verticalCast, transform.rotation, Vector3.up,
-                        hit.distance, Color.green);
-                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
-                    {
-                        groundedUp = true;
-                        transform.position = new Vector3(transform.position.x,
-                            GetClosestGridCentre(transform.position.y), transform.position.z);
-                    }
-
-                    CheckCollisionInMovement(Vector3.up);
-                }
-
-                break;
-            }
-        }
-
-        switch (velocity.x)
-        {
-            case > 0:
-            {
-                if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, transform.rotation,
-                        transform.localScale.x / 2, groundMask))
-                {
-                    ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.right,
-                        hit.distance, Color.green);
-                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
-                    {
-                        groundedRight = true;
-                        transform.position = new Vector3(
-                            GetClosestGridCentre(transform.position.x),
-                            transform.position.y, OBJECT_Z);
-                    }
-
-                    CheckCollisionInMovement(Vector3.right);
-                }
-
-                break;
-            }
-            case < 0:
-            {
-                if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, transform.rotation,
-                        transform.localScale.x / 2, groundMask))
-                {
-                    ExtDebug.DrawBoxCastOnHit(transform.position, horizontalCast, transform.rotation, Vector3.left,
-                        hit.distance, Color.green);
-                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
-                    {
-                        groundedLeft = true;
-                        transform.position = new Vector3(
-                            GetClosestGridCentre(transform.position.x),
-                            transform.position.y, OBJECT_Z);
-                    }
-
-                    CheckCollisionInMovement(Vector3.left);
-                }
-
-                break;
-            }
-        }
-    }
-
-    private float GetClosestGridCentre(float origin)
-    {
-        if (Math.Abs(origin) > Math.Abs(Math.Round(origin)))
-        {
-            if (origin > 0)
-            {
-                return (float) Math.Round(Math.Abs(origin));
-            }
-
-            if (origin < 0)
-            {
-                return -((float) Math.Round(Math.Abs(origin)));
-            }
-        }
-        else
-        {
-            if (origin > 0)
-            {
-                return (float) Math.Round(Math.Abs(origin));
-            }
-
-            if (origin < 0)
-            {
-                return -((float) Math.Round(Math.Abs(origin)));
-            }
-        }
-
-        return origin;
-    }
-
+    /*
+    * Dampens movement if needed, will check if the current velocity will place the player within a cube.
+    * Also calls upon method handling collision sounds.
+    */
     private void ApplyCollisions()
     {
-        if ((groundedDown && velocity.y < 0) || (groundedUp && velocity.y > 0))
+        RaycastHit hit;
+        Vector3 nextPos = transform.position + (velocity * Time.fixedDeltaTime);
+        if (velocity.y < 0)
         {
-            velocity.y = 0;
-        }
-
-        if ((groundedLeft && velocity.x < 0) || (groundedRight && velocity.x > 0))
-        {
-            velocity.x = 0;
-        }
-    }
-
-    private void ApplyFriction()
-    {
-        if (groundedDown || groundedUp)
-        {
-            if (velocity.x > 0)
+            if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
+                    Mathf.Abs(transform.position.y - nextPos.y) + ObjectCollisionGridClamp, groundMask))
             {
-                velocity.x -= friction * Time.fixedDeltaTime;
-                if (velocity.x < 0)
+                if (Math.Abs(transform.position.y - nextPos.y) < Math.Abs(transform.position.y - hit.point.y))
                 {
-                    velocity.x = 0;
-                }
-            }
-            else if (velocity.x < 0)
-            {
-                velocity.x += friction * Time.fixedDeltaTime;
-                if (velocity.x > 0)
-                {
-                    velocity.x = 0;
-                }
-            }
-        }
-
-        if (groundedLeft || groundedRight)
-        {
-            if (velocity.y > 0)
-            {
-                velocity.y -= friction * Time.fixedDeltaTime;
-                if (velocity.y < 0)
-                {
+                    CheckCollisionInMovement(Vector3.down);
+                    transform.position = new Vector3(transform.position.x, hit.point.y + ObjectCollisionGridClamp,
+                        transform.position.z);
                     velocity.y = 0;
                 }
             }
-            else if (velocity.y < 0)
+        }
+        else if (velocity.y > 0)
+        {
+            if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
+                    Mathf.Abs(transform.position.y - nextPos.y) + ObjectCollisionGridClamp, groundMask))
             {
-                velocity.y += friction * Time.fixedDeltaTime;
-                if (velocity.y > 0)
+                if (Math.Abs(transform.position.y - nextPos.y) < Math.Abs(transform.position.y - hit.point.y))
                 {
+                    CheckCollisionInMovement(Vector3.up);
+                    transform.position = new Vector3(transform.position.x, hit.point.y - ObjectCollisionGridClamp,
+                        transform.position.z);
                     velocity.y = 0;
+                }
+            }
+        }
+
+        if (velocity.x < 0)
+        {
+            if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
+                    Mathf.Abs(transform.position.x - nextPos.x) + ObjectCollisionGridClamp, groundMask))
+            {
+                if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.y))
+                {
+                    CheckCollisionInMovement(Vector3.left);
+                    transform.position = new Vector3(hit.point.x + ObjectCollisionGridClamp, transform.position.y,
+                        transform.position.z);
+                    velocity.x = 0;
+                }
+            }
+        }
+        else if (velocity.x > 0)
+        {
+            if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
+                    Mathf.Abs(transform.position.x - nextPos.x) + ObjectCollisionGridClamp, groundMask))
+            {
+                if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.x))
+                {
+                    CheckCollisionInMovement(Vector3.right);
+                    transform.position = new Vector3(hit.point.x - ObjectCollisionGridClamp, transform.position.y,
+                        transform.position.z);
+                    velocity.x = 0;
                 }
             }
         }

@@ -29,9 +29,10 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private float _maxVelocity;
     [SerializeField] private float _acceleration;
     [SerializeField] private bool isTutorialLevel;
-    private float walkingDefaultVolume;
-    private const float GRID_CLAMP_THRESHOLD = 0.02f;
     private AudioSource _audioSource;
+    private float walkingDefaultVolume;
+    private const float GridClampThreshold = 0.02f;
+    private const float PlayerCollisionGridClamp = 0.5f;
 
     private readonly float OBJECT_Z = 1;
 
@@ -98,7 +99,7 @@ public class PlayerInput : MonoBehaviour
     {
         Vector3 newPosition = transform.position;
         if (Math.Abs(gameObject.transform.position.x - Math.Round(gameObject.transform.position.x)) <
-            GRID_CLAMP_THRESHOLD && !GravityController.IsGravityHorizontal())
+            GridClampThreshold && !GravityController.IsGravityHorizontal())
         {
             newPosition.x = Mathf.Round(transform.position.x);
         }
@@ -205,7 +206,8 @@ public class PlayerInput : MonoBehaviour
         {
             raycastHits = Physics.BoxCastAll(transform.position, verticalCast, direction,
                 Quaternion.identity,
-                transform.localScale.y / 2, soundCollisionMask, QueryTriggerInteraction.UseGlobal);
+                Mathf.Abs(transform.position.y - (transform.position + (velocity * Time.fixedDeltaTime)).y) +
+                PlayerCollisionGridClamp, soundCollisionMask, QueryTriggerInteraction.UseGlobal);
             foreach (var collision in raycastHits)
             {
                 if (collision.transform.GetComponentInParent<DynamicObjectMovement>())
@@ -273,11 +275,7 @@ public class PlayerInput : MonoBehaviour
                     if (!ShouldInheritMovement(hit.collider.gameObject, false))
                     {
                         groundedDown = true;
-                        transform.position = new Vector3(transform.position.x,
-                            GetClosestGridCentre(transform.position.y), transform.position.z);
                     }
-
-                    CheckCollisionInMovement(Vector3.down);
                 }
 
                 break;
@@ -290,11 +288,7 @@ public class PlayerInput : MonoBehaviour
                     if (!ShouldInheritMovement(hit.collider.gameObject, false))
                     {
                         groundedUp = true;
-                        transform.position = new Vector3(transform.position.x,
-                            GetClosestGridCentre(transform.position.y), transform.position.z);
                     }
-
-                    CheckCollisionInMovement(Vector3.up);
                 }
 
                 break;
@@ -311,12 +305,7 @@ public class PlayerInput : MonoBehaviour
                     if (!ShouldInheritMovement(hit.collider.gameObject, true))
                     {
                         groundedRight = true;
-                        transform.position = new Vector3(
-                            GetClosestGridCentre(transform.position.x),
-                            transform.position.y, OBJECT_Z);
                     }
-
-                    CheckCollisionInMovement(Vector3.right);
                 }
 
                 break;
@@ -329,12 +318,7 @@ public class PlayerInput : MonoBehaviour
                     if (!ShouldInheritMovement(hit.collider.gameObject, true))
                     {
                         groundedLeft = true;
-                        transform.position = new Vector3(
-                            GetClosestGridCentre(transform.position.x),
-                            transform.position.y, OBJECT_Z);
                     }
-
-                    CheckCollisionInMovement(Vector3.left);
                 }
 
                 break;
@@ -372,6 +356,10 @@ public class PlayerInput : MonoBehaviour
         return origin;
     }
 
+    /*
+     * Dampens movement if needed, will check if the current velocity will place the player within a cube.
+     * Also calls upon method handling collision sounds.
+     */
     private void ApplyCollisions()
     {
         RaycastHit hit;
@@ -379,12 +367,13 @@ public class PlayerInput : MonoBehaviour
         if (velocity.y < 0)
         {
             if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
-                    Mathf.Abs(transform.position.y - nextPos.y) + 0.5f, groundMask))
+                    Mathf.Abs(transform.position.y - nextPos.y) + PlayerCollisionGridClamp, groundMask))
             {
-                if (transform.position.y - nextPos.y < transform.position.y - hit.point.y)
+                if (Math.Abs(transform.position.y - nextPos.y) < Math.Abs(transform.position.y - hit.point.y))
                 {
-                    
-                    transform.position = new Vector3(transform.position.x, hit.point.y + 0.5f, transform.position.z);
+                    CheckCollisionInMovement(Vector3.down);
+                    transform.position = new Vector3(transform.position.x, hit.point.y + PlayerCollisionGridClamp,
+                        transform.position.z);
                     velocity.y = 0;
                 }
             }
@@ -392,24 +381,28 @@ public class PlayerInput : MonoBehaviour
         else if (velocity.y > 0)
         {
             if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
-                    Mathf.Abs(transform.position.y - nextPos.y) + 0.5f, groundMask))
+                    Mathf.Abs(transform.position.y - nextPos.y) + PlayerCollisionGridClamp, groundMask))
             {
                 if (Math.Abs(transform.position.y - nextPos.y) < Math.Abs(transform.position.y - hit.point.y))
                 {
-                    transform.position = new Vector3(transform.position.x, hit.point.y - 0.5f, transform.position.z);
+                    CheckCollisionInMovement(Vector3.up);
+                    transform.position = new Vector3(transform.position.x, hit.point.y - PlayerCollisionGridClamp,
+                        transform.position.z);
                     velocity.y = 0;
                 }
             }
         }
-        
+
         if (velocity.x < 0)
         {
             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
-                    Mathf.Abs(transform.position.x - nextPos.x) + 0.5f, groundMask))
+                    Mathf.Abs(transform.position.x - nextPos.x) + PlayerCollisionGridClamp, groundMask))
             {
                 if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.y))
                 {
-                    transform.position = new Vector3(hit.point.x + 0.5f, transform.position.y , transform.position.z);
+                    CheckCollisionInMovement(Vector3.left);
+                    transform.position = new Vector3(hit.point.x + PlayerCollisionGridClamp, transform.position.y,
+                        transform.position.z);
                     velocity.x = 0;
                 }
             }
@@ -417,16 +410,17 @@ public class PlayerInput : MonoBehaviour
         else if (velocity.x > 0)
         {
             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
-                    Mathf.Abs(transform.position.x - nextPos.x) + 0.5f, groundMask))
+                    Mathf.Abs(transform.position.x - nextPos.x) + PlayerCollisionGridClamp, groundMask))
             {
                 if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.x))
                 {
-                    transform.position = new Vector3(hit.point.x - 0.5f, transform.position.y , transform.position.z);
+                    CheckCollisionInMovement(Vector3.right);
+                    transform.position = new Vector3(hit.point.x - PlayerCollisionGridClamp, transform.position.y,
+                        transform.position.z);
                     velocity.x = 0;
                 }
             }
         }
-        
     }
 
     private void MovePlayer()
@@ -466,7 +460,6 @@ public class PlayerInput : MonoBehaviour
             }
             else
             {
-                //_audioSource.volume = GameController.GlobalVolumeMultiplier * walkingDefaultVolume;
                 _audioSource.mute = false;
             }
         }
