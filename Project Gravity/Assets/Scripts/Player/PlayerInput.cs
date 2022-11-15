@@ -58,7 +58,7 @@ public class PlayerInput : MonoBehaviour
 
         velocity += Physics.gravity * Time.fixedDeltaTime;
         MovePlayer();
-        CheckForCollisions();
+        //CheckForCollisions();
         ApplyCollisions();
 
         transform.position += velocity * Time.fixedDeltaTime;
@@ -362,6 +362,10 @@ public class PlayerInput : MonoBehaviour
      */
     private void ApplyCollisions()
     {
+        groundedDown = false;
+        groundedUp = false;
+        groundedLeft = false;
+        groundedRight = false;
         RaycastHit hit;
         Vector3 nextPos = transform.position + (velocity * Time.fixedDeltaTime);
         if (velocity.y < 0)
@@ -371,6 +375,10 @@ public class PlayerInput : MonoBehaviour
             {
                 if (Math.Abs(transform.position.y - nextPos.y) < Math.Abs(transform.position.y - hit.point.y))
                 {
+                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                    {
+                        groundedDown = true;
+                    }
                     CheckCollisionInMovement(Vector3.down);
                     transform.position = new Vector3(transform.position.x, hit.point.y + PlayerCollisionGridClamp,
                         transform.position.z);
@@ -385,6 +393,10 @@ public class PlayerInput : MonoBehaviour
             {
                 if (Math.Abs(transform.position.y - nextPos.y) < Math.Abs(transform.position.y - hit.point.y))
                 {
+                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
+                    {
+                        groundedUp = true;
+                    }
                     CheckCollisionInMovement(Vector3.up);
                     transform.position = new Vector3(transform.position.x, hit.point.y - PlayerCollisionGridClamp,
                         transform.position.z);
@@ -400,6 +412,10 @@ public class PlayerInput : MonoBehaviour
             {
                 if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.y))
                 {
+                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                    {
+                        groundedLeft = true;
+                    }
                     CheckCollisionInMovement(Vector3.left);
                     transform.position = new Vector3(hit.point.x + PlayerCollisionGridClamp, transform.position.y,
                         transform.position.z);
@@ -414,6 +430,10 @@ public class PlayerInput : MonoBehaviour
             {
                 if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.x))
                 {
+                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
+                    {
+                        groundedRight = true;
+                    }
                     CheckCollisionInMovement(Vector3.right);
                     transform.position = new Vector3(hit.point.x - PlayerCollisionGridClamp, transform.position.y,
                         transform.position.z);
