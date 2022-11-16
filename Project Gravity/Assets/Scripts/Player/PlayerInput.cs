@@ -200,7 +200,6 @@ public class PlayerInput : MonoBehaviour
 
     private void CheckCollisionInMovement(Vector3 direction)
     {
-        Debug.Log(velocity.x);
         List<int> layers = new List<int>();
         RaycastHit[] raycastHits = new RaycastHit[0];
         if (direction.y != 0 && Math.Abs(velocity.y) >
@@ -229,7 +228,6 @@ public class PlayerInput : MonoBehaviour
         else if (direction.x != 0 && Math.Abs(velocity.x) >
                  Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
         {
-            Debug.Log("äntrar horizontal");
             raycastHits = Physics.BoxCastAll(transform.position, horizontalCast, direction,
                 Quaternion.identity,
                 Mathf.Abs(transform.position.x - (transform.position + (velocity * Time.fixedDeltaTime)).x) +
@@ -253,10 +251,6 @@ public class PlayerInput : MonoBehaviour
 
         if (layers.Count > 0)
         {
-            foreach (var VARIABLE in layers)
-            {
-                Debug.Log(VARIABLE);
-            }
             Event collisionEvent = new CollisionEvent()
             {
                 SourceGameObject = gameObject,
