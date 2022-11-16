@@ -194,11 +194,6 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   horizontalCast: {x: 0.05, y: 0.49, z: 0.49}
   verticalCast: {x: 0.49, y: 0.05, z: 0.49}
-  groundedRight: 0
-  groundedLeft: 0
-  groundedUp: 0
-  groundedDown: 0
-  friction: 50
   groundMask:
     serializedVersion: 2
     m_Bits: 2176
@@ -229,7 +224,7 @@ AudioSource:
   m_GameObject: {fileID: 8165094197702842839}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 03449f5ef8b7b5849a3d81db028eb968, type: 2}
+  OutputAudioMixerGroup: {fileID: -2520070580912996039, guid: 03449f5ef8b7b5849a3d81db028eb968, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.5
@@ -276,7 +271,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

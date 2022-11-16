@@ -260,103 +260,103 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void CheckForCollisions()
-    {
-        groundedDown = false;
-        groundedUp = false;
-        groundedLeft = false;
-        groundedRight = false;
-        RaycastHit hit;
-        switch (velocity.y)
-        {
-            case < 0:
-            {
-                if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
-                        transform.localScale.y / 2, groundMask))
-                {
-                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
-                    {
-                        groundedDown = true;
-                    }
-                }
-
-                break;
-            }
-            case > 0:
-            {
-                if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
-                        transform.localScale.y / 2, groundMask))
-                {
-                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
-                    {
-                        groundedUp = true;
-                    }
-                }
-
-                break;
-            }
-        }
-
-        switch (velocity.x)
-        {
-            case > 0:
-            {
-                if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
-                        transform.localScale.x / 2, groundMask))
-                {
-                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
-                    {
-                        groundedRight = true;
-                    }
-                }
-
-                break;
-            }
-            case < 0:
-            {
-                if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
-                        transform.localScale.x / 2, groundMask))
-                {
-                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
-                    {
-                        groundedLeft = true;
-                    }
-                }
-
-                break;
-            }
-        }
-    }
-
-    private float GetClosestGridCentre(float origin)
-    {
-        if (Math.Abs(origin) > Math.Abs(Math.Round(origin)))
-        {
-            if (origin > 0)
-            {
-                return (float) Math.Round(Math.Abs(origin));
-            }
-
-            if (origin < 0)
-            {
-                return -((float) Math.Round(Math.Abs(origin)));
-            }
-        }
-        else
-        {
-            if (origin > 0)
-            {
-                return (float) Math.Round(Math.Abs(origin));
-            }
-
-            if (origin < 0)
-            {
-                return -((float) Math.Round(Math.Abs(origin)));
-            }
-        }
-
-        return origin;
-    }
+    // private void CheckForCollisions()
+    // {
+    //     groundedDown = false;
+    //     groundedUp = false;
+    //     groundedLeft = false;
+    //     groundedRight = false;
+    //     RaycastHit hit;
+    //     switch (velocity.y)
+    //     {
+    //         case < 0:
+    //         {
+    //             if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
+    //                     transform.localScale.y / 2, groundMask))
+    //             {
+    //                 if (!ShouldInheritMovement(hit.collider.gameObject, false))
+    //                 {
+    //                     groundedDown = true;
+    //                 }
+    //             }
+    //
+    //             break;
+    //         }
+    //         case > 0:
+    //         {
+    //             if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
+    //                     transform.localScale.y / 2, groundMask))
+    //             {
+    //                 if (!ShouldInheritMovement(hit.collider.gameObject, false))
+    //                 {
+    //                     groundedUp = true;
+    //                 }
+    //             }
+    //
+    //             break;
+    //         }
+    //     }
+    //
+    //     switch (velocity.x)
+    //     {
+    //         case > 0:
+    //         {
+    //             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
+    //                     transform.localScale.x / 2, groundMask))
+    //             {
+    //                 if (!ShouldInheritMovement(hit.collider.gameObject, true))
+    //                 {
+    //                     groundedRight = true;
+    //                 }
+    //             }
+    //
+    //             break;
+    //         }
+    //         case < 0:
+    //         {
+    //             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
+    //                     transform.localScale.x / 2, groundMask))
+    //             {
+    //                 if (!ShouldInheritMovement(hit.collider.gameObject, true))
+    //                 {
+    //                     groundedLeft = true;
+    //                 }
+    //             }
+    //
+    //             break;
+    //         }
+    //     }
+    // }
+    //
+    // private float GetClosestGridCentre(float origin)
+    // {
+    //     if (Math.Abs(origin) > Math.Abs(Math.Round(origin)))
+    //     {
+    //         if (origin > 0)
+    //         {
+    //             return (float) Math.Round(Math.Abs(origin));
+    //         }
+    //
+    //         if (origin < 0)
+    //         {
+    //             return -((float) Math.Round(Math.Abs(origin)));
+    //         }
+    //     }
+    //     else
+    //     {
+    //         if (origin > 0)
+    //         {
+    //             return (float) Math.Round(Math.Abs(origin));
+    //         }
+    //
+    //         if (origin < 0)
+    //         {
+    //             return -((float) Math.Round(Math.Abs(origin)));
+    //         }
+    //     }
+    //
+    //     return origin;
+    // }
 
     /*
      * Dampens movement if needed, will check if the current velocity will place the player within a cube.
@@ -507,7 +507,7 @@ public class PlayerInput : MonoBehaviour
             }
             else
             {
-                _audioSource.volume = GameController.GlobalVolumeMultiplier * walkingDefaultVolume;
+                //_audioSource.volume = GameController.MasterVolumeMultiplier * walkingDefaultVolume;
                 _audioSource.mute = false;
             }
         }

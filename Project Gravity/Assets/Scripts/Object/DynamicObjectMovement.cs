@@ -6,7 +6,9 @@ using UnityEngine;
 public class DynamicObjectMovement : MonoBehaviour
 {
     public Vector3 velocity;
+
     [SerializeField] private Vector3 horizontalCast, verticalCast;
+
     // [SerializeField] bool groundedRight;
     // [SerializeField] bool groundedLeft;
     // [SerializeField] bool groundedUp;
@@ -16,6 +18,7 @@ public class DynamicObjectMovement : MonoBehaviour
     [SerializeField] private LayerMask magnetMask;
 
     public float collisionDefaultVolume;
+
     //private readonly float OBJECT_Z = 1;
     private Quaternion lockedRotation;
     private Vector3 boxCastDimensions;
@@ -107,11 +110,14 @@ public class DynamicObjectMovement : MonoBehaviour
     private void CheckCollisionInMovement(Vector3 direction)
     {
         RaycastHit[] raycastHits;
-        if (direction.y != 0 && Math.Abs(velocity.y) > Constants.COLLISION_SPEED_THRESHOLD)
+        if (direction.y != 0 && Math.Abs(velocity.y) >
+            Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
         {
+            Debug.Log("Kommer in i checkcollision");
             raycastHits = Physics.BoxCastAll(transform.position, verticalCast, direction,
                 Quaternion.identity,
-                transform.localScale.y / 2, groundMask, QueryTriggerInteraction.UseGlobal);
+                Mathf.Abs(transform.position.y - (transform.position + (velocity * Time.fixedDeltaTime)).y) +
+                ObjectCollisionGridClamp, groundMask, QueryTriggerInteraction.UseGlobal);
             foreach (var collision in raycastHits)
             {
                 if (collision.transform.gameObject.GetComponentInParent<PlayerInput>())
@@ -126,7 +132,9 @@ public class DynamicObjectMovement : MonoBehaviour
                 {
                     if (Math.Abs(
                             collision.transform.gameObject.GetComponentInParent<DynamicObjectMovement>().velocity.y) >
-                        Constants.COLLISION_SPEED_THRESHOLD)
+                        Constants.COLLISION_SPEED_THRESHOLD &&
+                        collision.transform.GetComponentInParent<DynamicObjectMovement>().GetInstanceID() !=
+                        GetComponentInParent<DynamicObjectMovement>().GetInstanceID())
                     {
                         return;
                     }
@@ -139,11 +147,13 @@ public class DynamicObjectMovement : MonoBehaviour
             };
             EventSystem.Current.FireEvent(collisionEvent);
         }
-        else if (direction.x != 0 && Math.Abs(velocity.x) > Constants.COLLISION_SPEED_THRESHOLD)
+        else if (direction.x != 0 && Math.Abs(velocity.x) >
+                 Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
         {
             raycastHits = Physics.BoxCastAll(transform.position, horizontalCast, direction,
                 Quaternion.identity,
-                transform.localScale.y / 2, groundMask, QueryTriggerInteraction.UseGlobal);
+                Mathf.Abs(transform.position.x - (transform.position + (velocity * Time.fixedDeltaTime)).x) +
+                ObjectCollisionGridClamp, groundMask, QueryTriggerInteraction.UseGlobal);
             foreach (var collision in raycastHits)
             {
                 if (collision.transform.gameObject.GetComponentInParent<PlayerInput>())
