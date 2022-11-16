@@ -10,6 +10,8 @@ public static class GameController
     public static float MusicVolumeMultiplier = 1f;
     public static float EffectsVolumeMultiplier = 1f;
     public static float DialogueVolumeMultiplier = 1f;
+    public static int CurrentControlSchemeIndex = 0;
+    
     public static float GlobalSpeedMultiplier = 1f;
     public static bool TutorialIsOn = true;
 

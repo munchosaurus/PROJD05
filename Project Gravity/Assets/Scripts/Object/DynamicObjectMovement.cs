@@ -48,8 +48,6 @@ public class DynamicObjectMovement : MonoBehaviour
         {
             MoveToMagnet();
         }
-
-        //CheckForCollisions();
         ApplyCollisions();
 
         transform.position += velocity * Time.fixedDeltaTime;
@@ -113,7 +111,6 @@ public class DynamicObjectMovement : MonoBehaviour
         if (direction.y != 0 && Math.Abs(velocity.y) >
             Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
         {
-            Debug.Log("Kommer in i checkcollision");
             raycastHits = Physics.BoxCastAll(transform.position, verticalCast, direction,
                 Quaternion.identity,
                 Mathf.Abs(transform.position.y - (transform.position + (velocity * Time.fixedDeltaTime)).y) +
@@ -182,8 +179,7 @@ public class DynamicObjectMovement : MonoBehaviour
             EventSystem.Current.FireEvent(collisionEvent);
         }
     }
-
-
+    
     // private void CheckForCollisions()
     // {
     //     groundedDown = false;
