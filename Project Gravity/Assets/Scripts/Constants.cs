@@ -40,6 +40,6 @@ public static class Constants
     public const float PLAYER_DEATH_TIME = 1f;
     
     // Global speeds
-    public const float COLLISION_SPEED_THRESHOLD = 5;
+    public const float COLLISION_SPEED_THRESHOLD = 4f;
 
 }
