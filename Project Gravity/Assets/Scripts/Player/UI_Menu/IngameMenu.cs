@@ -104,8 +104,8 @@ public class IngameMenu : MonoBehaviour
         tutorialToggle.onValueChanged.AddListener(delegate { OnTutorialToggleValueChanged(); });
 
         // Controls
-        controlSchemeSlider.onValueChanged.AddListener(delegate { OnInputSchemeChanged(); });
-        controlSchemeSlider.value = GameController.CurrentControlSchemeIndex;
+        // controlSchemeSlider.onValueChanged.AddListener(delegate { OnInputSchemeChanged(); });
+        // controlSchemeSlider.value = GameController.CurrentControlSchemeIndex;
 
         _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
 
