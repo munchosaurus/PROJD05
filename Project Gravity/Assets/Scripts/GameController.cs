@@ -6,11 +6,13 @@ using UnityEngine;
 public static class GameController
 {
     private static bool _inputLocked = true;
+    public static int CurrentControlSchemeIndex = 0;
     public static float MasterVolumeMultiplier = 1f;
     public static float MusicVolumeMultiplier = 1f;
     public static float EffectsVolumeMultiplier = 1f;
     public static float DialogueVolumeMultiplier = 1f;
-    public static int CurrentControlSchemeIndex = 0;
+    public static bool GlobalSoundIsOn = true;
+    public static bool fullscreenOn = true;
     
     public static float GlobalSpeedMultiplier = 1f;
     public static bool TutorialIsOn = true;
