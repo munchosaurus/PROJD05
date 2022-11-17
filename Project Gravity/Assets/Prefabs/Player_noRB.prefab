@@ -13374,12 +13374,12 @@ MonoBehaviour:
   soundCollisionMask:
     serializedVersion: 2
     m_Bits: 17088
-  _groundCheckDimensions: {x: 0.499, y: 0.05, z: 0.499}
-  _roofCheckDimensions: {x: 0.499, y: 0.05, z: 0.499}
-  _airMovementMultiplier: 0.7
-  _jumpForce: 8
-  _maxVelocity: 5
-  _acceleration: 10
+  groundCheckDimensions: {x: 0.499, y: 0.05, z: 0.499}
+  roofCheckDimensions: {x: 0.499, y: 0.05, z: 0.499}
+  airMovementMultiplier: 0.7
+  jumpForce: 8
+  maxVelocity: 5
+  acceleration: 10
 --- !u!114 &5558133775299111569
 MonoBehaviour:
   m_ObjectHideFlags: 0
