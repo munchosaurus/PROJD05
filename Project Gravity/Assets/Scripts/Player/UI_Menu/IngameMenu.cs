@@ -25,6 +25,8 @@ public class IngameMenu : MonoBehaviour
     [Header("Volume settings game objects")] [SerializeField]
     private Slider masterVolumeSlider;
 
+    [SerializeField] private Toggle globalSoundToggle;
+
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider effectsVolumeSlider;
     [SerializeField] private Slider dialogueVolumeSlider;
@@ -56,6 +58,9 @@ public class IngameMenu : MonoBehaviour
     [TextArea] public string[] gravityGunTexts;
     [SerializeField] private Sprite[] movementImages;
     [SerializeField] private Sprite[] gravityGunImages;
+
+    [Header("Screen mode")] [SerializeField]
+    private Toggle fullscreenToggle; 
 
 
     public void ToggleActionMap(bool paused)
@@ -91,17 +96,20 @@ public class IngameMenu : MonoBehaviour
         musicVolumeSlider.onValueChanged.AddListener(delegate { OnMusicVolumeValueChanged(); });
         effectsVolumeSlider.onValueChanged.AddListener(delegate { OnEffectsVolumeValueChanged(); });
         dialogueVolumeSlider.onValueChanged.AddListener(delegate { OnDialogueVolumeValueChanged(); });
-
+        globalSoundToggle.onValueChanged.AddListener(delegate { OnSoundToggleChanged(); });
+        
         masterVolumeSlider.value = GameController.MasterVolumeMultiplier;
         musicVolumeSlider.value = GameController.MusicVolumeMultiplier;
         effectsVolumeSlider.value = GameController.EffectsVolumeMultiplier;
         dialogueVolumeSlider.value = GameController.DialogueVolumeMultiplier;
+        globalSoundToggle.isOn = GameController.GlobalSoundIsOn;
 
         masterVolumeText.text = Mathf.Round(masterVolumeSlider.value * 100.0f) + "%";
         musicVolumeText.text = Mathf.Round(musicVolumeSlider.value * 100.0f) + "%";
         effectsVolumeText.text = Mathf.Round(effectsVolumeSlider.value * 100.0f) + "%";
         dialogueVolumeText.text = Mathf.Round(dialogueVolumeSlider.value * 100.0f) + "%";
 
+        OnSoundToggleChanged();
 
         // Speed
         speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
@@ -126,8 +134,12 @@ public class IngameMenu : MonoBehaviour
             controllerSchemeToggle.interactable = false;
             mouseSchemeToggle.isOn = false;
         }
-
         SetControlImagesAndTexts();
+        
+        // Screen mode
+        fullscreenToggle.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
+        
+        fullscreenToggle.isOn = GameController.fullscreenOn;
         
         _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
 
@@ -150,6 +162,27 @@ public class IngameMenu : MonoBehaviour
         if (customCursor != null)
         {
             SetCustomCursor();
+        }
+    }
+
+    public void OnFullScreenToggleChanged()
+    {
+        GameController.fullscreenOn = !GameController.fullscreenOn;
+        Screen.fullScreen = GameController.fullscreenOn;
+        fullscreenToggle.isOn = GameController.fullscreenOn;
+    }
+
+    public void OnSoundToggleChanged()
+    {
+        GameController.GlobalSoundIsOn = globalSoundToggle.isOn;
+
+        if (GameController.GlobalSoundIsOn)
+        {
+            globalMixer.SetFloat("Master", Mathf.Log(GameController.MasterVolumeMultiplier) * 20f);
+        }
+        else
+        {
+            globalMixer.SetFloat("Master", Mathf.Log(0.001f) * 20f);
         }
     }
 
