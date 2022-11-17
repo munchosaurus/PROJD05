@@ -138,7 +138,6 @@ public class IngameMenu : MonoBehaviour
         
         // Screen mode
         fullscreenToggle.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
-        
         fullscreenToggle.isOn = GameController.fullscreenOn;
         
         _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
