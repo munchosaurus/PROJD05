@@ -46,8 +46,16 @@ public class IngameMenu : MonoBehaviour
     [Header("Tutorial toggle")] [SerializeField]
     private Toggle tutorialToggle;
 
-    [Header("Controls")] [SerializeField] private TMP_Text currentControlScheme;
-    [SerializeField] private Slider controlSchemeSlider;
+    [Header("Controls")] [SerializeField] private TMP_Text movementControlSchemeText;
+    [SerializeField] private TMP_Text gravityGunControlSchemeText;
+    [SerializeField] private Image movementControlImage;
+    [SerializeField] private Image gravityGunControlImage;
+    [SerializeField] private Toggle mouseSchemeToggle;
+    [SerializeField] private Toggle controllerSchemeToggle;
+    [TextArea] public string[] movementTexts;
+    [TextArea] public string[] gravityGunTexts;
+    [SerializeField] private Sprite[] movementImages;
+    [SerializeField] private Sprite[] gravityGunImages;
 
 
     public void ToggleActionMap(bool paused)
@@ -104,9 +112,23 @@ public class IngameMenu : MonoBehaviour
         tutorialToggle.onValueChanged.AddListener(delegate { OnTutorialToggleValueChanged(); });
 
         // Controls
-        // controlSchemeSlider.onValueChanged.AddListener(delegate { OnInputSchemeChanged(); });
-        // controlSchemeSlider.value = GameController.CurrentControlSchemeIndex;
+        controllerSchemeToggle.onValueChanged.AddListener(delegate{ OnControllerSchemeSelected(); });
+        mouseSchemeToggle.onValueChanged.AddListener(delegate { OnMouseSchemeSelected(); });
+        if (GameController.CurrentControlSchemeIndex == 0)
+        {
+            controllerSchemeToggle.isOn = false;
+            mouseSchemeToggle.interactable = false;
+            mouseSchemeToggle.isOn = true;
+        }
+        else
+        {
+            controllerSchemeToggle.isOn = true;
+            controllerSchemeToggle.interactable = false;
+            mouseSchemeToggle.isOn = false;
+        }
 
+        SetControlImagesAndTexts();
+        
         _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
 
         if (SceneManager.GetActiveScene().buildIndex == 0)
@@ -165,25 +187,38 @@ public class IngameMenu : MonoBehaviour
         GravityController.SetNewGravity(GravityController.GetCurrentFacing());
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
     }
-    
-    
-    public void OnInputSchemeChanged()
+
+    public void OnMouseSchemeSelected()
     {
-        GameController.CurrentControlSchemeIndex = (int) controlSchemeSlider.value;
-        if (GameController.CurrentControlSchemeIndex == 0)
+        if (mouseSchemeToggle.isOn)
         {
-            // TODO 
-            // Set input to mouse and keyboard
-            currentControlScheme.text = "Mouse & Keyboard";
-            
-        }
-        else
-        {
-            // TODO 
-            // Set input to controller
-            currentControlScheme.text = "Controller";
+            mouseSchemeToggle.interactable = false;
+            controllerSchemeToggle.interactable = true;
+            controllerSchemeToggle.isOn = false;
+            GameController.CurrentControlSchemeIndex = 0;
+            SetControlImagesAndTexts();
         }
         
+    }
+
+    public void OnControllerSchemeSelected()
+    {
+        if (controllerSchemeToggle.isOn)
+        {
+            controllerSchemeToggle.interactable = false;
+            mouseSchemeToggle.interactable = true;
+            mouseSchemeToggle.isOn = false;
+            GameController.CurrentControlSchemeIndex = 1;
+            SetControlImagesAndTexts();
+        }
+    }
+
+    private void SetControlImagesAndTexts()
+    {
+        movementControlSchemeText.text = movementTexts[GameController.CurrentControlSchemeIndex];
+        gravityGunControlSchemeText.text = gravityGunTexts[GameController.CurrentControlSchemeIndex];
+        movementControlImage.sprite = movementImages[GameController.CurrentControlSchemeIndex];
+        gravityGunControlImage.sprite = gravityGunImages[GameController.CurrentControlSchemeIndex];
     }
 
     void SetCustomCursor()
