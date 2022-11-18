@@ -60,6 +60,11 @@ public class IngameMenu : MonoBehaviour
 
     [Header("Screen mode")] [SerializeField]
     private TMP_Dropdown fullscreenDropdown;
+    
+    [Header("Level Container settings")]
+    [SerializeField] private LevelContainer[] _levelContainers;
+    [SerializeField] private GameObject scrollviewObjectTemplate;
+    [SerializeField] private GameObject scrollviewParent;
 
 
     public void ToggleActionMap(bool paused)
@@ -148,6 +153,16 @@ public class IngameMenu : MonoBehaviour
         if (customCursor != null)
         {
             SetCustomCursor();
+        }
+    }
+
+    public void SetupLevelContainers()
+    {
+        foreach (var level in _levelContainers)
+        {
+            GameObject go = Instantiate(scrollviewObjectTemplate);
+            go.transform.SetParent(scrollviewParent.transform);
+            go.GetComponentInChildren<TMP_Text>().text = level.levelName;
         }
     }
 
@@ -418,27 +433,27 @@ public class IngameMenu : MonoBehaviour
             menus[3].SetActive(true);
         }
 
-        for (int i = 0; i < menus[3].GetComponentsInChildren<Button>().Length - 1; i++)
-        {
-            if (i >= SceneManager.sceneCountInBuildSettings - 1)
-            {
-                menus[3].transform.GetChild(i).GetComponent<Button>().interactable = false;
-                continue;
-            }
-
-            if (LevelCompletionTracker.unlockedLevels.Count < 1)
-            {
-                LevelCompletionTracker.AddCompletedLevel(1);
-            }
-
-            if (!FindObjectOfType<LevelSettings>().GetLevelsAreUnlocked())
-            {
-                if (!LevelCompletionTracker.unlockedLevels.Contains(i + 1))
-                {
-                    menus[3].transform.GetChild(i).GetComponent<Button>().interactable = false;
-                }
-            }
-        }
+        // for (int i = 0; i < menus[3].GetComponentsInChildren<Button>().Length - 1; i++)
+        // {
+        //     if (i >= SceneManager.sceneCountInBuildSettings - 1)
+        //     {
+        //         menus[3].transform.GetChild(i).GetComponent<Button>().interactable = false;
+        //         continue;
+        //     }
+        //
+        //     if (LevelCompletionTracker.unlockedLevels.Count < 1)
+        //     {
+        //         LevelCompletionTracker.AddCompletedLevel(1);
+        //     }
+        //
+        //     if (!FindObjectOfType<LevelSettings>().GetLevelsAreUnlocked())
+        //     {
+        //         if (!LevelCompletionTracker.unlockedLevels.Contains(i + 1))
+        //         {
+        //             menus[3].transform.GetChild(i).GetComponent<Button>().interactable = false;
+        //         }
+        //     }
+        // }
     }
 
     public void OpenOptionsMenu(int index)
