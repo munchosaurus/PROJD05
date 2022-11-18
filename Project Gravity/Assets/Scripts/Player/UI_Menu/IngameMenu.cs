@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Globalization;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -18,10 +19,22 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private int previousMenu;
     [SerializeField] private TMP_Text levelRecordText;
 
-    [Header("Volume settings game objects")] [SerializeField]
-    private Slider volumeSlider;
+    [SerializeField] private GameObject[] optionTabs;
+    [SerializeField] private Button[] optionButtons;
 
-    [SerializeField] private TMP_Text volumeText;
+    [Header("Volume settings game objects")] [SerializeField]
+    private Slider masterVolumeSlider;
+
+    [SerializeField] private Toggle globalSoundToggle;
+
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider effectsVolumeSlider;
+    [SerializeField] private Slider dialogueVolumeSlider;
+
+    [SerializeField] private TMP_Text masterVolumeText;
+    [SerializeField] private TMP_Text musicVolumeText;
+    [SerializeField] private TMP_Text effectsVolumeText;
+    [SerializeField] private TMP_Text dialogueVolumeText;
 
     [Header("Speed settings game objects")] [SerializeField]
     private Slider speedSlider;
@@ -34,6 +47,20 @@ public class IngameMenu : MonoBehaviour
 
     [Header("Tutorial toggle")] [SerializeField]
     private Toggle tutorialToggle;
+
+    [Header("Controls")] [SerializeField] private TMP_Text movementControlSchemeText;
+    [SerializeField] private TMP_Text gravityGunControlSchemeText;
+    [SerializeField] private Image movementControlImage;
+    [SerializeField] private Image gravityGunControlImage;
+    [TextArea] public string[] movementTexts;
+    [TextArea] public string[] gravityGunTexts;
+    [SerializeField] private Sprite[] movementImages;
+    [SerializeField] private Sprite[] gravityGunImages;
+    [SerializeField] private TMP_Dropdown controlChoiceDropdown;
+
+    [Header("Screen mode")] [SerializeField]
+    private TMP_Dropdown fullscreenDropdown;
+
 
     public void ToggleActionMap(bool paused)
     {
@@ -61,36 +88,62 @@ public class IngameMenu : MonoBehaviour
     private void Start()
     {
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
-        volumeSlider.onValueChanged.AddListener(delegate { OnVolumeValueChanged(); });
-        speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
-        tutorialToggle.onValueChanged.AddListener(delegate { OnTutorialToggleValueChanged(); });
-
-        volumeSlider.value = GameController.GlobalVolumeMultiplier;
-        speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
-        tutorialToggle.isOn = GameController.TutorialIsOn;
-
-        volumeText.text = Mathf.Round(volumeSlider.value * 100.0f) + "%";
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
-
-        _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
-
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-            return;
-        }
-
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
 
+        // Volume setup
+        masterVolumeSlider.onValueChanged.AddListener(delegate { OnMasterVolumeValueChanged(); });
+        musicVolumeSlider.onValueChanged.AddListener(delegate { OnMusicVolumeValueChanged(); });
+        effectsVolumeSlider.onValueChanged.AddListener(delegate { OnEffectsVolumeValueChanged(); });
+        dialogueVolumeSlider.onValueChanged.AddListener(delegate { OnDialogueVolumeValueChanged(); });
+        globalSoundToggle.onValueChanged.AddListener(delegate { OnSoundToggleChanged(); });
+
+        masterVolumeSlider.value = GameController.MasterVolumeMultiplier;
+        musicVolumeSlider.value = GameController.MusicVolumeMultiplier;
+        effectsVolumeSlider.value = GameController.EffectsVolumeMultiplier;
+        dialogueVolumeSlider.value = GameController.DialogueVolumeMultiplier;
+        globalSoundToggle.isOn = GameController.GlobalSoundIsOn;
+
+        masterVolumeText.text = Mathf.Round(masterVolumeSlider.value * 100.0f) + "%";
+        musicVolumeText.text = Mathf.Round(musicVolumeSlider.value * 100.0f) + "%";
+        effectsVolumeText.text = Mathf.Round(effectsVolumeSlider.value * 100.0f) + "%";
+        dialogueVolumeText.text = Mathf.Round(dialogueVolumeSlider.value * 100.0f) + "%";
+
+        OnSoundToggleChanged();
+
+        // Speed
+        speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
+        speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
+        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
+        
+        // Tutorial
+        tutorialToggle.isOn = GameController.TutorialIsOn;
+        tutorialToggle.onValueChanged.AddListener(delegate { OnTutorialToggleValueChanged(); });
+
+        // Controls
+        controlChoiceDropdown.onValueChanged.AddListener(delegate { OnControlSchemeChanged(); });
+        controlChoiceDropdown.value = GameController.CurrentControlSchemeIndex;
+        
+        SetControlImagesAndTexts();
+
+        // Screen mode
+        fullscreenDropdown.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
+        fullscreenDropdown.value = GameController.fullscreenMode;
+        _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
         if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
         {
+            
             _playerInput.SwitchCurrentActionMap("MenuControls");
         }
         else
         {
             _playerInput.SwitchCurrentActionMap("PlayerControls");
         }
-
+        
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            return;
+        }
 
         if (customCursor != null)
         {
@@ -98,11 +151,66 @@ public class IngameMenu : MonoBehaviour
         }
     }
 
-    public void OnVolumeValueChanged()
+    public void OnFullScreenToggleChanged()
     {
-        GameController.GlobalVolumeMultiplier = volumeSlider.value;
-        globalMixer.SetFloat("Master", Mathf.Log(GameController.GlobalVolumeMultiplier) * 20f);
-        volumeText.text = Mathf.Round(volumeSlider.value * 100.0f) + "%";
+        GameController.fullscreenMode = fullscreenDropdown.value;
+
+        switch (fullscreenDropdown.value)
+        {
+            case 0:
+                Screen.fullScreen = true;
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                break;
+            case 1:
+                Screen.fullScreen = false;
+                break;
+            case 2:
+                Screen.fullScreen = true;
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                break;
+        }
+    }
+
+    public void OnSoundToggleChanged()
+    {
+        GameController.GlobalSoundIsOn = globalSoundToggle.isOn;
+
+        if (GameController.GlobalSoundIsOn)
+        {
+            globalMixer.SetFloat("Master", Mathf.Log(GameController.MasterVolumeMultiplier) * 20f);
+        }
+        else
+        {
+            globalMixer.SetFloat("Master", Mathf.Log(0.001f) * 20f);
+        }
+    }
+
+    public void OnMasterVolumeValueChanged()
+    {
+        GameController.MasterVolumeMultiplier = masterVolumeSlider.value;
+        globalMixer.SetFloat("Master", Mathf.Log(GameController.MasterVolumeMultiplier) * 20f);
+        masterVolumeText.text = Mathf.Round(masterVolumeSlider.value * 100.0f) + "%";
+    }
+
+    public void OnMusicVolumeValueChanged()
+    {
+        GameController.MusicVolumeMultiplier = musicVolumeSlider.value;
+        globalMixer.SetFloat("Music", Mathf.Log(GameController.MusicVolumeMultiplier) * 20f);
+        musicVolumeText.text = Mathf.Round(musicVolumeSlider.value * 100.0f) + "%";
+    }
+
+    public void OnEffectsVolumeValueChanged()
+    {
+        GameController.EffectsVolumeMultiplier = effectsVolumeSlider.value;
+        globalMixer.SetFloat("Effects", Mathf.Log(GameController.EffectsVolumeMultiplier) * 20f);
+        effectsVolumeText.text = Mathf.Round(effectsVolumeSlider.value * 100.0f) + "%";
+    }
+
+    public void OnDialogueVolumeValueChanged()
+    {
+        GameController.DialogueVolumeMultiplier = dialogueVolumeSlider.value;
+        globalMixer.SetFloat("Dialogue", Mathf.Log(GameController.DialogueVolumeMultiplier) * 20f);
+        dialogueVolumeText.text = Mathf.Round(dialogueVolumeSlider.value * 100.0f) + "%";
     }
 
     private void OnSpeedValueChanged()
@@ -110,6 +218,21 @@ public class IngameMenu : MonoBehaviour
         GameController.GlobalSpeedMultiplier = speedSlider.value / 100;
         GravityController.SetNewGravity(GravityController.GetCurrentFacing());
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
+    }
+
+    public void OnControlSchemeChanged()
+    {
+        GameController.CurrentControlSchemeIndex = controlChoiceDropdown.value;
+        //_playerInput.SwitchCurrentControlScheme(controlSchemeNames[GameController.CurrentControlSchemeIndex]);
+        SetControlImagesAndTexts();
+    }
+
+    private void SetControlImagesAndTexts()
+    {
+        movementControlSchemeText.text = movementTexts[GameController.CurrentControlSchemeIndex];
+        gravityGunControlSchemeText.text = gravityGunTexts[GameController.CurrentControlSchemeIndex];
+        movementControlImage.sprite = movementImages[GameController.CurrentControlSchemeIndex];
+        gravityGunControlImage.sprite = gravityGunImages[GameController.CurrentControlSchemeIndex];
     }
 
     void SetCustomCursor()
@@ -220,10 +343,11 @@ public class IngameMenu : MonoBehaviour
 
     public void OnPlayerSucceedsLevel(WinningEvent winningEvent)
     {
-        LevelCompletionTracker.SetLevelBest(SceneManager.GetActiveScene().buildIndex, FindObjectOfType<LevelTimer>().GetTimePassed());
+        LevelCompletionTracker.SetLevelBest(SceneManager.GetActiveScene().buildIndex,
+            FindObjectOfType<LevelTimer>().GetTimePassed());
 
         float bestTime = LevelCompletionTracker.levelRecords[SceneManager.GetActiveScene().buildIndex];
-        
+
         float minutes = Mathf.FloorToInt(bestTime / 60);
         float seconds = Mathf.FloorToInt(bestTime % 60);
         float milliSeconds = Mathf.Floor(bestTime % 1 * 100);
@@ -332,6 +456,8 @@ public class IngameMenu : MonoBehaviour
         {
             menus[4].SetActive(true);
         }
+
+        OnOptionTabButtonClick(0);
     }
 
     public void CloseOptionsMenu()
@@ -352,5 +478,16 @@ public class IngameMenu : MonoBehaviour
         }
 
         Pause(previousMenu);
+    }
+
+    public void OnOptionTabButtonClick(int index)
+    {
+        foreach (var go in optionTabs)
+        {
+            go.SetActive(false);
+        }
+
+        //optionButtons[index].Select();
+        optionTabs[index].SetActive(true);
     }
 }

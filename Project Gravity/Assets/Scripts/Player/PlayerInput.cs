@@ -20,31 +20,24 @@ public class PlayerInput : MonoBehaviour
     private InputAction.CallbackContext _movementKeyInfo;
 
     [Header("Movement settings")] [SerializeField]
-    private Vector3 _groundCheckDimensions;
+    private Vector3 groundCheckDimensions;
 
-    [SerializeField] private Vector3 _roofCheckDimensions;
+    [SerializeField] private Vector3 roofCheckDimensions;
 
-    [SerializeField] private float _airMovementMultiplier;
-    [SerializeField] private float _jumpForce;
-    [SerializeField] private float _maxVelocity;
-    [SerializeField] private float _acceleration;
+    [SerializeField] private float airMovementMultiplier;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float maxVelocity;
+    [SerializeField] private float acceleration;
     private AudioSource _audioSource;
-    private float walkingDefaultVolume;
     private const float GridClampThreshold = 0.02f;
     private const float PlayerCollisionGridClamp = 0.5f;
-
-    //private readonly float OBJECT_Z = 1;
-
 
     // Start is called before the first frame update
     void Start()
     {
         GameController.PauseGame();
         StartCoroutine(SwitchInputLock());
-
         _audioSource = GetComponent<AudioSource>();
-        walkingDefaultVolume = _audioSource.volume;
-
         velocity = Vector3.zero;
     }
 
@@ -57,7 +50,6 @@ public class PlayerInput : MonoBehaviour
 
         velocity += Physics.gravity * Time.fixedDeltaTime;
         MovePlayer();
-        //CheckForCollisions();
         ApplyCollisions();
 
         transform.position += velocity * Time.fixedDeltaTime;
@@ -104,12 +96,6 @@ public class PlayerInput : MonoBehaviour
             newPosition.x = Mathf.Round(transform.position.x);
         }
 
-        // if (Math.Abs(gameObject.transform.position.y - Math.Round(gameObject.transform.position.y)) <
-        //     GRID_CLAMP_THRESHOLD && GravityController.IsGravityHorizontal())
-        // {
-        //     newPosition.y = Mathf.Round(transform.position.y);
-        // }
-
         if (transform.position != newPosition)
         {
             transform.position = newPosition;
@@ -118,13 +104,13 @@ public class PlayerInput : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics.BoxCast(transform.position, _groundCheckDimensions, -transform.up, transform.rotation,
+        return Physics.BoxCast(transform.position, groundCheckDimensions, -transform.up, transform.rotation,
             transform.localScale.y / 2, groundMask);
     }
 
     public bool IsRoofed()
     {
-        return Physics.BoxCast(transform.position, _roofCheckDimensions, transform.up, transform.rotation,
+        return Physics.BoxCast(transform.position, roofCheckDimensions, transform.up, transform.rotation,
             transform.localScale.y / 2, groundMask);
     }
 
@@ -147,24 +133,24 @@ public class PlayerInput : MonoBehaviour
                 {
                     if (Physics.gravity.x > 0 && !groundedLeft)
                     {
-                        velocity.x -= _jumpForce * GameController.GlobalSpeedMultiplier;
+                        velocity.x -= jumpForce * GameController.GlobalSpeedMultiplier;
                     }
 
                     if (Physics.gravity.x < 0 && !groundedRight)
                     {
-                        velocity.x += _jumpForce * GameController.GlobalSpeedMultiplier;
+                        velocity.x += jumpForce * GameController.GlobalSpeedMultiplier;
                     }
                 }
                 else
                 {
                     if (Physics.gravity.y > 0 && !groundedDown)
                     {
-                        velocity.y -= _jumpForce * GameController.GlobalSpeedMultiplier;
+                        velocity.y -= jumpForce * GameController.GlobalSpeedMultiplier;
                     }
 
                     if (Physics.gravity.y < 0 && !groundedUp)
                     {
-                        velocity.y += _jumpForce * GameController.GlobalSpeedMultiplier;
+                        velocity.y += jumpForce * GameController.GlobalSpeedMultiplier;
                     }
                 }
             }
@@ -229,7 +215,8 @@ public class PlayerInput : MonoBehaviour
         {
             raycastHits = Physics.BoxCastAll(transform.position, horizontalCast, direction,
                 Quaternion.identity,
-                transform.localScale.y / 2, soundCollisionMask, QueryTriggerInteraction.UseGlobal);
+                Mathf.Abs(transform.position.x - (transform.position + (velocity * Time.fixedDeltaTime)).x) +
+                PlayerCollisionGridClamp, soundCollisionMask, QueryTriggerInteraction.UseGlobal);
             foreach (var collision in raycastHits)
             {
                 if (collision.transform.GetComponentInParent<DynamicObjectMovement>())
@@ -256,104 +243,6 @@ public class PlayerInput : MonoBehaviour
             };
             EventSystem.Current.FireEvent(collisionEvent);
         }
-    }
-
-    private void CheckForCollisions()
-    {
-        groundedDown = false;
-        groundedUp = false;
-        groundedLeft = false;
-        groundedRight = false;
-        RaycastHit hit;
-        switch (velocity.y)
-        {
-            case < 0:
-            {
-                if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
-                        transform.localScale.y / 2, groundMask))
-                {
-                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
-                    {
-                        groundedDown = true;
-                    }
-                }
-
-                break;
-            }
-            case > 0:
-            {
-                if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
-                        transform.localScale.y / 2, groundMask))
-                {
-                    if (!ShouldInheritMovement(hit.collider.gameObject, false))
-                    {
-                        groundedUp = true;
-                    }
-                }
-
-                break;
-            }
-        }
-
-        switch (velocity.x)
-        {
-            case > 0:
-            {
-                if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
-                        transform.localScale.x / 2, groundMask))
-                {
-                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
-                    {
-                        groundedRight = true;
-                    }
-                }
-
-                break;
-            }
-            case < 0:
-            {
-                if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
-                        transform.localScale.x / 2, groundMask))
-                {
-                    if (!ShouldInheritMovement(hit.collider.gameObject, true))
-                    {
-                        groundedLeft = true;
-                    }
-                }
-
-                break;
-            }
-        }
-    }
-
-    private float GetClosestGridCentre(float origin)
-    {
-        if (Math.Abs(origin) > Math.Abs(Math.Round(origin)))
-        {
-            if (origin > 0)
-            {
-                return (float) Math.Round(Math.Abs(origin));
-            }
-
-            if (origin < 0)
-            {
-                return -((float) Math.Round(Math.Abs(origin)));
-            }
-        }
-        else
-        {
-            if (origin > 0)
-            {
-                return (float) Math.Round(Math.Abs(origin));
-            }
-
-            if (origin < 0)
-            {
-                return -((float) Math.Round(Math.Abs(origin)));
-            }
-        }
-
-        return origin;
     }
 
     /*
@@ -449,11 +338,11 @@ public class PlayerInput : MonoBehaviour
         {
             if (GravityController.IsGravityHorizontal())
             {
-                MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y * _airMovementMultiplier);
+                MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y * airMovementMultiplier);
             }
             else
             {
-                MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x * _airMovementMultiplier);
+                MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x * airMovementMultiplier);
             }
         }
         else
@@ -490,7 +379,7 @@ public class PlayerInput : MonoBehaviour
 
         if (ShouldAddMoreMoveForce(direction))
         {
-            velocity.x += GameController.GlobalSpeedMultiplier * (direction * _acceleration * Time.fixedDeltaTime);
+            velocity.x += GameController.GlobalSpeedMultiplier * (direction * acceleration * Time.fixedDeltaTime);
         }
     }
 
@@ -505,7 +394,6 @@ public class PlayerInput : MonoBehaviour
             }
             else
             {
-                _audioSource.volume = GameController.GlobalVolumeMultiplier * walkingDefaultVolume;
                 _audioSource.mute = false;
             }
         }
@@ -516,7 +404,7 @@ public class PlayerInput : MonoBehaviour
 
         if (ShouldAddMoreMoveForce(direction * GameController.GlobalSpeedMultiplier))
         {
-            velocity.y += GameController.GlobalSpeedMultiplier * (direction * _acceleration * Time.fixedDeltaTime);
+            velocity.y += GameController.GlobalSpeedMultiplier * (direction * acceleration * Time.fixedDeltaTime);
         }
     }
 
@@ -552,10 +440,10 @@ public class PlayerInput : MonoBehaviour
 
         if (moveCoefficient != 0)
         {
-            return Math.Abs(magnitude) < _maxVelocity * GameController.GlobalSpeedMultiplier && !BoxCast(dir);
+            return Math.Abs(magnitude) < maxVelocity * GameController.GlobalSpeedMultiplier && !BoxCast(dir);
         }
 
-        return moveCoefficient != 0 && Math.Abs(magnitude) < _maxVelocity * GameController.GlobalSpeedMultiplier;
+        return moveCoefficient != 0 && Math.Abs(magnitude) < maxVelocity * GameController.GlobalSpeedMultiplier;
     }
 
     private bool BoxCast(Vector3 direction)
