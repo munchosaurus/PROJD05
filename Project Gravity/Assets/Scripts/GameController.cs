@@ -12,7 +12,7 @@ public static class GameController
     public static float EffectsVolumeMultiplier = 1f;
     public static float DialogueVolumeMultiplier = 1f;
     public static bool GlobalSoundIsOn = true;
-    public static bool fullscreenOn = true;
+    public static int fullscreenMode = 0;
     
     public static float GlobalSpeedMultiplier = 1f;
     public static bool TutorialIsOn = true;
