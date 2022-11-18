@@ -6678,33 +6678,9 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 768823247}
-    - target: {fileID: 2637555460394675483, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2637555460394675483, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6050876001664047157, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.000049591064
-      objectReference: {fileID: 0}
-    - target: {fileID: 6192420806753507334, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.000049591064
-      objectReference: {fileID: 0}
     - target: {fileID: 7406499542109578702, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_Name
       value: Player_noRB
-      objectReference: {fileID: 0}
-    - target: {fileID: 8723490952162935384, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8723490952162935384, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
