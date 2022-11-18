@@ -52,15 +52,14 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private TMP_Text gravityGunControlSchemeText;
     [SerializeField] private Image movementControlImage;
     [SerializeField] private Image gravityGunControlImage;
-    [SerializeField] private Toggle mouseSchemeToggle;
-    [SerializeField] private Toggle controllerSchemeToggle;
     [TextArea] public string[] movementTexts;
     [TextArea] public string[] gravityGunTexts;
     [SerializeField] private Sprite[] movementImages;
     [SerializeField] private Sprite[] gravityGunImages;
+    [SerializeField] private TMP_Dropdown controlChoiceDropdown;
 
     [Header("Screen mode")] [SerializeField]
-    private Toggle fullscreenToggle; 
+    private TMP_Dropdown fullscreenDropdown;
 
 
     public void ToggleActionMap(bool paused)
@@ -97,7 +96,7 @@ public class IngameMenu : MonoBehaviour
         effectsVolumeSlider.onValueChanged.AddListener(delegate { OnEffectsVolumeValueChanged(); });
         dialogueVolumeSlider.onValueChanged.AddListener(delegate { OnDialogueVolumeValueChanged(); });
         globalSoundToggle.onValueChanged.AddListener(delegate { OnSoundToggleChanged(); });
-        
+
         masterVolumeSlider.value = GameController.MasterVolumeMultiplier;
         musicVolumeSlider.value = GameController.MusicVolumeMultiplier;
         effectsVolumeSlider.value = GameController.EffectsVolumeMultiplier;
@@ -120,26 +119,14 @@ public class IngameMenu : MonoBehaviour
         tutorialToggle.onValueChanged.AddListener(delegate { OnTutorialToggleValueChanged(); });
 
         // Controls
-        controllerSchemeToggle.onValueChanged.AddListener(delegate{ OnControllerSchemeSelected(); });
-        mouseSchemeToggle.onValueChanged.AddListener(delegate { OnMouseSchemeSelected(); });
-        if (GameController.CurrentControlSchemeIndex == 0)
-        {
-            controllerSchemeToggle.isOn = false;
-            mouseSchemeToggle.interactable = false;
-            mouseSchemeToggle.isOn = true;
-        }
-        else
-        {
-            controllerSchemeToggle.isOn = true;
-            controllerSchemeToggle.interactable = false;
-            mouseSchemeToggle.isOn = false;
-        }
+        controlChoiceDropdown.onValueChanged.AddListener(delegate { OnControlSchemeChanged(); });
+        controlChoiceDropdown.value = GameController.CurrentControlSchemeIndex;
         SetControlImagesAndTexts();
-        
+
         // Screen mode
-        fullscreenToggle.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
-        fullscreenToggle.isOn = GameController.fullscreenOn;
-        
+        fullscreenDropdown.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
+        fullscreenDropdown.value = GameController.fullscreenMode;
+
         _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
 
         if (SceneManager.GetActiveScene().buildIndex == 0)
@@ -166,9 +153,22 @@ public class IngameMenu : MonoBehaviour
 
     public void OnFullScreenToggleChanged()
     {
-        GameController.fullscreenOn = !GameController.fullscreenOn;
-        Screen.fullScreen = GameController.fullscreenOn;
-        fullscreenToggle.isOn = GameController.fullscreenOn;
+        GameController.fullscreenMode = fullscreenDropdown.value;
+
+        switch (fullscreenDropdown.value)
+        {
+            case 0:
+                Screen.fullScreen = true;
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                break;
+            case 1:
+                Screen.fullScreen = false;
+                break;
+            case 2:
+                Screen.fullScreen = true;
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                break;
+        }
     }
 
     public void OnSoundToggleChanged()
@@ -220,29 +220,10 @@ public class IngameMenu : MonoBehaviour
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
     }
 
-    public void OnMouseSchemeSelected()
+    public void OnControlSchemeChanged()
     {
-        if (mouseSchemeToggle.isOn)
-        {
-            mouseSchemeToggle.interactable = false;
-            controllerSchemeToggle.interactable = true;
-            controllerSchemeToggle.isOn = false;
-            GameController.CurrentControlSchemeIndex = 0;
-            SetControlImagesAndTexts();
-        }
-        
-    }
-
-    public void OnControllerSchemeSelected()
-    {
-        if (controllerSchemeToggle.isOn)
-        {
-            controllerSchemeToggle.interactable = false;
-            mouseSchemeToggle.interactable = true;
-            mouseSchemeToggle.isOn = false;
-            GameController.CurrentControlSchemeIndex = 1;
-            SetControlImagesAndTexts();
-        }
+        GameController.CurrentControlSchemeIndex = controlChoiceDropdown.value;
+        SetControlImagesAndTexts();
     }
 
     private void SetControlImagesAndTexts()
