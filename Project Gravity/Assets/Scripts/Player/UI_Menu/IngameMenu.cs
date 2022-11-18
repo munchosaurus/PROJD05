@@ -114,6 +114,7 @@ public class IngameMenu : MonoBehaviour
         speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
         speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
+        
         // Tutorial
         tutorialToggle.isOn = GameController.TutorialIsOn;
         tutorialToggle.onValueChanged.AddListener(delegate { OnTutorialToggleValueChanged(); });
@@ -121,29 +122,28 @@ public class IngameMenu : MonoBehaviour
         // Controls
         controlChoiceDropdown.onValueChanged.AddListener(delegate { OnControlSchemeChanged(); });
         controlChoiceDropdown.value = GameController.CurrentControlSchemeIndex;
+        
         SetControlImagesAndTexts();
 
         // Screen mode
         fullscreenDropdown.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
         fullscreenDropdown.value = GameController.fullscreenMode;
-
         _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
-
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-            return;
-        }
-
         if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
         {
+            
             _playerInput.SwitchCurrentActionMap("MenuControls");
         }
         else
         {
             _playerInput.SwitchCurrentActionMap("PlayerControls");
         }
-
+        
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            return;
+        }
 
         if (customCursor != null)
         {
@@ -223,6 +223,7 @@ public class IngameMenu : MonoBehaviour
     public void OnControlSchemeChanged()
     {
         GameController.CurrentControlSchemeIndex = controlChoiceDropdown.value;
+        //_playerInput.SwitchCurrentControlScheme(controlSchemeNames[GameController.CurrentControlSchemeIndex]);
         SetControlImagesAndTexts();
     }
 
