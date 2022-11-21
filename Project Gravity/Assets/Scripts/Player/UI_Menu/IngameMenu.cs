@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class IngameMenu : MonoBehaviour
@@ -62,9 +63,15 @@ public class IngameMenu : MonoBehaviour
     private TMP_Dropdown fullscreenDropdown;
     
     [Header("Level Container settings")]
-    [SerializeField] private LevelContainer[] _levelContainers;
+    [SerializeField] private LevelContainer[] levelContainers;
     [SerializeField] private GameObject scrollviewObjectTemplate;
     [SerializeField] private GameObject scrollviewParent;
+    [SerializeField] private TMP_Text levelDescription;
+    [SerializeField] private TMP_Text levelSelectorRecordText;
+    [SerializeField] private Image levelSelectorImage;
+    [SerializeField] private Button levelSelectorPlay;
+    private Button[] _levelContainerButtons;
+    public int selectedLevel;
 
 
     public void ToggleActionMap(bool paused)
@@ -134,6 +141,11 @@ public class IngameMenu : MonoBehaviour
         fullscreenDropdown.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
         fullscreenDropdown.value = GameController.fullscreenMode;
         _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
+        
+        // Level selector 
+        levelSelectorPlay.onClick.AddListener(OnLevelSelectorPlayPressed);
+        SetupLevelContainers();
+        
         if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
         {
             
@@ -156,13 +168,64 @@ public class IngameMenu : MonoBehaviour
         }
     }
 
+    public void SelectLevel(Button selectedButton)
+    {
+        int internalLevelIndex = 0;
+        for (int i = 0; i < _levelContainerButtons.Length; i++)
+        {
+            if (selectedButton.GetInstanceID() == _levelContainerButtons[i].GetInstanceID())
+            {
+                internalLevelIndex = i;
+                break;
+            }
+        }
+
+        int levelID = internalLevelIndex + 1;
+
+        levelDescription.text = levelContainers[internalLevelIndex].levelDescription;
+        levelSelectorImage.sprite = levelContainers[internalLevelIndex].levelSprite;
+        string text = "Best time: ";
+        if (LevelCompletionTracker.levelRecords.Keys.Contains(levelID))
+        {
+            float bestTime = LevelCompletionTracker.levelRecords[levelID];
+
+            float minutes = Mathf.FloorToInt(bestTime / 60);
+            float seconds = Mathf.FloorToInt(bestTime % 60);
+            float milliSeconds = Mathf.Floor(bestTime % 1 * 100);
+
+            text += $"{minutes:00}:{seconds:00}:{milliSeconds:00}";
+            levelSelectorPlay.interactable = true;
+        }
+
+        if (LevelCompletionTracker.unlockedLevels.Contains(levelID))
+        {
+            levelSelectorPlay.interactable = true;
+        }
+        else
+        {
+            levelSelectorPlay.interactable = false;
+        }
+
+        selectedLevel = levelID;
+        levelSelectorRecordText.text = text;
+    }
+
     public void SetupLevelContainers()
     {
-        foreach (var level in _levelContainers)
+        _levelContainerButtons = new Button[levelContainers.Length];
+        for (int i = 0; i < levelContainers.Length; i++)
         {
-            GameObject go = Instantiate(scrollviewObjectTemplate);
-            go.transform.SetParent(scrollviewParent.transform);
-            go.GetComponentInChildren<TMP_Text>().text = level.levelName;
+            GameObject go = Instantiate(scrollviewObjectTemplate, scrollviewParent.transform, false);
+            go.GetComponentInChildren<TMP_Text>().text = levelContainers[i].levelName;
+            _levelContainerButtons[i] = go.GetComponent<Button>();
+        }
+    }
+
+    private void OnLevelSelectorPlayPressed()
+    {
+        if (LevelCompletionTracker.unlockedLevels.Contains(selectedLevel))
+        {
+            LoadScene(selectedLevel);
         }
     }
 
@@ -360,7 +423,8 @@ public class IngameMenu : MonoBehaviour
     {
         LevelCompletionTracker.SetLevelBest(SceneManager.GetActiveScene().buildIndex,
             FindObjectOfType<LevelTimer>().GetTimePassed());
-
+        LevelCompletionTracker.AddCompletedLevel(SceneManager.GetActiveScene().buildIndex);
+        
         float bestTime = LevelCompletionTracker.levelRecords[SceneManager.GetActiveScene().buildIndex];
 
         float minutes = Mathf.FloorToInt(bestTime / 60);
@@ -432,28 +496,9 @@ public class IngameMenu : MonoBehaviour
         {
             menus[3].SetActive(true);
         }
-
-        // for (int i = 0; i < menus[3].GetComponentsInChildren<Button>().Length - 1; i++)
-        // {
-        //     if (i >= SceneManager.sceneCountInBuildSettings - 1)
-        //     {
-        //         menus[3].transform.GetChild(i).GetComponent<Button>().interactable = false;
-        //         continue;
-        //     }
-        //
-        //     if (LevelCompletionTracker.unlockedLevels.Count < 1)
-        //     {
-        //         LevelCompletionTracker.AddCompletedLevel(1);
-        //     }
-        //
-        //     if (!FindObjectOfType<LevelSettings>().GetLevelsAreUnlocked())
-        //     {
-        //         if (!LevelCompletionTracker.unlockedLevels.Contains(i + 1))
-        //         {
-        //             menus[3].transform.GetChild(i).GetComponent<Button>().interactable = false;
-        //         }
-        //     }
-        // }
+        
+        SelectLevel(_levelContainerButtons[SceneManager.GetActiveScene().buildIndex - 1]);
+        _levelContainerButtons[SceneManager.GetActiveScene().buildIndex - 1].Select();
     }
 
     public void OpenOptionsMenu(int index)

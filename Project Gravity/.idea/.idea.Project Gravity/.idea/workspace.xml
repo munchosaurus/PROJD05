@@ -2,13 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Level Containers.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/LevelContainer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/LevelContainer.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Level.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Level.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_1.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_1.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_2.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_2.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/LevelSelectorLogic.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/LevelSelectorLogic.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Tutorial_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Tutorial_1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/up_and_down.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/up_and_down.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level Containers.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level Containers.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,6 +139,7 @@
       <workItem from="1668503727916" duration="12570000" />
       <workItem from="1668591094212" duration="9641000" />
       <workItem from="1668765077076" duration="7087000" />
+      <workItem from="1669020700857" duration="5435000" />
     </task>
     <servers />
   </component>
