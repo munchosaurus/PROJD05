@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="Added pics">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelCompletionTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelCompletionTracker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" afterDir="false" />
-    </list>
+    <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="Now adds unlocked level for next level during winning event" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -126,7 +123,7 @@
       <workItem from="1668503727916" duration="12570000" />
       <workItem from="1668591094212" duration="9641000" />
       <workItem from="1668765077076" duration="7087000" />
-      <workItem from="1669020700857" duration="5643000" />
+      <workItem from="1669020700857" duration="6288000" />
     </task>
     <task id="LOCAL−00001" summary="Added logic to level selector">
       <created>1669027248858</created>
@@ -140,7 +137,13 @@
       <option name="presentableId" value="LOCAL−00002" />
       <updated>1669027264460</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL−00003" summary="Now adds unlocked level for next level during winning event">
+      <created>1669027399229</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1669027399229</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +168,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Added logic to level selector" />
     <MESSAGE value="Added pics" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added pics" />
+    <MESSAGE value="Now adds unlocked level for next level during winning event" />
+    <option name="LAST_COMMIT_MESSAGE" value="Now adds unlocked level for next level during winning event" />
   </component>
 </project>
