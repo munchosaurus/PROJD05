@@ -21,10 +21,16 @@ public static class LevelCompletionTracker
         if (!levelRecords.ContainsKey(levelID))
         {
             levelRecords.Add(levelID, time);
-        }
-        else if (levelRecords[levelID] > time)
+        } else if (levelRecords[levelID] > time)
         {
             levelRecords[levelID] = time;
         }
+
+    }
+
+    public static bool IsTimeNewRecord(int levelID, float time)
+    {
+        if (levelRecords[levelID] < time) return false;
+        return true;
     }
 }

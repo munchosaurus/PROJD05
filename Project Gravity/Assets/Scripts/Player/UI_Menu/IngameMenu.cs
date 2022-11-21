@@ -18,7 +18,11 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] public GameObject interactText;
     [SerializeField] private Texture2D customCursor;
     [SerializeField] private int previousMenu;
+    
+    [Header("Level complete UI objects")]
     [SerializeField] private TMP_Text levelRecordText;
+    [SerializeField] private TMP_Text newRecordText;
+    [SerializeField] private TMP_Text completedLevelTitle;
 
     [SerializeField] private GameObject[] optionTabs;
     [SerializeField] private Button[] optionButtons;
@@ -61,9 +65,10 @@ public class IngameMenu : MonoBehaviour
 
     [Header("Screen mode")] [SerializeField]
     private TMP_Dropdown fullscreenDropdown;
-    
-    [Header("Level Container settings")]
-    [SerializeField] private LevelContainer[] levelContainers;
+
+    [Header("Level Container settings")] [SerializeField]
+    private LevelContainer[] levelContainers;
+
     [SerializeField] private GameObject scrollviewObjectTemplate;
     [SerializeField] private GameObject scrollviewParent;
     [SerializeField] private TMP_Text levelDescription;
@@ -126,7 +131,7 @@ public class IngameMenu : MonoBehaviour
         speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
         speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
-        
+
         // Tutorial
         tutorialToggle.isOn = GameController.TutorialIsOn;
         tutorialToggle.onValueChanged.AddListener(delegate { OnTutorialToggleValueChanged(); });
@@ -134,28 +139,27 @@ public class IngameMenu : MonoBehaviour
         // Controls
         controlChoiceDropdown.onValueChanged.AddListener(delegate { OnControlSchemeChanged(); });
         controlChoiceDropdown.value = GameController.CurrentControlSchemeIndex;
-        
+
         SetControlImagesAndTexts();
 
         // Screen mode
         fullscreenDropdown.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
         fullscreenDropdown.value = GameController.fullscreenMode;
         _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
-        
+
         // Level selector 
         levelSelectorPlay.onClick.AddListener(OnLevelSelectorPlayPressed);
         SetupLevelContainers();
-        
+
         if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
         {
-            
             _playerInput.SwitchCurrentActionMap("MenuControls");
         }
         else
         {
             _playerInput.SwitchCurrentActionMap("PlayerControls");
         }
-        
+
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
@@ -421,16 +425,31 @@ public class IngameMenu : MonoBehaviour
 
     public void OnPlayerSucceedsLevel(WinningEvent winningEvent)
     {
+        LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex);
+        LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
         LevelCompletionTracker.SetLevelBest(SceneManager.GetActiveScene().buildIndex,
             FindObjectOfType<LevelTimer>().GetTimePassed());
-        LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
         
         float bestTime = LevelCompletionTracker.levelRecords[SceneManager.GetActiveScene().buildIndex];
-
         float minutes = Mathf.FloorToInt(bestTime / 60);
         float seconds = Mathf.FloorToInt(bestTime % 60);
         float milliSeconds = Mathf.Floor(bestTime % 1 * 100);
-        levelRecordText.text = $"{minutes:00}:{seconds:00}:{milliSeconds:00}";
+        
+        // If a new record has been set by the player
+        if (LevelCompletionTracker.IsTimeNewRecord(SceneManager.GetActiveScene().buildIndex, FindObjectOfType<LevelTimer>().GetTimePassed()))
+        {
+            newRecordText.color = Color.red;
+            newRecordText.text = $"New record: {minutes:00}:{seconds:00}:{milliSeconds:00}";
+        }
+        else
+        {
+            newRecordText.color = Color.white;
+            newRecordText.text = $"Your time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
+        }
+        
+        levelRecordText.text = $"Best time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
+        completedLevelTitle.text = levelContainers[SceneManager.GetActiveScene().buildIndex-1].levelName;
+        //completedLevelImage.sprite = levelContainers[SceneManager.GetActiveScene().buildIndex + 1].levelSprite;
         Pause(1);
     }
 
@@ -496,7 +515,7 @@ public class IngameMenu : MonoBehaviour
         {
             menus[3].SetActive(true);
         }
-        
+
         SelectLevel(_levelContainerButtons[SceneManager.GetActiveScene().buildIndex - 1]);
         _levelContainerButtons[SceneManager.GetActiveScene().buildIndex - 1].Select();
     }
