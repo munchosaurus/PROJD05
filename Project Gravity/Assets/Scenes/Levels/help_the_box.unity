@@ -12143,6 +12143,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4516793662373366132, guid: f0d733965700cec48b966762db7ace2a, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 3984541996121568713, guid: 99240085a4221c34da37057b508c4942, type: 3}
+    - target: {fileID: 7488766228550762973, guid: f0d733965700cec48b966762db7ace2a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.273
+      objectReference: {fileID: 0}
     - target: {fileID: 8396303370207750296, guid: f0d733965700cec48b966762db7ace2a, type: 3}
       propertyPath: m_RootOrder
       value: 6
