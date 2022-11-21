@@ -423,7 +423,7 @@ public class IngameMenu : MonoBehaviour
     {
         LevelCompletionTracker.SetLevelBest(SceneManager.GetActiveScene().buildIndex,
             FindObjectOfType<LevelTimer>().GetTimePassed());
-        LevelCompletionTracker.AddCompletedLevel(SceneManager.GetActiveScene().buildIndex);
+        LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
         
         float bestTime = LevelCompletionTracker.levelRecords[SceneManager.GetActiveScene().buildIndex];
 
@@ -446,7 +446,7 @@ public class IngameMenu : MonoBehaviour
         }
 
         Unpause();
-        LevelCompletionTracker.AddCompletedLevel(scene);
+        LevelCompletionTracker.AddUnlockedLevel(scene);
         SceneManager.LoadScene(scene);
     }
 

@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Level.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Level.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_1.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_1.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_2.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_2.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/LevelSelectorLogic.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/LevelSelectorLogic.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Tutorial_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Tutorial_1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/up_and_down.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/up_and_down.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level Containers.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level Containers.meta" afterDir="false" />
+    <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="Added pics">
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelCompletionTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelCompletionTracker.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -139,8 +126,21 @@
       <workItem from="1668503727916" duration="12570000" />
       <workItem from="1668591094212" duration="9641000" />
       <workItem from="1668765077076" duration="7087000" />
-      <workItem from="1669020700857" duration="5435000" />
+      <workItem from="1669020700857" duration="5643000" />
     </task>
+    <task id="LOCAL−00001" summary="Added logic to level selector">
+      <created>1669027248858</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1669027248858</updated>
+    </task>
+    <task id="LOCAL−00002" summary="Added pics">
+      <created>1669027264460</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1669027264460</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,5 +163,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Added logic to level selector" />
+    <MESSAGE value="Added pics" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added pics" />
   </component>
 </project>

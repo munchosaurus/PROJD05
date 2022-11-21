@@ -8,7 +8,7 @@ public static class LevelCompletionTracker
     public static List<int> unlockedLevels = new List<int>();
     public static Dictionary<int, float> levelRecords = new Dictionary<int, float>();
 
-    public static void AddCompletedLevel(int levelIndex)
+    public static void AddUnlockedLevel(int levelIndex)
     {
         if (!unlockedLevels.Contains(levelIndex))
         {
