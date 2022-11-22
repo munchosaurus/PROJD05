@@ -7,6 +7,6 @@ public class LevelSelectorLogic : MonoBehaviour
 {
     public void SelectLevel()
     {
-        FindObjectOfType<IngameMenu>().SelectLevel(GetComponent<Button>());
+        FindObjectOfType<LevelSelector>().SelectLevel(GetComponent<Button>());
     }
 }

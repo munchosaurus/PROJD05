@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mono.Collections.Generic;
 using UnityEngine;
 
@@ -32,5 +33,10 @@ public static class LevelCompletionTracker
     {
         if (levelRecords[levelID] < time) return false;
         return true;
+    }
+
+    public static bool LevelHasRecord(int levelID)
+    {
+        return levelRecords.Keys.Contains(levelID);
     }
 }

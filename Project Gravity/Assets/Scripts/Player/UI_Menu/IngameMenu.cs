@@ -27,57 +27,9 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private GameObject[] optionTabs;
     [SerializeField] private Button[] optionButtons;
 
-    [Header("Volume settings game objects")] [SerializeField]
-    private Slider masterVolumeSlider;
-
-    [SerializeField] private Toggle globalSoundToggle;
-
-    [SerializeField] private Slider musicVolumeSlider;
-    [SerializeField] private Slider effectsVolumeSlider;
-    [SerializeField] private Slider dialogueVolumeSlider;
-
-    [SerializeField] private TMP_Text masterVolumeText;
-    [SerializeField] private TMP_Text musicVolumeText;
-    [SerializeField] private TMP_Text effectsVolumeText;
-    [SerializeField] private TMP_Text dialogueVolumeText;
-
-    [Header("Speed settings game objects")] [SerializeField]
-    private Slider speedSlider;
-
-    [SerializeField] private TMP_Text speedText;
+    private UnityEngine.InputSystem.PlayerInput _playerInput;
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
-    public AudioMixer globalMixer;
-    private UnityEngine.InputSystem.PlayerInput _playerInput;
-
-    [Header("Tutorial toggle")] [SerializeField]
-    private Toggle tutorialToggle;
-
-    [Header("Controls")] [SerializeField] private TMP_Text movementControlSchemeText;
-    [SerializeField] private TMP_Text gravityGunControlSchemeText;
-    [SerializeField] private Image movementControlImage;
-    [SerializeField] private Image gravityGunControlImage;
-    [TextArea] public string[] movementTexts;
-    [TextArea] public string[] gravityGunTexts;
-    [SerializeField] private Sprite[] movementImages;
-    [SerializeField] private Sprite[] gravityGunImages;
-    [SerializeField] private TMP_Dropdown controlChoiceDropdown;
-
-    [Header("Screen mode")] [SerializeField]
-    private TMP_Dropdown fullscreenDropdown;
-
-    [Header("Level Container settings")] [SerializeField]
-    private LevelContainer[] levelContainers;
-
-    [SerializeField] private GameObject scrollviewObjectTemplate;
-    [SerializeField] private GameObject scrollviewParent;
-    [SerializeField] private TMP_Text levelDescription;
-    [SerializeField] private TMP_Text levelSelectorRecordText;
-    [SerializeField] private Image levelSelectorImage;
-    [SerializeField] private Button levelSelectorPlay;
-    private Button[] _levelContainerButtons;
-    public int selectedLevel;
-
 
     public void ToggleActionMap(bool paused)
     {
@@ -97,61 +49,13 @@ public class IngameMenu : MonoBehaviour
         }
     }
 
-    public void OnTutorialToggleValueChanged()
-    {
-        GameController.TutorialIsOn = tutorialToggle.isOn;
-    }
-
     private void Start()
     {
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
-
-        // Volume setup
-        masterVolumeSlider.onValueChanged.AddListener(delegate { OnMasterVolumeValueChanged(); });
-        musicVolumeSlider.onValueChanged.AddListener(delegate { OnMusicVolumeValueChanged(); });
-        effectsVolumeSlider.onValueChanged.AddListener(delegate { OnEffectsVolumeValueChanged(); });
-        dialogueVolumeSlider.onValueChanged.AddListener(delegate { OnDialogueVolumeValueChanged(); });
-        globalSoundToggle.onValueChanged.AddListener(delegate { OnSoundToggleChanged(); });
-
-        masterVolumeSlider.value = GameController.MasterVolumeMultiplier;
-        musicVolumeSlider.value = GameController.MusicVolumeMultiplier;
-        effectsVolumeSlider.value = GameController.EffectsVolumeMultiplier;
-        dialogueVolumeSlider.value = GameController.DialogueVolumeMultiplier;
-        globalSoundToggle.isOn = GameController.GlobalSoundIsOn;
-
-        masterVolumeText.text = Mathf.Round(masterVolumeSlider.value * 100.0f) + "%";
-        musicVolumeText.text = Mathf.Round(musicVolumeSlider.value * 100.0f) + "%";
-        effectsVolumeText.text = Mathf.Round(effectsVolumeSlider.value * 100.0f) + "%";
-        dialogueVolumeText.text = Mathf.Round(dialogueVolumeSlider.value * 100.0f) + "%";
-
-        OnSoundToggleChanged();
-
-        // Speed
-        speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
-        speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
-
-        // Tutorial
-        tutorialToggle.isOn = GameController.TutorialIsOn;
-        tutorialToggle.onValueChanged.AddListener(delegate { OnTutorialToggleValueChanged(); });
-
-        // Controls
-        controlChoiceDropdown.onValueChanged.AddListener(delegate { OnControlSchemeChanged(); });
-        controlChoiceDropdown.value = GameController.CurrentControlSchemeIndex;
-
-        SetControlImagesAndTexts();
-
-        // Screen mode
-        fullscreenDropdown.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
-        fullscreenDropdown.value = GameController.fullscreenMode;
         _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
 
-        // Level selector 
-        levelSelectorPlay.onClick.AddListener(OnLevelSelectorPlayPressed);
-        SetupLevelContainers();
-
-        if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
+         if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
         {
             _playerInput.SwitchCurrentActionMap("MenuControls");
         }
@@ -170,151 +74,6 @@ public class IngameMenu : MonoBehaviour
         {
             SetCustomCursor();
         }
-    }
-
-    public void SelectLevel(Button selectedButton)
-    {
-        int internalLevelIndex = 0;
-        for (int i = 0; i < _levelContainerButtons.Length; i++)
-        {
-            if (selectedButton.GetInstanceID() == _levelContainerButtons[i].GetInstanceID())
-            {
-                internalLevelIndex = i;
-                break;
-            }
-        }
-
-        int levelID = internalLevelIndex + 1;
-
-        levelDescription.text = levelContainers[internalLevelIndex].levelDescription;
-        levelSelectorImage.sprite = levelContainers[internalLevelIndex].levelSprite;
-        string text = "Best time: ";
-        if (LevelCompletionTracker.levelRecords.Keys.Contains(levelID))
-        {
-            float bestTime = LevelCompletionTracker.levelRecords[levelID];
-
-            float minutes = Mathf.FloorToInt(bestTime / 60);
-            float seconds = Mathf.FloorToInt(bestTime % 60);
-            float milliSeconds = Mathf.Floor(bestTime % 1 * 100);
-
-            text += $"{minutes:00}:{seconds:00}:{milliSeconds:00}";
-            levelSelectorPlay.interactable = true;
-        }
-
-        if (LevelCompletionTracker.unlockedLevels.Contains(levelID))
-        {
-            levelSelectorPlay.interactable = true;
-        }
-        else
-        {
-            levelSelectorPlay.interactable = false;
-        }
-
-        selectedLevel = levelID;
-        levelSelectorRecordText.text = text;
-    }
-
-    public void SetupLevelContainers()
-    {
-        _levelContainerButtons = new Button[levelContainers.Length];
-        for (int i = 0; i < levelContainers.Length; i++)
-        {
-            GameObject go = Instantiate(scrollviewObjectTemplate, scrollviewParent.transform, false);
-            go.GetComponentInChildren<TMP_Text>().text = levelContainers[i].levelName;
-            _levelContainerButtons[i] = go.GetComponent<Button>();
-        }
-    }
-
-    private void OnLevelSelectorPlayPressed()
-    {
-        if (LevelCompletionTracker.unlockedLevels.Contains(selectedLevel))
-        {
-            LoadScene(selectedLevel);
-        }
-    }
-
-    public void OnFullScreenToggleChanged()
-    {
-        GameController.fullscreenMode = fullscreenDropdown.value;
-
-        switch (fullscreenDropdown.value)
-        {
-            case 0:
-                Screen.fullScreen = true;
-                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                break;
-            case 1:
-                Screen.fullScreen = false;
-                break;
-            case 2:
-                Screen.fullScreen = true;
-                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-                break;
-        }
-    }
-
-    public void OnSoundToggleChanged()
-    {
-        GameController.GlobalSoundIsOn = globalSoundToggle.isOn;
-
-        if (GameController.GlobalSoundIsOn)
-        {
-            globalMixer.SetFloat("Master", Mathf.Log(GameController.MasterVolumeMultiplier) * 20f);
-        }
-        else
-        {
-            globalMixer.SetFloat("Master", Mathf.Log(0.001f) * 20f);
-        }
-    }
-
-    public void OnMasterVolumeValueChanged()
-    {
-        GameController.MasterVolumeMultiplier = masterVolumeSlider.value;
-        globalMixer.SetFloat("Master", Mathf.Log(GameController.MasterVolumeMultiplier) * 20f);
-        masterVolumeText.text = Mathf.Round(masterVolumeSlider.value * 100.0f) + "%";
-    }
-
-    public void OnMusicVolumeValueChanged()
-    {
-        GameController.MusicVolumeMultiplier = musicVolumeSlider.value;
-        globalMixer.SetFloat("Music", Mathf.Log(GameController.MusicVolumeMultiplier) * 20f);
-        musicVolumeText.text = Mathf.Round(musicVolumeSlider.value * 100.0f) + "%";
-    }
-
-    public void OnEffectsVolumeValueChanged()
-    {
-        GameController.EffectsVolumeMultiplier = effectsVolumeSlider.value;
-        globalMixer.SetFloat("Effects", Mathf.Log(GameController.EffectsVolumeMultiplier) * 20f);
-        effectsVolumeText.text = Mathf.Round(effectsVolumeSlider.value * 100.0f) + "%";
-    }
-
-    public void OnDialogueVolumeValueChanged()
-    {
-        GameController.DialogueVolumeMultiplier = dialogueVolumeSlider.value;
-        globalMixer.SetFloat("Dialogue", Mathf.Log(GameController.DialogueVolumeMultiplier) * 20f);
-        dialogueVolumeText.text = Mathf.Round(dialogueVolumeSlider.value * 100.0f) + "%";
-    }
-
-    private void OnSpeedValueChanged()
-    {
-        GameController.GlobalSpeedMultiplier = speedSlider.value / 100;
-        GravityController.SetNewGravity(GravityController.GetCurrentFacing());
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
-    }
-
-    public void OnControlSchemeChanged()
-    {
-        GameController.CurrentControlSchemeIndex = controlChoiceDropdown.value;
-        //_playerInput.SwitchCurrentControlScheme(controlSchemeNames[GameController.CurrentControlSchemeIndex]);
-        SetControlImagesAndTexts();
-    }
-
-    private void SetControlImagesAndTexts()
-    {
-        movementControlSchemeText.text = movementTexts[GameController.CurrentControlSchemeIndex];
-        gravityGunControlSchemeText.text = gravityGunTexts[GameController.CurrentControlSchemeIndex];
-        movementControlImage.sprite = movementImages[GameController.CurrentControlSchemeIndex];
-        gravityGunControlImage.sprite = gravityGunImages[GameController.CurrentControlSchemeIndex];
     }
 
     void SetCustomCursor()
@@ -448,8 +207,7 @@ public class IngameMenu : MonoBehaviour
         }
         
         levelRecordText.text = $"Best time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
-        completedLevelTitle.text = levelContainers[SceneManager.GetActiveScene().buildIndex-1].levelName;
-        //completedLevelImage.sprite = levelContainers[SceneManager.GetActiveScene().buildIndex + 1].levelSprite;
+        completedLevelTitle.text = GetComponent<LevelSelector>().levelContainers[SceneManager.GetActiveScene().buildIndex-1].levelName;
         Pause(1);
     }
 
@@ -516,8 +274,7 @@ public class IngameMenu : MonoBehaviour
             menus[3].SetActive(true);
         }
 
-        SelectLevel(_levelContainerButtons[SceneManager.GetActiveScene().buildIndex - 1]);
-        _levelContainerButtons[SceneManager.GetActiveScene().buildIndex - 1].Select();
+        GetComponent<LevelSelector>().LaunchLevelSelection();
     }
 
     public void OpenOptionsMenu(int index)
@@ -565,8 +322,7 @@ public class IngameMenu : MonoBehaviour
         {
             go.SetActive(false);
         }
-
-        //optionButtons[index].Select();
+        
         optionTabs[index].SetActive(true);
     }
 }

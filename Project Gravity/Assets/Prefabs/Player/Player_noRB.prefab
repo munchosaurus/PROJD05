@@ -16567,6 +16567,10 @@ GameObject:
   - component: {fileID: 9064548700267641869}
   - component: {fileID: 9064548700267641870}
   - component: {fileID: 2124406989537400889}
+  - component: {fileID: 1597711895543682386}
+  - component: {fileID: 4465673912299390195}
+  - component: {fileID: 9030995664223489952}
+  - component: {fileID: 4561352281669415948}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -16690,8 +16694,20 @@ MonoBehaviour:
   - {fileID: 7112685183898127281}
   - {fileID: 7874008531267927944}
   - {fileID: 5365812508230221998}
-  masterVolumeSlider: {fileID: 1571779934}
+--- !u!114 &1597711895543682386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9064548700267641871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e47b46197b87c3444b2c0efa16c06445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   globalSoundToggle: {fileID: 7154453453368434380}
+  masterVolumeSlider: {fileID: 1571779934}
   musicVolumeSlider: {fileID: 6924941254249068828}
   effectsVolumeSlider: {fileID: 5354205179828090390}
   dialogueVolumeSlider: {fileID: 430555761670941678}
@@ -16699,31 +16715,19 @@ MonoBehaviour:
   musicVolumeText: {fileID: 1460311601098419436}
   effectsVolumeText: {fileID: 2634833670073742799}
   dialogueVolumeText: {fileID: 5166992856141140480}
-  speedSlider: {fileID: 1214944954}
-  speedText: {fileID: 1358682142}
   globalMixer: {fileID: 24100000, guid: 03449f5ef8b7b5849a3d81db028eb968, type: 2}
-  tutorialToggle: {fileID: 8661931370780451680}
-  movementControlSchemeText: {fileID: 2887737008060286268}
-  gravityGunControlSchemeText: {fileID: 3822374809313875563}
-  movementControlImage: {fileID: 2313201803561069365}
-  gravityGunControlImage: {fileID: 1540622644388871873}
-  movementTexts:
-  - Use the WASD keys on your keyboard to move Up, Down, Left and Right. To Jump
-    use the space key and to Interact use E.
-  - Use the D-pad on your controller to move Up, Down, Left and Right. To Jump use
-    the south face button and to Interact use the right face button.
-  gravityGunTexts:
-  - You can aim with your gun using your mouse movement, you can then shoot using
-    your left mouse button.
-  - You shoot at objects with right trigger and aim with the right joystick
-  movementImages:
-  - {fileID: 21300000, guid: 8385f11c72bf89c468c3cc4292958ca5, type: 3}
-  - {fileID: 21300000, guid: 80e0d7168e332e54a8a32cb58a7c4811, type: 3}
-  gravityGunImages:
-  - {fileID: 21300000, guid: 191777cf5758e2344b99abff9f14b93d, type: 3}
-  - {fileID: 21300000, guid: 79d5e75c0434f7e4d92067beb366c332, type: 3}
-  controlChoiceDropdown: {fileID: 7140025914385622392}
-  fullscreenDropdown: {fileID: 248297712033733446}
+--- !u!114 &4465673912299390195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9064548700267641871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39719ac56f1144d46b47431d2ba2bb94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   levelContainers:
   - {fileID: 11400000, guid: eedb8ec46f14cae4e8452410285987f2, type: 2}
   - {fileID: 11400000, guid: 327791dfe9d253641adc183af3bc9324, type: 2}
@@ -16745,7 +16749,54 @@ MonoBehaviour:
   levelSelectorRecordText: {fileID: 4993615379870243409}
   levelSelectorImage: {fileID: 8662367110074964760}
   levelSelectorPlay: {fileID: 520304486198744848}
-  selectedLevel: 0
+--- !u!114 &9030995664223489952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9064548700267641871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf4d508f5eba5274cbf8464239b04ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementControlSchemeText: {fileID: 2887737008060286268}
+  gravityGunControlSchemeText: {fileID: 3822374809313875563}
+  movementControlImage: {fileID: 2313201803561069365}
+  gravityGunControlImage: {fileID: 1540622644388871873}
+  movementTexts:
+  - Use the WASD keys on your keyboard to move Up, Down, Left and Right. To Jump
+    use the space key and to Interact use E.
+  - Use the D-pad on your controller to move Up, Down, Left and Right. To Jump use
+    the south face button and to Interact use the right face button.
+  gravityGunTexts:
+  - You can aim with your gun using your mouse movement, you can then shoot using
+    your left mouse button.
+  - You shoot at objects with right trigger and aim with the right joystick
+  movementImages:
+  - {fileID: 21300000, guid: 8385f11c72bf89c468c3cc4292958ca5, type: 3}
+  - {fileID: 21300000, guid: 80e0d7168e332e54a8a32cb58a7c4811, type: 3}
+  gravityGunImages:
+  - {fileID: 21300000, guid: 191777cf5758e2344b99abff9f14b93d, type: 3}
+  - {fileID: 21300000, guid: 79d5e75c0434f7e4d92067beb366c332, type: 3}
+  controlChoiceDropdown: {fileID: 7140025914385622392}
+--- !u!114 &4561352281669415948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9064548700267641871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61aaf6311298c44680d8b35d1a015f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedSlider: {fileID: 1214944954}
+  speedText: {fileID: 1358682142}
+  tutorialToggle: {fileID: 8661931370780451680}
+  fullscreenDropdown: {fileID: 248297712033733446}
 --- !u!1 &9064548700869106143
 GameObject:
   m_ObjectHideFlags: 0
