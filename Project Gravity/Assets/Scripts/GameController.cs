@@ -7,15 +7,47 @@ public static class GameController
 {
     private static bool _inputLocked = true;
     public static int CurrentControlSchemeIndex = 0;
-    public static float MasterVolumeMultiplier = 1f;
-    public static float MusicVolumeMultiplier = 1f;
-    public static float EffectsVolumeMultiplier = 1f;
-    public static float DialogueVolumeMultiplier = 1f;
-    public static bool GlobalSoundIsOn = true;
-    public static int fullscreenMode = 0;
-    
-    public static float GlobalSpeedMultiplier = 1f;
-    public static bool TutorialIsOn = true;
+    // Sound
+    public static bool GlobalSoundIsOn;
+    public static float MasterVolumeMultiplier;
+    public static float MusicVolumeMultiplier;
+    public static float EffectsVolumeMultiplier;
+    public static float DialogueVolumeMultiplier;
+
+    // Game
+    public static int FullscreenMode;
+    public static float GlobalSpeedMultiplier;
+    public static bool TutorialIsOn;
+
+    public static void SetUp(SettingsData settingsData)
+    {
+        // Sound
+        GlobalSoundIsOn = settingsData.SoundIsOn;
+        MasterVolumeMultiplier = settingsData.MasterVolumeMultiplier;
+        MusicVolumeMultiplier = settingsData.MusicVolumeMultiplier;
+        EffectsVolumeMultiplier = settingsData.EffectsVolumeMultiplier;
+        DialogueVolumeMultiplier = settingsData.MasterVolumeMultiplier;
+        
+        // Game
+        FullscreenMode = settingsData.ScreenMode;
+        GlobalSpeedMultiplier = settingsData.GlobalSpeedMultiplier;
+        TutorialIsOn = settingsData.TutorialIsOn;
+    }
+
+    public static void SetUp()
+    {
+        // Sound
+        GlobalSoundIsOn = true;
+        MasterVolumeMultiplier = 1f;
+        MusicVolumeMultiplier = 1f;
+        EffectsVolumeMultiplier = 1f;
+        DialogueVolumeMultiplier = 1f;
+        
+        // Game
+        FullscreenMode = 0;
+        GlobalSpeedMultiplier = 1f;
+        TutorialIsOn = true;
+    }
 
     public static void PauseGame()
     {

@@ -918,6 +918,17 @@
                     "action": "NextTutorialPage",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0bef2777-6667-4728-ac2f-7130a6d95867",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextTutorialPage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

@@ -1,22 +1,82 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuOptions : MonoBehaviour
 {
-    [SerializeField] private GameObject options;
+    [SerializeField] private GameObject optionsObject;
+    [SerializeField] private GameObject levelObject;
+    [SerializeField] private GameObject[] optionTabs;
+
+    private void Awake()
+    {
+        // Loads gamedata from file
+        GameLauncher.LoadSettings();
+        GetComponent<SoundOptions>().LoadSoundSettings();
+        GetComponent<GameOptions>().LoadGameSettings();
+    }
+
+    public void SaveTest()
+    {
+        GameLauncher.SaveSettings();
+    }
 
     public void OpenOptionsMenu()
     {
-        if (!options.activeSelf)
+        if (levelObject.activeSelf)
         {
-            options.SetActive(true);
+            levelObject.SetActive(false);
         }
+        if (!optionsObject.activeSelf)
+        {
+            optionsObject.SetActive(true);
+        }
+        OnOptionTabButtonClick(0);
     }
 
     public void CloseOptionsMenu()
     {
-        if (options.activeSelf)
+        if (optionsObject.activeSelf)
         {
-            options.SetActive(false);
+            optionsObject.SetActive(false);
         }
+    }
+    
+    public void OnOptionTabButtonClick(int index)
+    {
+        foreach (var go in optionTabs)
+        {
+            go.SetActive(false);
+        }
+        
+        optionTabs[index].SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        GameLauncher.SaveSettings();
+        SceneManager.LoadScene(1);
+    }
+    
+    public void CloseLevelSelector()
+    {
+        if (levelObject.activeSelf)
+        {
+            levelObject.SetActive(false);
+        }
+    }
+    
+    public void OpenLevelSelector()
+    {
+        if (optionsObject.activeSelf)
+        {
+            optionsObject.SetActive(false);
+        }
+        if (!levelObject.activeSelf)
+        {
+            levelObject.SetActive(true);
+        }
+
+        //GetComponent<LevelSelector>().LaunchLevelSelection();
     }
 }
