@@ -27,7 +27,6 @@ public class ControlOptions : MonoBehaviour
     public void OnControlSchemeChanged()
     {
         GameController.CurrentControlSchemeIndex = controlChoiceDropdown.value;
-        //_playerInput.SwitchCurrentControlScheme(controlSchemeNames[GameController.CurrentControlSchemeIndex]);
         SetControlImagesAndTexts();
     }
     

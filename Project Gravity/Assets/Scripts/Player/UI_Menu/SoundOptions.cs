@@ -21,6 +21,22 @@ public class SoundOptions : MonoBehaviour
     [SerializeField] private TMP_Text dialogueVolumeText;
     
     [SerializeField] private AudioMixer globalMixer;
+
+    public void LoadSoundSettings()
+    {
+        masterVolumeSlider.value = GameController.MasterVolumeMultiplier;
+        musicVolumeSlider.value = GameController.MusicVolumeMultiplier;
+        effectsVolumeSlider.value = GameController.EffectsVolumeMultiplier;
+        dialogueVolumeSlider.value = GameController.DialogueVolumeMultiplier;
+        globalSoundToggle.isOn = GameController.GlobalSoundIsOn;
+
+        masterVolumeText.text = Mathf.Round(masterVolumeSlider.value * 100.0f) + "%";
+        musicVolumeText.text = Mathf.Round(musicVolumeSlider.value * 100.0f) + "%";
+        effectsVolumeText.text = Mathf.Round(effectsVolumeSlider.value * 100.0f) + "%";
+        dialogueVolumeText.text = Mathf.Round(dialogueVolumeSlider.value * 100.0f) + "%";
+
+        OnSoundToggleChanged();
+    }
     void Start()
     {
         // Volume setup

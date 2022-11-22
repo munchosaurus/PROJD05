@@ -31,22 +31,13 @@ public class IngameMenu : MonoBehaviour
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
 
-    public void ToggleActionMap(bool paused)
+    // TODO: REMOVE AT LAUNCHES, ONLY USED NOW FOR EASIER CONTROL SETTINGS
+    private void Awake()
     {
-        if (paused)
-        {
-            if (_playerInput != null)
-            {
-                _playerInput.SwitchCurrentActionMap("MenuControls");
-            }
-        }
-        else
-        {
-            if (_playerInput != null)
-            {
-                _playerInput.SwitchCurrentActionMap("PlayerControls");
-            }
-        }
+        // Loads gamedata from file
+        GameLauncher.LoadSettings();
+        GetComponent<SoundOptions>().LoadSoundSettings();
+        GetComponent<GameOptions>().LoadGameSettings();
     }
 
     private void Start()
@@ -79,6 +70,24 @@ public class IngameMenu : MonoBehaviour
     void SetCustomCursor()
     {
         Cursor.SetCursor(customCursor, new Vector2(customCursor.width / 2, customCursor.height / 2), CursorMode.Auto);
+    }
+    
+    public void ToggleActionMap(bool paused)
+    {
+        if (paused)
+        {
+            if (_playerInput != null)
+            {
+                _playerInput.SwitchCurrentActionMap("MenuControls");
+            }
+        }
+        else
+        {
+            if (_playerInput != null)
+            {
+                _playerInput.SwitchCurrentActionMap("PlayerControls");
+            }
+        }
     }
 
     public void ChangePauseState(InputAction.CallbackContext context)
@@ -208,6 +217,7 @@ public class IngameMenu : MonoBehaviour
         
         levelRecordText.text = $"Best time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
         completedLevelTitle.text = GetComponent<LevelSelector>().levelContainers[SceneManager.GetActiveScene().buildIndex-1].levelName;
+        GameLauncher.SaveSettings();
         Pause(1);
     }
 

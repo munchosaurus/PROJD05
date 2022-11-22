@@ -39,4 +39,14 @@ public static class LevelCompletionTracker
     {
         return levelRecords.Keys.Contains(levelID);
     }
+
+    public static void LoadLevels(LevelData levelData)
+    {
+        AddUnlockedLevel(1);
+        levelRecords = levelData.LevelRecords;
+        foreach (var record in levelRecords)
+        {
+            AddUnlockedLevel(record.Key);
+        }
+    }
 }

@@ -35,7 +35,15 @@ public class GameOptions : MonoBehaviour
 
         // Screen mode
         fullscreenDropdown.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
-        fullscreenDropdown.value = GameController.fullscreenMode;
+        fullscreenDropdown.value = GameController.FullscreenMode;
+    }
+
+    public void LoadGameSettings()
+    {
+        speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
+        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
+        tutorialToggle.isOn = GameController.TutorialIsOn;
+        fullscreenDropdown.value = GameController.FullscreenMode;
     }
     
     public void OnTutorialToggleValueChanged()
@@ -45,7 +53,7 @@ public class GameOptions : MonoBehaviour
 
     public void OnFullScreenToggleChanged()
     {
-        GameController.fullscreenMode = fullscreenDropdown.value;
+        GameController.FullscreenMode = fullscreenDropdown.value;
 
         switch (fullscreenDropdown.value)
         {
