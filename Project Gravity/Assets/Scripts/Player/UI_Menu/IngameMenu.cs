@@ -23,6 +23,7 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private TMP_Text levelRecordText;
     [SerializeField] private TMP_Text newRecordText;
     [SerializeField] private TMP_Text completedLevelTitle;
+    [SerializeField] private Button nextLevelButton;
 
     [SerializeField] private GameObject[] optionTabs;
     [SerializeField] private Button[] optionButtons;
@@ -164,13 +165,9 @@ public class IngameMenu : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1 && index == 1)
         {
-            if (menus[index].transform.GetChild(0).GetComponent<Button>().IsInteractable())
+            if (nextLevelButton.IsInteractable())
             {
-                menus[index].transform.GetChild(0).GetComponent<Button>().interactable = false;
-            }
-            else
-            {
-                menus[index].transform.GetChild(0).GetComponent<Button>().interactable = true;
+                nextLevelButton.interactable = false;
             }
         }
 

@@ -16686,6 +16686,7 @@ MonoBehaviour:
   levelRecordText: {fileID: 8238274879155016665}
   newRecordText: {fileID: 7229744153782317875}
   completedLevelTitle: {fileID: 133921584076701202}
+  nextLevelButton: {fileID: 9064548699281237096}
   optionTabs:
   - {fileID: 2698861933568389436}
   - {fileID: 5279273302026858213}
