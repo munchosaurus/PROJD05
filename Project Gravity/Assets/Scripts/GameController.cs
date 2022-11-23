@@ -19,6 +19,8 @@ public static class GameController
     public static float GlobalSpeedMultiplier;
     public static bool TutorialIsOn;
 
+    public static bool playerIsDead;
+
     public static void SetUp(SettingsData settingsData)
     {
         // Sound
@@ -26,7 +28,7 @@ public static class GameController
         MasterVolumeMultiplier = settingsData.MasterVolumeMultiplier;
         MusicVolumeMultiplier = settingsData.MusicVolumeMultiplier;
         EffectsVolumeMultiplier = settingsData.EffectsVolumeMultiplier;
-        DialogueVolumeMultiplier = settingsData.MasterVolumeMultiplier;
+        DialogueVolumeMultiplier = settingsData.DialogueVolumeMultiplier;
         
         // Game
         FullscreenMode = settingsData.ScreenMode;

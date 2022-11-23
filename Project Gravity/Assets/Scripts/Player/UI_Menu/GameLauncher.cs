@@ -7,7 +7,6 @@ using UnityEngine;
 public static class GameLauncher
 {
     public static readonly string levelSettingsFile = Application.persistentDataPath + "/levelData.data";
-
     public static readonly string settingsFile = Application.persistentDataPath + "/settingsData.data";
 
     // Used for writing and reading level and settings data.

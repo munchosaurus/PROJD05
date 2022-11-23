@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Tutorial_4.unity
     guid: ccb022f7fa9695143ac5f1954255e714
   - enabled: 1
+    path: Assets/Scenes/Levels/corners.unity
+    guid: 3d41090d6df9597418ac3e7ced23e56f
+  - enabled: 1
     path: Assets/Scenes/Levels/up_and_down.unity
     guid: 22383b72cbd605c489b444990a226284
   - enabled: 1
@@ -43,6 +46,9 @@ EditorBuildSettings:
     guid: 398df15fd26a91e40b5662628d7f4d5c
   - enabled: 1
     path: Assets/Scenes/Levels/Tutorial_7.unity
+    guid: 33419a97bd690b34783786aeff95724e
+  - enabled: 1
+    path: Assets/Scenes/Levels/Tutorial_8.unity
     guid: 900e99de6b89c88439ce281108d22809
   - enabled: 1
     path: Assets/Scenes/Levels/backwards_a.unity
@@ -50,5 +56,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/magnet_1.unity
     guid: 5292c33dfebd9a64cbb081917c863b60
+  - enabled: 1
+    path: Assets/Scenes/Levels/N.unity
+    guid: 5a630b084ba99ab458e5f504b21de3f6
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 1b2918eef42bd3143ab487e371f969c2, type: 2}

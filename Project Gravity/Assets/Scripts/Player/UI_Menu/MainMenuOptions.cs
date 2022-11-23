@@ -16,11 +16,6 @@ public class MainMenuOptions : MonoBehaviour
         GetComponent<GameOptions>().LoadGameSettings();
     }
 
-    public void SaveTest()
-    {
-        GameLauncher.SaveSettings();
-    }
-
     public void OpenOptionsMenu()
     {
         if (levelObject.activeSelf)

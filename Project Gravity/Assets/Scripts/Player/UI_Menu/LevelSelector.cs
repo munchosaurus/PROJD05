@@ -88,7 +88,15 @@ public class LevelSelector : MonoBehaviour
     {
         if (LevelCompletionTracker.unlockedLevels.Contains(_selectedLevel))
         {
-            _ingameMenu.LoadScene(_selectedLevel);
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+            {
+                _ingameMenu.LoadScene(_selectedLevel);
+            }
+            else
+            {
+                GameLauncher.SaveSettings();
+                SceneManager.LoadScene(_selectedLevel);
+            }
         }
     }
 }
