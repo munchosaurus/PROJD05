@@ -24,6 +24,7 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private TMP_Text newRecordText;
     [SerializeField] private TMP_Text completedLevelTitle;
     [SerializeField] private Button nextLevelButton;
+    [SerializeField] private GameObject levelSelectorPauseReturn;
 
     [SerializeField] private GameObject[] optionTabs;
     [SerializeField] private Button[] optionButtons;
@@ -125,11 +126,24 @@ public class IngameMenu : MonoBehaviour
     {
         if (context.started)
         {
-            if (gameObject.transform.GetChild(0).gameObject.activeSelf && menus[0].gameObject.activeSelf)
+            if (gameObject.transform.GetChild(0).gameObject.activeSelf)
             {
-                Unpause();
+                if (menus[0].gameObject.activeSelf)
+                {
+                    Unpause();
+                } else if (menus[1].gameObject.activeSelf)
+                {
+                    OpenPauseScreenFromLevelSelector();
+                }
             }
         }
+    }
+
+    public void OpenPauseScreenFromLevelSelector()
+    {
+        menus[1].gameObject.SetActive(false);
+        menus[0].gameObject.SetActive(true);
+        levelSelectorPauseReturn.SetActive(true);
     }
 
     public void Unpause()
@@ -160,11 +174,21 @@ public class IngameMenu : MonoBehaviour
         gameObject.transform.parent.GetComponent<AudioSource>().mute = true;
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         gameObject.SetActive(true);
+
+        levelSelectorPauseReturn.SetActive(false);
+        foreach (var menu in menus)
+        {
+            if (menu.gameObject.activeSelf)
+            {
+                menu.SetActive(false);
+            }
+        }
         if (!menus[index].activeSelf)
         {
             menus[index].SetActive(true);
         }
-
+        levelSelectorPauseReturn.SetActive(false);
+        
         if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1 && index == 1)
         {
             if (nextLevelButton.IsInteractable())
