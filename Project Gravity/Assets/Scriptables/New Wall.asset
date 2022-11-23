@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad3f4937e7877b458d9363a9280d661, type: 3}
   m_Name: New Wall
   m_EditorClassIdentifier: 
-  wallPrefab: {fileID: 6098653093695181756, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
-  dimensions: {x: 3, y: 1, z: 3}
+  wallPrefab: {fileID: 1495554306845300774, guid: b4daf7a57450c9a4fa8643a6ebac7d12, type: 3}
+  dimensions: {x: 1, y: 2, z: 3}
   isGround: 1
-  specialPrefabs: []
-  specialPrefabPositions: []
+  specialPrefabs:
+  - {fileID: 3027047513118980189, guid: b9d7f8512fbe8fa4cb77b135d4d0e9dd, type: 3}
+  specialPrefabPositions:
+  - {x: 0, y: 1, z: 0}
   emblems: []
   emblemPositions: []
