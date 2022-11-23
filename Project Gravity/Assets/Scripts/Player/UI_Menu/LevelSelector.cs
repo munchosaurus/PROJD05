@@ -27,8 +27,16 @@ public class LevelSelector : MonoBehaviour
 
     public void LaunchLevelSelection()
     {
-        SelectLevel(_levelContainerButtons[SceneManager.GetActiveScene().buildIndex - 1]);
-        _levelContainerButtons[SceneManager.GetActiveScene().buildIndex - 1].Select();
+        int indexToChoose = SceneManager.GetActiveScene().buildIndex;
+        
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            indexToChoose--;
+
+        }
+        SelectLevel(_levelContainerButtons[indexToChoose]);
+        _levelContainerButtons[indexToChoose].Select();
+
     }
     
     public void SelectLevel(Button selectedButton)

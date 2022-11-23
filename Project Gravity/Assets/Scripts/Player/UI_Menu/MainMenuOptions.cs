@@ -72,6 +72,6 @@ public class MainMenuOptions : MonoBehaviour
             levelObject.SetActive(true);
         }
 
-        //GetComponent<LevelSelector>().LaunchLevelSelection();
+        GetComponent<LevelSelector>().LaunchLevelSelection();
     }
 }

@@ -15,4 +15,4 @@ MonoBehaviour:
   levelName: Tutorial 8
   levelID: 14
   levelSprite: {fileID: 21300000, guid: 8385f11c72bf89c468c3cc4292958ca5, type: 3}
-  levelDescription: Tutorial 7 description
+  levelDescription: Tutorial 8 description

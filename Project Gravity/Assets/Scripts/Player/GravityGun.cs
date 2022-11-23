@@ -12,6 +12,7 @@ public class GravityGun : MonoBehaviour
     [SerializeField] private LayerMask gravityMask;
     [SerializeField] private LayerMask magnetMask;
     [SerializeField] private LayerMask lavaMask;
+    [SerializeField] private LayerMask mirrorMask;
     private LineRenderer _lineRenderer;
     private GameObject aimDirector;
     private Vector3 _currentDirection;
@@ -59,7 +60,24 @@ public class GravityGun : MonoBehaviour
             gravityMask);
         Physics.Raycast(transform.position, _currentDirection, out var magnetHit, Mathf.Infinity,
             magnetMask);
+        Physics.Raycast(transform.position, _currentDirection, out var mirrorHit, Mathf.Infinity,
+            mirrorMask);
         Vector3 linePosition;
+
+        if (mirrorHit.collider)
+        {
+            float angle = Vector3.Angle(mirrorHit.normal, -_currentDirection);
+            //mirrorHit.collider.transform.Find("MirrorHitPoint").transform.position = mirrorHit.point;
+            //Debug.Log(angle);
+
+            var x = Vector3.Reflect(_currentDirection, mirrorHit.normal);
+            mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>().useWorldSpace = false;
+            Physics.Raycast(mirrorHit.point, x, out var testHit, Mathf.Infinity, groundMask);
+            mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>()
+                .SetPosition(0, mirrorHit.point);
+            mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>().SetPosition(1, testHit.point);
+        }
+
         if (gravityHit.collider)
         {
             if (magnetHit.collider)
@@ -224,7 +242,7 @@ public class GravityGun : MonoBehaviour
         };
         EventSystem.Current.FireEvent(gravityGunEvent);
     }
-    
+
     private RaycastHit GetRayCastHitToUse(List<RaycastHit> hits)
     {
         var closest = hits[0];
@@ -233,7 +251,7 @@ public class GravityGun : MonoBehaviour
             for (int i = 1; i < hits.Count; i++)
             {
                 if (!((float) Math.Round(Vector3.Distance(transform.position, hits[i].point), 2) >
-                    (float) Math.Round(Vector3.Distance(transform.position, closest.point), 2)))
+                      (float) Math.Round(Vector3.Distance(transform.position, closest.point), 2)))
                 {
                     closest = hits[i];
                 }
@@ -261,10 +279,10 @@ public class GravityGun : MonoBehaviour
         Physics.Raycast(transform.position, _currentDirection, out var lavaHit, Mathf.Infinity,
             lavaMask);
         var hits = new List<RaycastHit>();
-        
+
         // Ground needs to be added first for the sake of logic later
         hits.Add(groundHit);
-        
+
         if (gravityHit.collider)
         {
             hits.Add(gravityHit);
@@ -279,7 +297,7 @@ public class GravityGun : MonoBehaviour
         {
             hits.Add(lavaHit);
         }
-        
+
         TriggerGravityGunEvent(GetRayCastHitToUse(hits));
         DisableAimDirector();
     }
