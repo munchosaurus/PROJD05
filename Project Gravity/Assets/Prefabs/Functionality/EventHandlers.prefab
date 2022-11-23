@@ -47,6 +47,7 @@ MonoBehaviour:
   groundHitClip: {fileID: 8300000, guid: e8cd119cf35e13a45bec783f7658f2a3, type: 3}
   lavaHitClip: {fileID: 8300000, guid: 920b8f1cdfd8d774594a68527449727e, type: 3}
   gravityHitClip: {fileID: 8300000, guid: e3db21ac2dc538f4ca0e369394061c92, type: 3}
+  mirrorHitClip: {fileID: 8300000, guid: 0e06fa593a4c1d44bacf1ed11b94bbb9, type: 3}
   magnetActivationClip: {fileID: 8300000, guid: ac85e1a5430acb64a8883aac72e9056d, type: 3}
   magnetDeactivationClip: {fileID: 8300000, guid: f0ea1b21f5612d14fba90e42533db8a5, type: 3}
   playerCollidesWithGroundClip: {fileID: 8300000, guid: 19d38e9d8d34ab14684208d4bbcc95ed, type: 3}

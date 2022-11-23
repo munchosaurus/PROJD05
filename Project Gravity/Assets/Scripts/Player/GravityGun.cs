@@ -19,13 +19,25 @@ public class GravityGun : MonoBehaviour
     private GameObject crosshair;
     private MeshRenderer crosshairMesh;
     private bool buttonPressed;
-    private int _magnetLayer;
+    private static int gravityLayer;
+    private static int groundLayer;
+    private static int magnetLayer;
+    private static int lavaLayer;
+    private static int playerLayer;
+    private static int moveableLayer;
+    private static int mirrorLayer;
 
     private void Awake()
     {
         aimDirector = GameObject.FindGameObjectWithTag("AimingDirector");
         _lineRenderer = GameObject.FindWithTag("LineRenderer").GetComponent<LineRenderer>();
-        _magnetLayer = LayerMask.NameToLayer("GravityMagnet");
+        gravityLayer = LayerMask.NameToLayer("GravityChange");
+        playerLayer = LayerMask.NameToLayer("Player");
+        groundLayer = LayerMask.NameToLayer("Ground");
+        magnetLayer = LayerMask.NameToLayer("GravityMagnet");
+        lavaLayer = LayerMask.NameToLayer("Hazard");
+        moveableLayer = LayerMask.NameToLayer("Moveable");
+        mirrorLayer = LayerMask.NameToLayer("Mirror");
     }
 
     void FixedUpdate()
@@ -53,135 +65,148 @@ public class GravityGun : MonoBehaviour
         }
     }
 
+    private void ShootMirrorLine(RaycastHit mirrorHit, Vector3 incomingDirection)
+    {
+        var mirrorDirection = Vector3.Reflect(incomingDirection, mirrorHit.normal);
+
+        mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>().useWorldSpace = true;
+
+
+        Physics.Raycast(mirrorHit.point, mirrorDirection, out var testHit, Mathf.Infinity, groundMask);
+
+
+        mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>()
+            .SetPosition(0, mirrorHit.point);
+        mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>().SetPosition(1, testHit.point);
+    }
+
     private void SetCrosshair()
     {
-        Physics.Raycast(transform.position, _currentDirection, out var groundHit, Mathf.Infinity, groundMask);
-        Physics.Raycast(transform.position, _currentDirection, out var gravityHit, Mathf.Infinity,
-            gravityMask);
-        Physics.Raycast(transform.position, _currentDirection, out var magnetHit, Mathf.Infinity,
-            magnetMask);
-        Physics.Raycast(transform.position, _currentDirection, out var mirrorHit, Mathf.Infinity,
-            mirrorMask);
-        Vector3 linePosition;
-
-        if (mirrorHit.collider)
-        {
-            float angle = Vector3.Angle(mirrorHit.normal, -_currentDirection);
-            //mirrorHit.collider.transform.Find("MirrorHitPoint").transform.position = mirrorHit.point;
-            //Debug.Log(angle);
-
-            var x = Vector3.Reflect(_currentDirection, mirrorHit.normal);
-            mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>().useWorldSpace = false;
-            Physics.Raycast(mirrorHit.point, x, out var testHit, Mathf.Infinity, groundMask);
-            mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>()
-                .SetPosition(0, mirrorHit.point);
-            mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>().SetPosition(1, testHit.point);
-        }
-
-        if (gravityHit.collider)
-        {
-            if (magnetHit.collider)
-            {
-                if ((float) Math.Round(Vector3.Distance(transform.position, gravityHit.point), 2) >
-                    (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
-                {
-                    if ((float) Math.Round(Vector3.Distance(transform.position, magnetHit.point), 2) >
-                        (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
-                    {
-                        linePosition = SetGroundAim(groundHit);
-                    }
-                    else
-                    {
-                        if (magnetHit.collider.GetComponentInParent<DynamicObjectMovement>() != null)
-                        {
-                            if (magnetHit.collider.GetComponentInParent<DynamicObjectMovement>().lockedToMagnet)
-                            {
-                                linePosition = SetMagnetAim(magnetHit);
-                            }
-                            else
-                            {
-                                linePosition = SetGroundAim(groundHit);
-                            }
-                        }
-                        else
-                        {
-                            linePosition = SetMagnetAim(magnetHit);
-                        }
-                    }
-                }
-                else
-                {
-                    linePosition = SetGravityAim(gravityHit);
-                }
-            }
-            else
-            {
-                // Where no magnet exists 
-                if ((float) Math.Round(Vector3.Distance(transform.position, gravityHit.point), 2) >
-                    (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
-                {
-                    linePosition = SetGroundAim(groundHit);
-                }
-                else
-                {
-                    linePosition = SetGravityAim(gravityHit);
-                }
-            }
-        }
-        else if (magnetHit.collider)
-        {
-            // Where no gravity exists but magnet does
-            if ((float) Math.Round(Vector3.Distance(transform.position, magnetHit.point), 2) >
-                (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
-            {
-                linePosition = SetGroundAim(groundHit);
-            }
-            else
-            {
-                if (magnetHit.collider.GetComponentInParent<DynamicObjectMovement>() != null)
-                {
-                    if (magnetHit.collider.GetComponentInParent<DynamicObjectMovement>().lockedToMagnet)
-                    {
-                        linePosition = SetMagnetAim(magnetHit);
-                    }
-                    else
-                    {
-                        linePosition = SetGroundAim(groundHit);
-                    }
-                }
-                else
-                {
-                    linePosition = SetMagnetAim(magnetHit);
-                }
-            }
-        }
-        else
-        {
-            linePosition = SetGroundAim(groundHit);
-        }
-
-        _lineRenderer.SetPosition(1, linePosition);
+        // Physics.Raycast(transform.position, _currentDirection, out var groundHit, Mathf.Infinity, groundMask);
+        // Physics.Raycast(transform.position, _currentDirection, out var gravityHit, Mathf.Infinity,
+        //     gravityMask);
+        // Physics.Raycast(transform.position, _currentDirection, out var magnetHit, Mathf.Infinity,
+        //     magnetMask);
+        // Physics.Raycast(transform.position, _currentDirection, out var mirrorHit, Mathf.Infinity,
+        //     mirrorMask);
+        // Vector3 linePosition;
+        //
+        // if (mirrorHit.collider)
+        // {
+        //     // var mirrorDirection = Vector3.Reflect(_currentDirection, mirrorHit.normal);
+        //     // mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>().useWorldSpace = true;
+        //     // Physics.Raycast(mirrorHit.point, mirrorDirection, out var testHit, Mathf.Infinity, groundMask);
+        //     // mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>()
+        //     //     .SetPosition(0, mirrorHit.point);
+        //     // mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>().SetPosition(1, testHit.point);
+        // }
+        //
+        // if (gravityHit.collider)
+        // {
+        //     if (magnetHit.collider)
+        //     {
+        //         if ((float) Math.Round(Vector3.Distance(transform.position, gravityHit.point), 2) >
+        //             (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
+        //         {
+        //             if ((float) Math.Round(Vector3.Distance(transform.position, magnetHit.point), 2) >
+        //                 (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
+        //             {
+        //                 linePosition = SetGroundAim(groundHit);
+        //             }
+        //             else
+        //             {
+        //                 if (magnetHit.collider.GetComponentInParent<DynamicObjectMovement>() != null)
+        //                 {
+        //                     if (magnetHit.collider.GetComponentInParent<DynamicObjectMovement>().lockedToMagnet)
+        //                     {
+        //                         linePosition = SetMagnetAim(magnetHit);
+        //                     }
+        //                     else
+        //                     {
+        //                         linePosition = SetGroundAim(groundHit);
+        //                     }
+        //                 }
+        //                 else
+        //                 {
+        //                     linePosition = SetMagnetAim(magnetHit);
+        //                 }
+        //             }
+        //         }
+        //         else
+        //         {
+        //             linePosition = SetGravityAim(gravityHit);
+        //         }
+        //     }
+        //     else
+        //     {
+        //         // Where no magnet exists 
+        //         if ((float) Math.Round(Vector3.Distance(transform.position, gravityHit.point), 2) >
+        //             (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
+        //         {
+        //             linePosition = SetGroundAim(groundHit);
+        //         }
+        //         else
+        //         {
+        //             linePosition = SetGravityAim(gravityHit);
+        //         }
+        //     }
+        // }
+        // else if (magnetHit.collider)
+        // {
+        //     // Where no gravity exists but magnet does
+        //     if ((float) Math.Round(Vector3.Distance(transform.position, magnetHit.point), 2) >
+        //         (float) Math.Round(Vector3.Distance(transform.position, groundHit.point), 2))
+        //     {
+        //         linePosition = SetGroundAim(groundHit);
+        //     }
+        //     else
+        //     {
+        //         if (magnetHit.collider.GetComponentInParent<DynamicObjectMovement>() != null)
+        //         {
+        //             if (magnetHit.collider.GetComponentInParent<DynamicObjectMovement>().lockedToMagnet)
+        //             {
+        //                 linePosition = SetMagnetAim(magnetHit);
+        //             }
+        //             else
+        //             {
+        //                 linePosition = SetGroundAim(groundHit);
+        //             }
+        //         }
+        //         else
+        //         {
+        //             linePosition = SetMagnetAim(magnetHit);
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     linePosition = SetGroundAim(groundHit);
+        // }
+        var hits = InitRaycasts(transform.position, _currentDirection);
+        var hit = GetRayCastHitToUse(transform.position, _currentDirection, hits);
+        
+        SetAimingColor(hit);
+        
+        _lineRenderer.SetPosition(1, hit.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER);
     }
 
-    private Vector3 SetGroundAim(RaycastHit hit)
+    private void SetAimingColor(RaycastHit hit)
     {
-        DisableAimDirector();
-        _lineRenderer.material = lineMaterials[0];
-        return hit.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER;
-    }
-
-    private Vector3 SetGravityAim(RaycastHit hit)
-    {
-        EnableAimDirector(hit);
-        _lineRenderer.material = lineMaterials[1];
-        return hit.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER;
-    }
-
-    private Vector3 SetMagnetAim(RaycastHit hit)
-    {
-        DisableAimDirector();
-        _lineRenderer.material = lineMaterials[2];
-        return hit.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER;
+        int i = 0;
+        if (hit.collider.gameObject.layer == gravityLayer)
+        {
+            EnableAimDirector(hit);
+            i = 1;
+        } else
+        {
+            DisableAimDirector();
+            if (hit.collider.gameObject.layer == magnetLayer)
+            {
+                i = 2;
+            }
+            
+        }
+        _lineRenderer.material = lineMaterials[i];
     }
 
     private void EnableAimDirector(RaycastHit hit)
@@ -243,41 +268,64 @@ public class GravityGun : MonoBehaviour
         EventSystem.Current.FireEvent(gravityGunEvent);
     }
 
-    private RaycastHit GetRayCastHitToUse(List<RaycastHit> hits)
+    private RaycastHit GetRayCastHitToUse(Vector3 position, Vector3 currentDirection, List<RaycastHit> hits)
     {
-        var closest = hits[0];
+        var closestHit = hits[0];
         if (hits.Count > 1)
         {
             for (int i = 1; i < hits.Count; i++)
             {
-                if (!((float) Math.Round(Vector3.Distance(transform.position, hits[i].point), 2) >
-                      (float) Math.Round(Vector3.Distance(transform.position, closest.point), 2)))
+                if (!((float) Math.Round(Vector3.Distance(position, hits[i].point), 2) >
+                      (float) Math.Round(Vector3.Distance(position, closestHit.point), 2)))
                 {
-                    closest = hits[i];
+                    closestHit = hits[i];
                 }
             }
         }
 
-        if (closest.collider.gameObject.layer != _magnetLayer) return closest;
-        if (closest.transform.parent == null) return closest;
-        if (closest.transform.GetComponentInParent<DynamicObjectMovement>() == null) return closest;
-        if (!closest.transform.GetComponentInParent<DynamicObjectMovement>().lockedToMagnet)
+        if (closestHit.collider.gameObject.layer == mirrorLayer)
         {
-            closest = hits[0];
+            var hit = SetMirrorLine(closestHit, currentDirection);
+            return hit;
         }
 
-        return closest;
+        if (closestHit.collider.gameObject.layer != magnetLayer) return closestHit;
+        if (closestHit.transform.parent == null) return closestHit;
+        if (closestHit.transform.GetComponentInParent<DynamicObjectMovement>() == null) return closestHit;
+        if (!closestHit.transform.GetComponentInParent<DynamicObjectMovement>().lockedToMagnet)
+        {
+            closestHit = hits[0];
+        }
+
+        return closestHit;
     }
 
-    public void ShootGravityGun()
+    private RaycastHit SetMirrorLine(RaycastHit mirrorHit, Vector3 incomingDirection)
     {
-        Physics.Raycast(transform.position, _currentDirection, out var groundHit, Mathf.Infinity, groundMask);
-        Physics.Raycast(transform.position, _currentDirection, out var gravityHit, Mathf.Infinity,
+        var mirrorDirection = Vector3.Reflect(incomingDirection, mirrorHit.normal);
+
+        mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>().useWorldSpace = true;        
+            
+        mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>()
+            .SetPosition(0, mirrorHit.point);
+            
+        var rayCastHits = InitRaycasts(mirrorHit.collider.transform.position, mirrorDirection);
+        RaycastHit toUse = GetRayCastHitToUse(mirrorHit.point, mirrorDirection, rayCastHits);
+        mirrorHit.collider.transform.Find("MirrorLine").GetComponent<LineRenderer>().SetPosition(1, toUse.point);
+        return toUse;
+    }
+
+    private List<RaycastHit> InitRaycasts(Vector3 startingPos, Vector3 direction)
+    {
+        Physics.Raycast(startingPos, direction, out var groundHit, Mathf.Infinity, groundMask);
+        Physics.Raycast(startingPos, direction, out var gravityHit, Mathf.Infinity,
             gravityMask);
-        Physics.Raycast(transform.position, _currentDirection, out var magnetHit, Mathf.Infinity,
+        Physics.Raycast(startingPos, direction, out var magnetHit, Mathf.Infinity,
             magnetMask);
-        Physics.Raycast(transform.position, _currentDirection, out var lavaHit, Mathf.Infinity,
+        Physics.Raycast(startingPos, direction, out var lavaHit, Mathf.Infinity,
             lavaMask);
+        Physics.Raycast(startingPos, direction, out var mirrorHit, Mathf.Infinity,
+            mirrorMask);
         var hits = new List<RaycastHit>();
 
         // Ground needs to be added first for the sake of logic later
@@ -298,7 +346,19 @@ public class GravityGun : MonoBehaviour
             hits.Add(lavaHit);
         }
 
-        TriggerGravityGunEvent(GetRayCastHitToUse(hits));
+        if (mirrorHit.collider)
+        {
+            hits.Add(mirrorHit);
+        }
+
+        return hits;
+    }
+
+    public void ShootGravityGun()
+    {
+        var hits = InitRaycasts(transform.position, _currentDirection);
+
+        TriggerGravityGunEvent(GetRayCastHitToUse(transform.position, _currentDirection, hits));
         DisableAimDirector();
     }
 

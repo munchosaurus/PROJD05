@@ -13939,6 +13939,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ebd68e582f5d51b4986f096efc233b42, type: 2}
   - {fileID: 2100000, guid: 261cf4127f2808943abb10e0f4ed3438, type: 2}
   - {fileID: 2100000, guid: cc21de56af0d25e418f145ce0461c12e, type: 2}
+  - {fileID: 2100000, guid: ecf4bdefc941b674ba91f4a91dd0a324, type: 2}
   groundMask:
     serializedVersion: 2
     m_Bits: 128
@@ -13951,6 +13952,9 @@ MonoBehaviour:
   lavaMask:
     serializedVersion: 2
     m_Bits: 1024
+  mirrorMask:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!114 &816275455
 MonoBehaviour:
   m_ObjectHideFlags: 0
