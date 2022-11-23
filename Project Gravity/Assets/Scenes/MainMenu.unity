@@ -7121,6 +7121,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c4673bd6da3b64b4ea988b98ba464b19, type: 2}
   - {fileID: 11400000, guid: b7e3bf09a365bba419e20a8b86e4e6b1, type: 2}
   - {fileID: 11400000, guid: a94d8dd9663be4c49969678186374159, type: 2}
+  - {fileID: 11400000, guid: 42086a683ed348f4b884547dae878f76, type: 2}
   scrollviewObjectTemplate: {fileID: 1767864967681947104, guid: 7b9bdddfbfe5c1f429632c8648354cb0, type: 3}
   scrollviewParent: {fileID: 1207008437}
   levelDescription: {fileID: 292083443}
