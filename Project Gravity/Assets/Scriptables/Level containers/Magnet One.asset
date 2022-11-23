@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
   m_Name: Magnet One
   m_EditorClassIdentifier: 
-  levelName: Magnet One
-  levelID: 14
+  levelName: Magnet 1
+  levelID: 16
   levelSprite: {fileID: 21300000, guid: 554cf83644ab36044a98b44e63cdd9db, type: 3}
   levelDescription: Magnet One description
