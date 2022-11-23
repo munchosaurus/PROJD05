@@ -26,7 +26,7 @@ public static class GameController
         MasterVolumeMultiplier = settingsData.MasterVolumeMultiplier;
         MusicVolumeMultiplier = settingsData.MusicVolumeMultiplier;
         EffectsVolumeMultiplier = settingsData.EffectsVolumeMultiplier;
-        DialogueVolumeMultiplier = settingsData.MasterVolumeMultiplier;
+        DialogueVolumeMultiplier = settingsData.DialogueVolumeMultiplier;
         
         // Game
         FullscreenMode = settingsData.ScreenMode;
