@@ -62,6 +62,8 @@ public class IngameMenu : MonoBehaviour
             return;
         }
 
+        Physics.gravity = new Vector3(0, -Constants.GRAVITY, 0);
+        
         if (customCursor != null)
         {
             SetCustomCursor();
@@ -183,8 +185,11 @@ public class IngameMenu : MonoBehaviour
 
     private IEnumerator RestartWhenDead(PlayerDeathEvent playerDeathEvent)
     {
-        GameController.PauseGame();
+        GameController.SetInputLockState(true);
+        GameController.playerIsDead = true;
         yield return new WaitForSecondsRealtime(playerDeathEvent.DeathTime);
+        GameController.SetInputLockState(false);
+        GameController.playerIsDead = false;
         Restart();
     }
 

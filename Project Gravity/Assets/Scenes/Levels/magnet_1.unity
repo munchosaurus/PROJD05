@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1579453266}
-  m_IndirectSpecularColor: {r: 0.039847188, g: 0.040871747, b: 0.054255374, a: 1}
+  m_IndirectSpecularColor: {r: 0.042856283, g: 0.043965045, b: 0.05839958, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -23025,10 +23025,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: isTutorialLevel
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1049751914841088714, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -23072,42 +23068,6 @@ PrefabInstance:
     - target: {fileID: 1049751914841088714, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChangeActivePanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeActivePanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Tutorial, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7406499542109578702, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_Name
@@ -38222,14 +38182,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 953350191, guid: a663feaaee8f33a499bf2c7295e3b0cc, type: 3}
-      propertyPath: isDefault
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 953350191, guid: a663feaaee8f33a499bf2c7295e3b0cc, type: 3}
-      propertyPath: isTutorialLevel
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8737704364896298532, guid: a663feaaee8f33a499bf2c7295e3b0cc, type: 3}
       propertyPath: m_RootOrder
       value: 1

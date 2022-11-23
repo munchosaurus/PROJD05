@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="Fixed bugs: chaning master sound, playing level from main menu level selector">
+      <change afterPath="$PROJECT_DIR$/Assets/Animations/Player.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Animations/Player/Player.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Animations/Player/Player.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Animations/Player/Player_death.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Animations/Player/Player_death.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/VFXHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/VFXHandler.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Functionality/EventHandlers.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Functionality/EventHandlers.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/magnet_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/magnet_1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Constants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Constants.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/HazardLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/HazardLogic.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +143,7 @@
       <workItem from="1668765077076" duration="7087000" />
       <workItem from="1669020700857" duration="11444000" />
       <workItem from="1669107786889" duration="15496000" />
-      <workItem from="1669193530236" duration="1445000" />
+      <workItem from="1669193530236" duration="4934000" />
     </task>
     <task id="LOCAL−00001" summary="Added logic to level selector">
       <created>1669027248858</created>

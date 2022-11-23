@@ -19,6 +19,8 @@ public static class GameController
     public static float GlobalSpeedMultiplier;
     public static bool TutorialIsOn;
 
+    public static bool playerIsDead;
+
     public static void SetUp(SettingsData settingsData)
     {
         // Sound
