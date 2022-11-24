@@ -68,5 +68,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/N.unity
     guid: 5a630b084ba99ab458e5f504b21de3f6
+  - enabled: 1
+    path: Assets/Scenes/Levels/Control Room.unity
+    guid: 44694effbd8f6d04d865e34cbd153578
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 1b2918eef42bd3143ab487e371f969c2, type: 2}
