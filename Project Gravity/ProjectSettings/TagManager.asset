@@ -12,6 +12,7 @@ TagManager:
   - AimingDirector
   - Keycard
   - CollisionSpeaker
+  - Mirror
   layers:
   - Default
   - TransparentFX
