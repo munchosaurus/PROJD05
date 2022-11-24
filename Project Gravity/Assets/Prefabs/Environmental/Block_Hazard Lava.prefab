@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1135393948550724083}
   - component: {fileID: 7189762174737485154}
   m_Layer: 0
-  m_Name: BuildingBlock_Hazard
+  m_Name: Block_Hazard Lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

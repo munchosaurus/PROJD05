@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 153618604506026845}
   - component: {fileID: 2721638756538509207}
   m_Layer: 0
-  m_Name: BuildingBlock_Magnet
+  m_Name: Block_Magnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
