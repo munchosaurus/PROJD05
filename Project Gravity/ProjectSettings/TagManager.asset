@@ -13,6 +13,7 @@ TagManager:
   - Keycard
   - CollisionSpeaker
   - Mirror
+  - EmberRotation
   layers:
   - Default
   - TransparentFX
