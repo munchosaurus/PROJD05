@@ -15515,6 +15515,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1721855198}
     - target: {fileID: 7406499542109578702, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_Name
       value: Player_noRB
@@ -28091,6 +28095,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6911077100400773382, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
   m_PrefabInstance: {fileID: 1721428237}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1721855198 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2110725554297923202, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
+  m_PrefabInstance: {fileID: 1438508573}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1725443710
 PrefabInstance:
