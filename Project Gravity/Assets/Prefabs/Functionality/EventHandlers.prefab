@@ -47,6 +47,7 @@ MonoBehaviour:
   groundHitClip: {fileID: 8300000, guid: e8cd119cf35e13a45bec783f7658f2a3, type: 3}
   lavaHitClip: {fileID: 8300000, guid: 920b8f1cdfd8d774594a68527449727e, type: 3}
   gravityHitClip: {fileID: 8300000, guid: e3db21ac2dc538f4ca0e369394061c92, type: 3}
+  mirrorHitClip: {fileID: 8300000, guid: 0e06fa593a4c1d44bacf1ed11b94bbb9, type: 3}
   magnetActivationClip: {fileID: 8300000, guid: ac85e1a5430acb64a8883aac72e9056d, type: 3}
   magnetDeactivationClip: {fileID: 8300000, guid: f0ea1b21f5612d14fba90e42533db8a5, type: 3}
   playerCollidesWithGroundClip: {fileID: 8300000, guid: 19d38e9d8d34ab14684208d4bbcc95ed, type: 3}
@@ -229,8 +230,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7492477007387851065}
   - component: {fileID: 4424746963285128520}
+  - component: {fileID: 6934937467233386160}
   m_Layer: 0
-  m_Name: SkyBox_Rotator
+  m_Name: GraphicsRotator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,6 +266,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotateSpeed: 0.2
+--- !u!114 &6934937467233386160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2406529253708062146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2695046f31d02054f8f41ddfafd04c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emberRotationTag: EmberRotation
+  gravityChangeLayer: GravityChange
 --- !u!1 &8737704364896298535
 GameObject:
   m_ObjectHideFlags: 0

@@ -13021,6 +13021,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrampolineDOWN
       objectReference: {fileID: 0}
+    - target: {fileID: 3678146857292080627, guid: e62821903fb78ef4ea187251bd7e40e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3678146857292080628, guid: e62821903fb78ef4ea187251bd7e40e5, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -29192,38 +29196,6 @@ PrefabInstance:
     - target: {fileID: 5361997392337676397, guid: b64d0efce0a8d544aae56929e619e145, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5361997392337676398, guid: b64d0efce0a8d544aae56929e619e145, type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime0
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5361997392337676398, guid: b64d0efce0a8d544aae56929e619e145, type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime1
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 5361997392337676398, guid: b64d0efce0a8d544aae56929e619e145, type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime2
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 5361997392337676398, guid: b64d0efce0a8d544aae56929e619e145, type: 3}
-      propertyPath: m_Parameters.colorGradient.key2.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5361997392337676398, guid: b64d0efce0a8d544aae56929e619e145, type: 3}
-      propertyPath: m_Parameters.colorGradient.key2.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5361997392337676398, guid: b64d0efce0a8d544aae56929e619e145, type: 3}
-      propertyPath: m_Parameters.colorGradient.key2.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5361997392337676398, guid: b64d0efce0a8d544aae56929e619e145, type: 3}
-      propertyPath: m_Parameters.colorGradient.m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5361997392337676398, guid: b64d0efce0a8d544aae56929e619e145, type: 3}
-      propertyPath: m_Parameters.colorGradient.m_NumColorKeys
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5361997392337676399, guid: b64d0efce0a8d544aae56929e619e145, type: 3}
       propertyPath: m_Name

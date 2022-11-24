@@ -4,7 +4,6 @@
 public class LevelContainer : ScriptableObject
 {
     public string levelName;
-    public int levelID;
     public Sprite levelSprite;
     [TextArea] public string levelDescription;
 }

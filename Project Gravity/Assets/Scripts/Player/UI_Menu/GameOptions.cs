@@ -44,6 +44,7 @@ public class GameOptions : MonoBehaviour
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
         tutorialToggle.isOn = GameController.TutorialIsOn;
         fullscreenDropdown.value = GameController.FullscreenMode;
+        OnFullScreenToggleChanged();
     }
     
     public void OnTutorialToggleValueChanged()

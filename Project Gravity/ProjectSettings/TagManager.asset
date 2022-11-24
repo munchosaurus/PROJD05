@@ -12,6 +12,8 @@ TagManager:
   - AimingDirector
   - Keycard
   - CollisionSpeaker
+  - Mirror
+  - EmberRotation
   layers:
   - Default
   - TransparentFX
@@ -28,7 +30,7 @@ TagManager:
   - Interactable
   - Trampoline
   - Moveable
-  - 
+  - Mirror
   - 
   - 
   - 

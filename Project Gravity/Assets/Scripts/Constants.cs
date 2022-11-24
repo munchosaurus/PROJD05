@@ -35,6 +35,7 @@ public static class Constants
     
     // UI
     public const float GRAVITY_ARROW_ROTATION_SPEED = 5f;
+    public const float EMBER_ROTATION_SPEED = 2f;
     
     // Death timer
     public const float PLAYER_DEATH_TIME = 2f;
