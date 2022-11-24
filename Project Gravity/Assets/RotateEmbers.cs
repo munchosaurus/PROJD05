@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class RotateEmbers : MonoBehaviour
 {
+    [SerializeField] private string emberRotationTag; //"EmberRotation"
+    [SerializeField] private string gravityChangeLayer; //"GravityChange"
     private static Guid _gravityGunEventGuid;
     private static Vector3 _facing;
     private static Quaternion _rotationQuaternion;
@@ -16,17 +18,18 @@ public class RotateEmbers : MonoBehaviour
     {
         EventSystem.Current.RegisterListener<GravityGunEvent>(OnGravityGunHit, ref _gravityGunEventGuid);
         _facing = GravityController.GetCurrentFacing();
-        _embers = GameObject.FindGameObjectsWithTag("EmberRotation");
-        _gravityLayer = LayerMask.NameToLayer("GravityChange");
+        _embers = GameObject.FindGameObjectsWithTag(emberRotationTag);
+        _gravityLayer = LayerMask.NameToLayer(gravityChangeLayer);
     }
-    
+
     void FixedUpdate()
     {
         if (_embers.Length > 0)
         {
             foreach (var ember in _embers)
             {
-                ember.transform.rotation = Quaternion.Slerp(ember.transform.rotation, _rotationQuaternion, Time.fixedDeltaTime * Constants.GRAVITY_ARROW_ROTATION_SPEED);
+                ember.transform.rotation = Quaternion.Slerp(ember.transform.rotation, _rotationQuaternion,
+                    Time.fixedDeltaTime * Constants.EMBER_ROTATION_SPEED);
             }
         }
     }
@@ -42,9 +45,6 @@ public class RotateEmbers : MonoBehaviour
 
     private Quaternion FindRotation()
     {
-        return Quaternion.LookRotation(transform.forward, _facing);
+        return Quaternion.LookRotation(transform.forward, -_facing);
     }
-    
-
-
 }

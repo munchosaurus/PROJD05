@@ -278,6 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2695046f31d02054f8f41ddfafd04c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emberRotationTag: EmberRotation
+  gravityChangeLayer: GravityChange
 --- !u!1 &8737704364896298535
 GameObject:
   m_ObjectHideFlags: 0
