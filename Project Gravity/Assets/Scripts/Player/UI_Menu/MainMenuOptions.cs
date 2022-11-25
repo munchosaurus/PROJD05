@@ -12,6 +12,7 @@ public class MainMenuOptions : MonoBehaviour
     {
         // Loads gamedata from file
         GameLauncher.LoadSettings();
+        LevelCompletionTracker.AddUnlockedLevel(1);
         GetComponent<SoundOptions>().LoadSoundSettings();
         GetComponent<GameOptions>().LoadGameSettings();
     }

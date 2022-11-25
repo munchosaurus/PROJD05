@@ -53,6 +53,8 @@ public class LevelSelector : MonoBehaviour
 
         int levelID = internalLevelIndex + 1;
 
+        
+        
         levelDescription.text = levelContainers[internalLevelIndex].levelDescription;
         levelSelectorImage.sprite = levelContainers[internalLevelIndex].levelSprite;
         string text = "Best time: ";
