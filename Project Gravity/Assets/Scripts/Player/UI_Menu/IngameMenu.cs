@@ -276,6 +276,9 @@ public class IngameMenu : MonoBehaviour
             return;
         }
 
+        
+        LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex);
+        LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
         LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
