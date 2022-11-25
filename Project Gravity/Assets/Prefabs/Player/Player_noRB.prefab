@@ -17099,6 +17099,7 @@ MonoBehaviour:
   levelSelectorRecordText: {fileID: 4993615379870243409}
   levelSelectorImage: {fileID: 8662367110074964760}
   levelSelectorPlay: {fileID: 520304486198744848}
+  scrollRectTransform: {fileID: 2943252607261186038}
 --- !u!114 &9030995664223489952
 MonoBehaviour:
   m_ObjectHideFlags: 0

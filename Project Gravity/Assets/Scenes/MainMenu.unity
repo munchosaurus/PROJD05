@@ -7128,6 +7128,7 @@ MonoBehaviour:
   levelSelectorRecordText: {fileID: 1180517469}
   levelSelectorImage: {fileID: 875928897}
   levelSelectorPlay: {fileID: 395627080}
+  scrollRectTransform: {fileID: 1961667591}
 --- !u!1 &1150131392
 GameObject:
   m_ObjectHideFlags: 0
