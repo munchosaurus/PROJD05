@@ -28,9 +28,20 @@ public static class GameLauncher
     {
         if (File.Exists(filePath))
         {
-            fileStream = new FileStream(filePath, FileMode.Open);
-            converter.Serialize(fileStream, data);
-            fileStream.Close();
+            try
+            {
+                fileStream = new FileStream(filePath, FileMode.Open);
+                converter.Serialize(fileStream, data);
+                fileStream.Close();
+            }
+            catch (Exception e)
+            {
+                fileStream?.Close();
+                File.Delete(filePath);
+                fileStream = new FileStream(filePath, FileMode.Create);
+                converter.Serialize(fileStream, data);
+                fileStream.Close();
+            }
         }
         else
         {
@@ -44,10 +55,19 @@ public static class GameLauncher
     {
         if (File.Exists(settingsFile))
         {
-            fileStream = new FileStream(settingsFile, FileMode.Open);
-            _settingsData = converter.Deserialize(fileStream) as SettingsData;
-            fileStream.Close();
-            GameController.SetUp(_settingsData);
+            try
+            {
+                fileStream = new FileStream(settingsFile, FileMode.Open);
+                _settingsData = converter.Deserialize(fileStream) as SettingsData;
+                fileStream.Close();
+                GameController.SetUp(_settingsData);
+            }
+            catch (Exception e)
+            {
+                fileStream?.Close();
+                File.Delete(settingsFile);
+                GameController.SetUp();
+            }
         }
         else
         {
@@ -56,10 +76,18 @@ public static class GameLauncher
 
         if (File.Exists(levelSettingsFile))
         {
-            fileStream = new FileStream(levelSettingsFile, FileMode.Open);
-            _levelData = converter.Deserialize(fileStream) as LevelData;
-            fileStream.Close();
-            LevelCompletionTracker.LoadLevels(_levelData);
+            try
+            {
+                fileStream = new FileStream(levelSettingsFile, FileMode.Open);
+                _levelData = converter.Deserialize(fileStream) as LevelData;
+                fileStream.Close();
+                LevelCompletionTracker.LoadLevels(_levelData);
+            }
+            catch (Exception e)
+            {
+                fileStream?.Close();
+                File.Delete(levelSettingsFile);
+            }
         }
     }
 }
