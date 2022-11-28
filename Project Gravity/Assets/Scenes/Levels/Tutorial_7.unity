@@ -7505,10 +7505,6 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 255300001}
-    - target: {fileID: 3241432908524663144, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ChildForceExpandHeight
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7406499542109578702, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_Name
       value: Player_noRB
