@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Mono.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class LevelCompletionTracker
 {
@@ -11,7 +12,7 @@ public static class LevelCompletionTracker
 
     public static void AddUnlockedLevel(int levelIndex)
     {
-        if (!unlockedLevels.Contains(levelIndex))
+        if (!unlockedLevels.Contains(levelIndex) && levelIndex <= SceneManager.sceneCountInBuildSettings - 1)
         {
             unlockedLevels.Add(levelIndex);
         }
@@ -22,11 +23,11 @@ public static class LevelCompletionTracker
         if (!levelRecords.ContainsKey(levelID))
         {
             levelRecords.Add(levelID, time);
-        } else if (levelRecords[levelID] > time)
+        }
+        else if (levelRecords[levelID] > time)
         {
             levelRecords[levelID] = time;
         }
-
     }
 
     public static bool IsTimeNewRecord(int levelID, float time)
@@ -42,11 +43,16 @@ public static class LevelCompletionTracker
 
     public static void LoadLevels(LevelData levelData)
     {
-        AddUnlockedLevel(1);
-        levelRecords = levelData.LevelRecords;
-        foreach (var record in levelRecords)
+        if (levelData.LevelRecords.Count > 0)
         {
-            AddUnlockedLevel(record.Key);
+            levelRecords = levelData.LevelRecords;
+
+            int max = levelRecords.Keys.Max();
+
+            for (int i = 0; i <= max; i++)
+            {
+                AddUnlockedLevel(i + 1);
+            }
         }
     }
 }

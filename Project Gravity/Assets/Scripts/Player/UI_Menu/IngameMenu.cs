@@ -98,6 +98,7 @@ public class IngameMenu : MonoBehaviour
     {
         if (context.started)
         {
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
             if (SceneManager.GetActiveScene().buildIndex == 0)
             {
                 Debug.Log("Nice try David");
@@ -276,6 +277,9 @@ public class IngameMenu : MonoBehaviour
             return;
         }
 
+        
+        LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex);
+        LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
         LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

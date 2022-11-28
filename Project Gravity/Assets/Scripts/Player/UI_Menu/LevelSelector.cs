@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using System.Data;
 
 public class LevelSelector : MonoBehaviour
 {
-    [Header("Level Container settings")] 
-    public LevelContainer[] levelContainers;
+    [Header("Level Container settings")] public LevelContainer[] levelContainers;
     [SerializeField] private GameObject scrollviewObjectTemplate;
     [SerializeField] private GameObject scrollviewParent;
     [SerializeField] private TMP_Text levelDescription;
@@ -17,7 +17,10 @@ public class LevelSelector : MonoBehaviour
     private Button[] _levelContainerButtons;
     private IngameMenu _ingameMenu;
     private int _selectedLevel;
-    
+    private GameObject lastSelected;
+    private RectTransform selectedButton;
+    [SerializeField] private RectTransform scrollRectTransform;
+
     void Start()
     {
         _ingameMenu = GetComponent<IngameMenu>();
@@ -28,17 +31,17 @@ public class LevelSelector : MonoBehaviour
     public void LaunchLevelSelection()
     {
         int indexToChoose = SceneManager.GetActiveScene().buildIndex;
-        
+
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
             indexToChoose--;
-
         }
+
         SelectLevel(_levelContainerButtons[indexToChoose]);
         _levelContainerButtons[indexToChoose].Select();
-
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(_levelContainerButtons[indexToChoose].gameObject);
     }
-    
+
     public void SelectLevel(Button selectedButton)
     {
         int internalLevelIndex = 0;
@@ -52,6 +55,7 @@ public class LevelSelector : MonoBehaviour
         }
 
         int levelID = internalLevelIndex + 1;
+
 
         levelDescription.text = levelContainers[internalLevelIndex].levelDescription;
         levelSelectorImage.sprite = levelContainers[internalLevelIndex].levelSprite;
@@ -80,7 +84,7 @@ public class LevelSelector : MonoBehaviour
         _selectedLevel = levelID;
         levelSelectorRecordText.text = text;
     }
-    
+
     public void SetupLevelContainers()
     {
         _levelContainerButtons = new Button[levelContainers.Length];
@@ -106,5 +110,82 @@ public class LevelSelector : MonoBehaviour
                 SceneManager.LoadScene(_selectedLevel);
             }
         }
+    }
+
+    private void MoveScrollView()
+    {
+         /*
+         * Credit: https://forum.unity.com/threads/scrollview-using-controller-arrowkeys.1008121/
+         */
+        
+        // Get the currently selected UI element from the event system.
+        var selected = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        
+        // Return if there are none.
+        if (selected == null)
+        {
+            return;
+        }
+
+        // Return if the selected game object is not inside the scroll rect.
+        if (selected.transform.parent != scrollviewParent.transform)
+        {
+            return;
+        }
+        
+        if (IsImageFullyVisible(selected))
+        {
+            return;
+        }
+
+        // Return if the selected game object is the same as it was last frame,
+        // meaning we haven't moved.
+        if (selected == lastSelected)
+        {
+            return;
+        }
+        
+        
+        // Get the rect tranform for the selected game object.
+        selectedButton = selected.GetComponent<RectTransform>();
+        SelectLevel(selected.GetComponent<Button>());
+        // The position of the selected UI element is the absolute anchor position,
+        // ie. the local position within the scroll rect + its height if we're
+        // scrolling down. If we're scrolling up it's just the absolute anchor position.
+        float selectedPositionY =
+            Mathf.Abs(selectedButton.anchoredPosition.y) + selectedButton.rect.height;
+        // The upper bound of the scroll view is the anchor position of the content we're scrolling.
+
+
+        float scrollViewMinY = scrollviewParent.GetComponent<RectTransform>().anchoredPosition.y;
+        // The lower bound is the anchor position + the height of the scroll rect.
+        float scrollViewMaxY = scrollviewParent.GetComponent<RectTransform>().anchoredPosition.y + scrollRectTransform.rect.height;
+        // If the selected position is below the current lower bound of the scroll view we scroll down.
+        if (selectedPositionY > scrollViewMaxY)
+        {
+            float newY = selectedPositionY - scrollRectTransform.rect.height;
+            scrollviewParent.GetComponent<RectTransform>().anchoredPosition = new Vector2(scrollviewParent.GetComponent<RectTransform>().anchoredPosition.x, newY);
+        }
+        // If the selected position is above the current upper bound of the scroll view we scroll up.
+        else if (Mathf.Abs(selectedButton.anchoredPosition.y) < scrollViewMinY)
+        {
+            scrollviewParent.GetComponent<RectTransform>().anchoredPosition = new Vector2(scrollviewParent.GetComponent<RectTransform>().anchoredPosition.x,
+                Mathf.Abs(selectedButton.anchoredPosition.y));
+        }
+
+        lastSelected = selected;
+    }
+
+
+    void Update()
+    {
+        MoveScrollView();
+    }
+    
+    private bool IsImageFullyVisible(GameObject obj) {
+        var planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+        var image = obj.GetComponent<Image>();
+        var bounds = new Bounds(image.transform.localPosition,image.rectTransform.rect.size);
+        return GeometryUtility.TestPlanesAABB(planes, bounds);
     }
 }

@@ -624,6 +624,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+--- !u!1 &48618945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 294012833879436019, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
+  m_PrefabInstance: {fileID: 1741532684}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &49322286 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6911077100400773382, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
@@ -1297,17 +1302,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6911077100400773382, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
   m_PrefabInstance: {fileID: 123839890}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &125963669 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2124406989537400889, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-  m_PrefabInstance: {fileID: 944047853}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8b2ef3b252642c28c6c524deabf1375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &127287030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7468,10 +7462,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: isTutorialLevel
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1049751914841088714, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -7517,80 +7507,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[19].m_ActionId
-      value: e227bb51-42e2-4733-8484-6f57e2633818
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[19].m_ActionName
-      value: MenuControls/Unpause[/Keyboard/escape]
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 255300001}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 125963669}
+      objectReference: {fileID: 48618945}
     - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 255300001}
     - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChangeActivePanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePauseScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeActivePanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Tutorial, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: IngameMenu, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061672191659828517, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7406499542109578702, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_Name
@@ -14181,6 +14119,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1524519156, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
+      propertyPath: m_MoveAction
+      value: 
+      objectReference: {fileID: 3770380102825292535, guid: 9d04051e5d86750469d0a1c96e5fa9bb, type: 3}
+    - target: {fileID: 1524519156, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
+      propertyPath: m_PointAction
+      value: 
+      objectReference: {fileID: -2655418278590310727, guid: 9d04051e5d86750469d0a1c96e5fa9bb, type: 3}
+    - target: {fileID: 1524519156, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
+      propertyPath: m_ActionsAsset
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 9d04051e5d86750469d0a1c96e5fa9bb, type: 3}
+    - target: {fileID: 1524519156, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
+      propertyPath: m_CancelAction
+      value: 
+      objectReference: {fileID: -6793507925512376420, guid: 9d04051e5d86750469d0a1c96e5fa9bb, type: 3}
+    - target: {fileID: 1524519156, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
+      propertyPath: m_SubmitAction
+      value: 
+      objectReference: {fileID: 815038551829559149, guid: 9d04051e5d86750469d0a1c96e5fa9bb, type: 3}
+    - target: {fileID: 1524519156, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
+      propertyPath: m_LeftClickAction
+      value: 
+      objectReference: {fileID: 4128997109157459438, guid: 9d04051e5d86750469d0a1c96e5fa9bb, type: 3}
+    - target: {fileID: 1524519156, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
+      propertyPath: m_RightClickAction
+      value: 
+      objectReference: {fileID: -8613978417477720759, guid: 9d04051e5d86750469d0a1c96e5fa9bb, type: 3}
+    - target: {fileID: 1524519156, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
+      propertyPath: m_MiddleClickAction
+      value: 
+      objectReference: {fileID: -5668852309118878482, guid: 9d04051e5d86750469d0a1c96e5fa9bb, type: 3}
+    - target: {fileID: 1524519156, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
+      propertyPath: m_ScrollWheelAction
+      value: 
+      objectReference: {fileID: -4508775341161685462, guid: 9d04051e5d86750469d0a1c96e5fa9bb, type: 3}
+    - target: {fileID: 1524519156, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
+      propertyPath: m_TrackedDevicePositionAction
+      value: 
+      objectReference: {fileID: -4433090388243502386, guid: 9d04051e5d86750469d0a1c96e5fa9bb, type: 3}
+    - target: {fileID: 1524519156, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
+      propertyPath: m_TrackedDeviceOrientationAction
+      value: 
+      objectReference: {fileID: -5815796452176736111, guid: 9d04051e5d86750469d0a1c96e5fa9bb, type: 3}
     - target: {fileID: 294012833879436019, guid: 80e12cd0c01b8a140941e61660025a4d, type: 3}
       propertyPath: m_Name
       value: EventSystem
