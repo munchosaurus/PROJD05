@@ -98,6 +98,7 @@ public class IngameMenu : MonoBehaviour
     {
         if (context.started)
         {
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
             if (SceneManager.GetActiveScene().buildIndex == 0)
             {
                 Debug.Log("Nice try David");

@@ -782,7 +782,7 @@
                     "path": "*/{Submit}",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick",
+                    "groups": "Joystick;Mouse;GamePad",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -793,7 +793,7 @@
                     "path": "*/{Cancel}",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick",
+                    "groups": "Joystick;GamePad;Mouse",
                     "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
