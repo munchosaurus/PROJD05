@@ -112,26 +112,29 @@ public class LevelSelector : MonoBehaviour
         }
     }
 
-
-    void Update()
+    private void MoveScrollView()
     {
-        /*
+         /*
          * Credit: https://forum.unity.com/threads/scrollview-using-controller-arrowkeys.1008121/
          */
         
         // Get the currently selected UI element from the event system.
-        GameObject selected = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        var selected = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        
         // Return if there are none.
         if (selected == null)
         {
-            Debug.Log("Kraschat i första");
             return;
         }
 
         // Return if the selected game object is not inside the scroll rect.
         if (selected.transform.parent != scrollviewParent.transform)
         {
-            Debug.Log("Kraschat i andra");
+            return;
+        }
+        
+        if (IsImageFullyVisible(selected))
+        {
             return;
         }
 
@@ -139,17 +142,9 @@ public class LevelSelector : MonoBehaviour
         // meaning we haven't moved.
         if (selected == lastSelected)
         {
-            Debug.Log("Kraschat i tredje");
             return;
         }
-
-        if (isFullyVisible(selected))
-        {
-            Debug.Log("Kraschat i fjärde");
-            return;
-        }
-
-        Debug.Log("Should move");
+        
         
         // Get the rect tranform for the selected game object.
         selectedButton = selected.GetComponent<RectTransform>();
@@ -180,8 +175,14 @@ public class LevelSelector : MonoBehaviour
 
         lastSelected = selected;
     }
+
+
+    void Update()
+    {
+        MoveScrollView();
+    }
     
-    private bool isFullyVisible(GameObject obj) {
+    private bool IsImageFullyVisible(GameObject obj) {
         var planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
         var image = obj.GetComponent<Image>();
         var bounds = new Bounds(image.transform.localPosition,image.rectTransform.rect.size);
