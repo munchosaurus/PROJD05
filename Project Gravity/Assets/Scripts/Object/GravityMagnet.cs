@@ -12,6 +12,7 @@ public class GravityMagnet : MonoBehaviour
     [SerializeField] private LayerMask gravityMagnet;
     [SerializeField] private float magnetRange;
     [SerializeField] private float magnetSpeed;
+    [SerializeField] private GameObject effectHolder;
     private static Guid _gravityGunEventGuid;
     //private readonly float magnetCoolDown = 2f;
 
@@ -26,11 +27,22 @@ public class GravityMagnet : MonoBehaviour
     {
         if (triggered)
         {
+            if (!effectHolder.activeSelf)
+            {
+                effectHolder.SetActive(true);
+            }
             CheckForBoxes();
             // if (dynamicObjectMovement != null)
             // {
             //     dynamicObjectMovement.SetMagnetPosition(transform.position + detectionDirection, magnetSpeed);
             // }
+        }
+        else
+        {
+            if (effectHolder.activeSelf)
+            {
+                effectHolder.SetActive(false);
+            }
         }
     }
 
