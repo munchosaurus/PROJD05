@@ -2,10 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Prototypes/Prototype_controller.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Prototypes/Prototype_controller.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamepadCursor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamepadCursor.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/RotateEmbers.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/RotateEmbers.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/VFXHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/VFXHandler.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GamepadCursor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GamepadCursor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/PlayerInput.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayerInput.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Tutorial_7.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Tutorial_7.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RotateEmbers.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RotateEmbers.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GravityController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GravityController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/DynamicObjectMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Object/DynamicObjectMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/Trampoline.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Object/Trampoline.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/HazardLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/HazardLogic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/InteractionLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/InteractionLogic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInput.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFXHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VFXHandler.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +47,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/EventSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/InputModules/BaseInput.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.4.4/InputSystem/Plugins/UI/VirtualMouseInput.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/86acb61e0d2b4b36bc20af11093be9a5157e00/9f/b2b8f2b6/GeometryUtility.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -131,6 +153,7 @@
       <workItem from="1669369065728" duration="3003000" />
       <workItem from="1669382047211" duration="1369000" />
       <workItem from="1669632842777" duration="5197000" />
+      <workItem from="1669722275454" duration="3981000" />
     </task>
     <task id="LOCAL−00001" summary="Added logic to level selector">
       <created>1669027248858</created>

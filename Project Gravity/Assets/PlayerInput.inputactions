@@ -833,6 +833,17 @@
                 },
                 {
                     "name": "",
+                    "id": "8380c2d7-202a-4765-a01d-8ce7f0004b05",
+                    "path": "<VirtualMouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "dbd9eb85-6863-4bb2-b5f5-965be9a1c401",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -877,6 +888,28 @@
                 },
                 {
                     "name": "",
+                    "id": "95c9808e-0a59-4a5f-bc08-4faaa52adf07",
+                    "path": "<VirtualMouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8eb86a00-b096-4518-b33e-eddea862f7e0",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d897840c-023e-4da0-bc3f-7cd21fa26543",
                     "path": "<Mouse>/scroll",
                     "interactions": "",
@@ -890,6 +923,17 @@
                     "name": "",
                     "id": "8504bde1-3da4-4b4a-b8ce-f2dded2657a2",
                     "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "ScrollWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "283e8c61-ced5-40af-9197-241e66d5b7b3",
+                    "path": "<VirtualMouse>/scroll",
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
@@ -954,6 +998,17 @@
                 },
                 {
                     "name": "",
+                    "id": "47e8eeb9-53d2-4d5e-9eda-73af1777d830",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Unpause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c82dc5b5-a7ea-4db1-b38f-b2e8730f0bcc",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -1001,6 +1056,11 @@
                 {
                     "devicePath": "<Gamepad>",
                     "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<VirtualMouse>",
+                    "isOptional": true,
                     "isOR": false
                 }
             ]

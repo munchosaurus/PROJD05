@@ -7,13 +7,13 @@ using UnityEngine;
 public class InteractionLogic : MonoBehaviour
 {
     [SerializeField] private List<GameObject> interactableGameObjects;
-    private PlayerInput _playerInput;
+    private PlayerController _playerController;
     private const float DISTANCE_TO_INTERACT_THRESHOLD = 0.5f;
     private IngameMenu _menu;
 
     private void Start()
     {
-        _playerInput = GetComponent<PlayerInput>();
+        _playerController = GetComponent<PlayerController>();
         StartCoroutine(FetchInteractablesInScene());
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
     }
@@ -38,13 +38,13 @@ public class InteractionLogic : MonoBehaviour
 
     private bool IsGoalReached()
     {
-        return _playerInput.IsGrounded() && GetComponent<KeycardLogic>().keyCardsCompleted;
+        return _playerController.IsGrounded() && GetComponent<KeycardLogic>().keyCardsCompleted;
     }
 
     private bool IsInteractableCloseEnough(Transform interactable)
     {
         return Vector3.Distance(gameObject.transform.position, interactable.position) <
-            DISTANCE_TO_INTERACT_THRESHOLD && _playerInput.IsGrounded();
+            DISTANCE_TO_INTERACT_THRESHOLD && _playerController.IsGrounded();
     }
 
     Transform GetClosestInteractable()
