@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementArchived : MonoBehaviour
 {
     [SerializeField] private Transform levelTarget;
     [SerializeField] private LayerMask groundMask;

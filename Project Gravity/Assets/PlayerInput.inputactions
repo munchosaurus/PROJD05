@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Point",
+                    "type": "PassThrough",
+                    "id": "a1ded4cf-bdc9-4e46-815d-2d86cf323eb7",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "af199d8d-3ea3-441c-8e91-841bd66aebc3",
@@ -81,6 +90,15 @@
                     "name": "PreviousLevelDebug",
                     "type": "Button",
                     "id": "fa2a2111-7959-4034-81c0-048f061f436e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightClick",
+                    "type": "Button",
+                    "id": "7c1fcc73-8b15-48ae-a14c-7aefa258c91b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -404,6 +422,28 @@
                     "processors": "",
                     "groups": "Mouse",
                     "action": "PreviousLevelDebug",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "821ae1ae-1a4c-4a9f-a04b-4bcd660b4183",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "Mouse",
+                    "action": "RightClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec7d99f1-ae9e-4c5b-901c-d4fdf23026b2",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse",
+                    "action": "Point",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
