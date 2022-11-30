@@ -5,63 +5,79 @@ using UnityEngine.InputSystem;
 
 public class CameraAngles : MonoBehaviour
 {
-    //Rotation variables
-    private bool _rightMouseDown = false;
-    private const float InternalRotationSpeed = 1;
-    private float RotationSpeed = 1f;
-    private Quaternion _rotationTarget;
-    private Vector2 _mouseDelta;
-    private Camera _actualCamera;
+
+    [SerializeField] private Vector2 turn;
+    [SerializeField] private float sensitivity;
     
-    void Start()
+    private float targetYRotation;
+    private float targetXRotation;
+    private float cameraSmoothness = 0.5f;
+    
+    private bool _rightMouseDown;
+    public float minXRotation = -10;
+    public float maxXRotation = 10;
+    public float minYRotation = -10;
+    public float maxYRotation = 10;
+    private void Update()
     {
-        //Store a reference to the camera rig
-        _actualCamera = GetComponent<Camera>();
+        if (_rightMouseDown)
+        {
+            turn.x += Mouse.current.delta.y.ReadValue() * sensitivity;
+            turn.y += Mouse.current.delta.x.ReadValue() * sensitivity;
+            transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
+            
+            turn.x = Mathf.Clamp(turn.x, minXRotation, maxXRotation);
+            turn.y = Mathf.Clamp(turn.y, minYRotation, maxYRotation);
+            
+            var targetRotation = Quaternion.Euler(Vector3.up * -turn.y) * Quaternion.Euler(Vector3.right * turn.x);
 
-        // //Set the rotation of the camera based on the CameraAngle property
-        // _actualCamera.transform.rotation = Quaternion.AngleAxis(gameObject., Vector3.right);
-        //
-        // //Set the position of the camera based on the look offset, angle and default zoom properties. This will make sure we're focusing on the right focal point.
-        // _actualCamera.transform.position = _cameraPositionTarget;
+            transform.rotation = targetRotation;
 
-        //Set the initial rotation value
-        _rotationTarget = transform.rotation;
+            //Quaternion q = ClampRotation(Quaternion.Euler(-turn.y, turn.x, 0), new Vector3(10, 10, 0));
+            //transform.rotation = Quaternion.Lerp(transform.rotation, q, Time.deltaTime * 0.75f);
+            //transform.localRotation = q;
+            //transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
 
+        }
     }
-    
-    private void LateUpdate()
-    {
-        // //Lerp the camera rig to a new move target position
-        // transform.position = Vector3.Lerp(transform.position, _moveTarget, Time.deltaTime * InternalMoveSpeed);
-        //
-        // //Move the _actualCamera's local position based on the new zoom factor
-        // _actualCamera.transform.localPosition = Vector3.Lerp(_actualCamera.transform.localPosition, _cameraPositionTarget, Time.deltaTime * _internalZoomSpeed);
 
-        //Slerp the camera rig's rotation based on the new target
-        Debug.Log(_rotationTarget);
-        transform.rotation = Quaternion.Slerp(transform.rotation, _rotationTarget, Time.deltaTime * InternalRotationSpeed);
-    }
-    
-    /// <summary>
-    /// Sets whether the player has the right mouse button down
-    /// </summary>
-    /// <param name="context"></param>
     public void OnRotateToggle(InputAction.CallbackContext context)
     {
         _rightMouseDown = context.ReadValue<float>() == 1;
     }
     
-    /// <summary>
-    /// Sets the rotation target quaternion if the right mouse button is pushed when the player is moving the mouse
-    /// </summary>
-    /// <param name="context"></param>
+    public static Quaternion ClampRotation(Quaternion q, Vector3 bounds)
+    {
+        q.x /= q.w;
+        q.y /= q.w;
+        q.z /= q.w;
+        q.w = 1.0f;
+ 
+        float angleX = 2.0f * Mathf.Rad2Deg * Mathf.Atan(q.x);
+        angleX = Mathf.Clamp(angleX, -bounds.x, bounds.x);
+        q.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleX);
+ 
+        float angleY = 2.0f * Mathf.Rad2Deg * Mathf.Atan(q.y);
+        angleY = Mathf.Clamp(angleY, -bounds.y, bounds.y);
+        q.y = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleY);
+ 
+        float angleZ = 2.0f * Mathf.Rad2Deg * Mathf.Atan(q.z);
+        angleZ = Mathf.Clamp(angleZ, -bounds.z, bounds.z);
+        q.z = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleZ);
+ 
+        return q;
+    }
+    
     public void OnRotate(InputAction.CallbackContext context)
     {
-        // If the right mouse is down then we'll read the mouse delta value. If it is not, we'll clear it out.
-        // Note: Clearing the mouse delta prevents a 'death spin' from occuring if the player flings the mouse really fast in a direction.
-        _mouseDelta = _rightMouseDown ? context.ReadValue<Vector2>() : Vector2.zero;
-
-        _rotationTarget *= Quaternion.AngleAxis(_mouseDelta.x * Time.deltaTime * RotationSpeed, Vector3.up);
-
+        // if (_rightMouseDown)
+        // {
+        //     turn.x = Mouse.current.delta.x.ReadValue();
+        //     turn.y = Mouse.current.delta.y.ReadValue();
+        // }
+        // else
+        // {
+        //     turn = new Vector2();
+        // }
     }
 }
