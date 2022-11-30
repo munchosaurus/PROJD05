@@ -1160,6 +1160,82 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1047718892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1047718893}
+  - component: {fileID: 1047718895}
+  - component: {fileID: 1047718894}
+  m_Layer: 5
+  m_Name: GamepadCursor
+  m_TagString: GamePadCursor
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1047718893
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047718892}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9064548700267641867}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 30, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1047718895
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047718892}
+  m_CullTransparentMesh: 1
+--- !u!114 &1047718894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047718892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: c08500e75c1581d4daacd1a363ff46f6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1052246185
 GameObject:
   m_ObjectHideFlags: 0
@@ -13955,6 +14031,7 @@ MonoBehaviour:
   mirrorMask:
     serializedVersion: 2
     m_Bits: 32768
+  gamePadCursor: {fileID: 1047718892}
 --- !u!114 &816275455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14222,6 +14299,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 11b23daa-961d-4f97-9f3d-584de3a83af8
     m_ActionName: MenuControls/NextTutorialPage[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a1ded4cf-bdc9-4e46-815d-2d86cf323eb7
+    m_ActionName: PlayerControls/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7c1fcc73-8b15-48ae-a14c-7aefa258c91b
+    m_ActionName: PlayerControls/RightClick[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Mouse
   m_DefaultActionMap: PlayerControls
@@ -16889,6 +16974,7 @@ RectTransform:
   - {fileID: 9064548699057912467}
   - {fileID: 7732642566604352357}
   - {fileID: 7898771897906856538}
+  - {fileID: 1047718893}
   m_Father: {fileID: 1049751914841088714}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16977,7 +17063,8 @@ MonoBehaviour:
   - {fileID: 6383587370639663261}
   - {fileID: 814713862}
   interactText: {fileID: 7262611090942812245}
-  customCursor: {fileID: 2800000, guid: 7a21cb6362f0cd94685f605b095665a9, type: 3}
+  customAimCursor: {fileID: 2800000, guid: 7a21cb6362f0cd94685f605b095665a9, type: 3}
+  customCursor: {fileID: 2800000, guid: f39b8b892fa7cf34e9c93ca9ef25b4ae, type: 3}
   previousMenu: 0
   levelRecordText: {fileID: 8238274879155016665}
   newRecordText: {fileID: 7229744153782317875}

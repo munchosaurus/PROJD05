@@ -11,11 +11,13 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class IngameMenu : MonoBehaviour
 {
     [SerializeField] private GameObject[] menus;
     [SerializeField] public GameObject interactText;
+    [SerializeField] private Texture2D customAimCursor;
     [SerializeField] private Texture2D customCursor;
     [SerializeField] private int previousMenu;
     
@@ -59,21 +61,21 @@ public class IngameMenu : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(customCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2), CursorMode.Auto);
             return;
         }
 
         Physics.gravity = new Vector3(0, -Constants.GRAVITY, 0);
         
-        if (customCursor != null)
+        if (customAimCursor != null)
         {
-            SetCustomCursor();
+            SetAimCursor();
         }
     }
 
-    void SetCustomCursor()
+    void SetAimCursor()
     {
-        Cursor.SetCursor(customCursor, new Vector2(customCursor.width / 2, customCursor.height / 2), CursorMode.Auto);
+        Cursor.SetCursor(customAimCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2), CursorMode.Auto);
     }
     
     public void ToggleActionMap(bool paused)
@@ -166,7 +168,7 @@ public class IngameMenu : MonoBehaviour
         }
 
         ToggleActionMap(false);
-        SetCustomCursor();
+        SetAimCursor();
         GameController.UnpauseGame();
     }
 
@@ -199,7 +201,7 @@ public class IngameMenu : MonoBehaviour
         }
 
         ToggleActionMap(true);
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(customCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2), CursorMode.Auto);
         GameController.PauseGame();
     }
 
@@ -256,7 +258,7 @@ public class IngameMenu : MonoBehaviour
         }
         else
         {
-            SetCustomCursor();
+            SetAimCursor();
         }
 
         Unpause();

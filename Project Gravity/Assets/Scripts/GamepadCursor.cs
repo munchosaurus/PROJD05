@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.Users;
+using UnityEngine.UI;
 
 public class GamepadCursor : MonoBehaviour
 {
@@ -12,8 +13,11 @@ public class GamepadCursor : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private float cursorSpeed = 2000f;
     [SerializeField] private float padding = 50f;
+    [SerializeField] private Sprite aimCursor;
+    [SerializeField] private Sprite regularCursor;
+    private Image cursorImage;
     private Camera mainCamera;
-    private Mouse virtualMouse;
+    public Mouse virtualMouse;
     private bool previousMouseState;
     private string previousControlScheme = "";
     private Mouse currentMouse;
@@ -26,7 +30,7 @@ public class GamepadCursor : MonoBehaviour
     {
         mainCamera = Camera.main;
         currentMouse = Mouse.current;
-        
+        cursorImage = cursorTransform.gameObject.GetComponent<Image>();
         
         if (virtualMouse == null)
         {
@@ -46,7 +50,6 @@ public class GamepadCursor : MonoBehaviour
         }
 
         InputSystem.onAfterUpdate += UpdateMotion;
-        playerInput.onControlsChanged += OnControlsChanged;
     }
 
     private void OnDisable()
@@ -56,7 +59,6 @@ public class GamepadCursor : MonoBehaviour
             InputSystem.RemoveDevice(virtualMouse);
         }
         InputSystem.onAfterUpdate -= UpdateMotion;
-        playerInput.onControlsChanged -= OnControlsChanged;
     }
 
     private void OnControlsChanged(PlayerInput input)
@@ -84,11 +86,11 @@ public class GamepadCursor : MonoBehaviour
             return;
         }
 
-        Vector2 stickValue = Gamepad.current.rightStick.ReadValue();
-        stickValue *= cursorSpeed * Time.deltaTime;
+        var stickValue = Gamepad.current.rightStick.ReadValue();
+        stickValue *= cursorSpeed * Time.unscaledDeltaTime ;
 
-        Vector2 currentPosition = virtualMouse.position.ReadValue();
-        Vector2 newPosition = currentPosition + stickValue;
+        var currentPosition = virtualMouse.position.ReadValue();
+        var newPosition = currentPosition + stickValue;
 
         newPosition.x = Mathf.Clamp(newPosition.x, padding, Screen.width - padding);
         newPosition.y = Mathf.Clamp(newPosition.y, padding, Screen.height - padding);
@@ -96,7 +98,7 @@ public class GamepadCursor : MonoBehaviour
         InputState.Change(virtualMouse.position, newPosition);
         InputState.Change(virtualMouse.delta, stickValue);
 
-        bool rightTriggerPressed = Gamepad.current.rightTrigger.IsPressed();
+        var rightTriggerPressed = Gamepad.current.rightTrigger.IsPressed();
 
         if (previousMouseState != rightTriggerPressed)
         {
@@ -105,8 +107,19 @@ public class GamepadCursor : MonoBehaviour
             InputState.Change(virtualMouse, mouseState);
             previousMouseState = rightTriggerPressed;
         }
-
+        ChangeCursorSprite();
         AnchorCursor(newPosition);
+    }
+
+    private void ChangeCursorSprite()
+    {
+        if (playerInput.currentActionMap.name == "MenuControls")
+        {
+            cursorImage.sprite = regularCursor;
+        } else if (playerInput.currentActionMap.name == "PlayerControls")
+        {
+            cursorImage.sprite = aimCursor;
+        }
     }
 
     private void AnchorCursor(Vector2 position)
@@ -117,15 +130,28 @@ public class GamepadCursor : MonoBehaviour
 
         cursorTransform.anchoredPosition = anchoredPosition;
     }
-
-    // TODO: TESTA
-    // private void Update()
-    // {
-    //     if (previousControlScheme != playerInput.currentControlScheme)
-    //     {
-    //         OnControlsChanged(playerInput);
-    //     }
-    //
-    //     previousControlScheme = playerInput.currentControlScheme;
-    // }
+    
+    private void Update()
+    {
+        if (previousControlScheme != playerInput.currentControlScheme)
+        {
+            OnControlsChanged(playerInput);
+        }
+    
+        previousControlScheme = playerInput.currentControlScheme;
+        if (playerInput.currentControlScheme == gamePadScheme)
+        {
+            if (Cursor.visible)
+            {
+                Cursor.visible = false;
+            }
+        } else if (playerInput.currentControlScheme == mouseScheme)
+        {
+            if (!Cursor.visible)
+            {
+                Cursor.visible = true;
+            }
+            
+        }
+    }
 }
