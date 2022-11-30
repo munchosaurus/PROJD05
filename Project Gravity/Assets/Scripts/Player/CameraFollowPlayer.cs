@@ -22,6 +22,7 @@ public class CameraFollowPlayer : MonoBehaviour
     private bool _move;
 
     private Vector3 targetPosition;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -75,11 +76,11 @@ public class CameraFollowPlayer : MonoBehaviour
                 _move = false;
             }
         }
-        //else if (targetZ < maximumDistance + 0.1f && (Mathf.Abs(transform.position.x - targetX) > 0.1f || Mathf.Abs(transform.position.y - targetY) > 0.1f))
-        //{
-        //    targetPosition = new Vector3(targetX, targetY, targetZ);
-        //    transform.position = transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
-        //}
+        // else if (targetZ < maximumDistance + 0.1f && (Mathf.Abs(transform.position.x - targetX) > 0.1f || Mathf.Abs(transform.position.y - targetY) > 0.1f))
+        // {
+        //     targetPosition = new Vector3(targetX, targetY, targetZ);
+        //     transform.position = transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity, smoothTime);
+        // }
     }
 
     private Vector3 CalculateTargetPosition()

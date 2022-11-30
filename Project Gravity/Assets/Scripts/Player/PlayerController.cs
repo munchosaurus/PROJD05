@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public Vector3 velocity;
 
@@ -186,7 +186,7 @@ public class PlayerInput : MonoBehaviour
     private void CheckCollisionInMovement(Vector3 direction)
     {
         List<int> layers = new List<int>();
-        RaycastHit[] raycastHits = new RaycastHit[0];
+        RaycastHit[] raycastHits;
         if (direction.y != 0 && Math.Abs(velocity.y) >
             Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
         {

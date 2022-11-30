@@ -10,12 +10,12 @@ public class Trampoline : MonoBehaviour
     [SerializeField] private float counter;
     [SerializeField] private Transform board;
     private Vector3 _playerCheckDimensions;
-    private PlayerInput _playerInput;
+    private PlayerController _playerController;
 
     private void Start()
     {
         _playerCheckDimensions = new Vector3(0.05f, 0.01f, 0.5f);
-        _playerInput = FindObjectOfType<PlayerInput>();
+        _playerController = FindObjectOfType<PlayerController>();
         counter = trampolineCooldown;
     }
 
@@ -48,7 +48,7 @@ public class Trampoline : MonoBehaviour
             };
             EventSystem.Current.FireEvent(trampolineEvent);
             
-            _playerInput.velocity = transform.up * trampolinePower;
+            _playerController.velocity = transform.up * trampolinePower;
             StartCoroutine(ShootBoard());
             counter = 0;
             

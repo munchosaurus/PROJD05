@@ -88,9 +88,9 @@ public class DynamicObjectMovement : MonoBehaviour
     private bool ShouldInheritMovement(GameObject otherObject, bool isHorizontal)
     {
         var otherMovement = new Vector3();
-        if (otherObject.GetComponentInParent<PlayerInput>() != null)
+        if (otherObject.GetComponentInParent<PlayerController>() != null)
         {
-            otherMovement = otherObject.GetComponentInParent<PlayerInput>().velocity;
+            otherMovement = otherObject.GetComponentInParent<PlayerController>().velocity;
         }
         else if (otherObject.GetComponent<DynamicObjectMovement>() != null)
         {
@@ -126,9 +126,9 @@ public class DynamicObjectMovement : MonoBehaviour
                 ObjectCollisionGridClamp, groundMask, QueryTriggerInteraction.UseGlobal);
             foreach (var collision in raycastHits)
             {
-                if (collision.transform.gameObject.GetComponentInParent<PlayerInput>())
+                if (collision.transform.gameObject.GetComponentInParent<PlayerController>())
                 {
-                    if (Math.Abs(collision.transform.gameObject.GetComponentInParent<PlayerInput>().velocity.y) >
+                    if (Math.Abs(collision.transform.gameObject.GetComponentInParent<PlayerController>().velocity.y) >
                         Constants.COLLISION_SPEED_THRESHOLD)
                     {
                         return;
@@ -162,9 +162,9 @@ public class DynamicObjectMovement : MonoBehaviour
                 ObjectCollisionGridClamp, groundMask, QueryTriggerInteraction.UseGlobal);
             foreach (var collision in raycastHits)
             {
-                if (collision.transform.gameObject.GetComponentInParent<PlayerInput>())
+                if (collision.transform.gameObject.GetComponentInParent<PlayerController>())
                 {
-                    if (Math.Abs(collision.transform.gameObject.GetComponentInParent<PlayerInput>().velocity.x) >
+                    if (Math.Abs(collision.transform.gameObject.GetComponentInParent<PlayerController>().velocity.x) >
                         Constants.COLLISION_SPEED_THRESHOLD)
                     {
                         return;
