@@ -13360,6 +13360,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GravityMagnet
       objectReference: {fileID: 0}
+    - target: {fileID: 5129284201960932481, guid: 20b1aedec502eb64a98136e90d7d0229, type: 3}
+      propertyPath: upTriggered
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5129284201960932481, guid: 20b1aedec502eb64a98136e90d7d0229, type: 3}
+      propertyPath: downTriggered
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5129284201960932481, guid: 20b1aedec502eb64a98136e90d7d0229, type: 3}
+      propertyPath: leftTriggered
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6214276518166787106, guid: 20b1aedec502eb64a98136e90d7d0229, type: 3}
       propertyPath: m_Enabled
       value: 1
