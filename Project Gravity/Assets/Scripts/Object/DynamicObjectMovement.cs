@@ -16,6 +16,7 @@ public class DynamicObjectMovement : MonoBehaviour
     // [SerializeField] private float friction;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask magnetMask;
+    [SerializeField] private GameObject effectHolder;
 
     public float collisionDefaultVolume;
 
@@ -41,11 +42,19 @@ public class DynamicObjectMovement : MonoBehaviour
     {
         if (!lockedToMagnet)
         {
+            if (effectHolder.activeSelf)
+            {
+                effectHolder.SetActive(false);
+            }
             velocity += Physics.gravity * Time.fixedDeltaTime;
             transform.rotation = lockedRotation;
         }
         else
         {
+            if (!effectHolder.activeSelf)
+            {
+                effectHolder.SetActive(true);
+            }
             MoveToMagnet();
         }
         ApplyCollisions();

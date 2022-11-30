@@ -179,13 +179,13 @@ public class SoundManager : MonoBehaviour
         {
             if (gravityGunEvent.TargetGameObject.transform.GetComponent<GravityMagnet>().triggered)
             {
-                clipLength = magnetDeactivationClip.length;
-                sp.GetComponent<AudioSource>().PlayOneShot(magnetDeactivationClip);
+                clipLength = magnetActivationClip.length;
+                sp.GetComponent<AudioSource>().PlayOneShot(magnetActivationClip);
             }
             else
             {
-                clipLength = magnetActivationClip.length;
-                sp.GetComponent<AudioSource>().PlayOneShot(magnetActivationClip);
+                clipLength = magnetDeactivationClip.length;
+                sp.GetComponent<AudioSource>().PlayOneShot(magnetDeactivationClip);
             }
 
             StartCoroutine(DestroyAfterTime(sp, clipLength));
@@ -194,13 +194,13 @@ public class SoundManager : MonoBehaviour
         {
             if (gravityGunEvent.TargetGameObject.transform.GetComponentInParent<DynamicObjectMovement>().lockedToMagnet)
             {
-                clipLength = magnetDeactivationClip.length;
-                sp.GetComponent<AudioSource>().PlayOneShot(magnetDeactivationClip);
+                clipLength = magnetActivationClip.length;
+                sp.GetComponent<AudioSource>().PlayOneShot(magnetActivationClip);
             }
             else
             {
-                clipLength = magnetActivationClip.length;
-                sp.GetComponent<AudioSource>().PlayOneShot(magnetActivationClip);
+                clipLength = magnetDeactivationClip.length;
+                sp.GetComponent<AudioSource>().PlayOneShot(magnetDeactivationClip);
             }
 
             StartCoroutine(DestroyAfterTime(sp, clipLength));
