@@ -23041,7 +23041,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turn: {x: 0, y: 0}
-  sensitivity: 1
+  sensitivity: 0.05
+  minXRotation: -20
+  maxXRotation: 20
+  minYRotation: -20
+  maxYRotation: 20
 --- !u!1001 &1443301242
 PrefabInstance:
   m_ObjectHideFlags: 0
