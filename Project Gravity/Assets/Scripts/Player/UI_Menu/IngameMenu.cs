@@ -18,7 +18,7 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private GameObject[] menus;
     [SerializeField] public GameObject interactText;
     [SerializeField] private Texture2D customAimCursor;
-    [SerializeField] private Texture2D customCursor;
+    //[SerializeField] private Texture2D customCursor;
     [SerializeField] private int previousMenu;
     
     [Header("Level complete UI objects")]
@@ -31,7 +31,7 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private GameObject[] optionTabs;
     [SerializeField] private Button[] optionButtons;
 
-    private UnityEngine.InputSystem.PlayerInput _playerInput;
+    private PlayerInput _playerInput;
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
 
@@ -61,7 +61,8 @@ public class IngameMenu : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            Cursor.SetCursor(customCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2), CursorMode.Auto);
+            //Cursor.SetCursor(customCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2), CursorMode.Auto);
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
             return;
         }
 
@@ -201,7 +202,8 @@ public class IngameMenu : MonoBehaviour
         }
 
         ToggleActionMap(true);
-        Cursor.SetCursor(customCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2), CursorMode.Auto);
+        //Cursor.SetCursor(customCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2), CursorMode.Auto);
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         GameController.PauseGame();
     }
 

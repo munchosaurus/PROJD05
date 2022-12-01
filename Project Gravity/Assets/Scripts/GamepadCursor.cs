@@ -107,20 +107,21 @@ public class GamepadCursor : MonoBehaviour
             InputState.Change(virtualMouse, mouseState);
             previousMouseState = rightTriggerPressed;
         }
-        ChangeCursorSprite();
+        //ChangeCursorSprite();
         AnchorCursor(newPosition);
+        currentMouse.WarpCursorPosition(virtualMouse.position.ReadValue());
     }
 
-    private void ChangeCursorSprite()
-    {
-        if (playerInput.currentActionMap.name == "MenuControls")
-        {
-            cursorImage.sprite = regularCursor;
-        } else if (playerInput.currentActionMap.name == "PlayerControls")
-        {
-            cursorImage.sprite = aimCursor;
-        }
-    }
+    // private void ChangeCursorSprite()
+    // {
+    //     if (playerInput.currentActionMap.name == "MenuControls")
+    //     {
+    //         cursorImage.sprite = regularCursor;
+    //     } else if (playerInput.currentActionMap.name == "PlayerControls")
+    //     {
+    //         cursorImage.sprite = aimCursor;
+    //     }
+    // }
 
     private void AnchorCursor(Vector2 position)
     {
@@ -143,13 +144,13 @@ public class GamepadCursor : MonoBehaviour
         {
             if (Cursor.visible)
             {
-                Cursor.visible = false;
+                //Cursor.visible = false;
             }
         } else if (playerInput.currentControlScheme == mouseScheme)
         {
             if (!Cursor.visible)
             {
-                Cursor.visible = true;
+                //Cursor.visible = true;
             }
             
         }
