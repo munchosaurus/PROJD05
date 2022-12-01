@@ -20,13 +20,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement settings")] [SerializeField]
     private Vector3 groundCheckDimensions;
-
     [SerializeField] private Vector3 roofCheckDimensions;
-
-    [SerializeField] private float airMovementMultiplier;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float maxVelocity;
-    [SerializeField] private float acceleration;
     private AudioSource _audioSource;
     private const float GridClampThreshold = 0.02f;
     private const float PlayerCollisionGridClamp = 0.5f;
@@ -48,6 +42,7 @@ public class PlayerController : MonoBehaviour
         }
 
         velocity += Physics.gravity * Time.fixedDeltaTime;
+        Debug.Log(Physics.gravity);
         MovePlayer();
         ApplyCollisions();
 
@@ -132,24 +127,24 @@ public class PlayerController : MonoBehaviour
                 {
                     if (Physics.gravity.x > 0 && !groundedLeft)
                     {
-                        velocity.x -= (jumpForce * PlayerStaticValues.PlayerJumpMultiplier) * GameController.GlobalSpeedMultiplier;
+                        velocity.x -= GameController.PlayerJumpForce * GameController.GlobalSpeedMultiplier;
                     }
 
                     if (Physics.gravity.x < 0 && !groundedRight)
                     {
-                        velocity.x += (jumpForce * PlayerStaticValues.PlayerJumpMultiplier) * GameController.GlobalSpeedMultiplier;
+                        velocity.x += GameController.PlayerJumpForce * GameController.GlobalSpeedMultiplier;
                     }
                 }
                 else
                 {
                     if (Physics.gravity.y > 0 && !groundedDown)
                     {
-                        velocity.y -= (jumpForce * PlayerStaticValues.PlayerJumpMultiplier) * GameController.GlobalSpeedMultiplier;
+                        velocity.y -= GameController.PlayerJumpForce * GameController.GlobalSpeedMultiplier;
                     }
 
                     if (Physics.gravity.y < 0 && !groundedUp)
                     {
-                        velocity.y += (jumpForce * PlayerStaticValues.PlayerJumpMultiplier) * GameController.GlobalSpeedMultiplier;
+                        velocity.y += GameController.PlayerJumpForce * GameController.GlobalSpeedMultiplier;
                     }
                 }
             }
@@ -337,11 +332,11 @@ public class PlayerController : MonoBehaviour
         {
             if (GravityController.IsGravityHorizontal())
             {
-                MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y * airMovementMultiplier * PlayerStaticValues.PlayerAirMovementMultiplier);
+                MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y * GameController.PlayerAirMovementMultiplier);
             }
             else
             {
-                MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x * airMovementMultiplier * PlayerStaticValues.PlayerAirMovementMultiplier);
+                MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x * GameController.PlayerAirMovementMultiplier);
             }
         }
         else
@@ -378,7 +373,7 @@ public class PlayerController : MonoBehaviour
 
         if (ShouldAddMoreMoveForce(direction))
         {
-            velocity.x += GameController.GlobalSpeedMultiplier * (direction * acceleration * PlayerStaticValues.PlayerMovementMultiplier * Time.fixedDeltaTime);
+            velocity.x += GameController.GlobalSpeedMultiplier * (direction * GameController.PlayerAcceleration * Time.fixedDeltaTime);
         }
     }
 
@@ -403,7 +398,7 @@ public class PlayerController : MonoBehaviour
 
         if (ShouldAddMoreMoveForce(direction * GameController.GlobalSpeedMultiplier))
         {
-            velocity.y += GameController.GlobalSpeedMultiplier * (direction * (acceleration * PlayerStaticValues.PlayerMovementMultiplier) * Time.fixedDeltaTime);
+            velocity.y += GameController.GlobalSpeedMultiplier * (direction * GameController.PlayerAcceleration * Time.fixedDeltaTime);
         }
     }
 
@@ -439,10 +434,10 @@ public class PlayerController : MonoBehaviour
 
         if (moveCoefficient != 0)
         {
-            return Math.Abs(magnitude) < (maxVelocity * PlayerStaticValues.PlayerMovementMultiplier) * GameController.GlobalSpeedMultiplier && !BoxCast(dir);
+            return Math.Abs(magnitude) < GameController.PlayerMaxVelocity * GameController.GlobalSpeedMultiplier && !BoxCast(dir);
         }
 
-        return moveCoefficient != 0 && Math.Abs(magnitude) < (maxVelocity * PlayerStaticValues.PlayerMovementMultiplier) * GameController.GlobalSpeedMultiplier;
+        return moveCoefficient != 0 && Math.Abs(magnitude) < GameController.PlayerMaxVelocity * GameController.GlobalSpeedMultiplier;
     }
 
     private bool BoxCast(Vector3 direction)

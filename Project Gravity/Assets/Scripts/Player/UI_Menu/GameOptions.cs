@@ -17,9 +17,13 @@ public class GameOptions : MonoBehaviour
 
     [Header("Tutorial toggle")] [SerializeField]
     private Toggle tutorialToggle;
+
+    [Header("Camera Rotation toggle")] [SerializeField] private Toggle cameraAutoRotationToggle;
     
     [Header("Screen mode")] [SerializeField]
     private TMP_Dropdown fullscreenDropdown;
+    
+    
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +40,10 @@ public class GameOptions : MonoBehaviour
         // Screen mode
         fullscreenDropdown.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
         fullscreenDropdown.value = GameController.FullscreenMode;
+        
+        // Camera rotation
+        cameraAutoRotationToggle.onValueChanged.AddListener(delegate { OnCameraRotationToggleChanged(); });
+        cameraAutoRotationToggle.isOn = GameController.CameraAutoRotationToggled;
     }
 
     public void LoadGameSettings()
@@ -44,7 +52,13 @@ public class GameOptions : MonoBehaviour
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
         tutorialToggle.isOn = GameController.TutorialIsOn;
         fullscreenDropdown.value = GameController.FullscreenMode;
+        cameraAutoRotationToggle.isOn = GameController.CameraAutoRotationToggled;
         OnFullScreenToggleChanged();
+    }
+
+    public void OnCameraRotationToggleChanged()
+    {
+        GameController.CameraAutoRotationToggled = cameraAutoRotationToggle.isOn;
     }
     
     public void OnTutorialToggleValueChanged()

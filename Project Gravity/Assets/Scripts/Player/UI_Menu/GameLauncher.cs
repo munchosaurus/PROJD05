@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using UnityEngine;
 
 public static class GameLauncher
 {
     public static readonly string levelSettingsFile = Application.persistentDataPath + "/levelData.data";
-    public static readonly string settingsFile = Application.persistentDataPath + "/settingsData.data";
     public static readonly string settingsTextFile = Application.persistentDataPath + "/Settings.txt";
+    public static readonly string testSettingsTextFile = Application.persistentDataPath + "/TestSettings.txt";
 
     // Used for writing and reading level and settings data.
-    private static FileStream fileStream;
+    private static FileStream _fileStream;
     private static BinaryFormatter converter = new BinaryFormatter();
 
     private static SettingsData _settingsData;
     private static LevelData _levelData;
-    private static ManualSettingsData _manualSettingsData;
+    private static TestData _testData;
 
     public static void SaveSettings()
     {
-        _settingsData = new SettingsData();
         _levelData = new LevelData();
-        WriteData(settingsFile, _settingsData);
+        //WriteData(settingsFile, _settingsData);
         WriteData(levelSettingsFile, _levelData);
         WriteSettings();
     }
@@ -34,131 +34,198 @@ public static class GameLauncher
         {
             try
             {
-                fileStream = new FileStream(filePath, FileMode.Open);
-                converter.Serialize(fileStream, data);
-                fileStream.Close();
+                _fileStream = new FileStream(filePath, FileMode.Open);
+                converter.Serialize(_fileStream, data);
+                _fileStream.Close();
             }
             catch (Exception e)
             {
-                fileStream?.Close();
+                _fileStream?.Close();
                 File.Delete(filePath);
-                fileStream = new FileStream(filePath, FileMode.Create);
-                converter.Serialize(fileStream, data);
-                fileStream.Close();
+                _fileStream = new FileStream(filePath, FileMode.Create);
+                converter.Serialize(_fileStream, data);
+                _fileStream.Close();
             }
         }
         else
         {
-            fileStream = new FileStream(filePath, FileMode.Create);
-            converter.Serialize(fileStream, data);
-            fileStream.Close();
+            _fileStream = new FileStream(filePath, FileMode.Create);
+            converter.Serialize(_fileStream, data);
+            _fileStream.Close();
         }
     }
 
     private static void WriteSettings()
     {
-        // If the settings file doesn't exist
+        _testData = new TestData();
+        _settingsData = new SettingsData();
+        
         if (!File.Exists(settingsTextFile))
         {
-            _manualSettingsData = new ManualSettingsData();
-            fileStream = new FileStream(settingsTextFile, FileMode.Create);
-            fileStream.Dispose();
-            File.AppendAllText(settingsTextFile, _manualSettingsData.ToString());
+            _fileStream = new FileStream(settingsTextFile, FileMode.Create);
+            _fileStream.Dispose();
+            File.AppendAllText(settingsTextFile, _settingsData.ToString());
+        }
+        else
+        {
+            File.WriteAllText(settingsTextFile, String.Empty);
+            File.AppendAllText(settingsTextFile, _settingsData.ToString());
+        }
+        
+        if (!File.Exists(testSettingsTextFile))
+        {
+            _fileStream = new FileStream(testSettingsTextFile, FileMode.Create);
+            _fileStream.Dispose();
+            File.AppendAllText(testSettingsTextFile, _testData.ToString());
+        }
+        else
+        {
+            File.WriteAllText(testSettingsTextFile, String.Empty);
+            File.AppendAllText(testSettingsTextFile, _testData.ToString());
+        }
+    }
+
+    private static void LoadLevelSettings()
+    {
+        if (File.Exists(levelSettingsFile))
+        {
+            try
+            {
+                _fileStream = new FileStream(levelSettingsFile, FileMode.Open);
+                _levelData = converter.Deserialize(_fileStream) as LevelData;
+                _fileStream.Close();
+                LevelCompletionTracker.LoadLevels(_levelData);
+            }
+            catch (Exception e)
+            {
+                _fileStream?.Close();
+                File.Delete(levelSettingsFile);
+            }
+        }
+    }
+
+    private static void LoadTextSettings()
+    {
+        if (File.Exists(settingsTextFile))
+        {
+            int counter = 0;
+            string[] values = new string[9];
+            foreach (var line in File.ReadLines(settingsTextFile))
+            {
+                values[counter] = line.Split(' ', 2)[1].Trim();
+                counter++;
+            }
+            UpdateSettings(values);
+        }
+        else
+        {
+            GameController.SetUpSettings();
+        }
+    }
+
+    /*
+     * TODO: Remove at launch
+     */
+    private static void LoadTestSettings()
+    {
+        if (File.Exists(testSettingsTextFile))
+        {
+            int counter = 0;
+            string[] values = new string[5];
+            foreach (var line in File.ReadLines(testSettingsTextFile))
+            {
+                values[counter] = line.Split(' ', 2)[1].Trim();
+                counter++;
+            }
+            UpdateTestSettings(values);
+        }
+        else
+        {
+            GameController.SetUp();
+            GravityController.SetUp();
         }
     }
 
     public static void LoadSettings()
     {
-        if (File.Exists(settingsFile))
-        {
-            try
-            {
-                fileStream = new FileStream(settingsFile, FileMode.Open);
-                _settingsData = converter.Deserialize(fileStream) as SettingsData;
-                fileStream.Close();
-                GameController.SetUp(_settingsData);
-            }
-            catch (Exception e)
-            {
-                fileStream?.Close();
-                File.Delete(settingsFile);
-                GameController.SetUp();
-            }
-        }
-        else
-        {
-            GameController.SetUp();
-        }
+        // if (File.Exists(settingsFile))
+        // {
+        //     try
+        //     {
+        //         _fileStream = new FileStream(settingsFile, FileMode.Open);
+        //         _settingsData = converter.Deserialize(fileStream) as SettingsData;
+        //         _fileStream.Close();
+        //         GameController.SetUp(_settingsData);
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         fileStream?.Close();
+        //         File.Delete(settingsFile);
+        //         GameController.SetUp();
+        //     }
+        // }
+        LoadLevelSettings();
+        LoadTextSettings();
+        LoadTestSettings();
+    }
 
+    private static void UpdateSettings(string[] values)
+    {
+        // Sound
+        GameController.GlobalSoundIsOn = bool.Parse(values[0]);
+        GameController.MasterVolumeMultiplier = float.Parse(values[1]);
+        GameController.MusicVolumeMultiplier = float.Parse(values[2]);
+        GameController.EffectsVolumeMultiplier = float.Parse(values[3]);
+        GameController.DialogueVolumeMultiplier = float.Parse(values[4]);
+        
+        // Game
+        GameController.FullscreenMode = int.Parse(values[5]);
+        GameController.TutorialIsOn = bool.Parse(values[6]);
+        GameController.GlobalSpeedMultiplier = float.Parse(values[7]);
+        GameController.CameraAutoRotationToggled = bool.Parse(values[8]);
+    }
 
-        if (File.Exists(levelSettingsFile))
-        {
-            try
-            {
-                fileStream = new FileStream(levelSettingsFile, FileMode.Open);
-                _levelData = converter.Deserialize(fileStream) as LevelData;
-                fileStream.Close();
-                LevelCompletionTracker.LoadLevels(_levelData);
-            }
-            catch (Exception e)
-            {
-                fileStream?.Close();
-                File.Delete(levelSettingsFile);
-            }
-        }
-
-        if (File.Exists(settingsTextFile))
-        {
-            // Number of setting options
-            float[] floats = new float[4];
-            int counter = 0;
-            foreach (var line in File.ReadLines(settingsTextFile))
-            {
-                floats[counter] = float.Parse(line.Split(' ', 2)[1].Trim());
-                counter++;
-            }
-
-            ManualSettingsData manualSettingsData = new ManualSettingsData(floats[0], floats[1], floats[2], floats[3]);
-
-            PlayerStaticValues.PlayerJumpMultiplier = manualSettingsData.JumpMultiplier;
-            PlayerStaticValues.PlayerMovementMultiplier = manualSettingsData.MovementMultiplier;
-            PlayerStaticValues.PlayerAirMovementMultiplier = manualSettingsData.AirMovementMultiplier;
-            GravityController.GRAVITY = Constants.GRAVITY * manualSettingsData.GravityMultiplier;
-        }
+    private static void UpdateTestSettings(string[] values)
+    {        
+        // Movement
+        GameController.PlayerJumpForce = float.Parse(values[0]);
+        GameController.PlayerAcceleration = float.Parse(values[1]);
+        GameController.PlayerAirMovementMultiplier = float.Parse(values[2]);
+        GameController.PlayerMaxVelocity = float.Parse(values[3]);
+        GravityController.GravityMultiplier = float.Parse(values[4]);
     }
 }
-
 [Serializable]
-public class ManualSettingsData
+public class TestData
 {
-    public float JumpMultiplier { get; set; }
-    public float MovementMultiplier{ get; set; }
-    public float GravityMultiplier { get; set; }
+    public TestData()
+    {
+        JumpForce = GameController.PlayerJumpForce;
+        Acceleration = GameController.PlayerAcceleration;
+        AirMovementMultiplier = GameController.PlayerAirMovementMultiplier;
+        MaxVelocity = GameController.PlayerMaxVelocity;
+        GravityMultiplier = GravityController.GravityMultiplier;
+    }
+    
+    // Movement
+    public float JumpForce { get; set; }
+    public float Acceleration{ get; set; }
     public float AirMovementMultiplier{ get; set; }
+    public float MaxVelocity { get; set; }
+    public float GravityMultiplier { get; set; }
 
-    public ManualSettingsData(float jMultiplier, float mMultiplier, float gMultiplier, float aMovementMultiplier)
-    {
-        JumpMultiplier = jMultiplier;
-        MovementMultiplier = mMultiplier;
-        GravityMultiplier = gMultiplier;
-        AirMovementMultiplier = aMovementMultiplier;
-    }
-
-    public ManualSettingsData()
-    {
-        JumpMultiplier = 1;
-        MovementMultiplier = 1;
-        GravityMultiplier = 1;
-        AirMovementMultiplier = 1;
-    }
+    
 
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append("Jump: " + JumpMultiplier + "\n");
-        sb.Append("Movement: " + MovementMultiplier + "\n");
-        sb.Append("Gravity: " + GravityMultiplier + "\n");
-        sb.Append("Air: " + AirMovementMultiplier);
+        
+        // Movement
+        sb.Append("JumpForce: " + JumpForce + "\n");
+        sb.Append("Acceleration: " + Acceleration + "\n");
+        sb.Append("AirMovementMultiplier: " + AirMovementMultiplier + "\n");
+        sb.Append("MaxVelocity: " + MaxVelocity + "\n");
+        sb.Append("GravityMultiplier: " + GravityMultiplier);
 
         return sb.ToString();
     }
@@ -180,6 +247,7 @@ public class SettingsData
         ScreenMode = GameController.FullscreenMode;
         TutorialIsOn = GameController.TutorialIsOn;
         GlobalSpeedMultiplier = GameController.GlobalSpeedMultiplier;
+        CameraAutoRotationToggled = GameController.CameraAutoRotationToggled;
     }
 
     // Volume
@@ -193,6 +261,26 @@ public class SettingsData
     public int ScreenMode { get; set; }
     public bool TutorialIsOn { get; set; }
     public float GlobalSpeedMultiplier { get; set; }
+    public bool CameraAutoRotationToggled { get; set; }
+
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        // Sound
+        sb.Append("SoundIsOn: " + SoundIsOn + "\n");
+        sb.Append("MasterVolumeMultiplier: " + MasterVolumeMultiplier + "\n");
+        sb.Append("MusicVolumeMultiplier: " + MusicVolumeMultiplier + "\n");
+        sb.Append("EffectsVolumeMultiplier: " + EffectsVolumeMultiplier + "\n");
+        sb.Append("DialogueVolumeMultiplier: " + DialogueVolumeMultiplier + "\n");
+        
+        // Game
+        sb.Append("ScreenMode: " + ScreenMode + "\n");
+        sb.Append("TutorialIsOn: " + TutorialIsOn + "\n");
+        sb.Append("GlobalSpeedMultiplier: " + GlobalSpeedMultiplier + "\n");
+        sb.Append("CameraAutoRotationToggled: " + CameraAutoRotationToggled + "\n");
+        
+        return sb.ToString();
+    }
 }
 
 [Serializable]

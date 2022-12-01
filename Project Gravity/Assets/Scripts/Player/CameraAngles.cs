@@ -8,10 +8,9 @@ public class CameraAngles : MonoBehaviour
 {
     [SerializeField] private Vector2 turn;
     [SerializeField] private float sensitivity;
-    [SerializeField] private bool autoReturn;
     [SerializeField] private float returnSpeed;
 
-    private bool rotationToggled;
+    private bool _rotationToggled;
     public float minXRotation;
     public float maxXRotation;
     public float minYRotation;
@@ -19,11 +18,11 @@ public class CameraAngles : MonoBehaviour
 
     private void Update()
     {
-        if (rotationToggled)
+        if (_rotationToggled)
         {
             Rotate();
         }
-        else if (autoReturn)
+        else if (GameController.CameraAutoRotationToggled)
         {
             transform.rotation =
                 Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * returnSpeed);
@@ -50,6 +49,15 @@ public class CameraAngles : MonoBehaviour
     // Sets the rotation toggle to true if pressed
     public void OnRotateToggle(InputAction.CallbackContext context)
     {
-        rotationToggled = context.ReadValue<float>() == 1;
+        _rotationToggled = context.ReadValue<float>() == 1;
+    }
+
+    public void RotateToDefault(InputAction.CallbackContext context)
+    {
+        if (context.started && !_rotationToggled && !GameController.CameraAutoRotationToggled)
+        {
+            turn = new Vector2();
+            transform.rotation = Quaternion.identity;
+        }
     }
 }

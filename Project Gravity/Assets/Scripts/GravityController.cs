@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,13 +9,18 @@ public static class GravityController
     private static Vector3 _currentFacing;
     private static Guid _gravityGunEventGuid;
     static int gravityLayer = LayerMask.NameToLayer("GravityChange");
-    public static float GRAVITY = 20f;
+    public static float GravityMultiplier;
 
     // Gets initiated by the EventSystem.
     public static void Init()
     {
         _currentFacing = new Vector3(0f, -1f, 0f);
         EventSystem.Current.RegisterListener<GravityGunEvent>(OnGravityGunHit, ref _gravityGunEventGuid);
+    }
+
+    public static void SetUp()
+    {
+        GravityMultiplier = 1;
     }
 
     public static bool IsGravityHorizontal()
@@ -34,7 +40,7 @@ public static class GravityController
 
     public static void SetNewGravity(Vector3 direction)
     {
-        Physics.gravity = GameController.GlobalSpeedMultiplier * (GRAVITY * direction);
+        Physics.gravity = direction * Constants.GRAVITY * GravityMultiplier * GameController.GlobalSpeedMultiplier;
     }
 
     private static void OnGravityGunHit(GravityGunEvent gravityGunEvent)
