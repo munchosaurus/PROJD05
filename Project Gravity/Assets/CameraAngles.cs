@@ -8,6 +8,7 @@ public class CameraAngles : MonoBehaviour
 
     [SerializeField] private Vector2 turn;
     [SerializeField] private float sensitivity;
+    [SerializeField] private bool autoReturn;
     
     private float targetYRotation;
     private float targetXRotation;
@@ -38,7 +39,16 @@ public class CameraAngles : MonoBehaviour
             //transform.localRotation = q;
             //transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
 
+        } else if (autoReturn)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * 3);
+            turn = new Vector2();
         }
+    }
+    
+    public Quaternion RotateForward()
+    {
+        return Quaternion.LookRotation(transform.forward, new Vector3());
     }
 
     public void OnRotateToggle(InputAction.CallbackContext context)
