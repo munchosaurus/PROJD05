@@ -29,10 +29,10 @@ public static class Constants
     public const float PLAYER_Z_VALUE = 1f;
     public const float PLAYER_AIR_SPEED_DAMPER = 0.1f;
     public const float PLAYER_AIR_MOVEMENT_WINDOW = 1f;
-
+    
     // Gravity
     public const float GRAVITY = 20f;
-    
+
     // UI
     public const float GRAVITY_ARROW_ROTATION_SPEED = 5f;
     public const float EMBER_ROTATION_SPEED = 2f;

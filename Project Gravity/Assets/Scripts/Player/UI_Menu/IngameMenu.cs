@@ -66,7 +66,7 @@ public class IngameMenu : MonoBehaviour
             return;
         }
 
-        Physics.gravity = new Vector3(0, -Constants.GRAVITY, 0);
+        Physics.gravity = new Vector3(0, -GravityController.GRAVITY, 0);
         
         if (customAimCursor != null)
         {

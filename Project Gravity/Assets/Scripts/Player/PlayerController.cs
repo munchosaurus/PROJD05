@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public Vector3 velocity;
-
     [SerializeField] private Vector3 horizontalCast, verticalCast;
     [SerializeField] bool groundedRight;
     [SerializeField] bool groundedLeft;
@@ -133,24 +132,24 @@ public class PlayerController : MonoBehaviour
                 {
                     if (Physics.gravity.x > 0 && !groundedLeft)
                     {
-                        velocity.x -= jumpForce * GameController.GlobalSpeedMultiplier;
+                        velocity.x -= (jumpForce * PlayerStaticValues.PlayerJumpMultiplier) * GameController.GlobalSpeedMultiplier;
                     }
 
                     if (Physics.gravity.x < 0 && !groundedRight)
                     {
-                        velocity.x += jumpForce * GameController.GlobalSpeedMultiplier;
+                        velocity.x += (jumpForce * PlayerStaticValues.PlayerJumpMultiplier) * GameController.GlobalSpeedMultiplier;
                     }
                 }
                 else
                 {
                     if (Physics.gravity.y > 0 && !groundedDown)
                     {
-                        velocity.y -= jumpForce * GameController.GlobalSpeedMultiplier;
+                        velocity.y -= (jumpForce * PlayerStaticValues.PlayerJumpMultiplier) * GameController.GlobalSpeedMultiplier;
                     }
 
                     if (Physics.gravity.y < 0 && !groundedUp)
                     {
-                        velocity.y += jumpForce * GameController.GlobalSpeedMultiplier;
+                        velocity.y += (jumpForce * PlayerStaticValues.PlayerJumpMultiplier) * GameController.GlobalSpeedMultiplier;
                     }
                 }
             }
@@ -338,11 +337,11 @@ public class PlayerController : MonoBehaviour
         {
             if (GravityController.IsGravityHorizontal())
             {
-                MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y * airMovementMultiplier);
+                MoveVertical(_movementKeyInfo.ReadValue<Vector2>().y * airMovementMultiplier * PlayerStaticValues.PlayerAirMovementMultiplier);
             }
             else
             {
-                MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x * airMovementMultiplier);
+                MoveHorizontal(_movementKeyInfo.ReadValue<Vector2>().x * airMovementMultiplier * PlayerStaticValues.PlayerAirMovementMultiplier);
             }
         }
         else
@@ -379,7 +378,7 @@ public class PlayerController : MonoBehaviour
 
         if (ShouldAddMoreMoveForce(direction))
         {
-            velocity.x += GameController.GlobalSpeedMultiplier * (direction * acceleration * Time.fixedDeltaTime);
+            velocity.x += GameController.GlobalSpeedMultiplier * (direction * acceleration * PlayerStaticValues.PlayerMovementMultiplier * Time.fixedDeltaTime);
         }
     }
 
@@ -404,7 +403,7 @@ public class PlayerController : MonoBehaviour
 
         if (ShouldAddMoreMoveForce(direction * GameController.GlobalSpeedMultiplier))
         {
-            velocity.y += GameController.GlobalSpeedMultiplier * (direction * acceleration * Time.fixedDeltaTime);
+            velocity.y += GameController.GlobalSpeedMultiplier * (direction * (acceleration * PlayerStaticValues.PlayerMovementMultiplier) * Time.fixedDeltaTime);
         }
     }
 
@@ -440,10 +439,10 @@ public class PlayerController : MonoBehaviour
 
         if (moveCoefficient != 0)
         {
-            return Math.Abs(magnitude) < maxVelocity * GameController.GlobalSpeedMultiplier && !BoxCast(dir);
+            return Math.Abs(magnitude) < (maxVelocity * PlayerStaticValues.PlayerMovementMultiplier) * GameController.GlobalSpeedMultiplier && !BoxCast(dir);
         }
 
-        return moveCoefficient != 0 && Math.Abs(magnitude) < maxVelocity * GameController.GlobalSpeedMultiplier;
+        return moveCoefficient != 0 && Math.Abs(magnitude) < (maxVelocity * PlayerStaticValues.PlayerMovementMultiplier) * GameController.GlobalSpeedMultiplier;
     }
 
     private bool BoxCast(Vector3 direction)

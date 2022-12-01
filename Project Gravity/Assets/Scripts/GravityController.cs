@@ -8,6 +8,7 @@ public static class GravityController
     private static Vector3 _currentFacing;
     private static Guid _gravityGunEventGuid;
     static int gravityLayer = LayerMask.NameToLayer("GravityChange");
+    public static float GRAVITY = 20f;
 
     // Gets initiated by the EventSystem.
     public static void Init()
@@ -33,7 +34,7 @@ public static class GravityController
 
     public static void SetNewGravity(Vector3 direction)
     {
-        Physics.gravity = GameController.GlobalSpeedMultiplier * (Constants.GRAVITY * direction);
+        Physics.gravity = GameController.GlobalSpeedMultiplier * (GRAVITY * direction);
     }
 
     private static void OnGravityGunHit(GravityGunEvent gravityGunEvent)
