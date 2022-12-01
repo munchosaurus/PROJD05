@@ -13,14 +13,14 @@ public class GamepadCursor : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private float cursorSpeed = 2000f;
     [SerializeField] private float padding = 50f;
-    [SerializeField] private Sprite aimCursor;
-    [SerializeField] private Sprite regularCursor;
-    private Image cursorImage;
-    private Camera mainCamera;
-    public Mouse virtualMouse;
-    private bool previousMouseState;
-    private string previousControlScheme = "";
-    private Mouse currentMouse;
+    // [SerializeField] private Sprite aimCursor;
+    // [SerializeField] private Sprite regularCursor;
+    // private Image cursorImage;
+    private Camera _mainCamera;
+    public Mouse VirtualMouse;
+    private bool _previousMouseState;
+    private string _previousControlScheme = "";
+    private Mouse _currentMouse;
     
     
     private const string gamePadScheme = "GamePad";
@@ -28,25 +28,25 @@ public class GamepadCursor : MonoBehaviour
 
     private void OnEnable()
     {
-        mainCamera = Camera.main;
-        currentMouse = Mouse.current;
-        cursorImage = cursorTransform.gameObject.GetComponent<Image>();
+        _mainCamera = Camera.main;
+        _currentMouse = Mouse.current;
+        //cursorImage = cursorTransform.gameObject.GetComponent<Image>();
         
-        if (virtualMouse == null)
+        if (VirtualMouse == null)
         {
-            virtualMouse = (Mouse) InputSystem.AddDevice("VirtualMouse");
+            VirtualMouse = (Mouse) InputSystem.AddDevice("VirtualMouse");
         }
-        else if (!virtualMouse.added)
+        else if (!VirtualMouse.added)
         {
-            InputSystem.AddDevice(virtualMouse);
+            InputSystem.AddDevice(VirtualMouse);
         }
 
-        InputUser.PerformPairingWithDevice(virtualMouse, playerInput.user);
+        InputUser.PerformPairingWithDevice(VirtualMouse, playerInput.user);
 
         if (cursorTransform != null)
         {
             Vector2 position = cursorTransform.anchoredPosition;
-            InputState.Change(virtualMouse.position, position);
+            InputState.Change(VirtualMouse.position, position);
         }
 
         InputSystem.onAfterUpdate += UpdateMotion;
@@ -54,34 +54,34 @@ public class GamepadCursor : MonoBehaviour
 
     private void OnDisable()
     {
-        if (virtualMouse != null && virtualMouse.added)
+        if (VirtualMouse != null && VirtualMouse.added)
         {
-            InputSystem.RemoveDevice(virtualMouse);
+            InputSystem.RemoveDevice(VirtualMouse);
         }
         InputSystem.onAfterUpdate -= UpdateMotion;
     }
 
     private void OnControlsChanged(PlayerInput input)
     {
-        if (playerInput.currentControlScheme == mouseScheme && previousControlScheme != mouseScheme)
+        if (playerInput.currentControlScheme == mouseScheme && _previousControlScheme != mouseScheme)
         {
             cursorTransform.gameObject.SetActive(false);
-            Cursor.visible = true;
-            currentMouse.WarpCursorPosition(virtualMouse.position.ReadValue());
-            previousControlScheme = mouseScheme;
-        } else if (playerInput.currentControlScheme == gamePadScheme && previousControlScheme != gamePadScheme)
+            //Cursor.visible = true;
+            _currentMouse.WarpCursorPosition(VirtualMouse.position.ReadValue());
+            _previousControlScheme = mouseScheme;
+        } else if (playerInput.currentControlScheme == gamePadScheme && _previousControlScheme != gamePadScheme)
         {
             cursorTransform.gameObject.SetActive(true);
-            Cursor.visible = false;
-            InputState.Change(virtualMouse.position, currentMouse.position.ReadValue());
-            AnchorCursor(currentMouse.position.ReadValue());
-            previousControlScheme = gamePadScheme;
+            //Cursor.visible = false;
+            InputState.Change(VirtualMouse.position, _currentMouse.position.ReadValue());
+            AnchorCursor(_currentMouse.position.ReadValue());
+            _previousControlScheme = gamePadScheme;
         }
     }
 
     private void UpdateMotion()
     {
-        if (virtualMouse == null || Gamepad.current == null)
+        if (VirtualMouse == null || Gamepad.current == null)
         {
             return;
         }
@@ -89,69 +89,70 @@ public class GamepadCursor : MonoBehaviour
         var stickValue = Gamepad.current.rightStick.ReadValue();
         stickValue *= cursorSpeed * Time.unscaledDeltaTime ;
 
-        var currentPosition = virtualMouse.position.ReadValue();
+        var currentPosition = VirtualMouse.position.ReadValue();
         var newPosition = currentPosition + stickValue;
 
         newPosition.x = Mathf.Clamp(newPosition.x, padding, Screen.width - padding);
         newPosition.y = Mathf.Clamp(newPosition.y, padding, Screen.height - padding);
 
-        InputState.Change(virtualMouse.position, newPosition);
-        InputState.Change(virtualMouse.delta, stickValue);
+        InputState.Change(VirtualMouse.position, newPosition);
+        InputState.Change(VirtualMouse.delta, stickValue);
 
         var rightTriggerPressed = Gamepad.current.rightTrigger.IsPressed();
 
-        if (previousMouseState != rightTriggerPressed)
+        if (_previousMouseState != rightTriggerPressed)
         {
-            virtualMouse.CopyState<MouseState>(out var mouseState);
+            VirtualMouse.CopyState<MouseState>(out var mouseState);
             mouseState.WithButton(MouseButton.Left, rightTriggerPressed);
-            InputState.Change(virtualMouse, mouseState);
-            previousMouseState = rightTriggerPressed;
+            InputState.Change(VirtualMouse, mouseState);
+            _previousMouseState = rightTriggerPressed;
         }
-        ChangeCursorSprite();
+        //ChangeCursorSprite();
         AnchorCursor(newPosition);
+        _currentMouse.WarpCursorPosition(VirtualMouse.position.ReadValue());
     }
 
-    private void ChangeCursorSprite()
-    {
-        if (playerInput.currentActionMap.name == "MenuControls")
-        {
-            cursorImage.sprite = regularCursor;
-        } else if (playerInput.currentActionMap.name == "PlayerControls")
-        {
-            cursorImage.sprite = aimCursor;
-        }
-    }
+    // private void ChangeCursorSprite()
+    // {
+    //     if (playerInput.currentActionMap.name == "MenuControls")
+    //     {
+    //         cursorImage.sprite = regularCursor;
+    //     } else if (playerInput.currentActionMap.name == "PlayerControls")
+    //     {
+    //         cursorImage.sprite = aimCursor;
+    //     }
+    // }
 
     private void AnchorCursor(Vector2 position)
     {
         Vector2 anchoredPosition;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasTransform, position,
-            canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : mainCamera, out anchoredPosition);
+            canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : _mainCamera, out anchoredPosition);
 
         cursorTransform.anchoredPosition = anchoredPosition;
     }
     
     private void Update()
     {
-        if (previousControlScheme != playerInput.currentControlScheme)
+        if (_previousControlScheme != playerInput.currentControlScheme)
         {
             OnControlsChanged(playerInput);
         }
     
-        previousControlScheme = playerInput.currentControlScheme;
-        if (playerInput.currentControlScheme == gamePadScheme)
-        {
-            if (Cursor.visible)
-            {
-                Cursor.visible = false;
-            }
-        } else if (playerInput.currentControlScheme == mouseScheme)
-        {
-            if (!Cursor.visible)
-            {
-                Cursor.visible = true;
-            }
-            
-        }
+        _previousControlScheme = playerInput.currentControlScheme;
+        // if (playerInput.currentControlScheme == gamePadScheme)
+        // {
+        //     if (Cursor.visible)
+        //     {
+        //         Cursor.visible = false;
+        //     }
+        // } else if (playerInput.currentControlScheme == mouseScheme)
+        // {
+        //     if (!Cursor.visible)
+        //     {
+        //         Cursor.visible = true;
+        //     }
+        //     
+        // }
     }
 }
