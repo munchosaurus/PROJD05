@@ -96,7 +96,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RightClick",
+                    "name": "ToggleRotation",
                     "type": "Button",
                     "id": "7c1fcc73-8b15-48ae-a14c-7aefa258c91b",
                     "expectedControlType": "Button",
@@ -432,7 +432,29 @@
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "Mouse",
-                    "action": "RightClick",
+                    "action": "ToggleRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ce05111-3b67-4bdb-be83-c18ff03fa85f",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "ToggleRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "844e624e-3e71-411f-bc59-7a4e6558fbcd",
+                    "path": "<VirtualMouse>/rightButton",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "ToggleRotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
