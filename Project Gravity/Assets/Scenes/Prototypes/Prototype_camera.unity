@@ -6328,7 +6328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 409731865}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: CameraStuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6346,8 +6346,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 796427064}
   - {fileID: 1441568106}
+  - {fileID: 796427064}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22830,7 +22830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2110725554297923197, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2110725554297923197, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23026,7 +23026,7 @@ Transform:
   m_Children:
   - {fileID: 50444529}
   m_Father: {fileID: 409731865}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1441568107
 MonoBehaviour:
@@ -23042,6 +23042,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turn: {x: 0, y: 0}
   sensitivity: 0.05
+  autoReturn: 0
+  returnSpeed: 0
   minXRotation: -15
   maxXRotation: 15
   minYRotation: -15

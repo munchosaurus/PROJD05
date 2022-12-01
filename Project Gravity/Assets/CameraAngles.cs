@@ -9,16 +9,17 @@ public class CameraAngles : MonoBehaviour
     [SerializeField] private Vector2 turn;
     [SerializeField] private float sensitivity;
     [SerializeField] private bool autoReturn;
+    [SerializeField] private float returnSpeed;
     
     private float targetYRotation;
     private float targetXRotation;
     private float cameraSmoothness = 0.5f;
     
     private bool _rightMouseDown;
-    public float minXRotation = -10;
-    public float maxXRotation = 10;
-    public float minYRotation = -10;
-    public float maxYRotation = 10;
+    public float minXRotation;
+    public float maxXRotation;
+    public float minYRotation;
+    public float maxYRotation;
     private void Update()
     {
         if (_rightMouseDown)
@@ -41,7 +42,7 @@ public class CameraAngles : MonoBehaviour
 
         } else if (autoReturn)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * 3);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * returnSpeed);
             turn = new Vector2();
         }
     }
