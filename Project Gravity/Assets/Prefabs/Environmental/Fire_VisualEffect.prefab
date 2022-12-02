@@ -4880,7 +4880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6647467901563181830}
   m_Layer: 0
-  m_Name: VFX_Fire
+  m_Name: Fire_VisualEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

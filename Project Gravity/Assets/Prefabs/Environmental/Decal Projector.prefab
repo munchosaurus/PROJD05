@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7209559296322934269}
   - component: {fileID: 6973409493102110741}
   m_Layer: 0
-  m_Name: Decal Projector Testing
+  m_Name: Decal Projector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,5 +53,5 @@ MonoBehaviour:
   m_UVBias: {x: 0, y: 0}
   m_ScaleMode: 0
   m_Offset: {x: 0, y: 0, z: 0.5}
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 18, y: 18, z: 1}
   m_FadeFactor: 1
