@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class GameLauncher
@@ -57,7 +58,6 @@ public static class GameLauncher
 
     private static void WriteSettings()
     {
-        _testData = new TestData();
         _settingsData = new SettingsData();
         
         if (!File.Exists(settingsTextFile))
@@ -70,18 +70,6 @@ public static class GameLauncher
         {
             File.WriteAllText(settingsTextFile, String.Empty);
             File.AppendAllText(settingsTextFile, _settingsData.ToString());
-        }
-        
-        if (!File.Exists(testSettingsTextFile))
-        {
-            _fileStream = new FileStream(testSettingsTextFile, FileMode.Create);
-            _fileStream.Dispose();
-            File.AppendAllText(testSettingsTextFile, _testData.ToString());
-        }
-        else
-        {
-            File.WriteAllText(testSettingsTextFile, String.Empty);
-            File.AppendAllText(testSettingsTextFile, _testData.ToString());
         }
     }
 
@@ -143,6 +131,10 @@ public static class GameLauncher
         {
             GameController.SetUp();
             GravityController.SetUp();
+            _testData = new TestData();
+            _fileStream = new FileStream(testSettingsTextFile, FileMode.Create);
+            _fileStream.Dispose();
+            File.AppendAllText(testSettingsTextFile, _testData.ToString());
         }
     }
 
@@ -164,19 +156,28 @@ public static class GameLauncher
         //         GameController.SetUp();
         //     }
         // }
-        LoadLevelSettings();
-        LoadTextSettings();
-        LoadTestSettings();
+        try
+        {
+            LoadLevelSettings();
+            LoadTextSettings();
+            LoadTestSettings();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
     }
 
     private static void UpdateSettings(string[] values)
     {
         // Sound
         GameController.GlobalSoundIsOn = bool.Parse(values[0]);
-        GameController.MasterVolumeMultiplier = float.Parse(values[1]);
-        GameController.MusicVolumeMultiplier = float.Parse(values[2]);
-        GameController.EffectsVolumeMultiplier = float.Parse(values[3]);
-        GameController.DialogueVolumeMultiplier = float.Parse(values[4]);
+        GameController.MasterVolumeMultiplier = float.Parse(values[1]) / 100f;
+        GameController.MusicVolumeMultiplier = float.Parse(values[2]) / 100f;
+        GameController.EffectsVolumeMultiplier = float.Parse(values[3]) / 100f;
+        GameController.DialogueVolumeMultiplier = float.Parse(values[4]) / 100f;
         
         // Game
         GameController.FullscreenMode = int.Parse(values[5]);
@@ -268,10 +269,10 @@ public class SettingsData
         StringBuilder sb = new StringBuilder();
         // Sound
         sb.Append("SoundIsOn: " + SoundIsOn + "\n");
-        sb.Append("MasterVolumeMultiplier: " + MasterVolumeMultiplier + "\n");
-        sb.Append("MusicVolumeMultiplier: " + MusicVolumeMultiplier + "\n");
-        sb.Append("EffectsVolumeMultiplier: " + EffectsVolumeMultiplier + "\n");
-        sb.Append("DialogueVolumeMultiplier: " + DialogueVolumeMultiplier + "\n");
+        sb.Append("MasterVolume: " + Mathf.Floor(MasterVolumeMultiplier * 100) + "\n");
+        sb.Append("MusicVolume: " + Mathf.Floor(MusicVolumeMultiplier * 100) + "\n");
+        sb.Append("EffectsVolume: " + Mathf.Floor(EffectsVolumeMultiplier * 100) + "\n");
+        sb.Append("DialogueVolume: " + Mathf.Floor(DialogueVolumeMultiplier * 100) + "\n");
         
         // Game
         sb.Append("ScreenMode: " + ScreenMode + "\n");

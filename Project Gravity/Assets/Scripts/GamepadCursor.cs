@@ -67,7 +67,7 @@ public class GamepadCursor : MonoBehaviour
         {
             cursorTransform.gameObject.SetActive(false);
             //Cursor.visible = true;
-            _currentMouse.WarpCursorPosition(VirtualMouse.position.ReadValue());
+            //_currentMouse.WarpCursorPosition(VirtualMouse.position.ReadValue());
             _previousControlScheme = mouseScheme;
         } else if (playerInput.currentControlScheme == gamePadScheme && _previousControlScheme != gamePadScheme)
         {
@@ -109,6 +109,7 @@ public class GamepadCursor : MonoBehaviour
         }
         //ChangeCursorSprite();
         AnchorCursor(newPosition);
+        Debug.Log("Flyttar musen i Update motion");
         _currentMouse.WarpCursorPosition(VirtualMouse.position.ReadValue());
     }
 

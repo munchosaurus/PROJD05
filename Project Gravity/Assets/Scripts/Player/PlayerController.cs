@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
         }
 
         velocity += Physics.gravity * Time.fixedDeltaTime;
-        Debug.Log(Physics.gravity);
         MovePlayer();
         ApplyCollisions();
 

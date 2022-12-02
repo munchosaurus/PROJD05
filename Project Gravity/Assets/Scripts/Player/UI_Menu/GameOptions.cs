@@ -59,11 +59,15 @@ public class GameOptions : MonoBehaviour
     public void OnCameraRotationToggleChanged()
     {
         GameController.CameraAutoRotationToggled = cameraAutoRotationToggle.isOn;
+        
+        GameLauncher.SaveSettings();
     }
     
     public void OnTutorialToggleValueChanged()
     {
         GameController.TutorialIsOn = tutorialToggle.isOn;
+        
+        GameLauncher.SaveSettings();
     }
 
     public void OnFullScreenToggleChanged()
@@ -84,6 +88,8 @@ public class GameOptions : MonoBehaviour
                 Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
                 break;
         }
+        
+        GameLauncher.SaveSettings();
     }
     
     private void OnSpeedValueChanged()
@@ -91,6 +97,8 @@ public class GameOptions : MonoBehaviour
         GameController.GlobalSpeedMultiplier = speedSlider.value / 100;
         GravityController.SetNewGravity(GravityController.GetCurrentFacing());
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
+        
+        GameLauncher.SaveSettings();
     }
 
 }
