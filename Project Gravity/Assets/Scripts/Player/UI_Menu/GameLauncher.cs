@@ -24,9 +24,7 @@ public static class GameLauncher
     public static void SaveSettings()
     {
         _levelData = new LevelData();
-        //WriteData(settingsFile, _settingsData);
         WriteData(levelSettingsFile, _levelData);
-        WriteSettings();
     }
 
     private static void WriteData<T>(string filePath, T data)
@@ -56,7 +54,7 @@ public static class GameLauncher
         }
     }
 
-    private static void WriteSettings()
+    public static void WriteSettings()
     {
         _settingsData = new SettingsData();
         

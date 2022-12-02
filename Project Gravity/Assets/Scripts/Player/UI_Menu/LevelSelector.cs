@@ -106,7 +106,7 @@ public class LevelSelector : MonoBehaviour
             }
             else
             {
-                GameLauncher.SaveSettings();
+                GameLauncher.WriteSettings();;
                 SceneManager.LoadScene(_selectedLevel);
             }
         }

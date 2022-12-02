@@ -49,9 +49,13 @@ public static class GravityController
         {
             try
             {
-                SetCurrentFacing(-gravityGunEvent.HitNormal);
-                SetNewGravity(-gravityGunEvent.HitNormal);
-                gravityGunEvent.SourceGameObject.GetComponent<PlayerController>().RotateToPlane();
+                if (Physics.gravity != -gravityGunEvent.HitNormal * Constants.GRAVITY * GravityMultiplier * GameController.GlobalSpeedMultiplier)
+                {
+                    CompletionLogger.gravityChanges++;
+                    SetCurrentFacing(-gravityGunEvent.HitNormal);
+                    SetNewGravity(-gravityGunEvent.HitNormal);
+                    gravityGunEvent.SourceGameObject.GetComponent<PlayerController>().RotateToPlane();
+                }
             }
             catch
             {

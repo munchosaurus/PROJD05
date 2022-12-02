@@ -73,7 +73,7 @@ public class SoundOptions : MonoBehaviour
             globalMixer.SetFloat("Master", Mathf.Log(0.001f) * 20f);
         }
         
-        GameLauncher.SaveSettings();
+        GameLauncher.WriteSettings();
     }
     
     public void OnMasterVolumeValueChanged()
@@ -82,7 +82,7 @@ public class SoundOptions : MonoBehaviour
         globalMixer.SetFloat("Master", Mathf.Log(GameController.MasterVolumeMultiplier) * 20f);
         masterVolumeText.text = Mathf.Round(masterVolumeSlider.value * 100.0f) + "%";
         
-        GameLauncher.SaveSettings();
+        GameLauncher.WriteSettings();;
     }
 
     public void OnMusicVolumeValueChanged()
@@ -91,7 +91,7 @@ public class SoundOptions : MonoBehaviour
         globalMixer.SetFloat("Music", Mathf.Log(GameController.MusicVolumeMultiplier) * 20f);
         musicVolumeText.text = Mathf.Round(musicVolumeSlider.value * 100.0f) + "%";
         
-        GameLauncher.SaveSettings();
+        GameLauncher.WriteSettings();;
     }
 
     public void OnEffectsVolumeValueChanged()
@@ -100,7 +100,7 @@ public class SoundOptions : MonoBehaviour
         globalMixer.SetFloat("Effects", Mathf.Log(GameController.EffectsVolumeMultiplier) * 20f);
         effectsVolumeText.text = Mathf.Round(effectsVolumeSlider.value * 100.0f) + "%";
         
-        GameLauncher.SaveSettings();
+        GameLauncher.WriteSettings();
     }
 
     public void OnDialogueVolumeValueChanged()
@@ -109,7 +109,7 @@ public class SoundOptions : MonoBehaviour
         globalMixer.SetFloat("Dialogue", Mathf.Log(GameController.DialogueVolumeMultiplier) * 20f);
         dialogueVolumeText.text = Mathf.Round(dialogueVolumeSlider.value * 100.0f) + "%";
         
-        GameLauncher.SaveSettings();
+        GameLauncher.WriteSettings();
     }
     
 }

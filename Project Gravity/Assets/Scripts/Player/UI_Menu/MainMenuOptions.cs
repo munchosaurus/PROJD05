@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +9,7 @@ public class MainMenuOptions : MonoBehaviour
 
     private void Awake()
     {
+        CompletionLogger.LoadCountfile();
         // Loads gamedata from file
         GameLauncher.LoadSettings();
         LevelCompletionTracker.AddUnlockedLevel(1);
@@ -50,7 +50,7 @@ public class MainMenuOptions : MonoBehaviour
 
     public void StartGame()
     {
-        GameLauncher.SaveSettings();
+        GameLauncher.WriteSettings();
         SceneManager.LoadScene(1);
     }
     
