@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 521153510}
-  m_IndirectSpecularColor: {r: 0.043647014, g: 0.04481054, b: 0.05953993, a: 1}
+  m_IndirectSpecularColor: {r: 0.0431246, g: 0.04425379, b: 0.05878946, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1469,11 +1469,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6911077100400773382, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
   m_PrefabInstance: {fileID: 1608803522}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &157001294 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2110725554297923202, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
-  m_PrefabInstance: {fileID: 1737443075}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &157025256 stripped
 Transform:
@@ -6135,7 +6130,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 157001294}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 37
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -15288,15 +15283,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2110725554297923197, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2110725554297923197, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2110725554297923197, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -38
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2110725554297923197, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
       propertyPath: m_LocalRotation.w
