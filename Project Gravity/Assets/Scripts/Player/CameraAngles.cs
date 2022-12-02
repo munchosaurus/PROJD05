@@ -6,11 +6,12 @@ using UnityEngine.InputSystem;
 
 public class CameraAngles : MonoBehaviour
 {
+    [SerializeField] private Transform virtualCameraTransform;
     [SerializeField] private Vector2 turn;
     [SerializeField] private float sensitivity;
     [SerializeField] private float returnSpeed;
 
-    private bool _rotationToggled;
+    public bool _rotationToggled;
     public float minXRotation;
     public float maxXRotation;
     public float minYRotation;
@@ -21,6 +22,7 @@ public class CameraAngles : MonoBehaviour
 
     private void Start()
     {
+        virtualCameraTransform = GameObject.FindWithTag("VirtualCamera").transform;
         _playerInput = FindObjectOfType<PlayerInput>();
         _gamepadCursor = FindObjectOfType<GamepadCursor>();
     }
@@ -29,13 +31,12 @@ public class CameraAngles : MonoBehaviour
     {
         if (_rotationToggled)
         {
-            Debug.Log("hej");
             Rotate();
         }
         else if (GameController.CameraAutoRotationToggled)
         {
-            transform.rotation =
-                Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * returnSpeed);
+            virtualCameraTransform.rotation =
+                Quaternion.Slerp(virtualCameraTransform.rotation, Quaternion.identity, Time.deltaTime * returnSpeed);
             // Resets the rotation input
             turn = new Vector2();
         }
@@ -61,13 +62,25 @@ public class CameraAngles : MonoBehaviour
 
         var targetRotation = Quaternion.Euler(Vector3.up * -turn.y) * Quaternion.Euler(Vector3.right * turn.x);
 
-        transform.rotation = targetRotation;
+        virtualCameraTransform.rotation = targetRotation;
     }
 
     // Sets the rotation toggle to true if pressed
     public void OnRotateToggle(InputAction.CallbackContext context)
     {
+        // if (context.started || context.performed)
+        // {
+        //     
+        //     _rotationToggled = true;
+        // } else if (context.canceled)
+        // {
+        //     _rotationToggled = false;
+        // }
+        // Debug.Log(_rotationToggled);
+        
+
         _rotationToggled = context.ReadValue<float>() == 1;
+        
     }
 
     public void RotateToDefault(InputAction.CallbackContext context)
@@ -75,7 +88,7 @@ public class CameraAngles : MonoBehaviour
         if (context.started && !_rotationToggled && !GameController.CameraAutoRotationToggled)
         {
             turn = new Vector2();
-            transform.rotation = Quaternion.identity;
+            virtualCameraTransform.rotation = Quaternion.identity;
         }
     }
 }

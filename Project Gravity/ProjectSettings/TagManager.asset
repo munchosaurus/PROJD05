@@ -15,6 +15,7 @@ TagManager:
   - Mirror
   - EmberRotation
   - GamePadCursor
+  - VirtualCamera
   layers:
   - Default
   - TransparentFX
