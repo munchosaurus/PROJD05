@@ -20816,7 +20816,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6857536948309454310, guid: 3b45fdf18839c1b43aa1375189fd63be, type: 3}
       propertyPath: m_Name
-      value: Level Directional Light
+      value: Lighting & Volume
       objectReference: {fileID: 0}
     - target: {fileID: 6857536948309454328, guid: 3b45fdf18839c1b43aa1375189fd63be, type: 3}
       propertyPath: m_RootOrder
@@ -20866,7 +20866,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 3b45fdf18839c1b43aa1375189fd63be, type: 3}
 --- !u!108 &888288100 stripped
 Light:
-  m_CorrespondingSourceObject: {fileID: 6857536948309454329, guid: 3b45fdf18839c1b43aa1375189fd63be, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7896921290399627768, guid: 3b45fdf18839c1b43aa1375189fd63be, type: 3}
   m_PrefabInstance: {fileID: 888288099}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &890222668

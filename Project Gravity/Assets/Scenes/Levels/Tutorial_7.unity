@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 184768602}
-  m_IndirectSpecularColor: {r: 0.0431246, g: 0.04425379, b: 0.05878946, a: 1}
+  m_IndirectSpecularColor: {r: 0.043124765, g: 0.04425354, b: 0.05878944, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1978,7 +1978,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6857536948309454310, guid: 3b45fdf18839c1b43aa1375189fd63be, type: 3}
       propertyPath: m_Name
-      value: Level Directional Light
+      value: Lighting & Volume
       objectReference: {fileID: 0}
     - target: {fileID: 6857536948309454328, guid: 3b45fdf18839c1b43aa1375189fd63be, type: 3}
       propertyPath: m_RootOrder
@@ -2028,7 +2028,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 3b45fdf18839c1b43aa1375189fd63be, type: 3}
 --- !u!108 &184768602 stripped
 Light:
-  m_CorrespondingSourceObject: {fileID: 6857536948309454329, guid: 3b45fdf18839c1b43aa1375189fd63be, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7896921290399627768, guid: 3b45fdf18839c1b43aa1375189fd63be, type: 3}
   m_PrefabInstance: {fileID: 184768601}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &189240608
