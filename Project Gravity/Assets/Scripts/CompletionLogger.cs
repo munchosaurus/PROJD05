@@ -35,17 +35,24 @@ public static class CompletionLogger
     public static void WriteCompletionLog()
     {
         _completionLogLine = new CompletionLogLine(count, SceneManager.GetActiveScene().buildIndex, finishTime, gravityChanges, win, lose);
-        
-        if (!File.Exists(logFile))
+        try
         {
-            _fileStream = new FileStream(logFile, FileMode.Create);
-            _fileStream.Dispose();
-            File.AppendAllText(logFile, "sessionID;levelID;elapsedTime;GravityChanges;Win;Lose" + Environment.NewLine);
-            File.AppendAllText(logFile, _completionLogLine.ToString() + Environment.NewLine);
+            if (!File.Exists(logFile))
+            {
+                _fileStream = new FileStream(logFile, FileMode.Create);
+                _fileStream.Dispose();
+                File.AppendAllText(logFile, "sessionID;levelID;elapsedTime;GravityChanges;Win;Lose" + Environment.NewLine);
+                File.AppendAllText(logFile, _completionLogLine.ToString() + Environment.NewLine);
+            }
+            else
+            {
+                File.AppendAllText(logFile, _completionLogLine.ToString() + Environment.NewLine);
+            }
         }
-        else
+        catch (Exception e)
         {
-            File.AppendAllText(logFile, _completionLogLine.ToString() + Environment.NewLine);
+            Console.WriteLine(e);
+            throw;
         }
     }
 }
