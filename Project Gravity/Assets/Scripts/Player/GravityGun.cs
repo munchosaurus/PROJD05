@@ -314,16 +314,19 @@ public class GravityGun : MonoBehaviour
 
     private Vector3 GetMousePositionOnPlane()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 1));
-        xy.Raycast(ray, out float distance);
-        return ray.GetPoint(distance);
-        // } else
-        // {
-        //     Ray ray = Camera.main.ScreenPointToRay(FindObjectOfType<GamepadCursor>().virtualMouse.position.ReadValue());
-        //     Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 1));
-        //     xy.Raycast(ray, out float distance);
-        //     return ray.GetPoint(distance);
-        // }
+        if (playerInput.currentControlScheme == "Mouse")
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 1));
+            xy.Raycast(ray, out float distance);
+            return ray.GetPoint(distance);
+        }
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(FindObjectOfType<GamepadCursor>().VirtualMouse.position.ReadValue());
+            Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 1));
+            xy.Raycast(ray, out float distance);
+            return ray.GetPoint(distance);
+        }
     }
 }

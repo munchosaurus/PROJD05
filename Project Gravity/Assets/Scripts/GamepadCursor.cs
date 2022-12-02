@@ -13,9 +13,9 @@ public class GamepadCursor : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private float cursorSpeed = 2000f;
     [SerializeField] private float padding = 50f;
-    // [SerializeField] private Sprite aimCursor;
-    // [SerializeField] private Sprite regularCursor;
-    // private Image cursorImage;
+    [SerializeField] private Sprite aimCursor;
+    [SerializeField] private Sprite regularCursor;
+    [SerializeField] private Image cursorImage;
     private Camera _mainCamera;
     public Mouse VirtualMouse;
     private bool _previousMouseState;
@@ -66,13 +66,13 @@ public class GamepadCursor : MonoBehaviour
         if (playerInput.currentControlScheme == mouseScheme && _previousControlScheme != mouseScheme)
         {
             cursorTransform.gameObject.SetActive(false);
-            //Cursor.visible = true;
-            //_currentMouse.WarpCursorPosition(VirtualMouse.position.ReadValue());
+            Cursor.visible = true;
+            _currentMouse.WarpCursorPosition(VirtualMouse.position.ReadValue());
             _previousControlScheme = mouseScheme;
         } else if (playerInput.currentControlScheme == gamePadScheme && _previousControlScheme != gamePadScheme)
         {
             cursorTransform.gameObject.SetActive(true);
-            //Cursor.visible = false;
+            Cursor.visible = false;
             InputState.Change(VirtualMouse.position, _currentMouse.position.ReadValue());
             AnchorCursor(_currentMouse.position.ReadValue());
             _previousControlScheme = gamePadScheme;
@@ -87,7 +87,7 @@ public class GamepadCursor : MonoBehaviour
         }
 
         var stickValue = Gamepad.current.rightStick.ReadValue();
-        stickValue *= cursorSpeed * Time.unscaledDeltaTime ;
+        stickValue *= cursorSpeed * Time.unscaledDeltaTime;
 
         var currentPosition = VirtualMouse.position.ReadValue();
         var newPosition = currentPosition + stickValue;
@@ -107,22 +107,20 @@ public class GamepadCursor : MonoBehaviour
             InputState.Change(VirtualMouse, mouseState);
             _previousMouseState = rightTriggerPressed;
         }
-        //ChangeCursorSprite();
+        ChangeCursorSprite();
         AnchorCursor(newPosition);
-        Debug.Log("Flyttar musen i Update motion");
-        _currentMouse.WarpCursorPosition(VirtualMouse.position.ReadValue());
     }
 
-    // private void ChangeCursorSprite()
-    // {
-    //     if (playerInput.currentActionMap.name == "MenuControls")
-    //     {
-    //         cursorImage.sprite = regularCursor;
-    //     } else if (playerInput.currentActionMap.name == "PlayerControls")
-    //     {
-    //         cursorImage.sprite = aimCursor;
-    //     }
-    // }
+    private void ChangeCursorSprite()
+    {
+        if (playerInput.currentActionMap.name == "MenuControls")
+        {
+            cursorImage.sprite = regularCursor;
+        } else if (playerInput.currentActionMap.name == "PlayerControls")
+        {
+            cursorImage.sprite = aimCursor;
+        }
+    }
 
     private void AnchorCursor(Vector2 position)
     {
@@ -141,19 +139,19 @@ public class GamepadCursor : MonoBehaviour
         }
     
         _previousControlScheme = playerInput.currentControlScheme;
-        // if (playerInput.currentControlScheme == gamePadScheme)
-        // {
-        //     if (Cursor.visible)
-        //     {
-        //         Cursor.visible = false;
-        //     }
-        // } else if (playerInput.currentControlScheme == mouseScheme)
-        // {
-        //     if (!Cursor.visible)
-        //     {
-        //         Cursor.visible = true;
-        //     }
-        //     
-        // }
+        if (playerInput.currentControlScheme == gamePadScheme)
+        {
+            if (Cursor.visible)
+            {
+                Cursor.visible = false;
+            }
+        } else if (playerInput.currentControlScheme == mouseScheme)
+        {
+            if (!Cursor.visible)
+            {
+                Cursor.visible = true;
+            }
+            
+        }
     }
 }

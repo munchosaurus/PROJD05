@@ -16,10 +16,20 @@ public class CameraAngles : MonoBehaviour
     public float minYRotation;
     public float maxYRotation;
 
+    private PlayerInput _playerInput;
+    private GamepadCursor _gamepadCursor;
+
+    private void Start()
+    {
+        _playerInput = FindObjectOfType<PlayerInput>();
+        _gamepadCursor = FindObjectOfType<GamepadCursor>();
+    }
+
     private void Update()
     {
         if (_rotationToggled)
         {
+            Debug.Log("hej");
             Rotate();
         }
         else if (GameController.CameraAutoRotationToggled)
@@ -35,9 +45,17 @@ public class CameraAngles : MonoBehaviour
     // Rotates and moves the camera object in scene
     private void Rotate()
     {
-        turn.x += Mouse.current.delta.y.ReadValue() * sensitivity;
-        turn.y += Mouse.current.delta.x.ReadValue() * sensitivity;
-
+        if (_playerInput.currentControlScheme == "Mouse")
+        {
+            turn.x += Mouse.current.delta.y.ReadValue() * sensitivity;
+            turn.y += Mouse.current.delta.x.ReadValue() * sensitivity;
+        }
+        else
+        {
+            turn.x += _gamepadCursor.VirtualMouse.delta.y.ReadValue() * sensitivity;
+            turn.y += _gamepadCursor.VirtualMouse.delta.x.ReadValue() * sensitivity;
+        }
+        
         turn.x = Mathf.Clamp(turn.x, minXRotation, maxXRotation);
         turn.y = Mathf.Clamp(turn.y, minYRotation, maxYRotation);
 
