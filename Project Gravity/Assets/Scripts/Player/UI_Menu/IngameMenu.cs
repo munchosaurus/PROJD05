@@ -248,7 +248,7 @@ public class IngameMenu : MonoBehaviour
         
         levelRecordText.text = $"Best time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
         completedLevelTitle.text = GetComponent<LevelSelector>().levelContainers[SceneManager.GetActiveScene().buildIndex-1].levelName;
-        GameLauncher.SaveSettings();
+        //GameLauncher.SaveSettings();
         Pause(1);
     }
 
