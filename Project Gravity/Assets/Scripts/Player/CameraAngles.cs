@@ -8,22 +8,31 @@ public class CameraAngles : MonoBehaviour
 {
     [SerializeField] private Vector2 turn;
     [SerializeField] private float sensitivity;
-    [SerializeField] private bool autoReturn;
     [SerializeField] private float returnSpeed;
 
-    private bool rotationToggled;
+    private bool _rotationToggled;
     public float minXRotation;
     public float maxXRotation;
     public float minYRotation;
     public float maxYRotation;
 
+    private PlayerInput _playerInput;
+    private GamepadCursor _gamepadCursor;
+
+    private void Start()
+    {
+        _playerInput = FindObjectOfType<PlayerInput>();
+        _gamepadCursor = FindObjectOfType<GamepadCursor>();
+    }
+
     private void Update()
     {
-        if (rotationToggled)
+        if (_rotationToggled)
         {
+            Debug.Log("hej");
             Rotate();
         }
-        else if (autoReturn)
+        else if (GameController.CameraAutoRotationToggled)
         {
             transform.rotation =
                 Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * returnSpeed);
@@ -36,9 +45,17 @@ public class CameraAngles : MonoBehaviour
     // Rotates and moves the camera object in scene
     private void Rotate()
     {
-        turn.x += Mouse.current.delta.y.ReadValue() * sensitivity;
-        turn.y += Mouse.current.delta.x.ReadValue() * sensitivity;
-
+        if (_playerInput.currentControlScheme == "Mouse")
+        {
+            turn.x += Mouse.current.delta.y.ReadValue() * sensitivity;
+            turn.y += Mouse.current.delta.x.ReadValue() * sensitivity;
+        }
+        else
+        {
+            turn.x += _gamepadCursor.VirtualMouse.delta.y.ReadValue() * sensitivity;
+            turn.y += _gamepadCursor.VirtualMouse.delta.x.ReadValue() * sensitivity;
+        }
+        
         turn.x = Mathf.Clamp(turn.x, minXRotation, maxXRotation);
         turn.y = Mathf.Clamp(turn.y, minYRotation, maxYRotation);
 
@@ -50,6 +67,15 @@ public class CameraAngles : MonoBehaviour
     // Sets the rotation toggle to true if pressed
     public void OnRotateToggle(InputAction.CallbackContext context)
     {
-        rotationToggled = context.ReadValue<float>() == 1;
+        _rotationToggled = context.ReadValue<float>() == 1;
+    }
+
+    public void RotateToDefault(InputAction.CallbackContext context)
+    {
+        if (context.started && !_rotationToggled && !GameController.CameraAutoRotationToggled)
+        {
+            turn = new Vector2();
+            transform.rotation = Quaternion.identity;
+        }
     }
 }

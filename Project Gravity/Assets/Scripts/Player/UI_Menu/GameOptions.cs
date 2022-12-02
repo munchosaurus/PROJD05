@@ -17,9 +17,13 @@ public class GameOptions : MonoBehaviour
 
     [Header("Tutorial toggle")] [SerializeField]
     private Toggle tutorialToggle;
+
+    [Header("Camera Rotation toggle")] [SerializeField] private Toggle cameraAutoRotationToggle;
     
     [Header("Screen mode")] [SerializeField]
     private TMP_Dropdown fullscreenDropdown;
+    
+    
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +40,10 @@ public class GameOptions : MonoBehaviour
         // Screen mode
         fullscreenDropdown.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
         fullscreenDropdown.value = GameController.FullscreenMode;
+        
+        // Camera rotation
+        cameraAutoRotationToggle.onValueChanged.AddListener(delegate { OnCameraRotationToggleChanged(); });
+        cameraAutoRotationToggle.isOn = GameController.CameraAutoRotationToggled;
     }
 
     public void LoadGameSettings()
@@ -44,12 +52,22 @@ public class GameOptions : MonoBehaviour
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
         tutorialToggle.isOn = GameController.TutorialIsOn;
         fullscreenDropdown.value = GameController.FullscreenMode;
+        cameraAutoRotationToggle.isOn = GameController.CameraAutoRotationToggled;
         OnFullScreenToggleChanged();
+    }
+
+    public void OnCameraRotationToggleChanged()
+    {
+        GameController.CameraAutoRotationToggled = cameraAutoRotationToggle.isOn;
+        
+        GameLauncher.WriteSettings();;
     }
     
     public void OnTutorialToggleValueChanged()
     {
         GameController.TutorialIsOn = tutorialToggle.isOn;
+        
+        GameLauncher.WriteSettings();;
     }
 
     public void OnFullScreenToggleChanged()
@@ -70,6 +88,8 @@ public class GameOptions : MonoBehaviour
                 Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
                 break;
         }
+        
+        GameLauncher.WriteSettings();;
     }
     
     private void OnSpeedValueChanged()
@@ -77,6 +97,8 @@ public class GameOptions : MonoBehaviour
         GameController.GlobalSpeedMultiplier = speedSlider.value / 100;
         GravityController.SetNewGravity(GravityController.GetCurrentFacing());
         speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
+        
+        GameLauncher.WriteSettings();;
     }
 
 }

@@ -19,24 +19,19 @@ public static class GameController
     public static float GlobalSpeedMultiplier;
     public static bool TutorialIsOn;
 
-    public static bool playerIsDead;
+    // Player death
+    public static bool PlayerIsDead;
+    
+    // Camera rotation toggle
+    public static bool CameraAutoRotationToggled;
+    
+    // Player
+    public static float PlayerAcceleration;
+    public static float PlayerJumpForce;
+    public static float PlayerAirMovementMultiplier;
+    public static float PlayerMaxVelocity;
 
-    public static void SetUp(SettingsData settingsData)
-    {
-        // Sound
-        GlobalSoundIsOn = settingsData.SoundIsOn;
-        MasterVolumeMultiplier = settingsData.MasterVolumeMultiplier;
-        MusicVolumeMultiplier = settingsData.MusicVolumeMultiplier;
-        EffectsVolumeMultiplier = settingsData.EffectsVolumeMultiplier;
-        DialogueVolumeMultiplier = settingsData.DialogueVolumeMultiplier;
-        
-        // Game
-        FullscreenMode = settingsData.ScreenMode;
-        GlobalSpeedMultiplier = settingsData.GlobalSpeedMultiplier;
-        TutorialIsOn = settingsData.TutorialIsOn;
-    }
-
-    public static void SetUp()
+    public static void SetUpSettings()
     {
         // Sound
         GlobalSoundIsOn = true;
@@ -49,6 +44,16 @@ public static class GameController
         FullscreenMode = 0;
         GlobalSpeedMultiplier = 1f;
         TutorialIsOn = true;
+        CameraAutoRotationToggled = false;
+    }
+
+    public static void SetUp()
+    {
+        // Player
+        PlayerAcceleration = 10f;
+        PlayerJumpForce = 8f;
+        PlayerAirMovementMultiplier = 0.7f;
+        PlayerMaxVelocity = 5f;
     }
 
     public static void PauseGame()

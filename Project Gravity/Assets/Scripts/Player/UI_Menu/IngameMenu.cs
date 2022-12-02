@@ -35,11 +35,14 @@ public class IngameMenu : MonoBehaviour
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
 
+    private bool playerWon;
+
     // TODO: REMOVE AT LAUNCHES, ONLY USED NOW FOR EASIER CONTROL SETTINGS
     private void Awake()
     {
         // Loads gamedata from file
         GameLauncher.LoadSettings();
+        CompletionLogger.gravityChanges = 0;
         GetComponent<SoundOptions>().LoadSoundSettings();
         GetComponent<GameOptions>().LoadGameSettings();
     }
@@ -48,7 +51,7 @@ public class IngameMenu : MonoBehaviour
     {
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
-        _playerInput = FindObjectOfType<UnityEngine.InputSystem.PlayerInput>();
+        _playerInput = FindObjectOfType<PlayerInput>();
 
          if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
         {
@@ -66,7 +69,7 @@ public class IngameMenu : MonoBehaviour
             return;
         }
 
-        Physics.gravity = new Vector3(0, -Constants.GRAVITY, 0);
+        Physics.gravity = new Vector3(0, -GravityController.GravityMultiplier * Constants.GRAVITY, 0);
         
         if (customAimCursor != null)
         {
@@ -214,16 +217,18 @@ public class IngameMenu : MonoBehaviour
 
     private IEnumerator RestartWhenDead(PlayerDeathEvent playerDeathEvent)
     {
+        CompletionLogger.lose = 1;
         GameController.SetInputLockState(true);
-        GameController.playerIsDead = true;
+        GameController.PlayerIsDead = true;
         yield return new WaitForSecondsRealtime(playerDeathEvent.DeathTime);
         GameController.SetInputLockState(false);
-        GameController.playerIsDead = false;
+        GameController.PlayerIsDead = false;
         Restart();
     }
 
     public void OnPlayerSucceedsLevel(WinningEvent winningEvent)
     {
+        playerWon = true;
         LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex);
         LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
         LevelCompletionTracker.SetLevelBest(SceneManager.GetActiveScene().buildIndex,
@@ -233,6 +238,11 @@ public class IngameMenu : MonoBehaviour
         float minutes = Mathf.FloorToInt(bestTime / 60);
         float seconds = Mathf.FloorToInt(bestTime % 60);
         float milliSeconds = Mathf.Floor(bestTime % 1 * 100);
+
+        float elapsedTime = FindObjectOfType<LevelTimer>().GetTimePassed();
+        float elapsedMinutes = Mathf.FloorToInt(elapsedTime / 60);
+        float elapsedSeconds = Mathf.FloorToInt(elapsedTime % 60);
+        float elapsedMilliseconds = Mathf.Floor(elapsedTime % 1 * 100);
         
         // If a new record has been set by the player
         if (LevelCompletionTracker.IsTimeNewRecord(SceneManager.GetActiveScene().buildIndex, FindObjectOfType<LevelTimer>().GetTimePassed()))
@@ -243,12 +253,15 @@ public class IngameMenu : MonoBehaviour
         else
         {
             newRecordText.color = Color.white;
-            newRecordText.text = $"Your time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
+            newRecordText.text = $"Your time: {elapsedMinutes:00}:{elapsedSeconds:00}:{elapsedMilliseconds:00}";
         }
         
         levelRecordText.text = $"Best time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
         completedLevelTitle.text = GetComponent<LevelSelector>().levelContainers[SceneManager.GetActiveScene().buildIndex-1].levelName;
         GameLauncher.SaveSettings();
+        CompletionLogger.win = 1;
+        CompletionLogger.finishTime = elapsedTime;
+        CompletionLogger.WriteCompletionLog();
         Pause(1);
     }
 
@@ -271,6 +284,11 @@ public class IngameMenu : MonoBehaviour
 
     public void Restart()
     {
+        if (!playerWon)
+        {
+            CompletionLogger.finishTime = FindObjectOfType<LevelTimer>().GetTimePassed();
+            CompletionLogger.WriteCompletionLog();
+        }
         LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

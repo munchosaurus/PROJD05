@@ -36,7 +36,7 @@ public class HazardLogic : MonoBehaviour
             {
                 transform.position = new Vector3(transform.position.x, hit.point.y + PlayerCollisionGridClamp,
                     transform.position.z);
-                if (!GameController.playerIsDead)
+                if (!GameController.PlayerIsDead)
                 {
                     Event playerDeathEvent = new PlayerDeathEvent()
                     {
@@ -58,7 +58,7 @@ public class HazardLogic : MonoBehaviour
             {
                 transform.position = new Vector3(transform.position.x, hit.point.y - PlayerCollisionGridClamp,
                     transform.position.z);
-                if (!GameController.playerIsDead)
+                if (!GameController.PlayerIsDead)
                 {
                     Event playerDeathEvent = new PlayerDeathEvent()
                     {
@@ -80,7 +80,7 @@ public class HazardLogic : MonoBehaviour
             {
                 transform.position = new Vector3(hit.point.x - PlayerCollisionGridClamp, transform.position.y,
                     transform.position.z);
-                if (!GameController.playerIsDead)
+                if (!GameController.PlayerIsDead)
                 {
                     Event playerDeathEvent = new PlayerDeathEvent()
                     {
@@ -102,7 +102,7 @@ public class HazardLogic : MonoBehaviour
             {
                 transform.position = new Vector3(hit.point.x + PlayerCollisionGridClamp, transform.position.y,
                     transform.position.z);
-                if (!GameController.playerIsDead)
+                if (!GameController.PlayerIsDead)
                 {
                     Event playerDeathEvent = new PlayerDeathEvent()
                     {
