@@ -93,6 +93,10 @@ public class LevelSelector : MonoBehaviour
             GameObject go = Instantiate(scrollviewObjectTemplate, scrollviewParent.transform, false);
             go.GetComponentInChildren<TMP_Text>().text = levelContainers[i].levelName;
             _levelContainerButtons[i] = go.GetComponent<Button>();
+            if (!LevelCompletionTracker.unlockedLevels.Contains(i+1))
+            {
+                _levelContainerButtons[i].interactable = false;
+            }
         }
     }
 
