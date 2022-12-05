@@ -46,9 +46,16 @@ public static class GameLauncher
         }
         else
         {
-            _fileStream = new FileStream(filePath, FileMode.Create);
-            converter.Serialize(_fileStream, data);
-            _fileStream.Close();
+            try
+            {
+                _fileStream = new FileStream(filePath, FileMode.Create);
+                converter.Serialize(_fileStream, data);
+                _fileStream.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 
@@ -64,8 +71,19 @@ public static class GameLauncher
         }
         else
         {
-            File.WriteAllText(settingsTextFile, String.Empty);
-            File.AppendAllText(settingsTextFile, _settingsData.ToString());
+            try
+            {
+                File.WriteAllText(settingsTextFile, String.Empty);
+                File.AppendAllText(settingsTextFile, _settingsData.ToString());
+            }
+            catch (Exception e)
+            {
+                _fileStream?.Close();
+                File.Delete(settingsTextFile);
+                _fileStream = new FileStream(settingsTextFile, FileMode.Create);
+                _fileStream?.Dispose();
+                File.AppendAllText(settingsTextFile, _settingsData.ToString());
+            }
         }
     }
 
