@@ -13585,12 +13585,12 @@ MonoBehaviour:
   mirrorMask:
     serializedVersion: 2
     m_Bits: 32768
-  magnetHitColor: {r: 0.99285436, g: 1, b: 0, a: 0}
+  magnetHitColor: {r: 1, g: 1, b: 0, a: 0}
   groundHitColor: {r: 1, g: 0.0047169924, b: 0.0047169924, a: 0}
   gravityHitColor: {r: 0, g: 1, b: 0.015245676, a: 0}
-  alternativeMagnetHitColor: {r: 0.99999994, g: 0.8325388, b: 0.14136124, a: 0}
-  alternativeGroundHitColor: {r: 0.99999994, g: 0.8325388, b: 0.14136124, a: 0}
-  alternativeGravityHitColor: {r: 0.99999994, g: 0.8325388, b: 0.14136124, a: 0}
+  alternativeMagnetHitColor: {r: 0.5019608, g: 0.5019608, b: 0, a: 0}
+  alternativeGroundHitColor: {r: 0.5019608, g: 0, b: 0, a: 0}
+  alternativeGravityHitColor: {r: 0, g: 0.5019608, b: 0.007843138, a: 0}
   _playerAimEffectController: {fileID: 6543249217566397070}
 --- !u!114 &816275455
 MonoBehaviour:
