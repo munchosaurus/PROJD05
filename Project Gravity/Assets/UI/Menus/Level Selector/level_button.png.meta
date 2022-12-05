@@ -121,7 +121,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 112
+        y: 168
         width: 380
         height: 56
       alignment: 0
@@ -142,7 +142,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 56
+        y: 112
         width: 380
         height: 56
       alignment: 0
@@ -163,7 +163,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 56
         width: 380
         height: 56
       alignment: 0
@@ -175,6 +175,27 @@ TextureImporter:
       bones: []
       spriteID: 7848d618c7e88d741a08068ddfddf01b
       internalID: 926481647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: level_button_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 380
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 3, z: 0, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e14b278a9ffdb044ab6b3f3c60e8082
+      internalID: 1179571097
       vertices: []
       indices: 
       edges: []
@@ -191,6 +212,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       level_button_0: -1900536301
+      level_button_3: 1179571097
       level_button_1: 362720329
       level_button_2: 926481647
   spritePackingTag: 

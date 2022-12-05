@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 380, y: 50}
+  m_SizeDelta: {x: 370, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2907829101477513104
 CanvasRenderer:
@@ -111,7 +111,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 362720329, guid: 24351bdde32fb594485ab06d6f6b9ecb, type: 3}
     m_PressedSprite: {fileID: 926481647, guid: 24351bdde32fb594485ab06d6f6b9ecb, type: 3}
     m_SelectedSprite: {fileID: 926481647, guid: 24351bdde32fb594485ab06d6f6b9ecb, type: 3}
-    m_DisabledSprite: {fileID: 926481647, guid: 24351bdde32fb594485ab06d6f6b9ecb, type: 3}
+    m_DisabledSprite: {fileID: 1179571097, guid: 24351bdde32fb594485ab06d6f6b9ecb, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
