@@ -14255,9 +14255,9 @@ MonoBehaviour:
   magnetHitColor: {r: 0.99285436, g: 1, b: 0, a: 0}
   groundHitColor: {r: 1, g: 0.0047169924, b: 0.0047169924, a: 0}
   gravityHitColor: {r: 0, g: 1, b: 0.015245676, a: 0}
-  alternativeMagnetHitColor: {r: 0.2735849, g: 0.23711269, b: 0, a: 0}
-  alternativeGroundHitColor: {r: 0.3962264, g: 0, b: 0, a: 0}
-  alternativeGravityHitColor: {r: 0.006449123, g: 0.26415092, b: 0, a: 0}
+  alternativeMagnetHitColor: {r: 0.99999994, g: 0.8325388, b: 0.14136124, a: 0}
+  alternativeGroundHitColor: {r: 0.99999994, g: 0.8325388, b: 0.14136124, a: 0}
+  alternativeGravityHitColor: {r: 0.99999994, g: 0.8325388, b: 0.14136124, a: 0}
   _playerAimEffectController: {fileID: 6543249217566397070}
 --- !u!114 &816275455
 MonoBehaviour:

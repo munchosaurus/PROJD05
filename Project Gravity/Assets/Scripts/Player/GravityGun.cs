@@ -176,6 +176,7 @@ public class GravityGun : MonoBehaviour
     {
         Event gravityGunEvent = new GravityGunEvent()
         {
+            Point = hit.point,
             TargetGameObject = hit.transform.gameObject,
             SourceGameObject = gameObject,
             HitNormal = hit.normal
