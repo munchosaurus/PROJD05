@@ -14,6 +14,7 @@ public class LevelSelector : MonoBehaviour
     [SerializeField] private TMP_Text levelSelectorRecordText;
     [SerializeField] private Image levelSelectorImage;
     [SerializeField] private Button levelSelectorPlay;
+    [SerializeField] private byte disabledLevelTextAlpha;
     private Button[] _levelContainerButtons;
     private IngameMenu _ingameMenu;
     private int _selectedLevel;
@@ -93,6 +94,13 @@ public class LevelSelector : MonoBehaviour
             GameObject go = Instantiate(scrollviewObjectTemplate, scrollviewParent.transform, false);
             go.GetComponentInChildren<TMP_Text>().text = levelContainers[i].levelName;
             _levelContainerButtons[i] = go.GetComponent<Button>();
+            if (!LevelCompletionTracker.unlockedLevels.Contains(i+1))
+            {
+                _levelContainerButtons[i].interactable = false;
+                Color32 color = _levelContainerButtons[i].gameObject.transform.GetComponentInChildren<TMP_Text>()
+                    .faceColor;
+                _levelContainerButtons[i].gameObject.transform.GetComponentInChildren<TMP_Text>().faceColor = new Color32(color.r, color.b, color.g, disabledLevelTextAlpha);
+            }
         }
     }
 
