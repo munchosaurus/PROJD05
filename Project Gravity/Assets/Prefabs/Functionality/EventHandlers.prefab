@@ -45,6 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserShotPrefab: {fileID: 3307971002495625796, guid: 6f1d2f2dd7f3f10499d1eda6ae87fa24, type: 3}
+  colors:
+  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 0.0048110485, g: 1, b: 0, a: 0}
+  - {r: 0.83672804, g: 0.9811321, b: 0, a: 0}
+  impactSize: 2
 --- !u!1 &663620502
 GameObject:
   m_ObjectHideFlags: 0
