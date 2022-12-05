@@ -139,7 +139,7 @@ public class SoundManager : MonoBehaviour
 
     private void PlayGunHitSound(GravityGunEvent gravityGunEvent)
     {
-        var speaker = Instantiate(speakerPrefab, gravityGunEvent.TargetGameObject.transform.position,
+        var speaker = Instantiate(speakerPrefab, gravityGunEvent.Point,
             Quaternion.identity);
         float clipLength;
         if (gravityGunEvent.TargetGameObject.layer == gravityLayer)

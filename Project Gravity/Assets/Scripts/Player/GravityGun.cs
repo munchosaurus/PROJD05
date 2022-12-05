@@ -14,8 +14,15 @@ public class GravityGun : MonoBehaviour
     [SerializeField] private LayerMask magnetMask;
     [SerializeField] private LayerMask lavaMask;
     [SerializeField] private LayerMask mirrorMask;
+    [SerializeField] public Color magnetHitColor;
+    [SerializeField] public Color groundHitColor;
+    [SerializeField] public Color gravityHitColor;
+    [SerializeField] public Color alternativeMagnetHitColor;
+    [SerializeField] public Color alternativeGroundHitColor;
+    [SerializeField] public Color alternativeGravityHitColor;
+    [SerializeField] private PlayerAimEffectController _playerAimEffectController;
     private PlayerInput playerInput;
-    private LineRenderer _lineRenderer;
+    //private LineRenderer _lineRenderer;
     private GameObject aimDirector;
     private Vector3 _currentDirection;
     private GameObject crosshair;
@@ -35,7 +42,7 @@ public class GravityGun : MonoBehaviour
     private void Awake()
     {
         aimDirector = GameObject.FindGameObjectWithTag("AimingDirector");
-        _lineRenderer = GameObject.FindWithTag("LineRenderer").GetComponent<LineRenderer>();
+        //_lineRenderer = GameObject.FindWithTag("LineRenderer").GetComponent<LineRenderer>();
         gravityLayer = LayerMask.NameToLayer("GravityChange");
         playerLayer = LayerMask.NameToLayer("Player");
         groundLayer = LayerMask.NameToLayer("Ground");
@@ -54,20 +61,25 @@ public class GravityGun : MonoBehaviour
         }
 
         _currentDirection = GetMousePositionOnPlane() - transform.position;
-        _lineRenderer.SetPosition(0, transform.position);
+        //_lineRenderer.SetPosition(0, transform.position);
 
         if (buttonPressed)
         {
-            if (!_lineRenderer.gameObject.activeSelf)
+            // if (!_lineRenderer.gameObject.activeSelf)
+            // {
+            //     _lineRenderer.gameObject.SetActive(true);
+            // }
+            
+            if (!_playerAimEffectController.gameObject.activeSelf)
             {
-                _lineRenderer.gameObject.SetActive(true);
+                _playerAimEffectController.gameObject.SetActive(true);
             }
 
             SetCrosshair();
         }
         else
         {
-            _lineRenderer.gameObject.SetActive(false);
+            _playerAimEffectController.gameObject.SetActive(false);
         }
     }
 
@@ -78,18 +90,20 @@ public class GravityGun : MonoBehaviour
 
         var lineSpot = GetSingleRay(transform.position, hits);
 
-        SetAimingColor(_lineRenderer, hit);
+        SetAimingColor(hit);
 
-        _lineRenderer.SetPosition(1, lineSpot.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER);
+        //_lineRenderer.SetPosition(1, lineSpot.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER);
+        _playerAimEffectController.SetAim(transform.position,lineSpot.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER);
     }
 
-    private void SetAimingColor(LineRenderer lr, RaycastHit hit)
+    private void SetAimingColor(RaycastHit hit)
     {
         int i = 0;
         if (hit.collider.gameObject.layer == gravityLayer)
         {
             EnableAimDirector(hit);
             i = 1;
+            _playerAimEffectController.SetColors(gravityHitColor, alternativeGravityHitColor);
         }
         else
         {
@@ -97,10 +111,17 @@ public class GravityGun : MonoBehaviour
             if (hit.collider.gameObject.layer == magnetLayer)
             {
                 i = 2;
+                _playerAimEffectController.SetColors(magnetHitColor, alternativeMagnetHitColor);
+            }
+            else
+            {
+                _playerAimEffectController.SetColors(groundHitColor, alternativeGroundHitColor);
             }
         }
-
-        lr.material = lineMaterials[i];
+        
+        
+        
+        //lr.material = lineMaterials[i];
     }
 
     private void EnableAimDirector(RaycastHit hit)
@@ -155,6 +176,7 @@ public class GravityGun : MonoBehaviour
     {
         Event gravityGunEvent = new GravityGunEvent()
         {
+            Point = hit.point,
             TargetGameObject = hit.transform.gameObject,
             SourceGameObject = gameObject,
             HitNormal = hit.normal
@@ -182,10 +204,10 @@ public class GravityGun : MonoBehaviour
             return SetMirrorLine(closestHit, currentDirection);
         }
 
-        if (_lineRenderer.positionCount > 2)
-        {
-            _lineRenderer.positionCount--;
-        }
+        // if (_lineRenderer.positionCount > 2)
+        // {
+        //     _lineRenderer.positionCount--;
+        // }
 
         if (closestHit.collider.gameObject.layer != magnetLayer) return closestHit;
         if (closestHit.transform.parent == null) return closestHit;
@@ -231,12 +253,12 @@ public class GravityGun : MonoBehaviour
         var rayCastHits = InitRaycasts(mirrorHit.collider.transform.position, mirrorDirection);
         RaycastHit toUse = GetFinalGravityGunHit(mirrorHit.point, mirrorDirection, rayCastHits);
 
-        if (_lineRenderer.positionCount < 3)
-        {
-            _lineRenderer.positionCount++;
-        }
-
-        _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, toUse.point);
+        // if (_lineRenderer.positionCount < 3)
+        // {
+        //     _lineRenderer.positionCount++;
+        // }
+        //
+        // _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, toUse.point);
 
         return toUse;
     }
@@ -285,7 +307,7 @@ public class GravityGun : MonoBehaviour
         var hits = InitRaycasts(transform.position, _currentDirection);
 
         TriggerGravityGunEvent(GetFinalGravityGunHit(transform.position, _currentDirection, hits));
-        _lineRenderer.positionCount = 2;
+        //_lineRenderer.positionCount = 2;
         DisableAimDirector();
     }
 
@@ -307,7 +329,8 @@ public class GravityGun : MonoBehaviour
 
         if (val.canceled)
         {
-            _lineRenderer.gameObject.SetActive(false);
+            _playerAimEffectController.gameObject.SetActive(false);
+            //_lineRenderer.gameObject.SetActive(false);
             ShootGravityGun();
         }
     }

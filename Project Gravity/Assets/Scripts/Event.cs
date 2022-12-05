@@ -11,6 +11,7 @@ public abstract class Event
 public class GravityGunEvent : Event
 {
     public Vector3 HitNormal;
+    public Vector3 Point;
 }
 
 public class TrampolineEvent : Event
