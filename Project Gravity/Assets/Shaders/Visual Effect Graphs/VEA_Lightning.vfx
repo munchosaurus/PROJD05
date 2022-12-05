@@ -300,20 +300,6 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: ImpactDelay
-    path: ImpactDelay
-    tooltip: 
-    sheetType: m_Float
-    realType: Single
-    defaultValue:
-      m_Type:
-        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.15
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
   - name: ImpactSize
     path: ImpactSize
     tooltip: 
@@ -3724,7 +3710,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614719}
       inputSlot: {fileID: 8926484042661614817}
-    position: {x: 3609, y: 1062}
+    position: {x: 3533, y: 1073}
     expandedSlots: []
     expanded: 0
   - m_Id: 3
@@ -7062,7 +7048,7 @@ MonoBehaviour:
   m_OutputSlots:
   - {fileID: 8926484042661614833}
   m_ExposedName: ImpactDelay
-  m_Exposed: 1
+  m_Exposed: 0
   m_Order: 3
   m_Category: 
   m_Min:
