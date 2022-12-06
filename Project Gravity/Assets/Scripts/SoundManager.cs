@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = System.Random;
 
 public class SoundManager : MonoBehaviour
 {
@@ -17,11 +18,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip magnetDeactivationClip;
 
     [Header("Collision sounds")] [SerializeField]
-    private AudioClip playerCollidesWithGroundClip;
+    private AudioClip[] playerCollidesWithGroundClip;
 
-    [SerializeField] private AudioClip playerCollidesWithObjectClip;
-    [SerializeField] private AudioClip playerCollidesWithMagnetClip;
-    [SerializeField] private AudioClip playerCollidesWithGravityPlateClip;
+    [SerializeField] private AudioClip[] playerCollidesWithObjectClip;
+    [SerializeField] private AudioClip[] playerCollidesWithMagnetClip;
+    [SerializeField] private AudioClip[] playerCollidesWithGravityPlateClip;
     [SerializeField] private AudioClip playerCollidesWithLavaClip;
     [SerializeField] private AudioClip playerCollidesWithTrampolineSound;
     [SerializeField] private AudioClip objectCollidesWithGroundClip;
@@ -42,6 +43,8 @@ public class SoundManager : MonoBehaviour
     private static Guid _playerDeathEventGuid;
     private static Guid _collisionEventGuid;
 
+    private Random rnd;
+
     private void Awake()
     {
         gravityLayer = LayerMask.NameToLayer("GravityChange");
@@ -55,6 +58,7 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        rnd = new Random();
         EventSystem.Current.RegisterListener<GravityGunEvent>(PlayGunHitSound, ref _gravityGunEventGuid);
         EventSystem.Current.RegisterListener<TrampolineEvent>(PlayTrampolineSound, ref _trampolineEventGuid);
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathEventGuid);
@@ -98,18 +102,18 @@ public class SoundManager : MonoBehaviour
 
         if (collisionEvent.Layers.Contains(moveableLayer))
         {
-            audioClip = playerCollidesWithObjectClip;
+            audioClip = playerCollidesWithObjectClip[rnd.Next(playerCollidesWithObjectClip.Length)];
         }
         else if (collisionEvent.Layers.Contains(magnetLayer))
         {
-            audioClip = playerCollidesWithMagnetClip;
+            audioClip = playerCollidesWithMagnetClip[rnd.Next(playerCollidesWithMagnetClip.Length)];
         } else if (collisionEvent.Layers.Contains(gravityLayer))
         {
-            audioClip = playerCollidesWithGravityPlateClip;
+            audioClip = playerCollidesWithGravityPlateClip[rnd.Next(playerCollidesWithGravityPlateClip.Length)];
         }
         else if (collisionEvent.Layers.Contains(groundLayer))
         {
-            audioClip = playerCollidesWithGroundClip;
+            audioClip = playerCollidesWithGroundClip[rnd.Next(playerCollidesWithGroundClip.Length)];
         }
 
         foreach (var source in sources)

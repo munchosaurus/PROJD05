@@ -15,7 +15,7 @@ public static class CompletionLogger
     public static int gravityChanges;
     public static int win;
     public static int lose;
-    
+
     public static void LoadCountfile()
     {
         if (File.Exists(playCountFile))
@@ -31,17 +31,28 @@ public static class CompletionLogger
             File.AppendAllText(playCountFile, count.ToString());
         }
     }
+
+    private static string BuildSettingsString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("Jumpforce: " + GameController.PlayerJumpForce + " ");
+        sb.Append("Acceleration: " + GameController.PlayerAcceleration + " ");
+        sb.Append("Airmovementmultiplier: " + GameController.PlayerAirMovementMultiplier + " ");
+        sb.Append("Maxvelocity: " + GameController.PlayerMaxVelocity + " ");
+        sb.Append("Gravitymultiplier: " + GravityController.GravityMultiplier);
+        return sb.ToString();
+    }
     
     public static void WriteCompletionLog()
     {
-        _completionLogLine = new CompletionLogLine(count, SceneManager.GetActiveScene().buildIndex, finishTime, gravityChanges, win, lose);
+        _completionLogLine = new CompletionLogLine(count, SceneManager.GetActiveScene().buildIndex, finishTime, gravityChanges, win, lose, BuildSettingsString());
         try
         {
             if (!File.Exists(logFile))
             {
                 _fileStream = new FileStream(logFile, FileMode.Create);
                 _fileStream.Dispose();
-                File.AppendAllText(logFile, "sessionID;levelID;elapsedTime;GravityChanges;Win;Lose" + Environment.NewLine);
+                File.AppendAllText(logFile, "sessionID;levelID;elapsedTime;GravityChanges;Win;Lose;Settings" + Environment.NewLine);
                 File.AppendAllText(logFile, _completionLogLine.ToString() + Environment.NewLine);
             }
             else
@@ -65,8 +76,9 @@ public class CompletionLogLine
     private readonly int _gravityChanges;
     private readonly int _win;
     private readonly int _lose;
+    private readonly string _playerTestSettings;
 
-    public CompletionLogLine(int count, int lID, float eTime, int gChanges, int w, int l)
+    public CompletionLogLine(int count, int lID, float eTime, int gChanges, int w, int l, string pTestSettings)
     {
         _sessionID = count;
         _levelID = lID;
@@ -74,6 +86,7 @@ public class CompletionLogLine
         _gravityChanges = gChanges;
         _win = w;
         _lose = l;
+        _playerTestSettings = pTestSettings;
     }
 
     public override string ToString()
@@ -84,7 +97,8 @@ public class CompletionLogLine
         stringBuilder.Append(_elapsedTime + ";");
         stringBuilder.Append(_gravityChanges + ";");
         stringBuilder.Append(_win + ";");
-        stringBuilder.Append(_lose);
+        stringBuilder.Append(_lose + ";");
+        stringBuilder.Append(_playerTestSettings);
 
         return stringBuilder.ToString();
     }
