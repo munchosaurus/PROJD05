@@ -30,7 +30,6 @@ public class IngameMenu : MonoBehaviour
 
     [SerializeField] private GameObject[] optionTabs;
     [SerializeField] private Button[] optionButtons;
-
     private PlayerInput _playerInput;
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
