@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
@@ -21,6 +22,9 @@ public class GravityGun : MonoBehaviour
     [SerializeField] public Color alternativeGroundHitColor;
     [SerializeField] public Color alternativeGravityHitColor;
     [SerializeField] private PlayerAimEffectController _playerAimEffectController;
+    [SerializeField] private AudioClip playerAims;
+    [SerializeField] private AudioClip playerShoots;
+    [SerializeField] private AudioSource playerShotAudioSource;
     private PlayerInput playerInput;
     //private LineRenderer _lineRenderer;
     private GameObject aimDirector;
@@ -65,6 +69,8 @@ public class GravityGun : MonoBehaviour
 
         if (buttonPressed)
         {
+            playerShotAudioSource.clip = playerAims;
+            playerShotAudioSource.Play();
             // if (!_lineRenderer.gameObject.activeSelf)
             // {
             //     _lineRenderer.gameObject.SetActive(true);
@@ -304,12 +310,18 @@ public class GravityGun : MonoBehaviour
 
     public void ShootGravityGun()
     {
-        var hits = InitRaycasts(transform.position, _currentDirection);
-
-        TriggerGravityGunEvent(GetFinalGravityGunHit(transform.position, _currentDirection, hits));
-        //_lineRenderer.positionCount = 2;
+        StartCoroutine(StartShotWithDelay());
         DisableAimDirector();
     }
+
+    private IEnumerator StartShotWithDelay()
+    {
+        playerShotAudioSource.loop = false;
+        playerShotAudioSource.PlayOneShot(playerShoots);
+        var hits = InitRaycasts(transform.position, _currentDirection);
+        yield return new WaitForSeconds(0.2f);
+        TriggerGravityGunEvent(GetFinalGravityGunHit(transform.position, _currentDirection, hits));
+    } 
 
     public void Aim(InputAction.CallbackContext val)
     {
@@ -320,10 +332,13 @@ public class GravityGun : MonoBehaviour
 
         if (val.performed)
         {
+            playerShotAudioSource.loop = true;
             buttonPressed = true;
         }
         else if (!val.performed)
         {
+            playerShotAudioSource.loop = false;
+            playerShotAudioSource.Stop();
             buttonPressed = false;
         }
 
