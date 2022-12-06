@@ -1,46 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/ObjectCollisions.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/ObjectCollisions/Object_wall.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/ObjectCollisions/Object_wall.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_lava.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_lava.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_magnet_1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_magnet_1.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_magnet_2.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_magnet_2.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_magnet_3.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_magnet_3.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_magnet_4.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_magnet_4.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_object_1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_object_1.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_object_2.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_object_2.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_object_3.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_object_3.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_object_4.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_object_4.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_wall_1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_wall_1.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_wall_2.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_wall_2.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_wall_3.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_wall_3.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_wall_4.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/PlayerCollisions/Player_wall_4.wav.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Functionality/EventHandlers.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Functionality/EventHandlers.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Tutorial_8.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Tutorial_8.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CompletionLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CompletionLogger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/IngameMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SoundManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SoundManager.cs" afterDir="false" />
-    </list>
+    <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
