@@ -38,7 +38,7 @@ public static class Constants
     public const float EMBER_ROTATION_SPEED = 2f;
     
     // Death timer
-    public const float PLAYER_DEATH_TIME = 2f;
+    public const float PLAYER_DEATH_TIME = 3f;
     
     // Global speeds
     public const float COLLISION_SPEED_THRESHOLD = 4f;
