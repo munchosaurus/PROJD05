@@ -30,7 +30,6 @@ public class IngameMenu : MonoBehaviour
 
     [SerializeField] private GameObject[] optionTabs;
     [SerializeField] private Button[] optionButtons;
-
     private PlayerInput _playerInput;
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
@@ -218,6 +217,7 @@ public class IngameMenu : MonoBehaviour
     private IEnumerator RestartWhenDead(PlayerDeathEvent playerDeathEvent)
     {
         CompletionLogger.lose = 1;
+        CompletionLogger.win = 0;
         GameController.SetInputLockState(true);
         GameController.PlayerIsDead = true;
         yield return new WaitForSecondsRealtime(playerDeathEvent.DeathTime);
@@ -259,6 +259,7 @@ public class IngameMenu : MonoBehaviour
         levelRecordText.text = $"Best time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
         completedLevelTitle.text = GetComponent<LevelSelector>().levelContainers[SceneManager.GetActiveScene().buildIndex-1].levelName;
         GameLauncher.SaveSettings();
+        CompletionLogger.lose = 0;
         CompletionLogger.win = 1;
         CompletionLogger.finishTime = elapsedTime;
         CompletionLogger.WriteCompletionLog();

@@ -16,6 +16,7 @@ TagManager:
   - EmberRotation
   - GamePadCursor
   - VirtualCamera
+  - MainMenuSpeaker
   layers:
   - Default
   - TransparentFX

@@ -45,6 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserShotPrefab: {fileID: 3307971002495625796, guid: 6f1d2f2dd7f3f10499d1eda6ae87fa24, type: 3}
+  colors:
+  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 0.0048110485, g: 1, b: 0, a: 0}
+  - {r: 0.83672804, g: 0.9811321, b: 0, a: 0}
+  impactSize: 2
 --- !u!1 &663620502
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,13 +100,29 @@ MonoBehaviour:
   mirrorHitClip: {fileID: 8300000, guid: 0e06fa593a4c1d44bacf1ed11b94bbb9, type: 3}
   magnetActivationClip: {fileID: 8300000, guid: ac85e1a5430acb64a8883aac72e9056d, type: 3}
   magnetDeactivationClip: {fileID: 8300000, guid: f0ea1b21f5612d14fba90e42533db8a5, type: 3}
-  playerCollidesWithGroundClip: {fileID: 8300000, guid: 19d38e9d8d34ab14684208d4bbcc95ed, type: 3}
-  playerCollidesWithObjectClip: {fileID: 8300000, guid: 5101edee98c40784b8f9e0372f933beb, type: 3}
-  playerCollidesWithMagnetClip: {fileID: 8300000, guid: b36ee8f16ef0bf94682be1f360b4c4a7, type: 3}
-  playerCollidesWithGravityPlateClip: {fileID: 8300000, guid: 4e8936f35bca16445972a65f8b51c124, type: 3}
-  playerCollidesWithLavaClip: {fileID: 8300000, guid: f1eaa0ee6939d044ebbc41426d501954, type: 3}
+  playerCollidesWithGroundClip:
+  - {fileID: 8300000, guid: f0bd3a59e2abe1549bc78a282e513018, type: 3}
+  - {fileID: 8300000, guid: 262764f28be7c194a971afd68dceb4ee, type: 3}
+  - {fileID: 8300000, guid: f853408446b424344813edb99020340b, type: 3}
+  - {fileID: 8300000, guid: c84cd35332d8be640afa9f256d53975a, type: 3}
+  playerCollidesWithObjectClip:
+  - {fileID: 8300000, guid: 9dbb69d20afe5324991c504fd8fc7081, type: 3}
+  - {fileID: 8300000, guid: dca6ed6fc64d2d3448e384067850a572, type: 3}
+  - {fileID: 8300000, guid: 9223857d4357e0c418d3244ff83c4bbc, type: 3}
+  - {fileID: 8300000, guid: d4d9bedb7076e4b4aba996b1fddef0a8, type: 3}
+  playerCollidesWithMagnetClip:
+  - {fileID: 8300000, guid: 3b10db0bf802f5c48a3a8e15f896bb9d, type: 3}
+  - {fileID: 8300000, guid: 99d057381f4f83447a439938cbfc2782, type: 3}
+  - {fileID: 8300000, guid: 1fa84edc443d0314e956a1ebb760fbb5, type: 3}
+  - {fileID: 8300000, guid: 878755d0611386546b1f4f66f8e60142, type: 3}
+  playerCollidesWithGravityPlateClip:
+  - {fileID: 8300000, guid: 3f4045ea27437e14da539e744cf8112e, type: 3}
+  - {fileID: 8300000, guid: d90f433968f3891448f31cc8cfe01e65, type: 3}
+  - {fileID: 8300000, guid: 3a577e3bcd177bf48971cf379b8c20f1, type: 3}
+  - {fileID: 8300000, guid: 65c8c69b9a28b8241bda9b31f5fc95e8, type: 3}
+  playerCollidesWithLavaClip: {fileID: 8300000, guid: fc2b90d84329bed43b2296277a9bfba5, type: 3}
   playerCollidesWithTrampolineSound: {fileID: 8300000, guid: 6003632ee6439c14580b118a39000fce, type: 3}
-  objectCollidesWithGroundClip: {fileID: 8300000, guid: b11b70009dd4c7f49b9eca938f17bb77, type: 3}
+  objectCollidesWithGroundClip: {fileID: 8300000, guid: 09250776c7518934484ff7eb8900725b, type: 3}
   speakerPrefab: {fileID: 2555149493256999958, guid: 121b74d34e7654f4d8b858455a3f5744, type: 3}
 --- !u!1 &953350190
 GameObject:
