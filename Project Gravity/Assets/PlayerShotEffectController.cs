@@ -45,7 +45,7 @@ public class PlayerShotEffectController : MonoBehaviour
         }
         else
         {
-            effect.SetVector4("FlashColour", colors[0]);
+            //effect.SetVector4("FlashColour", colors[0]);
             effect.SetFloat("ImpactSize", impactSize);
         }
         
