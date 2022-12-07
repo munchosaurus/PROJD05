@@ -94,12 +94,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4ed5ab74027394d8059f40fc0e8771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundHitClip: {fileID: 8300000, guid: e8cd119cf35e13a45bec783f7658f2a3, type: 3}
-  lavaHitClip: {fileID: 8300000, guid: 920b8f1cdfd8d774594a68527449727e, type: 3}
-  gravityHitClip: {fileID: 8300000, guid: e3db21ac2dc538f4ca0e369394061c92, type: 3}
+  groundHitClip:
+  - {fileID: 8300000, guid: 4e3a352ac6167c84fa0493ead04928c3, type: 3}
+  - {fileID: 8300000, guid: 237a36e6e8f2dc046a771dbbe93289ae, type: 3}
+  - {fileID: 8300000, guid: 4fb861ee04f891d419b7b02fc3df2572, type: 3}
+  - {fileID: 8300000, guid: 07c34b22bf2b9be42bccd56091ef46b3, type: 3}
+  - {fileID: 8300000, guid: 59e27bd0cafc89b4384418c3242447d0, type: 3}
+  lavaHitClip:
+  - {fileID: 8300000, guid: 920b8f1cdfd8d774594a68527449727e, type: 3}
+  - {fileID: 8300000, guid: 9a56b998aa875f2499ba970506c02fd6, type: 3}
+  - {fileID: 8300000, guid: 8219e1917d8ccdf43b6ee5554513fa65, type: 3}
+  - {fileID: 8300000, guid: 09cd97424aad66d4996ca5cf6d04d60a, type: 3}
+  gravityHitClip: {fileID: 8300000, guid: 23b09d99aa068b243aa581083df5bd9e, type: 3}
   mirrorHitClip: {fileID: 8300000, guid: 0e06fa593a4c1d44bacf1ed11b94bbb9, type: 3}
-  magnetActivationClip: {fileID: 8300000, guid: ac85e1a5430acb64a8883aac72e9056d, type: 3}
-  magnetDeactivationClip: {fileID: 8300000, guid: f0ea1b21f5612d14fba90e42533db8a5, type: 3}
+  magnetActivationClip: {fileID: 8300000, guid: 19c5d3afd72a6fb49ba8982022a211d1, type: 3}
+  magnetDeactivationClip: {fileID: 8300000, guid: afd9f0cf7cfd1b94e85bdaf2df11abaf, type: 3}
   playerCollidesWithGroundClip:
   - {fileID: 8300000, guid: f0bd3a59e2abe1549bc78a282e513018, type: 3}
   - {fileID: 8300000, guid: 262764f28be7c194a971afd68dceb4ee, type: 3}

@@ -49,9 +49,6 @@ public class PlayerShotEffectController : MonoBehaviour
             effect.SetFloat("ImpactSize", impactSize);
         }
         
-        
-        
-        
         laser.GetComponent<VisualEffect>().Play();
         
 

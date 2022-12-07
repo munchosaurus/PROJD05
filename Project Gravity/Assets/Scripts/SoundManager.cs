@@ -6,9 +6,9 @@ using Random = System.Random;
 public class SoundManager : MonoBehaviour
 {
     [Header("Hit sounds")] [SerializeField]
-    private AudioClip groundHitClip;
+    private AudioClip[] groundHitClip;
 
-    [SerializeField] private AudioClip lavaHitClip;
+    [SerializeField] private AudioClip[] lavaHitClip;
     [SerializeField] private AudioClip gravityHitClip;
     [SerializeField] private AudioClip mirrorHitClip;
 
@@ -79,7 +79,6 @@ public class SoundManager : MonoBehaviour
 
     private void PlayObjectCollisionSound(CollisionEvent collisionEvent)
     {
-        
         try
         {
             collisionEvent.SourceGameObject.GetComponent<AudioSource>().PlayOneShot(objectCollidesWithGroundClip);
@@ -107,7 +106,8 @@ public class SoundManager : MonoBehaviour
         else if (collisionEvent.Layers.Contains(magnetLayer))
         {
             audioClip = playerCollidesWithMagnetClip[rnd.Next(playerCollidesWithMagnetClip.Length)];
-        } else if (collisionEvent.Layers.Contains(gravityLayer))
+        }
+        else if (collisionEvent.Layers.Contains(gravityLayer))
         {
             audioClip = playerCollidesWithGravityPlateClip[rnd.Next(playerCollidesWithGravityPlateClip.Length)];
         }
@@ -158,10 +158,11 @@ public class SoundManager : MonoBehaviour
         }
         else if (gravityGunEvent.TargetGameObject.layer == lavaLayer)
         {
-            clipLength = lavaHitClip.length;
-            speaker.GetComponent<AudioSource>().PlayOneShot(lavaHitClip);
+            AudioClip audioClip = lavaHitClip[rnd.Next(lavaHitClip.Length)];
+            clipLength = audioClip.length;
+            speaker.GetComponent<AudioSource>().PlayOneShot(audioClip);
             StartCoroutine(DestroyAfterTime(speaker, clipLength));
-        } 
+        }
         else if (gravityGunEvent.TargetGameObject.layer == mirrorLayer)
         {
             clipLength = mirrorHitClip.length;
@@ -170,8 +171,9 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            clipLength = groundHitClip.length;
-            speaker.GetComponent<AudioSource>().PlayOneShot(groundHitClip);
+            AudioClip audioClip = groundHitClip[rnd.Next(groundHitClip.Length)];
+            clipLength = audioClip.length;
+            speaker.GetComponent<AudioSource>().PlayOneShot(audioClip);
             StartCoroutine(DestroyAfterTime(speaker, clipLength));
         }
     }

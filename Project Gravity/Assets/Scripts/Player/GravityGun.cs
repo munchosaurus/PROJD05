@@ -25,6 +25,7 @@ public class GravityGun : MonoBehaviour
     [SerializeField] private AudioClip playerAims;
     [SerializeField] private AudioClip playerShoots;
     [SerializeField] private AudioSource playerShotAudioSource;
+    [SerializeField] private float gunDelay;
     private PlayerInput playerInput;
     //private LineRenderer _lineRenderer;
     private GameObject aimDirector;
@@ -319,7 +320,7 @@ public class GravityGun : MonoBehaviour
         playerShotAudioSource.loop = false;
         playerShotAudioSource.PlayOneShot(playerShoots);
         var hits = InitRaycasts(transform.position, _currentDirection);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(gunDelay);
         TriggerGravityGunEvent(GetFinalGravityGunHit(transform.position, _currentDirection, hits));
     } 
 
