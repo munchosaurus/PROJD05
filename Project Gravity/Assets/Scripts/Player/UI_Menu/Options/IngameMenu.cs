@@ -26,11 +26,6 @@ public class IngameMenu : MonoBehaviour
     private PlayerInput _playerInput;
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
-
-    [SerializeField] private GameObject blackOutSquare;
-    [SerializeField] private int fadeSpeed;
-
-
     private bool playerWon;
 
     // TODO: REMOVE AT LAUNCHES, ONLY USED NOW FOR EASIER CONTROL SETTINGS
@@ -41,36 +36,8 @@ public class IngameMenu : MonoBehaviour
         CompletionLogger.gravityChanges = 0;
         GetComponent<SoundOptions>().LoadSoundSettings();
         GetComponent<GameOptions>().LoadGameSettings();
-    }
-
-    private IEnumerator FadeToBlack(bool on)
-    {
-        Color objectColor = blackOutSquare.GetComponent<Image>().color;
-        float fadeAmount;
-
-        if (on)
-        {
-            while (blackOutSquare.GetComponent<Image>().color.a < 1)
-            {
-                fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
-
-                objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-                blackOutSquare.GetComponent<Image>().color = objectColor;
-                yield return null;
-            }
-        }
-        else
-        {
-            while (blackOutSquare.GetComponent<Image>().color.a > 0)
-            {
-                fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
-
-                objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-                blackOutSquare.GetComponent<Image>().color = objectColor;
-            }
-        }
-        
-        Debug.Log("KLAR!");
+        StartCoroutine(FindObjectOfType<LevelSelector>()
+            .StartFadeToBlack(0, Constants.LEVEL_SWITCH_FADE_DURATION, false));
     }
 
     private void Start()
@@ -102,8 +69,6 @@ public class IngameMenu : MonoBehaviour
         {
             SetAimCursor();
         }
-        
-        StartCoroutine(FadeToBlack(false));
     }
 
     void SetAimCursor()
@@ -307,11 +272,18 @@ public class IngameMenu : MonoBehaviour
             SetAimCursor();
         }
 
-        Unpause();
-        LevelCompletionTracker.AddUnlockedLevel(scene);
-        SceneManager.LoadScene(scene);
+        StartCoroutine(FindObjectOfType<LevelSelector>()
+            .StartFadeToBlack(scene, Constants.LEVEL_SWITCH_FADE_DURATION, true));
     }
 
+    public void RestartWithRButton(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Restart();
+        }
+    }
+    
 
     public void Restart()
     {

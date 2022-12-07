@@ -2553,6 +2553,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7650552164420973288, guid: fb75c72239580694e9236af10b9cd9ee, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8871e46a0560f604e966da315f2e0548, type: 3}
     - target: {fileID: 7650552164420973289, guid: fb75c72239580694e9236af10b9cd9ee, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -2620,6 +2624,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc42319e5a5f1874a8dff4caeb097d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &391047603 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7650552164420973288, guid: fb75c72239580694e9236af10b9cd9ee, type: 3}
+  m_PrefabInstance: {fileID: 391047600}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &420361720
 GameObject:
   m_ObjectHideFlags: 0
@@ -5501,6 +5510,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817108140}
   m_CullTransparentMesh: 1
+--- !u!1 &830650377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 830650378}
+  - component: {fileID: 830650380}
+  - component: {fileID: 830650379}
+  m_Layer: 5
+  m_Name: Black
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &830650378
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830650377}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1146322828}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &830650379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830650377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &830650380
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830650377}
+  m_CullTransparentMesh: 1
 --- !u!1 &864661844
 GameObject:
   m_ObjectHideFlags: 0
@@ -7407,6 +7492,7 @@ RectTransform:
   - {fileID: 513787928}
   - {fileID: 1468463821}
   - {fileID: 639944050}
+  - {fileID: 830650378}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7454,6 +7540,9 @@ MonoBehaviour:
   tutorialToggle: {fileID: 705431472}
   cameraAutoRotationToggle: {fileID: 1736094763}
   fullscreenDropdown: {fileID: 1607752623}
+  dyslecticToggle: {fileID: 0}
+  dyslecticFont: {fileID: 0}
+  regularFont: {fileID: 0}
 --- !u!114 &1146322831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7504,6 +7593,9 @@ MonoBehaviour:
   - {fileID: 1315423577}
   - {fileID: 2133542503}
   - {fileID: 1134441059}
+  mainTheme: {fileID: 391047603}
+  mainThemeClip: {fileID: 8300000, guid: d8c56ac47d791bf46813cd03385892ce, type: 3}
+  bottomvolume: 0.05
 --- !u!114 &1146322833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7546,6 +7638,7 @@ MonoBehaviour:
   levelSelectorPlay: {fileID: 1709989402}
   disabledLevelTextAlpha: 0
   scrollRectTransform: {fileID: 804194476}
+  black: {fileID: 830650377}
 --- !u!1 &1150131392
 GameObject:
   m_ObjectHideFlags: 0

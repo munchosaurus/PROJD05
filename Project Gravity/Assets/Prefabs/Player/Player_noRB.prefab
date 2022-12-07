@@ -12766,6 +12766,82 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -400}
   m_SizeDelta: {x: 550, y: 50}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!1 &6430790505297024188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 179608110452225413}
+  - component: {fileID: 6437468271576423979}
+  - component: {fileID: 6800789280042394373}
+  m_Layer: 5
+  m_Name: Black
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &179608110452225413
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6430790505297024188}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9064548700267641867}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6437468271576423979
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6430790505297024188}
+  m_CullTransparentMesh: 1
+--- !u!114 &6800789280042394373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6430790505297024188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6631352976623965233
 GameObject:
   m_ObjectHideFlags: 0
@@ -14203,22 +14279,6 @@ MonoBehaviour:
     m_ActionName: PlayerControls/Jump[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5736146823932097086}
-        m_TargetAssemblyTypeName: InteractionLogic, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 899a16ae-eb25-4224-a4d5-660b3f6195c8
-    m_ActionName: PlayerControls/Interact[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 2124406989537400889}
         m_TargetAssemblyTypeName: IngameMenu, Assembly-CSharp
         m_MethodName: ChangePauseState
@@ -14249,46 +14309,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2057b4db-dd19-4256-b3bd-3cfb60887628
     m_ActionName: PlayerControls/GravityGun[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: aff80d19-98cc-4617-a088-521d3cf5d8be
-    m_ActionName: PlayerControls/ChangePlayerInputStats[/Keyboard/g]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c3991b6a-6264-42ea-8cff-743b1dfc2e84
-    m_ActionName: PlayerControls/Zoom[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2124406989537400889}
-        m_TargetAssemblyTypeName: IngameMenu, Assembly-CSharp
-        m_MethodName: LoadNextScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a87c103b-ebe0-4ee1-a56f-3eb76e7debf9
-    m_ActionName: PlayerControls/NextLevelDebug[/Keyboard/u]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2124406989537400889}
-        m_TargetAssemblyTypeName: IngameMenu, Assembly-CSharp
-        m_MethodName: LoadPreviousScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: fa2a2111-7959-4034-81c0-048f061f436e
-    m_ActionName: PlayerControls/PreviousLevelDebug[/Keyboard/y]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: b9565816-fcd5-4f3b-a366-4bbf5f55998e
@@ -14399,10 +14419,10 @@ MonoBehaviour:
     m_ActionName: PlayerControls/RotateCameraToDefault[/Keyboard/f]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1447688653, guid: 00e26dd783e2a584ba750d015032aff7, type: 3}
+      - m_Target: {fileID: 2124406989537400889}
         m_TargetAssemblyTypeName: IngameMenu, Assembly-CSharp
-        m_MethodName: Restart
-        m_Mode: 1
+        m_MethodName: RestartWithRButton
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -17047,6 +17067,7 @@ RectTransform:
   - {fileID: 7732642566604352357}
   - {fileID: 7898771897906856538}
   - {fileID: 1047718893}
+  - {fileID: 179608110452225413}
   m_Father: {fileID: 1049751914841088714}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17210,6 +17231,7 @@ MonoBehaviour:
   levelSelectorPlay: {fileID: 520304486198744848}
   disabledLevelTextAlpha: 50
   scrollRectTransform: {fileID: 2943252607261186038}
+  black: {fileID: 6430790505297024188}
 --- !u!114 &9030995664223489952
 MonoBehaviour:
   m_ObjectHideFlags: 0

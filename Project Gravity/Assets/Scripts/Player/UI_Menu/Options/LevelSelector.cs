@@ -21,6 +21,8 @@ public class LevelSelector : MonoBehaviour
     private GameObject lastSelected;
     private RectTransform selectedButton;
     [SerializeField] private RectTransform scrollRectTransform;
+    [SerializeField] private GameObject black;
+
 
     void Start()
     {
@@ -56,8 +58,6 @@ public class LevelSelector : MonoBehaviour
         }
 
         int levelID = internalLevelIndex + 1;
-
-
         levelDescription.text = levelContainers[internalLevelIndex].levelDescription;
         levelSelectorImage.sprite = levelContainers[internalLevelIndex].levelSprite;
         string text = "Best time: ";
@@ -103,6 +103,46 @@ public class LevelSelector : MonoBehaviour
             }
         }
     }
+    
+    public IEnumerator StartFadeToBlack(int sceneToLoad, float duration, bool turnBlack)
+    {
+        var b = black.GetComponent<Image>();
+        var color = b.color;
+        float currentTime = 0;
+        while (currentTime < duration)
+        {
+            currentTime += Time.unscaledDeltaTime;
+            float val;
+            if (turnBlack)
+            {
+                val = Mathf.Lerp(0, 1, currentTime / duration);
+            }
+            else
+            {
+                val = Mathf.Lerp(1, 0, currentTime / duration);
+            }
+            
+            Color c = new Color(color.r, color.g, color.b, val);
+            b.color = c;
+            yield return null;
+        }
+        
+        
+        if (turnBlack)
+        {
+            GameLauncher.WriteSettings();
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+            {
+                FindObjectOfType<IngameMenu>().Unpause();
+                LevelCompletionTracker.AddUnlockedLevel(sceneToLoad);
+                SceneManager.LoadScene(sceneToLoad);
+            }
+            else
+            {
+                SceneManager.LoadScene(sceneToLoad);
+            }
+        }
+    }
 
     private void OnLevelSelectorPlayPressed()
     {
@@ -110,12 +150,12 @@ public class LevelSelector : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().buildIndex != 0)
             {
-                _ingameMenu.LoadScene(_selectedLevel);
+                StartCoroutine(StartFadeToBlack(_selectedLevel, Constants.LEVEL_SWITCH_FADE_DURATION, true));
             }
             else
             {
-                GameLauncher.WriteSettings();;
-                SceneManager.LoadScene(_selectedLevel);
+                StartCoroutine(FindObjectOfType<MainMenuOptions>().StartFade());
+                StartCoroutine(StartFadeToBlack(_selectedLevel, Constants.LEVEL_SWITCH_FADE_DURATION * 2, true));
             }
         }
     }

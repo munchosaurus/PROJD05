@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "899a16ae-eb25-4224-a4d5-660b3f6195c8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "PauseGame",
                     "type": "Button",
                     "id": "bad429da-d47e-42b6-b9ac-eb9b4614c480",
@@ -54,42 +45,6 @@
                     "name": "GravityGun",
                     "type": "Button",
                     "id": "2057b4db-dd19-4256-b3bd-3cfb60887628",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ChangePlayerInputStats",
-                    "type": "Button",
-                    "id": "aff80d19-98cc-4617-a088-521d3cf5d8be",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Zoom",
-                    "type": "Value",
-                    "id": "c3991b6a-6264-42ea-8cff-743b1dfc2e84",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "NextLevelDebug",
-                    "type": "Button",
-                    "id": "a87c103b-ebe0-4ee1-a56f-3eb76e7debf9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "PreviousLevelDebug",
-                    "type": "Button",
-                    "id": "fa2a2111-7959-4034-81c0-048f061f436e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -313,39 +268,6 @@
                 },
                 {
                     "name": "",
-                    "id": "bee92bc5-30e0-451f-916a-3269a7d77414",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "35e9ac0a-3e41-4ff3-ace2-645418a24070",
-                    "path": "<XInputController>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "GamePad",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e8870505-1cbb-4ab4-ae8d-a841a5670241",
-                    "path": "<DualShockGamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "GamePad",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "41de82cd-e734-420e-87a0-bd503a00fa9e",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -396,50 +318,6 @@
                     "processors": "",
                     "groups": "GamePad",
                     "action": "GravityGun",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0a619f13-e247-42f4-b13e-72a7227e982d",
-                    "path": "<Keyboard>/g",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse",
-                    "action": "ChangePlayerInputStats",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fddc373c-74df-4580-9c83-aa86eed57217",
-                    "path": "<Mouse>/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse",
-                    "action": "Zoom",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5902ecd4-947b-4eb9-9980-4ef593be1248",
-                    "path": "<Keyboard>/u",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse",
-                    "action": "NextLevelDebug",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "48d4057f-cdcb-42e7-ae43-0069982aedcf",
-                    "path": "<Keyboard>/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse",
-                    "action": "PreviousLevelDebug",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
