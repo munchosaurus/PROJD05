@@ -76,7 +76,6 @@ public class GameOptions : MonoBehaviour
     public void OnDyslecticToggleChanged()
     {
         GameController.DyslecticModeIsOn = dyslecticToggle.isOn;
-        Debug.Log(GameController.DyslecticModeIsOn);
         if (GameController.DyslecticModeIsOn)
         {
             SetFont(dyslecticFont);
@@ -85,6 +84,7 @@ public class GameOptions : MonoBehaviour
         {
             SetFont(regularFont);
         }
+        GameLauncher.WriteSettings();
     }
     
     public void SetFont(TMP_FontAsset fontToUse)
@@ -108,14 +108,14 @@ public class GameOptions : MonoBehaviour
     {
         GameController.CameraAutoRotationToggled = cameraAutoRotationToggle.isOn;
         
-        GameLauncher.WriteSettings();;
+        GameLauncher.WriteSettings();
     }
     
     public void OnTutorialToggleValueChanged()
     {
         GameController.TutorialIsOn = tutorialToggle.isOn;
         
-        GameLauncher.WriteSettings();;
+        GameLauncher.WriteSettings();
     }
 
     public void OnFullScreenToggleChanged()
