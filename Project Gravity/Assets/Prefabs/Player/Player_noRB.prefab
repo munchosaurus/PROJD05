@@ -17260,7 +17260,7 @@ MonoBehaviour:
   cameraAutoRotationToggle: {fileID: 4914380977122111007}
   fullscreenDropdown: {fileID: 248297712033733446}
   dyslecticToggle: {fileID: 2815942803594831643}
-  dyslecticFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  dyslecticFont: {fileID: 11400000, guid: dbaa307db1053554b8d7e3f2a4e72b61, type: 2}
   regularFont: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
 --- !u!1 &9064548700869106143
 GameObject:

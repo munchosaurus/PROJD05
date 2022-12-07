@@ -12,6 +12,7 @@ public class GravityGunEvent : Event
 {
     public Vector3 HitNormal;
     public Vector3 Point;
+    public bool GravityWasChanged;
 }
 
 public class TrampolineEvent : Event

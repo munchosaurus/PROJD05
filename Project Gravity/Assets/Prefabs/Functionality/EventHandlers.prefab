@@ -106,6 +106,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8219e1917d8ccdf43b6ee5554513fa65, type: 3}
   - {fileID: 8300000, guid: 09cd97424aad66d4996ca5cf6d04d60a, type: 3}
   gravityHitClip: {fileID: 8300000, guid: 23b09d99aa068b243aa581083df5bd9e, type: 3}
+  gravityDullHitClip: {fileID: 8300000, guid: f85aca7601129a2458ac90aac357b81b, type: 3}
   mirrorHitClip: {fileID: 8300000, guid: 0e06fa593a4c1d44bacf1ed11b94bbb9, type: 3}
   magnetActivationClip: {fileID: 8300000, guid: 19c5d3afd72a6fb49ba8982022a211d1, type: 3}
   magnetDeactivationClip: {fileID: 8300000, guid: afd9f0cf7cfd1b94e85bdaf2df11abaf, type: 3}
