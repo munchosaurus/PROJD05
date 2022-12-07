@@ -18,6 +18,7 @@ public static class GameController
     public static int FullscreenMode;
     public static float GlobalSpeedMultiplier;
     public static bool TutorialIsOn;
+    public static bool DyslecticModeIsOn;
 
     // Player death
     public static bool PlayerIsDead;
@@ -45,6 +46,7 @@ public static class GameController
         GlobalSpeedMultiplier = 1f;
         TutorialIsOn = true;
         CameraAutoRotationToggled = false;
+        DyslecticModeIsOn = false;
     }
 
     public static void SetUp()

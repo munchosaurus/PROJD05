@@ -74,6 +74,7 @@ public static class GameLauncher
             try
             {
                 File.WriteAllText(settingsTextFile, String.Empty);
+                //Debug.Log(_settingsData.ToString());
                 File.AppendAllText(settingsTextFile, _settingsData.ToString());
             }
             catch (Exception e)
@@ -111,7 +112,7 @@ public static class GameLauncher
         if (File.Exists(settingsTextFile))
         {
             int counter = 0;
-            string[] values = new string[9];
+            string[] values = new string[10];
             foreach (var line in File.ReadLines(settingsTextFile))
             {
                 values[counter] = line.Split(' ', 2)[1].Trim();
@@ -181,7 +182,6 @@ public static class GameLauncher
             Console.WriteLine(e);
             throw;
         }
-
     }
 
     private static void UpdateSettings(string[] values)
@@ -198,6 +198,7 @@ public static class GameLauncher
         GameController.TutorialIsOn = bool.Parse(values[6]);
         GameController.GlobalSpeedMultiplier = float.Parse(values[7]);
         GameController.CameraAutoRotationToggled = bool.Parse(values[8]);
+        GameController.DyslecticModeIsOn = bool.Parse(values[9]);
     }
 
     private static void UpdateTestSettings(string[] values)
@@ -263,6 +264,7 @@ public class SettingsData
         TutorialIsOn = GameController.TutorialIsOn;
         GlobalSpeedMultiplier = GameController.GlobalSpeedMultiplier;
         CameraAutoRotationToggled = GameController.CameraAutoRotationToggled;
+        DyslecticModeIsOn = GameController.DyslecticModeIsOn;
     }
 
     // Volume
@@ -277,6 +279,7 @@ public class SettingsData
     public bool TutorialIsOn { get; set; }
     public float GlobalSpeedMultiplier { get; set; }
     public bool CameraAutoRotationToggled { get; set; }
+    public bool DyslecticModeIsOn { get; set; }
 
     public override string ToString()
     {
@@ -293,6 +296,7 @@ public class SettingsData
         sb.Append("TutorialIsOn: " + TutorialIsOn + "\n");
         sb.Append("GlobalSpeedMultiplier: " + GlobalSpeedMultiplier + "\n");
         sb.Append("CameraAutoRotationToggled: " + CameraAutoRotationToggled + "\n");
+        sb.Append("DyslecticModeIsOn: " + DyslecticModeIsOn + "\n");
         
         return sb.ToString();
     }

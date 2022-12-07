@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Mono.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +24,12 @@ public class GameOptions : MonoBehaviour
     
     [Header("Screen mode")] [SerializeField]
     private TMP_Dropdown fullscreenDropdown;
+
+    [Header("Dyslectic mode")]
+    [SerializeField] private Toggle dyslecticToggle;
+    [SerializeField] private TMP_FontAsset dyslecticFont;
+    [SerializeField] private TMP_FontAsset regularFont;
+    
     
     
 
@@ -44,6 +52,14 @@ public class GameOptions : MonoBehaviour
         // Camera rotation
         cameraAutoRotationToggle.onValueChanged.AddListener(delegate { OnCameraRotationToggleChanged(); });
         cameraAutoRotationToggle.isOn = GameController.CameraAutoRotationToggled;
+        
+        // Dyslecticfont
+        dyslecticToggle.onValueChanged.AddListener(delegate { OnDyslecticToggleChanged(); });
+        dyslecticToggle.isOn = GameController.DyslecticModeIsOn;
+        if (GameController.DyslecticModeIsOn)
+        {
+            SetFont(dyslecticFont);
+        }
     }
 
     public void LoadGameSettings()
@@ -53,8 +69,40 @@ public class GameOptions : MonoBehaviour
         tutorialToggle.isOn = GameController.TutorialIsOn;
         fullscreenDropdown.value = GameController.FullscreenMode;
         cameraAutoRotationToggle.isOn = GameController.CameraAutoRotationToggled;
+        dyslecticToggle.isOn = GameController.DyslecticModeIsOn;
         OnFullScreenToggleChanged();
     }
+
+    public void OnDyslecticToggleChanged()
+    {
+        GameController.DyslecticModeIsOn = dyslecticToggle.isOn;
+        Debug.Log(GameController.DyslecticModeIsOn);
+        if (GameController.DyslecticModeIsOn)
+        {
+            SetFont(dyslecticFont);
+        }
+        else
+        {
+            SetFont(regularFont);
+        }
+    }
+    
+    public void SetFont(TMP_FontAsset fontToUse)
+    {
+        Collection<TMP_Text> texts = new Collection<TMP_Text>();
+        foreach (TMP_Text go in Resources.FindObjectsOfTypeAll(typeof(TMP_Text)) as TMP_Text[])
+        {
+            if (go.hideFlags != HideFlags.None)
+                continue;
+            if (PrefabUtility.GetPrefabType(go) == PrefabType.Prefab || PrefabUtility.GetPrefabType(go) == PrefabType.ModelPrefab)
+                continue;
+            texts.Add(go);
+        }
+        foreach (var VARIABLE in texts)
+        {
+            VARIABLE.font = fontToUse;
+        }
+    } 
 
     public void OnCameraRotationToggleChanged()
     {

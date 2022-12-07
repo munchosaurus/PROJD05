@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections;
-using System.Globalization;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Audio;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class IngameMenu : MonoBehaviour
 {
@@ -29,10 +22,11 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private GameObject levelSelectorPauseReturn;
 
     [SerializeField] private GameObject[] optionTabs;
-    [SerializeField] private Button[] optionButtons;
+    //[SerializeField] private Button[] optionButtons;
     private PlayerInput _playerInput;
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
+
 
     private bool playerWon;
 
@@ -44,6 +38,7 @@ public class IngameMenu : MonoBehaviour
         CompletionLogger.gravityChanges = 0;
         GetComponent<SoundOptions>().LoadSoundSettings();
         GetComponent<GameOptions>().LoadGameSettings();
+
     }
 
     private void Start()

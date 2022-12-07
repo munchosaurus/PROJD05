@@ -28,8 +28,9 @@ public class RotateEmbers : MonoBehaviour
         {
             foreach (var ember in _embers)
             {
-                ember.transform.rotation = Quaternion.Slerp(ember.transform.rotation, _rotationQuaternion,
-                    Time.fixedDeltaTime * Constants.EMBER_ROTATION_SPEED);
+                // ember.transform.rotation = Quaternion.Slerp(ember.transform.rotation, _rotationQuaternion,
+                //     Time.fixedDeltaTime * Constants.EMBER_ROTATION_SPEED);
+                ember.transform.rotation = _rotationQuaternion;
             }
         }
     }
