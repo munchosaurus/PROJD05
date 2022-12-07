@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7650552164420973289}
   - component: {fileID: 7650552164420973288}
+  - component: {fileID: 176287596}
   m_Layer: 0
   m_Name: MainThemeSpeaker
   m_TagString: MainMenuSpeaker
@@ -42,7 +43,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6748734841711417079, guid: 03449f5ef8b7b5849a3d81db028eb968, type: 2}
-  m_audioClip: {fileID: 8300000, guid: d8c56ac47d791bf46813cd03385892ce, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8871e46a0560f604e966da315f2e0548, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.344
   m_Pitch: 1
@@ -128,3 +129,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &176287596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7650552164420973290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc42319e5a5f1874a8dff4caeb097d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

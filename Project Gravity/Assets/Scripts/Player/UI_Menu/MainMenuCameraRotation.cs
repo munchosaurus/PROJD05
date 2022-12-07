@@ -14,6 +14,7 @@ public class MainMenuCameraRotation : MonoBehaviour
     [Header("Settings")] [SerializeField] private float maxRotationSpeed;
     [SerializeField] private float startingRotationSpeed;
     [SerializeField] private int framesBeforeRotationSwitch;
+    [SerializeField] private float rotationChangeValue;
     
     private static Random rnd = new Random();
     private int _counter;
@@ -34,28 +35,28 @@ public class MainMenuCameraRotation : MonoBehaviour
         {
             if (rotationSpeedX > maxRotationSpeed)
             {
-                rotationSpeedX -= 0.1f;
+                rotationSpeedX -= rotationChangeValue;
             }
             else if (rotationSpeedX < -maxRotationSpeed)
             {
-                rotationSpeedX += 0.1f;
+                rotationSpeedX += rotationChangeValue;
             }
             else
             {
-                rotationSpeedX = NextFloat(rotationSpeedX - 0.1f, rotationSpeedX + 0.1f);
+                rotationSpeedX = NextFloat(rotationSpeedX - rotationChangeValue, rotationSpeedX + rotationChangeValue);
             }
             
             if (rotationSpeedY > maxRotationSpeed)
             {
-                rotationSpeedY -= 0.1f;
+                rotationSpeedY -= rotationChangeValue;
             }
             else if (rotationSpeedY < -maxRotationSpeed)
             {
-                rotationSpeedY += 0.1f;
+                rotationSpeedY += rotationChangeValue;
             }
             else
             {
-                rotationSpeedY = NextFloat(rotationSpeedY - 0.1f, rotationSpeedY + 0.1f);
+                rotationSpeedY = NextFloat(rotationSpeedY - rotationChangeValue, rotationSpeedY + rotationChangeValue);
             }
             _counter = 0;
         }
@@ -71,8 +72,9 @@ public class MainMenuCameraRotation : MonoBehaviour
 
     private void Rotate()
     {
-        turn.x += rotationSpeedX / 2;
-        turn.y += rotationSpeedY / 2;
+        Debug.Log("jajamän");
+        turn.x += rotationSpeedX;
+        turn.y += rotationSpeedY;
 
         var targetRotation = Quaternion.Euler(Vector3.up * -turn.y) * Quaternion.Euler(Vector3.right * turn.x);
 
