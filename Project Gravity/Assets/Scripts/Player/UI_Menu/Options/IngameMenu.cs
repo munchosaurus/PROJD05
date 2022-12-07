@@ -27,6 +27,9 @@ public class IngameMenu : MonoBehaviour
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
 
+    [SerializeField] private GameObject blackOutSquare;
+    [SerializeField] private int fadeSpeed;
+
 
     private bool playerWon;
 
@@ -38,13 +41,43 @@ public class IngameMenu : MonoBehaviour
         CompletionLogger.gravityChanges = 0;
         GetComponent<SoundOptions>().LoadSoundSettings();
         GetComponent<GameOptions>().LoadGameSettings();
+    }
 
+    private IEnumerator FadeToBlack(bool on)
+    {
+        Color objectColor = blackOutSquare.GetComponent<Image>().color;
+        float fadeAmount;
+
+        if (on)
+        {
+            while (blackOutSquare.GetComponent<Image>().color.a < 1)
+            {
+                fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
+
+                objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+                blackOutSquare.GetComponent<Image>().color = objectColor;
+                yield return null;
+            }
+        }
+        else
+        {
+            while (blackOutSquare.GetComponent<Image>().color.a > 0)
+            {
+                fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
+
+                objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+                blackOutSquare.GetComponent<Image>().color = objectColor;
+            }
+        }
+        
+        Debug.Log("KLAR!");
     }
 
     private void Start()
     {
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
+        
         _playerInput = FindObjectOfType<PlayerInput>();
 
          if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
@@ -69,6 +102,8 @@ public class IngameMenu : MonoBehaviour
         {
             SetAimCursor();
         }
+        
+        StartCoroutine(FadeToBlack(false));
     }
 
     void SetAimCursor()

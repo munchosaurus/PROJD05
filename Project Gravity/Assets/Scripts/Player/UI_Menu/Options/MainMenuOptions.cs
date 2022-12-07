@@ -6,9 +6,12 @@ public class MainMenuOptions : MonoBehaviour
     [SerializeField] private GameObject optionsObject;
     [SerializeField] private GameObject levelObject;
     [SerializeField] private GameObject[] optionTabs;
+    [SerializeField] private AudioSource mainTheme;
+    [SerializeField] private AudioClip mainThemeClip;
 
     private void Awake()
     {
+        mainTheme = GameObject.Find("MainThemeSpeaker").GetComponent<AudioSource>();
         CompletionLogger.LoadCountfile();
         // Loads gamedata from file
         GameLauncher.LoadSettings();
@@ -50,6 +53,7 @@ public class MainMenuOptions : MonoBehaviour
 
     public void StartGame()
     {
+        mainTheme.clip = mainThemeClip;
         GameLauncher.WriteSettings();
         SceneManager.LoadScene(1);
     }
