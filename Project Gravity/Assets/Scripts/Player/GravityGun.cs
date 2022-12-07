@@ -27,7 +27,9 @@ public class GravityGun : MonoBehaviour
     [SerializeField] private AudioClip playerShoots;
     [SerializeField] private AudioSource playerShotAudioSource;
     [SerializeField] private float gunDelay;
+
     private PlayerInput playerInput;
+
     //private LineRenderer _lineRenderer;
     private GameObject aimDirector;
     private Vector3 _currentDirection;
@@ -77,7 +79,7 @@ public class GravityGun : MonoBehaviour
             // {
             //     _lineRenderer.gameObject.SetActive(true);
             // }
-            
+
             if (!_playerAimEffectController.gameObject.activeSelf)
             {
                 _playerAimEffectController.gameObject.SetActive(true);
@@ -101,7 +103,8 @@ public class GravityGun : MonoBehaviour
         SetAimingColor(hit);
 
         //_lineRenderer.SetPosition(1, lineSpot.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER);
-        _playerAimEffectController.SetAim(transform.position,lineSpot.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER);
+        _playerAimEffectController.SetAim(transform.position,
+            lineSpot.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER);
     }
 
     private void SetAimingColor(RaycastHit hit)
@@ -126,9 +129,8 @@ public class GravityGun : MonoBehaviour
                 _playerAimEffectController.SetColors(groundHitColor, alternativeGroundHitColor);
             }
         }
-        
-        
-        
+
+
         //lr.material = lineMaterials[i];
     }
 
@@ -187,7 +189,9 @@ public class GravityGun : MonoBehaviour
             Point = hit.point,
             TargetGameObject = hit.transform.gameObject,
             SourceGameObject = gameObject,
-            HitNormal = hit.normal
+            HitNormal = hit.normal,
+            GravityWasChanged = hit.transform.gameObject.layer == gravityLayer &&
+                                -hit.normal != GravityController.GetCurrentFacing()
         };
         EventSystem.Current.FireEvent(gravityGunEvent);
     }
@@ -323,7 +327,7 @@ public class GravityGun : MonoBehaviour
         var hits = InitRaycasts(transform.position, _currentDirection);
         yield return new WaitForSeconds(gunDelay);
         TriggerGravityGunEvent(GetFinalGravityGunHit(transform.position, _currentDirection, hits));
-    } 
+    }
 
     public void Aim(InputAction.CallbackContext val)
     {
