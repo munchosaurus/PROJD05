@@ -217,7 +217,6 @@ public class IngameMenu : MonoBehaviour
         GameController.PlayerIsDead = true;
         yield return new WaitForSecondsRealtime(playerDeathEvent.DeathTime);
         GameController.SetInputLockState(false);
-        GameController.PlayerIsDead = false;
         Restart();
     }
 
@@ -301,8 +300,6 @@ public class IngameMenu : MonoBehaviour
         {
             return;
         }
-
-        
         LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex);
         LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
         LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

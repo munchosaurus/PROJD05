@@ -44,6 +44,6 @@ public static class Constants
     public const float COLLISION_SPEED_THRESHOLD = 4f;
     
     // Level loading time
-    public const float LEVEL_SWITCH_FADE_DURATION = 2f;
+    public const float LEVEL_SWITCH_FADE_DURATION = 1f;
 
 }

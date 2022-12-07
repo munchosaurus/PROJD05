@@ -127,7 +127,7 @@ public class LevelSelector : MonoBehaviour
             yield return null;
         }
         
-        
+        GameController.PlayerIsDead = false;
         if (turnBlack)
         {
             GameLauncher.WriteSettings();
