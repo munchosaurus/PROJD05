@@ -9,6 +9,7 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip swirlClip;
     [SerializeField] private AudioClip victoryClip;
+    private static readonly int Dead = Animator.StringToHash("dead");
     private bool playerHasWon;
     private Vector3 velocity;
     private static Guid _playerSucceedsGuid;
@@ -36,9 +37,10 @@ public class PlayerAnimationController : MonoBehaviour
         FindObjectOfType<IngameMenu>().Pause(1);
     }
 
-    private void OnPlayerDeathEvent(PlayerDeathEvent playerDeathEvent)
+    public void OnPlayerDeathEvent(PlayerDeathEvent playerDeathEvent)
     {
-        
+        playerDeathEvent.SourceGameObject.GetComponent<Animator>().SetBool("dead", true);
+        playerDeathEvent.SourceGameObject.transform.Find("VFX_Fire").gameObject.SetActive(true);
     }
 
     private void FixedUpdate()
