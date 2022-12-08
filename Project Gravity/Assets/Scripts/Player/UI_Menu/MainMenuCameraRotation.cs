@@ -72,7 +72,6 @@ public class MainMenuCameraRotation : MonoBehaviour
 
     private void Rotate()
     {
-        Debug.Log("jajamän");
         turn.x += rotationSpeedX;
         turn.y += rotationSpeedY;
 
