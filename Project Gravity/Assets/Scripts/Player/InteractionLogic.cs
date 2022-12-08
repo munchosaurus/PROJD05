@@ -100,6 +100,7 @@ public class InteractionLogic : MonoBehaviour
                     {
                         WinningEvent winningEvent = new WinningEvent()
                         {
+                            TargetGameObject = GetClosestInteractable().gameObject
                         };
                         EventSystem.Current.FireEvent(winningEvent);
                     }

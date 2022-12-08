@@ -24,10 +24,12 @@ public class PlayerController : MonoBehaviour
     private AudioSource _audioSource;
     private const float GridClampThreshold = 0.02f;
     private const float PlayerCollisionGridClamp = 0.5f;
+    private Guid _playerSucceedsGuid;
 
     // Start is called before the first frame update
     void Start()
     {
+        EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
         GameController.PauseGame();
         StartCoroutine(SwitchInputLock());
         _audioSource = GetComponent<AudioSource>();
@@ -53,6 +55,11 @@ public class PlayerController : MonoBehaviour
         {
             ClampToGrid();
         }
+    }
+    
+    private void OnPlayerSucceedsLevel(WinningEvent winningEvent)
+    {
+        _audioSource.mute = true;
     }
 
     /*

@@ -199,7 +199,6 @@ public class IngameMenu : MonoBehaviour
         }
 
         ToggleActionMap(true);
-        //Cursor.SetCursor(customCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2), CursorMode.Auto);
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         GameController.PauseGame();
     }
@@ -256,7 +255,6 @@ public class IngameMenu : MonoBehaviour
         CompletionLogger.win = 1;
         CompletionLogger.finishTime = elapsedTime;
         CompletionLogger.WriteCompletionLog();
-        Pause(1);
     }
 
     public void LoadScene(int scene)

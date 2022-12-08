@@ -894,13 +894,14 @@ GameObject:
   - component: {fileID: 7499340524292069296}
   - component: {fileID: 756784478}
   - component: {fileID: 4086450689654132236}
+  - component: {fileID: 3389007568940360421}
   m_Layer: 0
   m_Name: Player_noRB
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1049751914841088714
 Transform:
   m_ObjectHideFlags: 0
@@ -1403,6 +1404,24 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7406499542109578702}
   m_Enabled: 1
+--- !u!114 &3389007568940360421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406499542109578702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cac05173de54a84af2df6b090fa60b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 7499340524292069296}
+  playerHasWon: 0
+  target: {fileID: 0}
+  _audioSource: {fileID: 627992507}
+  swirlClip: {fileID: 8300000, guid: ff98d2a5b345b274d96db21ee02b7a2e, type: 3}
+  victoryClip: {fileID: 8300000, guid: 2d3ef720675f54646b7666e3b5ed0b6e, type: 3}
 --- !u!1 &8639306054269957531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,7 +1604,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6709988429108092689, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8785348646229604258, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
       propertyPath: m_Name
