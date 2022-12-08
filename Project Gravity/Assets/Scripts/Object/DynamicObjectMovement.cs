@@ -46,6 +46,7 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 effectHolder.SetActive(false);
             }
+
             velocity += Physics.gravity * Time.fixedDeltaTime;
             transform.rotation = lockedRotation;
         }
@@ -55,9 +56,12 @@ public class DynamicObjectMovement : MonoBehaviour
             {
                 effectHolder.SetActive(true);
             }
+
             MoveToMagnet();
         }
+
         ApplyCollisions();
+        ApplyFrictionStop();
 
         transform.position += velocity * Time.fixedDeltaTime;
     }
@@ -254,5 +258,88 @@ public class DynamicObjectMovement : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void ApplyFrictionStop()
+    {
+        if (Physics.gravity.x < 0 && velocity.y != 0)
+        {
+            if (IsGroundFoundInDirection(Vector3.left, horizontalCast))
+            {
+                if (ShouldObjectStopAfterCheckInDirection(Vector3.left, horizontalCast))
+                {
+                    velocity.y = 0;
+                }
+            }
+        }
+        else if (Physics.gravity.x > 0 && velocity.y != 0)
+        {
+            if (IsGroundFoundInDirection(Vector3.right, horizontalCast))
+            {
+                if (ShouldObjectStopAfterCheckInDirection(Vector3.right, horizontalCast))
+                {
+                    velocity.y = 0;
+                }
+            }
+        }
+        else if (Physics.gravity.y > 0 && velocity.x != 0)
+        {
+            if (IsGroundFoundInDirection(Vector3.up, verticalCast))
+            {
+                if (ShouldObjectStopAfterCheckInDirection(Vector3.up, verticalCast))
+                {
+                    velocity.x = 0;
+                }
+            }
+        }
+        else if (Physics.gravity.y < 0 && velocity.x != 0)
+        {
+            if (IsGroundFoundInDirection(Vector3.down, verticalCast))
+            {
+                if (ShouldObjectStopAfterCheckInDirection(Vector3.down, verticalCast))
+                {
+                    velocity.x = 0;
+                }
+            }
+        }
+    }
+
+    private bool ShouldObjectStopAfterCheckInDirection(Vector3 direction, Vector3 boxcastDimensions)
+    {
+        List<RaycastHit> raycastHits = new List<RaycastHit>();
+        foreach (var hit in Physics.BoxCastAll(transform.position, boxcastDimensions, direction,
+                     Quaternion.identity,
+                     transform.localScale.y / 2, groundMask, QueryTriggerInteraction.UseGlobal))
+        {
+            raycastHits.Add(hit);
+        }
+
+        foreach (var collision in raycastHits)
+        {
+            if (collision.transform.gameObject.GetComponentInParent<PlayerController>())
+            {
+                return false;
+            }
+            else if (collision.transform.gameObject.GetComponent<DynamicObjectMovement>())
+            {
+                if (collision.transform.gameObject.GetInstanceID() != gameObject.GetInstanceID())
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private bool IsGroundFoundInDirection(Vector3 direction, Vector3 boxcastDimensions)
+    {
+        if (Physics.BoxCast(transform.position, boxcastDimensions, direction, Quaternion.identity,
+                transform.localScale.x / 2, groundMask))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

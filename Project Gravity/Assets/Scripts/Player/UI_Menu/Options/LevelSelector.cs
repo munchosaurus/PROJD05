@@ -133,6 +133,7 @@ public class LevelSelector : MonoBehaviour
             GameLauncher.WriteSettings();
             if (SceneManager.GetActiveScene().buildIndex != 0)
             {
+                GameController.SetInputLockState(false);
                 FindObjectOfType<IngameMenu>().Unpause();
                 LevelCompletionTracker.AddUnlockedLevel(sceneToLoad);
                 SceneManager.LoadScene(sceneToLoad);

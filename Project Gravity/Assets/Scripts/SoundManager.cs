@@ -128,7 +128,6 @@ public class SoundManager : MonoBehaviour
 
     private void OnPlayerDeath(PlayerDeathEvent playerDeathEvent)
     {
-        Debug.Log("Triggat");
         var speaker = Instantiate(speakerPrefab, playerDeathEvent.SourceGameObject.transform.position,
             Quaternion.identity);
         speaker.GetComponent<AudioSource>().PlayOneShot(playerCollidesWithLavaClip);

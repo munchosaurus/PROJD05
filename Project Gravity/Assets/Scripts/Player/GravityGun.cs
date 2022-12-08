@@ -50,7 +50,6 @@ public class GravityGun : MonoBehaviour
     private void Awake()
     {
         aimDirector = GameObject.FindGameObjectWithTag("AimingDirector");
-        //_lineRenderer = GameObject.FindWithTag("LineRenderer").GetComponent<LineRenderer>();
         gravityLayer = LayerMask.NameToLayer("GravityChange");
         playerLayer = LayerMask.NameToLayer("Player");
         groundLayer = LayerMask.NameToLayer("Ground");
@@ -59,6 +58,11 @@ public class GravityGun : MonoBehaviour
         moveableLayer = LayerMask.NameToLayer("Moveable");
         mirrorLayer = LayerMask.NameToLayer("Mirror");
         playerInput = FindObjectOfType<PlayerInput>();
+        
+        if (aimDirector.GetComponent<SpriteRenderer>().enabled)
+        {
+            aimDirector.GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 
     void FixedUpdate()
@@ -69,16 +73,11 @@ public class GravityGun : MonoBehaviour
         }
 
         _currentDirection = GetMousePositionOnPlane() - transform.position;
-        //_lineRenderer.SetPosition(0, transform.position);
 
         if (buttonPressed)
         {
             playerShotAudioSource.clip = playerAims;
             playerShotAudioSource.Play();
-            // if (!_lineRenderer.gameObject.activeSelf)
-            // {
-            //     _lineRenderer.gameObject.SetActive(true);
-            // }
 
             if (!_playerAimEffectController.gameObject.activeSelf)
             {

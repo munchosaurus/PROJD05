@@ -26,7 +26,7 @@ public class IngameMenu : MonoBehaviour
     private PlayerInput _playerInput;
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
-    private bool playerWon;
+    private bool _playerWon;
 
     // TODO: REMOVE AT LAUNCHES, ONLY USED NOW FOR EASIER CONTROL SETTINGS
     private void Awake()
@@ -216,13 +216,12 @@ public class IngameMenu : MonoBehaviour
         GameController.SetInputLockState(true);
         GameController.PlayerIsDead = true;
         yield return new WaitForSecondsRealtime(playerDeathEvent.DeathTime);
-        GameController.SetInputLockState(false);
         Restart();
     }
 
     public void OnPlayerSucceedsLevel(WinningEvent winningEvent)
     {
-        playerWon = true;
+        _playerWon = true;
         LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex);
         LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
         LevelCompletionTracker.SetLevelBest(SceneManager.GetActiveScene().buildIndex,
@@ -286,7 +285,7 @@ public class IngameMenu : MonoBehaviour
 
     public void Restart()
     {
-        if (!playerWon)
+        if (!_playerWon)
         {
             CompletionLogger.finishTime = FindObjectOfType<LevelTimer>().GetTimePassed();
             CompletionLogger.WriteCompletionLog();
