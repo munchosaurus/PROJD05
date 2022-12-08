@@ -39,7 +39,8 @@ public static class CompletionLogger
         sb.Append("Acceleration: " + GameController.PlayerAcceleration + " ");
         sb.Append("Airmovementmultiplier: " + GameController.PlayerAirMovementMultiplier + " ");
         sb.Append("Maxvelocity: " + GameController.PlayerMaxVelocity + " ");
-        sb.Append("Gravitymultiplier: " + GravityController.GravityMultiplier);
+        sb.Append("Gravitymultiplier: " + GravityController.GravityMultiplier + " ");
+        sb.Append("CurrentControlSchemeIndex: " + GameController.CurrentControlSchemeIndex);
         return sb.ToString();
     }
     
@@ -64,7 +65,9 @@ public static class CompletionLogger
         {
             Console.WriteLine(e);
             throw;
-        }
+        } 
+        win = 0;
+        lose = 0;
     }
 }
 

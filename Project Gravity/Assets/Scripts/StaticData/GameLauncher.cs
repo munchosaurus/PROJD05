@@ -19,7 +19,7 @@ public static class GameLauncher
     private static LevelData _levelData;
     private static TestData _testData;
 
-    public static void SaveSettings()
+    public static void SaveLevels()
     {
         _levelData = new LevelData();
         WriteData(levelSettingsFile, _levelData);
@@ -74,7 +74,6 @@ public static class GameLauncher
             try
             {
                 File.WriteAllText(settingsTextFile, String.Empty);
-                //Debug.Log(_settingsData.ToString());
                 File.AppendAllText(settingsTextFile, _settingsData.ToString());
             }
             catch (Exception e)
@@ -112,7 +111,7 @@ public static class GameLauncher
         if (File.Exists(settingsTextFile))
         {
             int counter = 0;
-            string[] values = new string[10];
+            string[] values = new string[11];
             foreach (var line in File.ReadLines(settingsTextFile))
             {
                 values[counter] = line.Split(' ', 2)[1].Trim();
@@ -199,6 +198,10 @@ public static class GameLauncher
         GameController.GlobalSpeedMultiplier = float.Parse(values[7]);
         GameController.CameraAutoRotationToggled = bool.Parse(values[8]);
         GameController.DyslecticModeIsOn = bool.Parse(values[9]);
+        
+        // Control
+        GameController.CurrentControlSchemeIndex = int.Parse(values[10]);
+
     }
 
     private static void UpdateTestSettings(string[] values)
@@ -265,6 +268,9 @@ public class SettingsData
         GlobalSpeedMultiplier = GameController.GlobalSpeedMultiplier;
         CameraAutoRotationToggled = GameController.CameraAutoRotationToggled;
         DyslecticModeIsOn = GameController.DyslecticModeIsOn;
+        
+        // Controll
+        CurrentControlSchemeIndex = GameController.CurrentControlSchemeIndex;
     }
 
     // Volume
@@ -280,6 +286,9 @@ public class SettingsData
     public float GlobalSpeedMultiplier { get; set; }
     public bool CameraAutoRotationToggled { get; set; }
     public bool DyslecticModeIsOn { get; set; }
+    
+    // Control
+    public int CurrentControlSchemeIndex { get; set; }
 
     public override string ToString()
     {
@@ -297,6 +306,9 @@ public class SettingsData
         sb.Append("GlobalSpeedMultiplier: " + GlobalSpeedMultiplier + "\n");
         sb.Append("CameraAutoRotationToggled: " + CameraAutoRotationToggled + "\n");
         sb.Append("DyslecticModeIsOn: " + DyslecticModeIsOn + "\n");
+        
+        // Control
+        sb.Append("CurrentControlSchemeIndex: " + CurrentControlSchemeIndex);
         
         return sb.ToString();
     }

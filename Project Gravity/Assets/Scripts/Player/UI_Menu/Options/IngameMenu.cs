@@ -36,6 +36,7 @@ public class IngameMenu : MonoBehaviour
         CompletionLogger.gravityChanges = 0;
         GetComponent<SoundOptions>().LoadSoundSettings();
         GetComponent<GameOptions>().LoadGameSettings();
+        GetComponent<ControlOptions>().SetControlImagesAndTexts();
         StartCoroutine(FindObjectOfType<LevelSelector>()
             .StartFadeToBlack(0, Constants.LEVEL_SWITCH_FADE_DURATION, false));
     }
@@ -220,41 +221,44 @@ public class IngameMenu : MonoBehaviour
 
     public void OnPlayerSucceedsLevel(WinningEvent winningEvent)
     {
-        _playerWon = true;
-        LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex);
-        LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
-        LevelCompletionTracker.SetLevelBest(SceneManager.GetActiveScene().buildIndex,
-            FindObjectOfType<LevelTimer>().GetTimePassed());
+        if (!_playerWon)
+        {
+            _playerWon = true;
+            LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex);
+            LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            LevelCompletionTracker.SetLevelBest(SceneManager.GetActiveScene().buildIndex,
+                FindObjectOfType<LevelTimer>().GetTimePassed());
         
-        float bestTime = LevelCompletionTracker.levelRecords[SceneManager.GetActiveScene().buildIndex];
-        float minutes = Mathf.FloorToInt(bestTime / 60);
-        float seconds = Mathf.FloorToInt(bestTime % 60);
-        float milliSeconds = Mathf.Floor(bestTime % 1 * 100);
+            float bestTime = LevelCompletionTracker.levelRecords[SceneManager.GetActiveScene().buildIndex];
+            float minutes = Mathf.FloorToInt(bestTime / 60);
+            float seconds = Mathf.FloorToInt(bestTime % 60);
+            float milliSeconds = Mathf.Floor(bestTime % 1 * 100);
 
-        float elapsedTime = FindObjectOfType<LevelTimer>().GetTimePassed();
-        float elapsedMinutes = Mathf.FloorToInt(elapsedTime / 60);
-        float elapsedSeconds = Mathf.FloorToInt(elapsedTime % 60);
-        float elapsedMilliseconds = Mathf.Floor(elapsedTime % 1 * 100);
+            float elapsedTime = FindObjectOfType<LevelTimer>().GetTimePassed();
+            float elapsedMinutes = Mathf.FloorToInt(elapsedTime / 60);
+            float elapsedSeconds = Mathf.FloorToInt(elapsedTime % 60);
+            float elapsedMilliseconds = Mathf.Floor(elapsedTime % 1 * 100);
         
-        // If a new record has been set by the player
-        if (LevelCompletionTracker.IsTimeNewRecord(SceneManager.GetActiveScene().buildIndex, FindObjectOfType<LevelTimer>().GetTimePassed()))
-        {
-            newRecordText.color = Color.red;
-            newRecordText.text = $"New record: {minutes:00}:{seconds:00}:{milliSeconds:00}";
-        }
-        else
-        {
-            newRecordText.color = Color.white;
-            newRecordText.text = $"Your time: {elapsedMinutes:00}:{elapsedSeconds:00}:{elapsedMilliseconds:00}";
-        }
+            // If a new record has been set by the player
+            if (LevelCompletionTracker.IsTimeNewRecord(SceneManager.GetActiveScene().buildIndex, FindObjectOfType<LevelTimer>().GetTimePassed()))
+            {
+                newRecordText.color = Color.red;
+                newRecordText.text = $"New record: {minutes:00}:{seconds:00}:{milliSeconds:00}";
+            }
+            else
+            {
+                newRecordText.color = Color.white;
+                newRecordText.text = $"Your time: {elapsedMinutes:00}:{elapsedSeconds:00}:{elapsedMilliseconds:00}";
+            }
         
-        levelRecordText.text = $"Best time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
-        completedLevelTitle.text = GetComponent<LevelSelector>().levelContainers[SceneManager.GetActiveScene().buildIndex-1].levelName;
-        GameLauncher.SaveSettings();
-        CompletionLogger.lose = 0;
-        CompletionLogger.win = 1;
-        CompletionLogger.finishTime = elapsedTime;
-        CompletionLogger.WriteCompletionLog();
+            levelRecordText.text = $"Best time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
+            completedLevelTitle.text = GetComponent<LevelSelector>().levelContainers[SceneManager.GetActiveScene().buildIndex-1].levelName;
+            GameLauncher.SaveLevels();
+            CompletionLogger.lose = 0;
+            CompletionLogger.win = 1;
+            CompletionLogger.finishTime = elapsedTime;
+            CompletionLogger.WriteCompletionLog();
+        }
     }
 
     public void LoadScene(int scene)

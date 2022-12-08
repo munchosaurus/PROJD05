@@ -28,9 +28,11 @@ public class ControlOptions : MonoBehaviour
     {
         GameController.CurrentControlSchemeIndex = controlChoiceDropdown.value;
         SetControlImagesAndTexts();
+        
+        GameLauncher.WriteSettings();
     }
     
-    private void SetControlImagesAndTexts()
+    public void SetControlImagesAndTexts()
     {
         movementControlSchemeText.text = movementTexts[GameController.CurrentControlSchemeIndex];
         gravityGunControlSchemeText.text = gravityGunTexts[GameController.CurrentControlSchemeIndex];
