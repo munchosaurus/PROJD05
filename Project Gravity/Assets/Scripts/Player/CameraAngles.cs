@@ -68,24 +68,13 @@ public class CameraAngles : MonoBehaviour
     // Sets the rotation toggle to true if pressed
     public void OnRotateToggle(InputAction.CallbackContext context)
     {
-        // if (context.started || context.performed)
-        // {
-        //     
-        //     _rotationToggled = true;
-        // } else if (context.canceled)
-        // {
-        //     _rotationToggled = false;
-        // }
-        // Debug.Log(_rotationToggled);
-        
-
         _rotationToggled = context.ReadValue<float>() == 1;
         
     }
 
     public void RotateToDefault(InputAction.CallbackContext context)
     {
-        if (context.started && !_rotationToggled && !GameController.CameraAutoRotationToggled)
+        if (context.started)
         {
             turn = new Vector2();
             virtualCameraTransform.rotation = Quaternion.identity;
