@@ -235,7 +235,7 @@ public class DynamicObjectMovement : MonoBehaviour
             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
                     Mathf.Abs(transform.position.x - nextPos.x) + ObjectCollisionGridClamp, groundMask))
             {
-                if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.y))
+                if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.x))
                 {
                     CheckCollisionInMovement(Vector3.left);
                     transform.position = new Vector3(hit.point.x + ObjectCollisionGridClamp, transform.position.y,
