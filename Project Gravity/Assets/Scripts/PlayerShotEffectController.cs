@@ -8,6 +8,7 @@ using UnityEngine.VFX;
 public class PlayerShotEffectController : MonoBehaviour
 {
     [SerializeField] private GameObject laserShotPrefab;
+    [ColorUsage(true, true)]
     [SerializeField] private Color[] colors;
     [SerializeField] private float impactSize;
     private static Guid _playerShootsGuid;
@@ -45,7 +46,6 @@ public class PlayerShotEffectController : MonoBehaviour
         }
         else
         {
-            //effect.SetVector4("FlashColour", colors[0]);
             effect.SetFloat("ImpactSize", impactSize);
         }
         

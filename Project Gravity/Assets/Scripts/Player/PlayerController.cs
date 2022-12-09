@@ -299,7 +299,7 @@ public class PlayerController : MonoBehaviour
             if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
                     Mathf.Abs(transform.position.x - nextPos.x) + PlayerCollisionGridClamp, groundMask))
             {
-                if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.y))
+                if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.x))
                 {
                     if (!ShouldInheritMovement(hit.collider.gameObject, true))
                     {

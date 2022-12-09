@@ -10,17 +10,22 @@ using UnityEngine.InputSystem;
 
 public class GravityGun : MonoBehaviour
 {
-    [SerializeField] private Material[] lineMaterials;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask gravityMask;
     [SerializeField] private LayerMask magnetMask;
     [SerializeField] private LayerMask lavaMask;
     [SerializeField] private LayerMask mirrorMask;
+    [ColorUsage(true, true)]
     [SerializeField] public Color magnetHitColor;
+    [ColorUsage(true, true)]
     [SerializeField] public Color groundHitColor;
+    [ColorUsage(true, true)]
     [SerializeField] public Color gravityHitColor;
+    [ColorUsage(true, true)]
     [SerializeField] public Color alternativeMagnetHitColor;
+    [ColorUsage(true, true)]
     [SerializeField] public Color alternativeGroundHitColor;
+    [ColorUsage(true, true)]
     [SerializeField] public Color alternativeGravityHitColor;
     [SerializeField] private PlayerAimEffectController _playerAimEffectController;
     [SerializeField] private AudioClip playerAims;
@@ -29,8 +34,6 @@ public class GravityGun : MonoBehaviour
     [SerializeField] private float gunDelay;
 
     private PlayerInput playerInput;
-
-    //private LineRenderer _lineRenderer;
     private GameObject aimDirector;
     private Vector3 _currentDirection;
     private GameObject crosshair;
@@ -41,21 +44,13 @@ public class GravityGun : MonoBehaviour
     private static int mirrorsHit;
     private static int lastMirrorHit;
     private static int magnetLayer;
-    private static int groundLayer;
-    private static int lavaLayer;
-    private static int playerLayer;
-    private static int moveableLayer;
 
 
     private void Awake()
     {
         aimDirector = GameObject.FindGameObjectWithTag("AimingDirector");
         gravityLayer = LayerMask.NameToLayer("GravityChange");
-        playerLayer = LayerMask.NameToLayer("Player");
-        groundLayer = LayerMask.NameToLayer("Ground");
         magnetLayer = LayerMask.NameToLayer("GravityMagnet");
-        lavaLayer = LayerMask.NameToLayer("Hazard");
-        moveableLayer = LayerMask.NameToLayer("Moveable");
         mirrorLayer = LayerMask.NameToLayer("Mirror");
         playerInput = FindObjectOfType<PlayerInput>();
         
@@ -100,19 +95,16 @@ public class GravityGun : MonoBehaviour
         var lineSpot = GetSingleRay(transform.position, hits);
 
         SetAimingColor(hit);
-
-        //_lineRenderer.SetPosition(1, lineSpot.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER);
+        
         _playerAimEffectController.SetAim(transform.position,
             lineSpot.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER);
     }
 
     private void SetAimingColor(RaycastHit hit)
     {
-        int i = 0;
         if (hit.collider.gameObject.layer == gravityLayer)
         {
             EnableAimDirector(hit);
-            i = 1;
             _playerAimEffectController.SetColors(gravityHitColor, alternativeGravityHitColor);
         }
         else
@@ -120,7 +112,6 @@ public class GravityGun : MonoBehaviour
             DisableAimDirector();
             if (hit.collider.gameObject.layer == magnetLayer)
             {
-                i = 2;
                 _playerAimEffectController.SetColors(magnetHitColor, alternativeMagnetHitColor);
             }
             else
@@ -128,9 +119,6 @@ public class GravityGun : MonoBehaviour
                 _playerAimEffectController.SetColors(groundHitColor, alternativeGroundHitColor);
             }
         }
-
-
-        //lr.material = lineMaterials[i];
     }
 
     private void EnableAimDirector(RaycastHit hit)
@@ -215,11 +203,6 @@ public class GravityGun : MonoBehaviour
             return SetMirrorLine(closestHit, currentDirection);
         }
 
-        // if (_lineRenderer.positionCount > 2)
-        // {
-        //     _lineRenderer.positionCount--;
-        // }
-
         if (closestHit.collider.gameObject.layer != magnetLayer) return closestHit;
         if (closestHit.transform.parent == null) return closestHit;
         if (closestHit.transform.GetComponentInParent<DynamicObjectMovement>() == null) return closestHit;
@@ -263,13 +246,6 @@ public class GravityGun : MonoBehaviour
 
         var rayCastHits = InitRaycasts(mirrorHit.collider.transform.position, mirrorDirection);
         RaycastHit toUse = GetFinalGravityGunHit(mirrorHit.point, mirrorDirection, rayCastHits);
-
-        // if (_lineRenderer.positionCount < 3)
-        // {
-        //     _lineRenderer.positionCount++;
-        // }
-        //
-        // _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, toUse.point);
 
         return toUse;
     }
@@ -350,26 +326,24 @@ public class GravityGun : MonoBehaviour
         if (val.canceled)
         {
             _playerAimEffectController.gameObject.SetActive(false);
-            //_lineRenderer.gameObject.SetActive(false);
             ShootGravityGun();
         }
     }
 
     private Vector3 GetMousePositionOnPlane()
     {
+        Ray ray;
         if (playerInput.currentControlScheme == "Mouse")
         {
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 1));
-            xy.Raycast(ray, out float distance);
-            return ray.GetPoint(distance);
+            ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         }
         else
         {
-            Ray ray = Camera.main.ScreenPointToRay(FindObjectOfType<GamepadCursor>().VirtualMouse.position.ReadValue());
-            Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 1));
-            xy.Raycast(ray, out float distance);
-            return ray.GetPoint(distance);
+            ray = Camera.main.ScreenPointToRay(FindObjectOfType<GamepadCursor>().VirtualMouse.position.ReadValue());
+
         }
+        Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 1));
+        xy.Raycast(ray, out float distance);
+        return ray.GetPoint(distance);
     }
 }
