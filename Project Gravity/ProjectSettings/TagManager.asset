@@ -17,6 +17,7 @@ TagManager:
   - GamePadCursor
   - VirtualCamera
   - MainMenuSpeaker
+  - GravityEffectObject
   layers:
   - Default
   - TransparentFX

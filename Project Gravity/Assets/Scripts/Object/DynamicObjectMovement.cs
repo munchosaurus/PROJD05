@@ -89,34 +89,34 @@ public class DynamicObjectMovement : MonoBehaviour
         }
     }
 
-    private bool ShouldInheritMovement(GameObject otherObject, bool isHorizontal)
-    {
-        var otherMovement = new Vector3();
-        if (otherObject.GetComponentInParent<PlayerController>() != null)
-        {
-            otherMovement = otherObject.GetComponentInParent<PlayerController>().velocity;
-        }
-        else if (otherObject.GetComponent<DynamicObjectMovement>() != null)
-        {
-            otherMovement = otherObject.GetComponent<DynamicObjectMovement>().velocity;
-        }
-
-        if (otherMovement.magnitude > 0)
-        {
-            if (isHorizontal)
-            {
-                if (!(Math.Abs(otherMovement.x) < velocity.x) || otherMovement.x == 0) return false;
-                velocity.x = otherMovement.x;
-                return true;
-            }
-
-            if (!(Math.Abs(otherMovement.y) < velocity.y) || otherMovement.y == 0) return false;
-            velocity.y = otherMovement.y;
-            return true;
-        }
-
-        return false;
-    }
+    // private bool ShouldInheritMovement(GameObject otherObject, bool isHorizontal)
+    // {
+    //     var otherMovement = new Vector3();
+    //     if (otherObject.GetComponentInParent<PlayerController>() != null)
+    //     {
+    //         otherMovement = otherObject.GetComponentInParent<PlayerController>().velocity;
+    //     }
+    //     else if (otherObject.GetComponent<DynamicObjectMovement>() != null)
+    //     {
+    //         otherMovement = otherObject.GetComponent<DynamicObjectMovement>().velocity;
+    //     }
+    //
+    //     if (otherMovement.magnitude > 0)
+    //     {
+    //         if (isHorizontal)
+    //         {
+    //             if (!(Math.Abs(otherMovement.x) < velocity.x) || otherMovement.x == 0) return false;
+    //             velocity.x = otherMovement.x;
+    //             return true;
+    //         }
+    //
+    //         if (!(Math.Abs(otherMovement.y) < velocity.y) || otherMovement.y == 0) return false;
+    //         velocity.y = otherMovement.y;
+    //         return true;
+    //     }
+    //
+    //     return false;
+    // }
 
     private void CheckCollisionInMovement(Vector3 direction)
     {
