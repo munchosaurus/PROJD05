@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7572594640149165245}
   m_Layer: 0
   m_Name: Block_Gravity Plate
-  m_TagString: Untagged
+  m_TagString: GravityEffectObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
