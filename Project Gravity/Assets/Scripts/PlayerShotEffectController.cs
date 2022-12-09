@@ -27,7 +27,6 @@ public class PlayerShotEffectController : MonoBehaviour
         {
             gravityAnimators.Add(gravityGameObject.GetComponent<Animator>());
         }
-        Debug.Log(gravityAnimators.Count);
         EventSystem.Current.RegisterListener<GravityGunEvent>(OnPlayerShoots, ref _playerShootsGuid);
     }
     
