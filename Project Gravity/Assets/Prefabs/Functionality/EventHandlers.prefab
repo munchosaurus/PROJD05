@@ -46,10 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserShotPrefab: {fileID: 3307971002495625796, guid: 6f1d2f2dd7f3f10499d1eda6ae87fa24, type: 3}
   colors:
-  - {r: 1, g: 0, b: 0, a: 0}
-  - {r: 0.0048110485, g: 1, b: 0, a: 0}
-  - {r: 0.83672804, g: 0.9811321, b: 0, a: 0}
+  - {r: 1.5993193, g: 3.554043, b: 11.313704, a: 1}
+  - {r: 1.066213, g: 11.313704, b: 2.7840004, a: 0}
+  - {r: 11.313704, g: 1.066213, b: 3.1986387, a: 1}
   impactSize: 2
+  gravityAnimators: []
 --- !u!1 &663620502
 GameObject:
   m_ObjectHideFlags: 0

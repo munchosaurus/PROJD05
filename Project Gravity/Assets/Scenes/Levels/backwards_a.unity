@@ -13380,6 +13380,18 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1921015880380027198, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: magnetHitColor.b
+      value: 3.1986387
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921015880380027198, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: magnetHitColor.g
+      value: 1.066213
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921015880380027198, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: magnetHitColor.r
+      value: 11.313704
+      objectReference: {fileID: 0}
     - target: {fileID: 7406499542109578702, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_Name
       value: Player_noRB
