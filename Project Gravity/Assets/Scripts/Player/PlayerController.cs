@@ -129,28 +129,38 @@ public class PlayerController : MonoBehaviour
         {
             if (IsGrounded() && !IsRoofed())
             {
+                float force = GameController.PlayerJumpForce;
+                if (GameController.GlobalSpeedMultiplier < 0.8f)
+                {
+                    force *= GameController.GlobalSpeedMultiplier * 1.1f;
+                }
+                else
+                {
+                    force *= GameController.GlobalSpeedMultiplier;
+                }
                 if (GravityController.IsGravityHorizontal())
                 {
                     if (Physics.gravity.x > 0 && !groundedLeft)
                     {
-                        velocity.x -= GameController.PlayerJumpForce * GameController.GlobalSpeedMultiplier;
+
+                        velocity.x -= force;
                     }
 
                     if (Physics.gravity.x < 0 && !groundedRight)
                     {
-                        velocity.x += GameController.PlayerJumpForce * GameController.GlobalSpeedMultiplier;
+                        velocity.x += force;
                     }
                 }
                 else
                 {
                     if (Physics.gravity.y > 0 && !groundedDown)
                     {
-                        velocity.y -= GameController.PlayerJumpForce * GameController.GlobalSpeedMultiplier;
+                        velocity.y -= force;
                     }
 
                     if (Physics.gravity.y < 0 && !groundedUp)
                     {
-                        velocity.y += GameController.PlayerJumpForce * GameController.GlobalSpeedMultiplier;
+                        velocity.y += force;
                     }
                 }
             }

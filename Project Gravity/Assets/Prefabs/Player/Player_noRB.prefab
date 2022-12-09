@@ -938,11 +938,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d13e61bf8dcf41dfba40c64200ddc70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineMaterials:
-  - {fileID: 2100000, guid: ebd68e582f5d51b4986f096efc233b42, type: 2}
-  - {fileID: 2100000, guid: 261cf4127f2808943abb10e0f4ed3438, type: 2}
-  - {fileID: 2100000, guid: cc21de56af0d25e418f145ce0461c12e, type: 2}
-  - {fileID: 2100000, guid: ecf4bdefc941b674ba91f4a91dd0a324, type: 2}
   groundMask:
     serializedVersion: 2
     m_Bits: 128
@@ -1616,6 +1611,10 @@ PrefabInstance:
     - target: {fileID: 297355257625748716, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 297355258026106135, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
+      propertyPath: m_MinValue
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 297355258668247353, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
       propertyPath: m_AnchorMax.x
