@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class PlayerController3D : MonoBehaviour
 {
-    [SerializeField] private LayerMask gravityChangeLayer;
-    private readonly float GRAVITY = 9.8f;
-    public new Transform camera;
-    public float speed = 6f;
-    // Keep in mind that that the vectors are the opposite value to how they are added
-    public float turnSmoothTime = 0.05f;
-    private float _turnSmoothVelocity;
+    // [SerializeField] private LayerMask gravityChangeLayer;
+    // private readonly float GRAVITY = 9.8f;
+    // public new Transform camera;
+    // public float speed = 6f;
+    // // Keep in mind that that the vectors are the opposite value to how they are added
+    // public float turnSmoothTime = 0.05f;
+    // private float _turnSmoothVelocity;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        camera = GameObject.FindWithTag("MainCamera").transform;
-    }
+    // void Start()
+    // {
+    //     camera = GameObject.FindWithTag("MainCamera").transform;
+    // }
 
     // Update is called once per frame
     void Update()

@@ -146,7 +146,6 @@ public class SoundManager : MonoBehaviour
     {
         var speaker = Instantiate(speakerPrefab, gravityGunEvent.Point,
             Quaternion.identity);
-        float clipLength;
         if (gravityGunEvent.TargetGameObject.layer == gravityLayer)
         {
             if (gravityGunEvent.GravityWasChanged)
