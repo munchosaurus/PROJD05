@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement settings")] [SerializeField]
     private Vector3 groundCheckDimensions;
+
     [SerializeField] private Vector3 roofCheckDimensions;
     private AudioSource _audioSource;
     private const float GridClampThreshold = 0.02f;
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
             ClampToGrid();
         }
     }
-    
+
     private void OnPlayerSucceedsLevel(WinningEvent winningEvent)
     {
         _audioSource.mute = true;
@@ -138,11 +139,11 @@ public class PlayerController : MonoBehaviour
                 {
                     force *= GameController.GlobalSpeedMultiplier;
                 }
+
                 if (GravityController.IsGravityHorizontal())
                 {
                     if (Physics.gravity.x > 0 && !groundedLeft)
                     {
-
                         velocity.x -= force;
                     }
 
@@ -193,55 +194,47 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
-    private void CheckCollisionInMovement(Vector3 direction)
+    private List<int> GetCollisionLayersInDirection(Vector3 castDimensions, Vector3 direction, int mask, float distance)
     {
         List<int> layers = new List<int>();
         RaycastHit[] raycastHits;
-        if (direction.y != 0 && Math.Abs(velocity.y) >
-            Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
+        raycastHits = Physics.BoxCastAll(transform.position, castDimensions, direction,
+            Quaternion.identity, distance, mask, QueryTriggerInteraction.UseGlobal);
+        foreach (var collision in raycastHits)
         {
-            raycastHits = Physics.BoxCastAll(transform.position, verticalCast, direction,
-                Quaternion.identity,
-                Mathf.Abs(transform.position.y - (transform.position + (velocity * Time.fixedDeltaTime)).y) +
-                PlayerCollisionGridClamp, soundCollisionMask, QueryTriggerInteraction.UseGlobal);
-            foreach (var collision in raycastHits)
+            if (collision.transform.GetComponentInParent<DynamicObjectMovement>())
             {
-                if (collision.transform.GetComponentInParent<DynamicObjectMovement>())
-                {
-                    if (collision.transform.GetComponentInParent<DynamicObjectMovement>().velocity.magnitude <
-                        Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
-                    {
-                        layers.Add(collision.collider.gameObject.layer);
-                    }
-                }
-                else
+                if (collision.transform.GetComponentInParent<DynamicObjectMovement>().velocity.magnitude <
+                    Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
                 {
                     layers.Add(collision.collider.gameObject.layer);
                 }
             }
+            else
+            {
+                layers.Add(collision.collider.gameObject.layer);
+            }
+        }
+
+        return layers;
+    }
+
+    private void CheckCollisionInMovement(Vector3 direction)
+    {
+        List<int> layers = new List<int>();
+        if (direction.y != 0 && Math.Abs(velocity.y) >
+            Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
+        {
+            layers = GetCollisionLayersInDirection(verticalCast, direction, soundCollisionMask,
+                Mathf.Abs(transform.position.y - (transform.position + (velocity * Time.fixedDeltaTime)).y) +
+                PlayerCollisionGridClamp);
         }
         else if (direction.x != 0 && Math.Abs(velocity.x) >
                  Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
         {
-            raycastHits = Physics.BoxCastAll(transform.position, horizontalCast, direction,
-                Quaternion.identity,
+            layers = GetCollisionLayersInDirection(horizontalCast, direction, soundCollisionMask,
                 Mathf.Abs(transform.position.x - (transform.position + (velocity * Time.fixedDeltaTime)).x) +
-                PlayerCollisionGridClamp, soundCollisionMask, QueryTriggerInteraction.UseGlobal);
-            foreach (var collision in raycastHits)
-            {
-                if (collision.transform.GetComponentInParent<DynamicObjectMovement>())
-                {
-                    if (collision.transform.GetComponentInParent<DynamicObjectMovement>().velocity.magnitude <
-                        Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
-                    {
-                        layers.Add(collision.collider.gameObject.layer);
-                    }
-                }
-                else
-                {
-                    layers.Add(collision.collider.gameObject.layer);
-                }
-            }
+                PlayerCollisionGridClamp);
         }
 
         if (layers.Count > 0)
@@ -278,6 +271,7 @@ public class PlayerController : MonoBehaviour
                     {
                         groundedDown = true;
                     }
+
                     CheckCollisionInMovement(Vector3.down);
                     transform.position = new Vector3(transform.position.x, hit.point.y + PlayerCollisionGridClamp,
                         transform.position.z);
@@ -296,6 +290,7 @@ public class PlayerController : MonoBehaviour
                     {
                         groundedUp = true;
                     }
+
                     CheckCollisionInMovement(Vector3.up);
                     transform.position = new Vector3(transform.position.x, hit.point.y - PlayerCollisionGridClamp,
                         transform.position.z);
@@ -315,6 +310,7 @@ public class PlayerController : MonoBehaviour
                     {
                         groundedLeft = true;
                     }
+
                     CheckCollisionInMovement(Vector3.left);
                     transform.position = new Vector3(hit.point.x + PlayerCollisionGridClamp, transform.position.y,
                         transform.position.z);
@@ -333,6 +329,7 @@ public class PlayerController : MonoBehaviour
                     {
                         groundedRight = true;
                     }
+
                     CheckCollisionInMovement(Vector3.right);
                     transform.position = new Vector3(hit.point.x - PlayerCollisionGridClamp, transform.position.y,
                         transform.position.z);
@@ -389,7 +386,8 @@ public class PlayerController : MonoBehaviour
 
         if (ShouldAddMoreMoveForce(direction))
         {
-            velocity.x += GameController.GlobalSpeedMultiplier * (direction * GameController.PlayerAcceleration * Time.fixedDeltaTime);
+            velocity.x += GameController.GlobalSpeedMultiplier *
+                          (direction * GameController.PlayerAcceleration * Time.fixedDeltaTime);
         }
     }
 
@@ -414,7 +412,8 @@ public class PlayerController : MonoBehaviour
 
         if (ShouldAddMoreMoveForce(direction * GameController.GlobalSpeedMultiplier))
         {
-            velocity.y += GameController.GlobalSpeedMultiplier * (direction * GameController.PlayerAcceleration * Time.fixedDeltaTime);
+            velocity.y += GameController.GlobalSpeedMultiplier *
+                          (direction * GameController.PlayerAcceleration * Time.fixedDeltaTime);
         }
     }
 
@@ -450,10 +449,12 @@ public class PlayerController : MonoBehaviour
 
         if (moveCoefficient != 0)
         {
-            return Math.Abs(magnitude) < GameController.PlayerMaxVelocity * GameController.GlobalSpeedMultiplier && !BoxCast(dir);
+            return Math.Abs(magnitude) < GameController.PlayerMaxVelocity * GameController.GlobalSpeedMultiplier &&
+                   !BoxCast(dir);
         }
 
-        return moveCoefficient != 0 && Math.Abs(magnitude) < GameController.PlayerMaxVelocity * GameController.GlobalSpeedMultiplier;
+        return moveCoefficient != 0 &&
+               Math.Abs(magnitude) < GameController.PlayerMaxVelocity * GameController.GlobalSpeedMultiplier;
     }
 
     private bool BoxCast(Vector3 direction)
