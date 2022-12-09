@@ -938,11 +938,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d13e61bf8dcf41dfba40c64200ddc70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineMaterials:
-  - {fileID: 2100000, guid: ebd68e582f5d51b4986f096efc233b42, type: 2}
-  - {fileID: 2100000, guid: 261cf4127f2808943abb10e0f4ed3438, type: 2}
-  - {fileID: 2100000, guid: cc21de56af0d25e418f145ce0461c12e, type: 2}
-  - {fileID: 2100000, guid: ecf4bdefc941b674ba91f4a91dd0a324, type: 2}
   groundMask:
     serializedVersion: 2
     m_Bits: 128
@@ -958,12 +953,12 @@ MonoBehaviour:
   mirrorMask:
     serializedVersion: 2
     m_Bits: 32768
-  magnetHitColor: {r: 1, g: 1, b: 0, a: 0}
-  groundHitColor: {r: 1, g: 0.0047169924, b: 0.0047169924, a: 0}
-  gravityHitColor: {r: 0, g: 1, b: 0.015245676, a: 0}
-  alternativeMagnetHitColor: {r: 0.5019608, g: 0.5019608, b: 0, a: 0}
-  alternativeGroundHitColor: {r: 0.5019608, g: 0, b: 0, a: 0}
-  alternativeGravityHitColor: {r: 0, g: 0.5019608, b: 0.007843138, a: 0}
+  magnetHitColor: {r: 11.313704, g: 1.066213, b: 3.1986387, a: 1}
+  groundHitColor: {r: 1.5993193, g: 3.554043, b: 11.313704, a: 1}
+  gravityHitColor: {r: 1.066213, g: 11.313704, b: 2.7840004, a: 0}
+  alternativeMagnetHitColor: {r: 11.25447, g: 9.536682, b: 1.5993193, a: 0}
+  alternativeGroundHitColor: {r: 11.313704, g: 9.536682, b: 1.5993193, a: 0}
+  alternativeGravityHitColor: {r: 11.25447, g: 9.65515, b: 1.6585535, a: 0}
   _playerAimEffectController: {fileID: 6543249217566397070}
   playerAims: {fileID: 8300000, guid: 50f9fd36cf8439b45b9084a3be38639f, type: 3}
   playerShoots: {fileID: 8300000, guid: 8156d3009e02b044eb6419a915a3b076, type: 3}
