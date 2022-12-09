@@ -243,15 +243,15 @@ public class IngameMenu : MonoBehaviour
             if (LevelCompletionTracker.IsTimeNewRecord(SceneManager.GetActiveScene().buildIndex, FindObjectOfType<LevelTimer>().GetTimePassed()))
             {
                 newRecordText.color = Color.red;
-                newRecordText.text = $"New record: {minutes:00}:{seconds:00}:{milliSeconds:00}";
+                newRecordText.text = $"New Record: {minutes:00}:{seconds:00}:{milliSeconds:00}";
             }
             else
             {
                 newRecordText.color = Color.white;
-                newRecordText.text = $"Your time: {elapsedMinutes:00}:{elapsedSeconds:00}:{elapsedMilliseconds:00}";
+                newRecordText.text = $"Your Time: {elapsedMinutes:00}:{elapsedSeconds:00}:{elapsedMilliseconds:00}";
             }
         
-            levelRecordText.text = $"Best time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
+            levelRecordText.text = $"Best Time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
             completedLevelTitle.text = GetComponent<LevelSelector>().levelContainers[SceneManager.GetActiveScene().buildIndex-1].levelName;
             GameLauncher.SaveLevels();
             CompletionLogger.lose = 0;
