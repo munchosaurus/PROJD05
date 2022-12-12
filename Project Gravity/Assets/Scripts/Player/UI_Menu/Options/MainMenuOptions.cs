@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -7,6 +9,7 @@ public class MainMenuOptions : MonoBehaviour
 {
     [SerializeField] private GameObject optionsObject;
     [SerializeField] private GameObject levelObject;
+    [SerializeField] private GameObject panel;
     [SerializeField] private GameObject[] optionTabs;
     [SerializeField] private AudioSource mainTheme;
     [SerializeField] private AudioClip mainThemeClip;
@@ -25,6 +28,7 @@ public class MainMenuOptions : MonoBehaviour
 
     public void OpenOptionsMenu()
     {
+        panel.SetActive(false);
         if (levelObject.activeSelf)
         {
             levelObject.SetActive(false);
@@ -38,6 +42,7 @@ public class MainMenuOptions : MonoBehaviour
 
     public void CloseOptionsMenu()
     {
+        panel.SetActive(true);
         if (optionsObject.activeSelf)
         {
             optionsObject.SetActive(false);
@@ -85,6 +90,7 @@ public class MainMenuOptions : MonoBehaviour
     
     public void CloseLevelSelector()
     {
+        panel.SetActive(true);
         if (levelObject.activeSelf)
         {
             levelObject.SetActive(false);
@@ -93,6 +99,7 @@ public class MainMenuOptions : MonoBehaviour
     
     public void OpenLevelSelector()
     {
+        panel.SetActive(false);
         if (optionsObject.activeSelf)
         {
             optionsObject.SetActive(false);
