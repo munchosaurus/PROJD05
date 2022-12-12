@@ -1406,6 +1406,7 @@ MonoBehaviour:
   _audioSource: {fileID: 627992507}
   swirlClip: {fileID: 8300000, guid: ff98d2a5b345b274d96db21ee02b7a2e, type: 3}
   victoryClip: {fileID: 8300000, guid: 2d3ef720675f54646b7666e3b5ed0b6e, type: 3}
+  suctionSpeed: 1
 --- !u!1001 &1260774266
 PrefabInstance:
   m_ObjectHideFlags: 0
