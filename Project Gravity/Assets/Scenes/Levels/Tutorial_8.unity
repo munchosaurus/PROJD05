@@ -722,6 +722,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 26715056}
   clip: {fileID: 8300000, guid: caa08ece994ca2d4484ce095be428ae4, type: 3}
+  alternateClip: {fileID: 0}
+  hasAlternateStuff: 0
+  theText: {fileID: 0}
+  alternateTextString: 
+  theImages: []
+  alternateImageSprites: []
 --- !u!82 &26715056
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6565,7 +6571,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: afd9f0cf7cfd1b94e85bdaf2df11abaf, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -14956,6 +14962,10 @@ PrefabInstance:
     - target: {fileID: 953350191, guid: a663feaaee8f33a499bf2c7295e3b0cc, type: 3}
       propertyPath: isTutorialLevel
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 908920862911098188, guid: a663feaaee8f33a499bf2c7295e3b0cc, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8737704364896298532, guid: a663feaaee8f33a499bf2c7295e3b0cc, type: 3}
       propertyPath: m_RootOrder
