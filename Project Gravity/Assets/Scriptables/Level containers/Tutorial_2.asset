@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Tutorial_2
   m_EditorClassIdentifier: 
   levelName: Tutorial_2
-  levelID: 2
-  levelSprite: {fileID: 21300000, guid: d89ba7317ae001e40981eaefed311305, type: 3}
+  levelSprite: {fileID: 21300000, guid: b07a8ff2df54e364bb337a070187f755, type: 3}
   levelDescription: Tutorial 2 description

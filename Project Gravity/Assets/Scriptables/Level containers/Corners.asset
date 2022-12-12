@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Corners
   m_EditorClassIdentifier: 
   levelName: Corners
-  levelID: 5
-  levelSprite: {fileID: 21300000, guid: 6fe7b794e7a1bb449b31eaa7c4fa19bd, type: 3}
+  levelSprite: {fileID: 21300000, guid: 567dd081eee8a664e9ea6042ebc341b2, type: 3}
   levelDescription: Corners Description

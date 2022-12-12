@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Help the Box
   m_EditorClassIdentifier: 
   levelName: Help the Box
-  levelID: 7
-  levelSprite: {fileID: 21300000, guid: f0428e03fa44db94ead7025043412afe, type: 3}
+  levelSprite: {fileID: 21300000, guid: 636cbfbeebaa2db4faa0896f3e5ba104, type: 3}
   levelDescription: Help the Box description

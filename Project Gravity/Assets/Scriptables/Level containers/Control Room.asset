@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Control Room
   m_EditorClassIdentifier: 
   levelName: Control Room
-  levelID: 0
-  levelSprite: {fileID: 21300000, guid: 0cc39a811ac07104b953ba896edc9726, type: 3}
+  levelSprite: {fileID: 21300000, guid: 8a940e8658a23be428dcf6770384ef7e, type: 3}
   levelDescription: Control Room description

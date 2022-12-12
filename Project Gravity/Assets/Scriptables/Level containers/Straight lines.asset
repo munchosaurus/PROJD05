@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Straight lines
   m_EditorClassIdentifier: 
   levelName: Straight lines
-  levelID: 11
-  levelSprite: {fileID: 21300000, guid: db04fe94f9b0c9c479ff0cdc48ce08b0, type: 3}
+  levelSprite: {fileID: 21300000, guid: cc85d887158de564e854392c1585a0cc, type: 3}
   levelDescription: Straight lines description

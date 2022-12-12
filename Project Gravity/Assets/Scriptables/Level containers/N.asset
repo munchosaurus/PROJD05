@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: N
   m_EditorClassIdentifier: 
   levelName: N
-  levelID: 18
-  levelSprite: {fileID: 21300000, guid: 0cc39a811ac07104b953ba896edc9726, type: 3}
+  levelSprite: {fileID: 21300000, guid: df28c9a516477d04dbc57d5baf192571, type: 3}
   levelDescription: N description

@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Magnet One
   m_EditorClassIdentifier: 
   levelName: Magnet 1
-  levelID: 17
-  levelSprite: {fileID: 21300000, guid: 554cf83644ab36044a98b44e63cdd9db, type: 3}
+  levelSprite: {fileID: 21300000, guid: 670a0974bd1073d49bdbbcd7135a505a, type: 3}
   levelDescription: Magnet One description

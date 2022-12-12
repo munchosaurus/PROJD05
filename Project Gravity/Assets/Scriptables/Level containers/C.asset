@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: C
   m_EditorClassIdentifier: 
   levelName: C
-  levelID: 0
-  levelSprite: {fileID: 21300000, guid: 79d5e75c0434f7e4d92067beb366c332, type: 3}
+  levelSprite: {fileID: 21300000, guid: 467cdaa04a0ccfc4bb53adb2a138b06b, type: 3}
   levelDescription: C description
