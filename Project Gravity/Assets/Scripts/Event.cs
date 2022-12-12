@@ -36,3 +36,8 @@ public class CollisionEvent : Event
 public class WinningEvent : Event
 {
 }
+
+public class LevelStartEvent : Event
+{
+    
+}

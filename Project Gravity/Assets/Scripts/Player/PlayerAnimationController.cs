@@ -13,6 +13,7 @@ public class PlayerAnimationController : MonoBehaviour
     private bool playerHasWon;
     private Vector3 velocity;
     private static Guid _playerSucceedsGuid;
+
     private void Start()
     {
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
@@ -51,10 +52,11 @@ public class PlayerAnimationController : MonoBehaviour
             transform.position += velocity * Time.fixedDeltaTime;
         }
     }
-    
+
     public void MoveToTarget()
     {
-        Vector3 nextPos = Vector3.MoveTowards(transform.position, target.transform.position, suctionSpeed * Time.fixedDeltaTime);
+        Vector3 nextPos = Vector3.MoveTowards(transform.position, target.transform.position,
+            suctionSpeed * Time.fixedDeltaTime);
         if (nextPos == transform.position)
         {
             velocity = Vector3.zero;
@@ -67,5 +69,18 @@ public class PlayerAnimationController : MonoBehaviour
             velocity.x = speedX;
             velocity.y = speedY;
         }
+    }
+
+    public void StartLevelAnimation()
+    {
+        _audioSource.PlayOneShot(swirlClip);
+    }
+
+    public void StartLevel()
+    {
+        LevelStartEvent levelStartEvent = new LevelStartEvent()
+        {
+        };
+        EventSystem.Current.FireEvent(levelStartEvent);
     }
 }

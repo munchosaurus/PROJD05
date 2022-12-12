@@ -56,8 +56,9 @@ public class Tutorial : MonoBehaviour
                 {
                     Debug.Log("No main theme speaker found");
                 }
-                
-                FindObjectOfType<IngameMenu>().Unpause();
+
+                Time.timeScale = 1;
+                //FindObjectOfType<IngameMenu>().Unpause();
             }
         }
     }

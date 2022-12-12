@@ -219,8 +219,15 @@ public class IngameMenu : MonoBehaviour
             menus[index].SetActive(true);
         }
 
-        levelCompleteReturn.SetActive(false);
-
+        if (_playerWon)
+        {
+            levelCompleteReturn.SetActive(true);
+        }
+        else
+        {
+            levelCompleteReturn.SetActive(false);
+        }
+        
         if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1 && index == 1)
         {
             if (nextLevelButton.IsInteractable())
@@ -290,6 +297,7 @@ public class IngameMenu : MonoBehaviour
             CompletionLogger.win = 1;
             CompletionLogger.finishTime = elapsedTime;
             CompletionLogger.WriteCompletionLog();
+            
         }
     }
 

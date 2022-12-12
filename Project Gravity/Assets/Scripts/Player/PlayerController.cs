@@ -25,14 +25,26 @@ public class PlayerController : MonoBehaviour
     private AudioSource _audioSource;
     private const float GridClampThreshold = 0.02f;
     private const float PlayerCollisionGridClamp = 0.5f;
-    private Guid _playerSucceedsGuid;
+    private static Guid _playerSucceedsGuid;
+    private static Guid _levelStartsGuid;
 
     // Start is called before the first frame update
     void Start()
     {
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
-        GameController.PauseGame();
-        StartCoroutine(SwitchInputLock());
+        EventSystem.Current.RegisterListener<LevelStartEvent>(OnLevelStarts, ref _levelStartsGuid);
+        
+        if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
+        {
+            GameController.PauseGame();
+            FindObjectOfType<IngameMenu>().ToggleActionMap(true);
+            GameObject.Find("Tutorial").GetComponent<Tutorial>().BeginTutorial();
+        }
+        else
+        {
+            GameController.SetInputLockState(true);
+        }
+
         _audioSource = GetComponent<AudioSource>();
         velocity = Vector3.zero;
     }
@@ -69,23 +81,11 @@ public class PlayerController : MonoBehaviour
     private IEnumerator SwitchInputLock()
     {
         yield return new WaitForSecondsRealtime(Constants.LEVEL_LOAD_INPUT_PAUSE_TIME);
+    }
 
-        if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
-        {
-            FindObjectOfType<IngameMenu>().ToggleActionMap(true);
-            GameObject.Find("Tutorial").GetComponent<Tutorial>().BeginTutorial();
-        }
-        else
-        {
-            if (GameController.IsPaused())
-            {
-                GameController.UnpauseGame();
-            }
-            else
-            {
-                GameController.PauseGame();
-            }
-        }
+    public void OnLevelStarts(LevelStartEvent levelStartEvent)
+    {
+        FindObjectOfType<IngameMenu>().Unpause();
     }
 
     private void ClampToGrid()
