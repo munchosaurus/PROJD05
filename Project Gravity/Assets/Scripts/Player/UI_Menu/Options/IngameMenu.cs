@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,18 +12,17 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private GameObject[] menus;
     [SerializeField] public GameObject interactText;
     [SerializeField] private Texture2D customAimCursor;
-    //[SerializeField] private Texture2D customCursor;
     [SerializeField] private int previousMenu;
-    
-    [Header("Level complete UI objects")]
-    [SerializeField] private TMP_Text levelRecordText;
+
+    [Header("Level complete UI objects")] [SerializeField]
+    private TMP_Text levelRecordText;
+
     [SerializeField] private TMP_Text newRecordText;
     [SerializeField] private TMP_Text completedLevelTitle;
     [SerializeField] private Button nextLevelButton;
-    [SerializeField] private GameObject levelSelectorPauseReturn;
+    [SerializeField] private GameObject levelCompleteReturn;
 
     [SerializeField] private GameObject[] optionTabs;
-    //[SerializeField] private Button[] optionButtons;
     private PlayerInput _playerInput;
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
@@ -45,10 +45,10 @@ public class IngameMenu : MonoBehaviour
     {
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
-        
+
         _playerInput = FindObjectOfType<PlayerInput>();
 
-         if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
+        if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
         {
             _playerInput.SwitchCurrentActionMap("MenuControls");
         }
@@ -65,7 +65,7 @@ public class IngameMenu : MonoBehaviour
         }
 
         Physics.gravity = new Vector3(0, -GravityController.GravityMultiplier * Constants.GRAVITY, 0);
-        
+
         if (customAimCursor != null)
         {
             SetAimCursor();
@@ -74,9 +74,10 @@ public class IngameMenu : MonoBehaviour
 
     void SetAimCursor()
     {
-        Cursor.SetCursor(customAimCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2), CursorMode.Auto);
+        Cursor.SetCursor(customAimCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2),
+            CursorMode.Auto);
     }
-    
+
     public void ToggleActionMap(bool paused)
     {
         if (paused)
@@ -132,20 +133,47 @@ public class IngameMenu : MonoBehaviour
             {
                 if (menus[0].gameObject.activeSelf)
                 {
+                    if (_playerWon)
+                    {
+                        ToggleLevelCompleteMenu(false);
+                        return;
+                    }
                     Unpause();
-                } else if (menus[1].gameObject.activeSelf)
+                }
+                else if (menus[1].gameObject.activeSelf)
+                {
+                    ToggleLevelCompleteMenu(true);
+                }
+                else if (menus[3].gameObject.activeSelf)
                 {
                     OpenPauseScreenFromLevelSelector();
+                } else if (menus[4].gameObject.activeSelf)
+                {
+                    CloseOptionsMenu();
                 }
             }
         }
     }
 
+    public void ToggleLevelCompleteMenu(bool open)
+    {
+        if (open)
+        {
+            menus[1].gameObject.SetActive(false);
+            menus[0].gameObject.SetActive(true);
+            levelCompleteReturn.SetActive(true);
+            return;
+        }
+
+        menus[1].gameObject.SetActive(true);
+        menus[0].gameObject.SetActive(false);
+        levelCompleteReturn.SetActive(false);
+    }
+
     public void OpenPauseScreenFromLevelSelector()
     {
-        menus[1].gameObject.SetActive(false);
+        menus[3].gameObject.SetActive(false);
         menus[0].gameObject.SetActive(true);
-        levelSelectorPauseReturn.SetActive(true);
     }
 
     public void Unpause()
@@ -177,7 +205,7 @@ public class IngameMenu : MonoBehaviour
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         gameObject.SetActive(true);
 
-        levelSelectorPauseReturn.SetActive(false);
+        levelCompleteReturn.SetActive(false);
         foreach (var menu in menus)
         {
             if (menu.gameObject.activeSelf)
@@ -185,12 +213,14 @@ public class IngameMenu : MonoBehaviour
                 menu.SetActive(false);
             }
         }
+
         if (!menus[index].activeSelf)
         {
             menus[index].SetActive(true);
         }
-        levelSelectorPauseReturn.SetActive(false);
-        
+
+        levelCompleteReturn.SetActive(false);
+
         if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1 && index == 1)
         {
             if (nextLevelButton.IsInteractable())
@@ -228,7 +258,7 @@ public class IngameMenu : MonoBehaviour
             LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
             LevelCompletionTracker.SetLevelBest(SceneManager.GetActiveScene().buildIndex,
                 FindObjectOfType<LevelTimer>().GetTimePassed());
-        
+
             float bestTime = LevelCompletionTracker.levelRecords[SceneManager.GetActiveScene().buildIndex];
             float minutes = Mathf.FloorToInt(bestTime / 60);
             float seconds = Mathf.FloorToInt(bestTime % 60);
@@ -238,9 +268,10 @@ public class IngameMenu : MonoBehaviour
             float elapsedMinutes = Mathf.FloorToInt(elapsedTime / 60);
             float elapsedSeconds = Mathf.FloorToInt(elapsedTime % 60);
             float elapsedMilliseconds = Mathf.Floor(elapsedTime % 1 * 100);
-        
+
             // If a new record has been set by the player
-            if (LevelCompletionTracker.IsTimeNewRecord(SceneManager.GetActiveScene().buildIndex, FindObjectOfType<LevelTimer>().GetTimePassed()))
+            if (LevelCompletionTracker.IsTimeNewRecord(SceneManager.GetActiveScene().buildIndex,
+                    FindObjectOfType<LevelTimer>().GetTimePassed()))
             {
                 newRecordText.color = Color.red;
                 newRecordText.text = $"New Record: {minutes:00}:{seconds:00}:{milliSeconds:00}";
@@ -250,9 +281,10 @@ public class IngameMenu : MonoBehaviour
                 newRecordText.color = Color.white;
                 newRecordText.text = $"Your Time: {elapsedMinutes:00}:{elapsedSeconds:00}:{elapsedMilliseconds:00}";
             }
-        
+
             levelRecordText.text = $"Best Time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
-            completedLevelTitle.text = GetComponent<LevelSelector>().levelContainers[SceneManager.GetActiveScene().buildIndex-1].levelName;
+            completedLevelTitle.text = GetComponent<LevelSelector>()
+                .levelContainers[SceneManager.GetActiveScene().buildIndex - 1].levelName;
             GameLauncher.SaveLevels();
             CompletionLogger.lose = 0;
             CompletionLogger.win = 1;
@@ -283,7 +315,7 @@ public class IngameMenu : MonoBehaviour
             Restart();
         }
     }
-    
+
 
     public void Restart()
     {
@@ -292,6 +324,7 @@ public class IngameMenu : MonoBehaviour
             CompletionLogger.finishTime = FindObjectOfType<LevelTimer>().GetTimePassed();
             CompletionLogger.WriteCompletionLog();
         }
+
         LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -301,6 +334,7 @@ public class IngameMenu : MonoBehaviour
         {
             return;
         }
+
         LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex);
         LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
         LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -385,7 +419,7 @@ public class IngameMenu : MonoBehaviour
         {
             go.SetActive(false);
         }
-        
+
         optionTabs[index].SetActive(true);
     }
 }

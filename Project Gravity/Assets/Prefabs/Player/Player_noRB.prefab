@@ -1588,6 +1588,10 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1827058397106459540, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
+      propertyPath: levelCompleteReturn
+      value: 
+      objectReference: {fileID: 3485597743273818244}
     - target: {fileID: 1827058398041054225, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1881,6 +1885,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b2ef3b252642c28c6c524deabf1375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3485597743273818244 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3782812195342660393, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
+  m_PrefabInstance: {fileID: 297355258967296941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &9064548700267641867 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8785348646229604262, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
