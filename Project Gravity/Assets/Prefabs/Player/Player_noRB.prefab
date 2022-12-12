@@ -893,7 +893,6 @@ GameObject:
   - component: {fileID: 944047855}
   - component: {fileID: 7499340524292069296}
   - component: {fileID: 756784478}
-  - component: {fileID: 4086450689654132236}
   - component: {fileID: 3389007568940360421}
   m_Layer: 0
   m_Name: Player_noRB
@@ -1390,14 +1389,6 @@ MonoBehaviour:
   aimCursor: {fileID: 21300000, guid: 1114e860007ef0744ad26ae6f78e6911, type: 3}
   regularCursor: {fileID: 21300000, guid: f1e7fa41923c49b4fb16e29b1da4bab2, type: 3}
   cursorImage: {fileID: 1047718894}
---- !u!81 &4086450689654132236
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7406499542109578702}
-  m_Enabled: 1
 --- !u!114 &3389007568940360421
 MonoBehaviour:
   m_ObjectHideFlags: 0
