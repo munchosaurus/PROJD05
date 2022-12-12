@@ -1405,7 +1405,12 @@ MonoBehaviour:
   target: {fileID: 0}
   _audioSource: {fileID: 627992507}
   swirlClip: {fileID: 8300000, guid: ff98d2a5b345b274d96db21ee02b7a2e, type: 3}
-  victoryClip: {fileID: 8300000, guid: 2d3ef720675f54646b7666e3b5ed0b6e, type: 3}
+  victoryClip:
+  - {fileID: 8300000, guid: 036fbb282e926ed48bb1cbb4ed05e9ae, type: 3}
+  - {fileID: 8300000, guid: 21a1c037aeffc2746a9a459e702e5ed5, type: 3}
+  - {fileID: 8300000, guid: b2c9cb52a4102d9459f5290b5c93c34a, type: 3}
+  - {fileID: 8300000, guid: 4bab62d19dbddcd4c93845d5ff62898c, type: 3}
+  - {fileID: 8300000, guid: 21004802fec00fe43831b552a2597625, type: 3}
   suctionSpeed: 1
 --- !u!1001 &1260774266
 PrefabInstance:

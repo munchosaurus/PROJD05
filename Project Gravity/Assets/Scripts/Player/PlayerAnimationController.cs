@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = System.Random;
 
 public class PlayerAnimationController : MonoBehaviour
 {
@@ -8,8 +10,9 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private GameObject target;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip swirlClip;
-    [SerializeField] private AudioClip victoryClip;
+    [SerializeField] private AudioClip[] victoryClip;
     [SerializeField] private float suctionSpeed;
+    private static int lastSound;
     private bool playerHasWon;
     private Vector3 velocity;
     private static Guid _playerSucceedsGuid;
@@ -32,9 +35,23 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
+    private AudioClip GetVictorySound()
+    {
+        Random rnd = new Random();
+        int i;
+        do
+        {
+            i = rnd.Next(5);
+            Debug.Log(i);
+        } while (i == lastSound);
+
+        lastSound = i;
+        return victoryClip[i];
+    }
+
     public void FinishAnimation()
     {
-        _audioSource.PlayOneShot(victoryClip);
+        _audioSource.PlayOneShot(GetVictorySound());
         FindObjectOfType<IngameMenu>().Pause(1);
     }
 
@@ -73,7 +90,6 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void StartLevelAnimation()
     {
-        Debug.Log("ja");
         _audioSource.PlayOneShot(swirlClip);
     }
 

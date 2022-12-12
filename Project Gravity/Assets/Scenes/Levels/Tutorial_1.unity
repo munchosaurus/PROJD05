@@ -3301,6 +3301,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3389007568940360421, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: victoryClip.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389007568940360421, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: victoryClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 036fbb282e926ed48bb1cbb4ed05e9ae, type: 3}
+    - target: {fileID: 3389007568940360421, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: victoryClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 21a1c037aeffc2746a9a459e702e5ed5, type: 3}
+    - target: {fileID: 3389007568940360421, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: victoryClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: b2c9cb52a4102d9459f5290b5c93c34a, type: 3}
+    - target: {fileID: 3389007568940360421, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: victoryClip.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4bab62d19dbddcd4c93845d5ff62898c, type: 3}
+    - target: {fileID: 3389007568940360421, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: victoryClip.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 21004802fec00fe43831b552a2597625, type: 3}
     - target: {fileID: 3459018647734519139, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
