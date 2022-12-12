@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using Mono.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -94,10 +93,11 @@ public class GameOptions : MonoBehaviour
         {
             if (go.hideFlags != HideFlags.None)
                 continue;
-            if (PrefabUtility.GetPrefabType(go) == PrefabType.Prefab || PrefabUtility.GetPrefabType(go) == PrefabType.ModelPrefab)
-                continue;
+            // if (PrefabUtility.GetPrefabType(go) == PrefabType.Prefab || PrefabUtility.GetPrefabType(go) == PrefabType.ModelPrefab)
+            //     continue;
             texts.Add(go);
         }
+        Debug.Log(texts.Count);
         foreach (var VARIABLE in texts)
         {
             VARIABLE.font = fontToUse;

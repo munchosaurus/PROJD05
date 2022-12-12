@@ -45,6 +45,11 @@ public class GravityGun : MonoBehaviour
     private static int lastMirrorHit;
     private static int magnetLayer;
 
+    private static Guid _playerDeathGuid;
+    private static Guid _playerSucceedsGuid;
+
+    private bool playerWon;
+    private bool playerDied;
 
     private void Awake()
     {
@@ -53,6 +58,9 @@ public class GravityGun : MonoBehaviour
         magnetLayer = LayerMask.NameToLayer("GravityMagnet");
         mirrorLayer = LayerMask.NameToLayer("Mirror");
         playerInput = FindObjectOfType<PlayerInput>();
+        
+        EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
+        EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
         
         if (aimDirector.GetComponent<SpriteRenderer>().enabled)
         {
@@ -69,7 +77,7 @@ public class GravityGun : MonoBehaviour
 
         _currentDirection = GetMousePositionOnPlane() - transform.position;
 
-        if (buttonPressed)
+        if (buttonPressed && !playerWon && !playerDied)
         {
             playerShotAudioSource.clip = playerAims;
             playerShotAudioSource.Play();
@@ -85,6 +93,21 @@ public class GravityGun : MonoBehaviour
         {
             _playerAimEffectController.gameObject.SetActive(false);
         }
+    }
+
+    public void OnPlayerSucceedsLevel(WinningEvent winningEvent)
+    {
+        playerWon = true;
+        _playerAimEffectController.gameObject.SetActive(false);
+        playerShotAudioSource.Stop();
+
+    }
+
+    public void OnPlayerDeath(PlayerDeathEvent playerDeathEvent)
+    {
+        playerDied = true;
+        _playerAimEffectController.gameObject.SetActive(false);
+        playerShotAudioSource.Stop();
     }
 
     private void SetCrosshair()

@@ -2278,7 +2278,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -5}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 220, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &313699933
 MonoBehaviour:
@@ -2301,7 +2301,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Initializing <color=#00aaffff>[Test Subject 37]</color>. Welcome. Beginning
-    first activation protocols.
+    first activation protocols. Press <color=#00aaffff>[Left Click]</color> to continue.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
   m_sharedMaterial: {fileID: 2126825604142186142, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
@@ -2719,6 +2719,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 346850047}
   clip: {fileID: 8300000, guid: 86ddd1b728351a246a145749f502b226, type: 3}
+  alternateClip: {fileID: 0}
+  hasAlternateStuff: 0
+  theText: {fileID: 0}
+  alternateTextString: 
+  theImages: []
+  alternateImageSprites: []
 --- !u!82 &346850047
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6290,6 +6296,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 783678996}
   clip: {fileID: 8300000, guid: f31efd92c95a1a547a9416bb74876f24, type: 3}
+  alternateClip: {fileID: 8300000, guid: 8a503804d782ec641a40bed52297570d, type: 3}
+  hasAlternateStuff: 1
+  theText: {fileID: 1210250280}
+  alternateTextString: "This is a <color=#00aaffff>[Gravity Plate]</color>. \n\nYou
+    can change the direction of gravity by shooting at it with your <color=#00aaffff>[Gravity
+    Gun]</color>.\nPress the <color=#00aaffff>[Right Trigger]</color> to shoot!"
+  theImages:
+  - {fileID: 1356179837}
+  alternateImageSprites:
+  - {fileID: 21300000, guid: 79d5e75c0434f7e4d92067beb366c332, type: 3}
 --- !u!82 &783678996
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8986,7 +9002,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 911553a59115aec44a5b674519e0206c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10743,7 +10759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20, y: 5}
+  m_AnchoredPosition: {x: 40, y: 5}
   m_SizeDelta: {x: 130, y: 65}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1356179837
@@ -12425,7 +12441,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1603404692}
-  clip: {fileID: 8300000, guid: 63b6c02154277114cadde2b632e1ffd2, type: 3}
+  clip: {fileID: 8300000, guid: 6b1b20baa385a3943b2a18f8d2c9827d, type: 3}
+  alternateClip: {fileID: 8300000, guid: 1ffee701e0bd5934182c2470f51e629c, type: 3}
+  hasAlternateStuff: 1
+  theText: {fileID: 313699933}
+  alternateTextString: Initializing <color=#00aaffff>[Test Subject 37]</color>. Welcome.
+    Beginning first activation protocols. Press <color=#00aaffff>[Right Trigger]</color>
+    to continue.
+  theImages: []
+  alternateImageSprites: []
 --- !u!82 &1603404692
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12579,7 +12603,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 180, y: 40}
+  m_SizeDelta: {x: 240, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &1604663680 stripped
 Transform:
@@ -16269,6 +16293,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 2049149540}
   clip: {fileID: 8300000, guid: b112e977c99679741943703cd18ac042, type: 3}
+  alternateClip: {fileID: 8300000, guid: e8259f6c7e03b174385e667b3c7d784a, type: 3}
+  hasAlternateStuff: 1
+  theText: {fileID: 945465069}
+  alternateTextString: Use the <color=#00aaffff>D-pad</color> on your controller
+    to move Up, Left, Down and Right. To Jump, use the <color=#00aaffff>[South Face]</color>
+    button.
+  theImages:
+  - {fileID: 2034795806}
+  - {fileID: 1924732797}
+  alternateImageSprites:
+  - {fileID: 21300000, guid: 80e0d7168e332e54a8a32cb58a7c4811, type: 3}
+  - {fileID: 21300000, guid: 48fccd369df0a7e43ac574f677fa9040, type: 3}
 --- !u!82 &2049149540
 AudioSource:
   m_ObjectHideFlags: 0
