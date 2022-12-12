@@ -73,6 +73,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void StartLevelAnimation()
     {
+        Debug.Log("ja");
         _audioSource.PlayOneShot(swirlClip);
     }
 
