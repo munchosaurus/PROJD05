@@ -8,34 +8,27 @@ public class DynamicObjectMovement : MonoBehaviour
     public Vector3 velocity;
 
     [SerializeField] private Vector3 horizontalCast, verticalCast;
-
-    // [SerializeField] bool groundedRight;
-    // [SerializeField] bool groundedLeft;
-    // [SerializeField] bool groundedUp;
-    // [SerializeField] bool groundedDown;
-    // [SerializeField] private float friction;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask magnetMask;
     [SerializeField] private GameObject effectHolder;
-
-    public float collisionDefaultVolume;
-
-    //private readonly float OBJECT_Z = 1;
     private Quaternion lockedRotation;
     private Vector3 boxCastDimensions;
     private bool isGrounded;
     public bool lockedToMagnet;
     private Vector3 magnetPosition;
     private const float ObjectCollisionGridClamp = 0.5f;
-
+    private bool playerWon;
     private float magnetVel;
+    private static int _playerLayer;
+    private static Guid _playerSucceedsGuid;
 
     // Start is called before the first frame update
     void Start()
     {
-        collisionDefaultVolume = GetComponent<AudioSource>().volume;
+        _playerLayer = LayerMask.NameToLayer("Player");
         velocity = Vector3.zero;
         lockedRotation = new Quaternion(0, 0, 0, 0);
+        EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
     }
 
     void FixedUpdate()
@@ -64,6 +57,11 @@ public class DynamicObjectMovement : MonoBehaviour
         ApplyFrictionStop();
 
         transform.position += velocity * Time.fixedDeltaTime;
+    }
+
+    public void OnPlayerSucceedsLevel(WinningEvent winningEvent)
+    {
+        playerWon = true;
     }
 
     public void SetMagnetPosition(Vector3 targetPos, float magnetSpeed)
@@ -193,6 +191,16 @@ public class DynamicObjectMovement : MonoBehaviour
         }
     }
 
+    private bool CheckIfCollisionObjectIsWinningPlayer(GameObject go)
+    {
+        if (playerWon && go.layer == _playerLayer)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     /*
     * Dampens movement if needed, will check if the current velocity will place the player within a cube.
     * Also calls upon method handling collision sounds.
@@ -209,9 +217,12 @@ public class DynamicObjectMovement : MonoBehaviour
                 if (Math.Abs(transform.position.y - nextPos.y) < Math.Abs(transform.position.y - hit.point.y))
                 {
                     CheckCollisionInMovement(Vector3.down);
-                    transform.position = new Vector3(transform.position.x, hit.point.y + ObjectCollisionGridClamp,
-                        transform.position.z);
-                    velocity.y = 0;
+                    if (!CheckIfCollisionObjectIsWinningPlayer(hit.collider.gameObject))
+                    {
+                        transform.position = new Vector3(transform.position.x, hit.point.y + ObjectCollisionGridClamp,
+                            transform.position.z);
+                        velocity.y = 0;
+                    }
                 }
             }
         }
@@ -223,9 +234,12 @@ public class DynamicObjectMovement : MonoBehaviour
                 if (Math.Abs(transform.position.y - nextPos.y) < Math.Abs(transform.position.y - hit.point.y))
                 {
                     CheckCollisionInMovement(Vector3.up);
-                    transform.position = new Vector3(transform.position.x, hit.point.y - ObjectCollisionGridClamp,
-                        transform.position.z);
-                    velocity.y = 0;
+                    if (!CheckIfCollisionObjectIsWinningPlayer(hit.collider.gameObject))
+                    {
+                        transform.position = new Vector3(transform.position.x, hit.point.y - ObjectCollisionGridClamp,
+                            transform.position.z);
+                        velocity.y = 0;
+                    }
                 }
             }
         }
@@ -238,9 +252,12 @@ public class DynamicObjectMovement : MonoBehaviour
                 if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.x))
                 {
                     CheckCollisionInMovement(Vector3.left);
-                    transform.position = new Vector3(hit.point.x + ObjectCollisionGridClamp, transform.position.y,
-                        transform.position.z);
-                    velocity.x = 0;
+                    if (!CheckIfCollisionObjectIsWinningPlayer(hit.collider.gameObject))
+                    {
+                        transform.position = new Vector3(hit.point.x + ObjectCollisionGridClamp, transform.position.y,
+                            transform.position.z);
+                        velocity.x = 0;
+                    }
                 }
             }
         }
@@ -252,9 +269,12 @@ public class DynamicObjectMovement : MonoBehaviour
                 if (Math.Abs(transform.position.x - nextPos.x) < Math.Abs(transform.position.x - hit.point.x))
                 {
                     CheckCollisionInMovement(Vector3.right);
-                    transform.position = new Vector3(hit.point.x - ObjectCollisionGridClamp, transform.position.y,
-                        transform.position.z);
-                    velocity.x = 0;
+                    if (!CheckIfCollisionObjectIsWinningPlayer(hit.collider.gameObject))
+                    {
+                        transform.position = new Vector3(hit.point.x - ObjectCollisionGridClamp, transform.position.y,
+                            transform.position.z);
+                        velocity.x = 0;
+                    }
                 }
             }
         }

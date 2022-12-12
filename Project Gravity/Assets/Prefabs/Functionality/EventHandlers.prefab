@@ -403,6 +403,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emberRotationTag: EmberRotation
   gravityChangeLayer: GravityChange
+--- !u!1 &6470912782521762214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8646160611473059501}
+  - component: {fileID: 5893755952852923153}
+  - component: {fileID: 1452312295487030455}
+  m_Layer: 0
+  m_Name: PlayerAudioListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8646160611473059501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6470912782521762214}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8737704364896298532}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5893755952852923153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6470912782521762214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7803cb12b5332c84d9c5df52d6a302dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!81 &1452312295487030455
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6470912782521762214}
+  m_Enabled: 1
 --- !u!1 &8737704364896298535
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,6 +490,7 @@ Transform:
   - {fileID: 7492477007387851065}
   - {fileID: 529100015}
   - {fileID: 2302443303069932872}
+  - {fileID: 8646160611473059501}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

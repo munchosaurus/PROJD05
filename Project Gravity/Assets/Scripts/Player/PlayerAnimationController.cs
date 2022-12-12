@@ -9,7 +9,7 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip swirlClip;
     [SerializeField] private AudioClip victoryClip;
-    private static readonly int Dead = Animator.StringToHash("dead");
+    [SerializeField] private float suctionSpeed;
     private bool playerHasWon;
     private Vector3 velocity;
     private static Guid _playerSucceedsGuid;
@@ -54,7 +54,7 @@ public class PlayerAnimationController : MonoBehaviour
     
     public void MoveToTarget()
     {
-        Vector3 nextPos = Vector3.MoveTowards(transform.position, target.transform.position, 2 * Time.fixedDeltaTime);
+        Vector3 nextPos = Vector3.MoveTowards(transform.position, target.transform.position, suctionSpeed * Time.fixedDeltaTime);
         if (nextPos == transform.position)
         {
             velocity = Vector3.zero;

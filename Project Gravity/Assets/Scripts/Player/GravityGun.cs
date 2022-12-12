@@ -100,7 +100,7 @@ public class GravityGun : MonoBehaviour
         playerWon = true;
         _playerAimEffectController.gameObject.SetActive(false);
         playerShotAudioSource.Stop();
-
+        DisableAimDirector();
     }
 
     public void OnPlayerDeath(PlayerDeathEvent playerDeathEvent)
@@ -108,6 +108,7 @@ public class GravityGun : MonoBehaviour
         playerDied = true;
         _playerAimEffectController.gameObject.SetActive(false);
         playerShotAudioSource.Stop();
+        DisableAimDirector();
     }
 
     private void SetCrosshair()

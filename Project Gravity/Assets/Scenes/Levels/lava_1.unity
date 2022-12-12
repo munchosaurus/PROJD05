@@ -8361,6 +8361,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3389007568940360421, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: suctionSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6430790505297024188, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -12723,6 +12727,10 @@ PrefabInstance:
       value: Main Camera
       objectReference: {fileID: 0}
     - target: {fileID: 2110725554297923202, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109960999718033039, guid: f48897fa3ce190e4ab50bcccc4a5a2be, type: 3}
       propertyPath: m_ClearFlags
       value: 1
       objectReference: {fileID: 0}
