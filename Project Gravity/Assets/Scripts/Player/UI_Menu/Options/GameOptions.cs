@@ -97,7 +97,6 @@ public class GameOptions : MonoBehaviour
             //     continue;
             texts.Add(go);
         }
-        Debug.Log(texts.Count);
         foreach (var VARIABLE in texts)
         {
             VARIABLE.font = fontToUse;
