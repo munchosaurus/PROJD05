@@ -14,11 +14,14 @@ public class LevelTimer : MonoBehaviour
     [SerializeField] private float minutes;
     [SerializeField] private float seconds;
     [SerializeField] private float milliSeconds;
-    private bool _shouldKeepCounting = true;
+    private static Guid _levelStartsGuid;
+    private bool shouldCount;
+    private bool _shouldKeepCounting;
     private Guid _playerSucceedsGuid;
     private void Start()
     {
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
+        EventSystem.Current.RegisterListener<LevelStartEvent>(OnLevelStarts, ref _levelStartsGuid);
         _levelSettings = (LevelSettings) FindObjectOfType (typeof(LevelSettings));
         _ingameMenu = (IngameMenu) FindObjectOfType (typeof(IngameMenu));
         if (_levelSettings == null)
@@ -37,6 +40,11 @@ public class LevelTimer : MonoBehaviour
         {
             levelTimer = _levelSettings.GetLevelTimeLimit();
         }
+    }
+    
+    public void OnLevelStarts(LevelStartEvent levelStartEvent)
+    {
+        _shouldKeepCounting = true;
     }
 
     private void OnPlayerSucceedsLevel(WinningEvent winningEvent)
