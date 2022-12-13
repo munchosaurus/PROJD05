@@ -135,7 +135,7 @@ Transform:
   - {fileID: 6542114518628182561}
   - {fileID: 8454899134528194197}
   - {fileID: 5454304062079982018}
-  - {fileID: 7758917372699214862}
+  - {fileID: 9129378208182227261}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -243,7 +243,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &3875073202925921715
+--- !u!1 &4168194147507961388
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,40 +251,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7758917372699214862}
-  - component: {fileID: 8982024629024442517}
-  - component: {fileID: 3661739237303649871}
+  - component: {fileID: 9129378208182227261}
+  - component: {fileID: 2663218412003315237}
+  - component: {fileID: 6982835753847708678}
   m_Layer: 0
   m_Name: Ember Effect
-  m_TagString: EmberRotation
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7758917372699214862
+--- !u!4 &9129378208182227261
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3875073202925921715}
+  m_GameObject: {fileID: 4168194147507961388}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2272794006740107932}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!2083052967 &8982024629024442517
+--- !u!2083052967 &2663218412003315237
 VisualEffect:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3875073202925921715}
+  m_GameObject: {fileID: 4168194147507961388}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 8fdb80e8debcb534fa42c5ad044b91e6, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: cb676f110dde3344abfeabf0095bfbfa, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -298,10 +298,7 @@ VisualEffect:
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array:
-      - m_Value: {x: 30.179165, y: 4.4241705, z: 1.5800605, w: 1}
-        m_Name: FlamesColour
-        m_Overridden: 1
+      m_Array: []
     m_Uint:
       m_Array: []
     m_Int:
@@ -316,14 +313,14 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!73398921 &3661739237303649871
+--- !u!73398921 &6982835753847708678
 VFXRenderer:
   serializedVersion: 1
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3875073202925921715}
+  m_GameObject: {fileID: 4168194147507961388}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
