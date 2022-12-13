@@ -1617,6 +1617,22 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2370178887324507364, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370178887324507364, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: -754946721, guid: 0bc38c524677f984c9b8db75d57565f1, type: 3}
+    - target: {fileID: 2370178887324507364, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: -754946721, guid: 0bc38c524677f984c9b8db75d57565f1, type: 3}
+    - target: {fileID: 2370178887324507364, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 620591416, guid: 0bc38c524677f984c9b8db75d57565f1, type: 3}
     - target: {fileID: 2401583712048118417, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1764,7 +1780,7 @@ PrefabInstance:
     - target: {fileID: 7817733871622786731, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1738336559, guid: ef419e7e72fe52249bf04bde6ff5550d, type: 3}
+      objectReference: {fileID: -1708456500, guid: 0bc38c524677f984c9b8db75d57565f1, type: 3}
     - target: {fileID: 8613276830068790349, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
       propertyPath: m_Enabled
       value: 1

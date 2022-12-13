@@ -201,6 +201,7 @@ public class IngameMenu : MonoBehaviour
 
     public void Pause(int index)
     {
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
         gameObject.transform.parent.GetComponent<AudioSource>().mute = true;
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         gameObject.SetActive(true);

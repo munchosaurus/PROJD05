@@ -33,7 +33,12 @@ public class PlayerController : MonoBehaviour
     {
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
         EventSystem.Current.RegisterListener<LevelStartEvent>(OnLevelStarts, ref _levelStartsGuid);
-        
+        _audioSource = GetComponent<AudioSource>();
+        velocity = Vector3.zero;
+    }
+
+    private void Awake()
+    {
         if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
         {
             GameController.PauseGame();
@@ -44,9 +49,6 @@ public class PlayerController : MonoBehaviour
         {
             GameController.SetInputLockState(true);
         }
-
-        _audioSource = GetComponent<AudioSource>();
-        velocity = Vector3.zero;
     }
 
     void FixedUpdate()
