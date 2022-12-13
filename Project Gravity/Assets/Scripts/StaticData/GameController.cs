@@ -7,6 +7,8 @@ public static class GameController
 {
     private static bool _inputLocked = true;
     public static int CurrentControlSchemeIndex = 0;
+
+    public static int previousSceneIndex;
     // Sound
     public static bool GlobalSoundIsOn;
     public static float MasterVolumeMultiplier;

@@ -2,16 +2,52 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Environmental/BlockFixer.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Environmental/BlockFixer.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Environmental/Block_Gravity Plate.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Environmental/Block_Gravity Plate.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Environmental/Block_Magnet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Environmental/Block_Magnet.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Environmental/Tile_Dirty.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Environmental/Tile_Dirty.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Environmental/Tile_SingleClean.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Environmental/Tile_SingleClean.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/A.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/A.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/B.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/B.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/C.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/C.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/backwards_a.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/backwards_a.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/CreditScreen.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/CreditScreen.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/CreditScene.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/CreditScene.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_0.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_0.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_0_alt.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_0_alt.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_1.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_1_alt.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_1_alt.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_2.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_2_alt.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_2_alt.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_3.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_1_3.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_2_0.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_2_0.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_3_0.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_3_0.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_4_0.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_4_0.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_5_0.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_5_0.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_6_0.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_6_0.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_6_1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_6_1.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_7_0.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_7_0.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_8_0.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/TutorialOriginal/tutorial_8_0.mp3.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/UI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/IngameMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/IngameMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/LevelSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/LevelSelector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/MainMenuOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/MainMenuOptions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SoundManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SoundManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/StaticData/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StaticData/GameController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/tutorial_1_0.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sounds/The Test Program/Tutorial/tutorial_1_0.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +186,7 @@
       <workItem from="1670531877015" duration="4818000" />
       <workItem from="1670580822131" duration="3858000" />
       <workItem from="1670836609525" duration="15363000" />
-      <workItem from="1670923561436" duration="7823000" />
+      <workItem from="1670923561436" duration="16147000" />
     </task>
     <task id="LOCAL−00001" summary="Added logic to level selector">
       <created>1669027248858</created>

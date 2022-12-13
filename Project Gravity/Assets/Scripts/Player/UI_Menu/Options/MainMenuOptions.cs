@@ -11,15 +11,17 @@ public class MainMenuOptions : MonoBehaviour
     [SerializeField] private GameObject levelObject;
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject[] optionTabs;
-    [SerializeField] private AudioSource mainTheme;
-    [SerializeField] private AudioClip mainThemeClip;
-    [SerializeField] private float bottomvolume;
+    [SerializeField] private GameObject speakerPrefab;
 
     private void Awake()
     {
-        mainTheme = GameObject.Find("MainThemeSpeaker").GetComponent<AudioSource>();
+        if (GameObject.Find("MainThemeSpeaker") == null)
+        {
+            FindObjectOfType<LevelSelector>().mainTheme = Instantiate(speakerPrefab).GetComponent<AudioSource>();
+        }
+        
+        StartCoroutine(FindObjectOfType<LevelSelector>().StartFadeToBlack(0, Constants.LEVEL_SWITCH_FADE_DURATION * 2, false));
         CompletionLogger.LoadCountfile();
-        // Loads gamedata from file
         GameLauncher.LoadSettings();
         LevelCompletionTracker.AddUnlockedLevel(1);
         GetComponent<SoundOptions>().LoadSoundSettings();
@@ -61,33 +63,10 @@ public class MainMenuOptions : MonoBehaviour
 
     public void StartGame()
     {
-        StartCoroutine(StartFade());
+        StartCoroutine(FindObjectOfType<LevelSelector>().StartFade());
         StartCoroutine(FindObjectOfType<LevelSelector>().StartFadeToBlack(1, Constants.LEVEL_SWITCH_FADE_DURATION * 2, true));
     }
 
-    public IEnumerator StartFade()
-    {
-        float currentTime = 0;
-        float start = mainTheme.volume;
-        while (currentTime < (Constants.LEVEL_SWITCH_FADE_DURATION * 2))
-        {
-            currentTime += Time.unscaledDeltaTime;
-            mainTheme.volume = Mathf.Lerp(start, bottomvolume, currentTime / (Constants.LEVEL_SWITCH_FADE_DURATION * 2));
-            yield return null;
-        }
-        mainTheme.clip = mainThemeClip;
-        mainTheme.Play();
-        currentTime = 0;
-        while (currentTime < (Constants.LEVEL_SWITCH_FADE_DURATION * 2))
-        {
-            currentTime += Time.unscaledDeltaTime;
-            mainTheme.volume = Mathf.Lerp(bottomvolume, start, currentTime / (Constants.LEVEL_SWITCH_FADE_DURATION * 2));
-            yield return null;
-        }
-
-        GameLauncher.WriteSettings();
-    }
-    
     public void CloseLevelSelector()
     {
         panel.SetActive(true);
