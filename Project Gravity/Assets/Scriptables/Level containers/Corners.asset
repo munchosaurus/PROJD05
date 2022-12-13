@@ -15,3 +15,6 @@ MonoBehaviour:
   levelName: Corners
   levelSprite: {fileID: 21300000, guid: 567dd081eee8a664e9ea6042ebc341b2, type: 3}
   levelDescription: Corners Description
+  playLongClipTime: 15
+  strictClip: {fileID: 0}
+  strictClipTime: 0

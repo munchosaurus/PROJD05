@@ -41,8 +41,7 @@ public class PlayerAnimationController : MonoBehaviour
         int i;
         do
         {
-            i = rnd.Next(5);
-            Debug.Log(i);
+            i = rnd.Next(victoryClip.Length);
         } while (i == lastSound);
 
         lastSound = i;

@@ -15,3 +15,6 @@ MonoBehaviour:
   levelName: Up and Down
   levelSprite: {fileID: 21300000, guid: 5d389e3818b317c49b853e0f97c7a64a, type: 3}
   levelDescription: Up and Down description
+  playLongClipTime: 45
+  strictClip: {fileID: 0}
+  strictClipTime: 0

@@ -2,16 +2,56 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/FacilitatorHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/FacilitatorHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/LongTime1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/LongTime1.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/LongTime2.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/LongTime2.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/LongTime3.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/LongTime3.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/LongTime4.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/LongTime4.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/LongTime5.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/LongTime5.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/Strict_backwardsA.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/Strict_backwardsA.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/Strict_controlroom.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/Strict_controlroom.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/Strict_helpthebox.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/Strict_helpthebox.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/Strict_tutorial2.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/Strict_tutorial2.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/Strict_tutorial4.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/Strict_tutorial4.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/Strict_tutorial5.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sounds/Audio Clips/Facilitators/Strict_tutorial5.wav.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GUST Main Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GUST Main Menu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Functionality/EventHandlers.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Functionality/EventHandlers.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/GravityMagnet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Object/GravityMagnet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/IngameMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/IngameMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/MainMenuOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/MainMenuOptions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/A.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/A.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/B.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/B.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Backwards A.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Backwards A.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/C.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/C.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Control Room.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Control Room.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Corners.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Corners.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Help the Box.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Help the Box.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Lava One.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Lava One.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Magnet One.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Magnet One.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/N.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/N.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Shoe.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Shoe.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Straight lines.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Straight lines.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_2.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_3.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_4.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_4.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_5.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_5.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_6.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_6.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_7.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_7.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_8.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Tutorial_8.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Up and Down.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scriptables/Level containers/Up and Down.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAnimationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/LevelContainer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/LevelContainer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,6 +190,7 @@
       <workItem from="1670531877015" duration="4818000" />
       <workItem from="1670580822131" duration="3858000" />
       <workItem from="1670836609525" duration="15363000" />
+      <workItem from="1670923561436" duration="3550000" />
     </task>
     <task id="LOCAL−00001" summary="Added logic to level selector">
       <created>1669027248858</created>

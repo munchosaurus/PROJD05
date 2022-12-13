@@ -15,3 +15,6 @@ MonoBehaviour:
   levelName: Backwards A
   levelSprite: {fileID: 21300000, guid: 58cde443e225d1345ab67eaf65701471, type: 3}
   levelDescription: Backwards A description
+  playLongClipTime: 40
+  strictClip: {fileID: 8300000, guid: 64602f869582670459417ea81f41bab3, type: 3}
+  strictClipTime: 20
