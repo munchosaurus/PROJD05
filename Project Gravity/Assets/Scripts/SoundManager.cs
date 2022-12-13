@@ -186,7 +186,6 @@ public class SoundManager : MonoBehaviour
 
     private void PlayMagnetToggle(GravityGunEvent gravityGunEvent, GameObject sp)
     {
-        Debug.Log("Nu spelas magnettoggle");
         float clipLength;
         if (gravityGunEvent.TargetGameObject.transform.GetComponent<GravityMagnet>() != null)
         {

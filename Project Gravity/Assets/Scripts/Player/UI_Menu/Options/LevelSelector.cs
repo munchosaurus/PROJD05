@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,20 +16,74 @@ public class LevelSelector : MonoBehaviour
     [SerializeField] private Image levelSelectorImage;
     [SerializeField] private Button levelSelectorPlay;
     [SerializeField] private byte disabledLevelTextAlpha;
+    [SerializeField] public AudioSource mainTheme;
+
+    [Header("Music player audio clips")] [SerializeField]
+    private AudioClip mainThemeClip;
+
+    [SerializeField] private AudioClip inGameThemeClip;
+    [SerializeField] private AudioClip creditThemeClip;
+    [SerializeField] private float bottomvolume;
+    [SerializeField] private RectTransform scrollRectTransform;
+    [SerializeField] private GameObject black;
     private Button[] _levelContainerButtons;
-    private IngameMenu _ingameMenu;
     private int _selectedLevel;
     private GameObject lastSelected;
     private RectTransform selectedButton;
-    [SerializeField] private RectTransform scrollRectTransform;
-    [SerializeField] private GameObject black;
 
 
     void Start()
     {
-        _ingameMenu = GetComponent<IngameMenu>();
+        try
+        {
+            mainTheme = GameObject.FindGameObjectWithTag("MainMenuSpeaker").GetComponent<AudioSource>();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("No Main theme in scene");
+        }
+        
         levelSelectorPlay.onClick.AddListener(OnLevelSelectorPlayPressed);
         SetupLevelContainers();
+    }
+
+    public IEnumerator StartFade()
+    {
+        float currentTime = 0;
+        float start = mainTheme.volume;
+        while (currentTime < (Constants.LEVEL_SWITCH_FADE_DURATION))
+        {
+            currentTime += Time.unscaledDeltaTime;
+            mainTheme.volume =
+                Mathf.Lerp(start, bottomvolume, currentTime / (Constants.LEVEL_SWITCH_FADE_DURATION));
+            yield return null;
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            mainTheme.clip = inGameThemeClip;
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
+        {
+            mainTheme.clip = mainThemeClip;
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 2)
+        {
+            mainTheme.clip = creditThemeClip;  
+        }
+
+
+        mainTheme.Play();
+        currentTime = 0;
+        while (currentTime < (Constants.LEVEL_SWITCH_FADE_DURATION))
+        {
+            currentTime += Time.unscaledDeltaTime;
+            mainTheme.volume =
+                Mathf.Lerp(bottomvolume, start, currentTime / (Constants.LEVEL_SWITCH_FADE_DURATION));
+            yield return null;
+        }
+
+        GameLauncher.WriteSettings();
     }
 
     public void LaunchLevelSelection()
@@ -42,7 +97,8 @@ public class LevelSelector : MonoBehaviour
 
         SelectLevel(_levelContainerButtons[indexToChoose]);
         _levelContainerButtons[indexToChoose].Select();
-        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(_levelContainerButtons[indexToChoose].gameObject);
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(_levelContainerButtons[indexToChoose]
+            .gameObject);
     }
 
     public void SelectLevel(Button selectedButton)
@@ -94,16 +150,17 @@ public class LevelSelector : MonoBehaviour
             GameObject go = Instantiate(scrollviewObjectTemplate, scrollviewParent.transform, false);
             go.GetComponentInChildren<TMP_Text>().text = levelContainers[i].levelName;
             _levelContainerButtons[i] = go.GetComponent<Button>();
-            if (!LevelCompletionTracker.unlockedLevels.Contains(i+1))
+            if (!LevelCompletionTracker.unlockedLevels.Contains(i + 1))
             {
                 _levelContainerButtons[i].interactable = false;
                 Color32 color = _levelContainerButtons[i].gameObject.transform.GetComponentInChildren<TMP_Text>()
                     .faceColor;
-                _levelContainerButtons[i].gameObject.transform.GetComponentInChildren<TMP_Text>().faceColor = new Color32(color.r, color.b, color.g, disabledLevelTextAlpha);
+                _levelContainerButtons[i].gameObject.transform.GetComponentInChildren<TMP_Text>().faceColor =
+                    new Color32(color.r, color.b, color.g, disabledLevelTextAlpha);
             }
         }
     }
-    
+
     public IEnumerator StartFadeToBlack(int sceneToLoad, float duration, bool turnBlack)
     {
         var b = black.GetComponent<Image>();
@@ -121,15 +178,16 @@ public class LevelSelector : MonoBehaviour
             {
                 val = Mathf.Lerp(1, 0, currentTime / duration);
             }
-            
+
             Color c = new Color(color.r, color.g, color.b, val);
             b.color = c;
             yield return null;
         }
-        
+
         GameController.PlayerIsDead = false;
         if (turnBlack)
         {
+            GameController.previousSceneIndex = SceneManager.GetActiveScene().buildIndex;
             GameLauncher.WriteSettings();
             if (SceneManager.GetActiveScene().buildIndex != 0)
             {
@@ -149,27 +207,24 @@ public class LevelSelector : MonoBehaviour
     {
         if (LevelCompletionTracker.unlockedLevels.Contains(_selectedLevel))
         {
-            if (SceneManager.GetActiveScene().buildIndex != 0)
+            if (SceneManager.GetActiveScene().buildIndex == 0)
             {
-                StartCoroutine(StartFadeToBlack(_selectedLevel, Constants.LEVEL_SWITCH_FADE_DURATION, true));
+                StartCoroutine(StartFade());
             }
-            else
-            {
-                StartCoroutine(FindObjectOfType<MainMenuOptions>().StartFade());
-                StartCoroutine(StartFadeToBlack(_selectedLevel, Constants.LEVEL_SWITCH_FADE_DURATION * 2, true));
-            }
+
+            StartCoroutine(StartFadeToBlack(_selectedLevel, Constants.LEVEL_SWITCH_FADE_DURATION, true));
         }
     }
 
     private void MoveScrollView()
     {
-         /*
-         * Credit: https://forum.unity.com/threads/scrollview-using-controller-arrowkeys.1008121/
-         */
-        
+        /*
+        * Credit: https://forum.unity.com/threads/scrollview-using-controller-arrowkeys.1008121/
+        */
+
         // Get the currently selected UI element from the event system.
         var selected = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-        
+
         // Return if there are none.
         if (selected == null)
         {
@@ -181,7 +236,7 @@ public class LevelSelector : MonoBehaviour
         {
             return;
         }
-        
+
         if (IsImageFullyVisible(selected))
         {
             return;
@@ -193,8 +248,8 @@ public class LevelSelector : MonoBehaviour
         {
             return;
         }
-        
-        
+
+
         // Get the rect tranform for the selected game object.
         selectedButton = selected.GetComponent<RectTransform>();
         SelectLevel(selected.GetComponent<Button>());
@@ -208,17 +263,20 @@ public class LevelSelector : MonoBehaviour
 
         float scrollViewMinY = scrollviewParent.GetComponent<RectTransform>().anchoredPosition.y;
         // The lower bound is the anchor position + the height of the scroll rect.
-        float scrollViewMaxY = scrollviewParent.GetComponent<RectTransform>().anchoredPosition.y + scrollRectTransform.rect.height;
+        float scrollViewMaxY = scrollviewParent.GetComponent<RectTransform>().anchoredPosition.y +
+                               scrollRectTransform.rect.height;
         // If the selected position is below the current lower bound of the scroll view we scroll down.
         if (selectedPositionY > scrollViewMaxY)
         {
             float newY = selectedPositionY - scrollRectTransform.rect.height;
-            scrollviewParent.GetComponent<RectTransform>().anchoredPosition = new Vector2(scrollviewParent.GetComponent<RectTransform>().anchoredPosition.x, newY);
+            scrollviewParent.GetComponent<RectTransform>().anchoredPosition =
+                new Vector2(scrollviewParent.GetComponent<RectTransform>().anchoredPosition.x, newY);
         }
         // If the selected position is above the current upper bound of the scroll view we scroll up.
         else if (Mathf.Abs(selectedButton.anchoredPosition.y) < scrollViewMinY)
         {
-            scrollviewParent.GetComponent<RectTransform>().anchoredPosition = new Vector2(scrollviewParent.GetComponent<RectTransform>().anchoredPosition.x,
+            scrollviewParent.GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                scrollviewParent.GetComponent<RectTransform>().anchoredPosition.x,
                 Mathf.Abs(selectedButton.anchoredPosition.y));
         }
 
@@ -230,11 +288,12 @@ public class LevelSelector : MonoBehaviour
     {
         MoveScrollView();
     }
-    
-    private bool IsImageFullyVisible(GameObject obj) {
+
+    private bool IsImageFullyVisible(GameObject obj)
+    {
         var planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
         var image = obj.GetComponent<Image>();
-        var bounds = new Bounds(image.transform.localPosition,image.rectTransform.rect.size);
+        var bounds = new Bounds(image.transform.localPosition, image.rectTransform.rect.size);
         return GeometryUtility.TestPlanesAABB(planes, bounds);
     }
 }

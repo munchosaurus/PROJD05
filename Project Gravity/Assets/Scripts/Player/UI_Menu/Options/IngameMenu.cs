@@ -138,6 +138,7 @@ public class IngameMenu : MonoBehaviour
                         ToggleLevelCompleteMenu(false);
                         return;
                     }
+
                     Unpause();
                 }
                 else if (menus[1].gameObject.activeSelf)
@@ -147,7 +148,8 @@ public class IngameMenu : MonoBehaviour
                 else if (menus[3].gameObject.activeSelf)
                 {
                     OpenPauseScreenFromLevelSelector();
-                } else if (menus[4].gameObject.activeSelf)
+                }
+                else if (menus[4].gameObject.activeSelf)
                 {
                     CloseOptionsMenu();
                 }
@@ -201,6 +203,7 @@ public class IngameMenu : MonoBehaviour
 
     public void Pause(int index)
     {
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
         gameObject.transform.parent.GetComponent<AudioSource>().mute = true;
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         gameObject.SetActive(true);
@@ -227,13 +230,10 @@ public class IngameMenu : MonoBehaviour
         {
             levelCompleteReturn.SetActive(false);
         }
-        
-        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1 && index == 1)
+
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 2 && index == 1)
         {
-            if (nextLevelButton.IsInteractable())
-            {
-                nextLevelButton.interactable = false;
-            }
+            nextLevelButton.GetComponentInChildren<TMP_Text>().text = "Continue";
         }
 
         ToggleActionMap(true);
@@ -297,7 +297,6 @@ public class IngameMenu : MonoBehaviour
             CompletionLogger.win = 1;
             CompletionLogger.finishTime = elapsedTime;
             CompletionLogger.WriteCompletionLog();
-            
         }
     }
 
@@ -312,8 +311,19 @@ public class IngameMenu : MonoBehaviour
             SetAimCursor();
         }
 
-        StartCoroutine(FindObjectOfType<LevelSelector>()
-            .StartFadeToBlack(scene, Constants.LEVEL_SWITCH_FADE_DURATION, true));
+        if (scene == SceneManager.sceneCountInBuildSettings - 1)
+        {
+            Debug.Log("Yes, nu ska startfade triggas");
+            StartCoroutine(FindObjectOfType<LevelSelector>()
+                .StartFade());
+            StartCoroutine(FindObjectOfType<LevelSelector>()
+                .StartFadeToBlack(scene, Constants.LEVEL_SWITCH_FADE_DURATION * 2, true));
+        }
+        else
+        {
+            StartCoroutine(FindObjectOfType<LevelSelector>()
+                .StartFadeToBlack(scene, Constants.LEVEL_SWITCH_FADE_DURATION, true));
+        }
     }
 
     public void RestartWithRButton(InputAction.CallbackContext context)
@@ -338,14 +348,16 @@ public class IngameMenu : MonoBehaviour
 
     public void LoadNextScene()
     {
-        if (SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCountInBuildSettings - 1)
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 2)
         {
-            return;
+            LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
-
-        LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex);
-        LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
-        LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else
+        {
+            LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex);
+            LevelCompletionTracker.AddUnlockedLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     public void LoadPreviousScene()

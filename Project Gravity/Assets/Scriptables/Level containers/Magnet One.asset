@@ -15,3 +15,6 @@ MonoBehaviour:
   levelName: Magnet 1
   levelSprite: {fileID: 21300000, guid: 670a0974bd1073d49bdbbcd7135a505a, type: 3}
   levelDescription: Magnet One description
+  playLongClipTime: 15
+  strictClip: {fileID: 0}
+  strictClipTime: 0

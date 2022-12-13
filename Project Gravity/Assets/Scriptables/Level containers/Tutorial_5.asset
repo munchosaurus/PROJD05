@@ -15,3 +15,6 @@ MonoBehaviour:
   levelName: Tutorial 5
   levelSprite: {fileID: 21300000, guid: ce6eb53795e8f744d9a01e636f0399d6, type: 3}
   levelDescription: Tutorial 5 description
+  playLongClipTime: 25
+  strictClip: {fileID: 8300000, guid: 82a58930453425e468ea6b34ed5b4846, type: 3}
+  strictClipTime: 3

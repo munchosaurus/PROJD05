@@ -15,3 +15,6 @@ MonoBehaviour:
   levelName: Shoe
   levelSprite: {fileID: 21300000, guid: eb199dfbc2ea18d4ea2bcb43ce0c877d, type: 3}
   levelDescription: Shoe description
+  playLongClipTime: 60
+  strictClip: {fileID: 0}
+  strictClipTime: 0

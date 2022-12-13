@@ -15,3 +15,6 @@ MonoBehaviour:
   levelName: Lava 1
   levelSprite: {fileID: 21300000, guid: 346d8397331920f408de40d3f58a3f7d, type: 3}
   levelDescription: Lava One description
+  playLongClipTime: 20
+  strictClip: {fileID: 0}
+  strictClipTime: 0
