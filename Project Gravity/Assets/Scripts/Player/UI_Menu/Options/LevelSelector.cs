@@ -47,7 +47,7 @@ public class LevelSelector : MonoBehaviour
         SetupLevelContainers();
     }
 
-    public IEnumerator StartFade()
+    public IEnumerator StartFade(int levelToLoad)
     {
         float currentTime = 0;
         float start = mainTheme.volume;
@@ -59,17 +59,17 @@ public class LevelSelector : MonoBehaviour
             yield return null;
         }
 
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            mainTheme.clip = inGameThemeClip;
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
+        if (levelToLoad == 0)
         {
             mainTheme.clip = mainThemeClip;
         }
-        else if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 2)
+        else if (levelToLoad == SceneManager.sceneCountInBuildSettings - 1)
         {
-            mainTheme.clip = creditThemeClip;  
+            mainTheme.clip = creditThemeClip;
+        }
+        else
+        {
+            mainTheme.clip = inGameThemeClip;  
         }
 
 
@@ -209,7 +209,7 @@ public class LevelSelector : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().buildIndex == 0)
             {
-                StartCoroutine(StartFade());
+                StartCoroutine(StartFade(_selectedLevel));
             }
 
             StartCoroutine(StartFadeToBlack(_selectedLevel, Constants.LEVEL_SWITCH_FADE_DURATION, true));

@@ -325,7 +325,7 @@ public class IngameMenu : MonoBehaviour
         {
             Debug.Log("Yes, nu ska startfade triggas");
             StartCoroutine(_levelSelector
-                .StartFade());
+                .StartFade(scene));
             StartCoroutine(_levelSelector
                 .StartFadeToBlack(scene, Constants.LEVEL_SWITCH_FADE_DURATION * 2, true));
         }

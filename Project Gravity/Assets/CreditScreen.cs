@@ -31,6 +31,10 @@ public class CreditScreen : MonoBehaviour
         {
             mainTheme = Instantiate(mainThemeSpeaker).GetComponent<AudioSource>();
         }
+        else
+        {
+            mainTheme = GameObject.Find("MainThemeSpeaker(Clone)").GetComponent<AudioSource>();
+        }
 
         StartCoroutine(StartFadeToBlack(0, Constants.LEVEL_SWITCH_FADE_DURATION, false));
     }

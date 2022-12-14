@@ -12,15 +12,17 @@ public class MainMenuOptions : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject[] optionTabs;
     [SerializeField] private GameObject mainThemeSpeaker;
+    private LevelSelector _levelSelector;
 
     private void Awake()
     {
+        _levelSelector = FindObjectOfType<LevelSelector>();
         if (GameObject.Find("MainThemeSpeaker(Clone)") == null)
         {
-            FindObjectOfType<LevelSelector>().mainTheme = Instantiate(mainThemeSpeaker).GetComponent<AudioSource>();
+            _levelSelector.mainTheme = Instantiate(mainThemeSpeaker).GetComponent<AudioSource>();
         }
         
-        StartCoroutine(FindObjectOfType<LevelSelector>().StartFadeToBlack(0, Constants.LEVEL_SWITCH_FADE_DURATION * 2, false));
+        StartCoroutine(_levelSelector.StartFadeToBlack(0, Constants.LEVEL_SWITCH_FADE_DURATION * 2, false));
         CompletionLogger.LoadCountfile();
         GameLauncher.LoadSettings();
         LevelCompletionTracker.AddUnlockedLevel(1);
@@ -63,8 +65,8 @@ public class MainMenuOptions : MonoBehaviour
 
     public void StartGame()
     {
-        StartCoroutine(FindObjectOfType<LevelSelector>().StartFade());
-        StartCoroutine(FindObjectOfType<LevelSelector>().StartFadeToBlack(1, Constants.LEVEL_SWITCH_FADE_DURATION * 2, true));
+        StartCoroutine(_levelSelector.StartFade(1));
+        StartCoroutine(_levelSelector.StartFadeToBlack(1, Constants.LEVEL_SWITCH_FADE_DURATION * 2, true));
     }
 
     public void CloseLevelSelector()
@@ -88,6 +90,13 @@ public class MainMenuOptions : MonoBehaviour
             levelObject.SetActive(true);
         }
 
-        GetComponent<LevelSelector>().LaunchLevelSelection();
+        _levelSelector.LaunchLevelSelection();
+    }
+
+    public void OpenCredits()
+    {
+        StartCoroutine(_levelSelector.StartFade(SceneManager.sceneCountInBuildSettings - 1));
+        StartCoroutine(_levelSelector.StartFadeToBlack(SceneManager.sceneCountInBuildSettings - 1,
+            Constants.LEVEL_SWITCH_FADE_DURATION * 2, true));
     }
 }
