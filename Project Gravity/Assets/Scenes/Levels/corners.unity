@@ -3199,6 +3199,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 756784478, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: cursorSpeed
+      value: 1500
+      objectReference: {fileID: 0}
     - target: {fileID: 816275455, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: isTutorialLevel
       value: 1

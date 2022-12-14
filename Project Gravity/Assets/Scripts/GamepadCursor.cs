@@ -11,7 +11,7 @@ public class GamepadCursor : MonoBehaviour
     [SerializeField] private RectTransform cursorTransform;
     [SerializeField] private RectTransform canvasTransform;
     [SerializeField] private Canvas canvas;
-    [SerializeField] private float cursorSpeed = 2000f;
+    [SerializeField] private float cursorSpeed;
     [SerializeField] private float padding = 50f;
     [SerializeField] private Sprite aimCursor;
     [SerializeField] private Sprite regularCursor;

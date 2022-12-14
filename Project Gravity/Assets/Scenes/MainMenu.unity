@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04338599, g: 0.044535346, b: 0.0591698, a: 1}
+  m_IndirectSpecularColor: {r: 0.041038126, g: 0.042068183, b: 0.055848405, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12381,7 +12381,7 @@ MonoBehaviour:
   cursorTransform: {fileID: 1818751363343521548}
   canvasTransform: {fileID: 7275072337568170218}
   canvas: {fileID: 7275072337568170221}
-  cursorSpeed: 2000
+  cursorSpeed: 1500
   padding: 50
   aimCursor: {fileID: 21300000, guid: 1114e860007ef0744ad26ae6f78e6911, type: 3}
   regularCursor: {fileID: 21300000, guid: f1e7fa41923c49b4fb16e29b1da4bab2, type: 3}
