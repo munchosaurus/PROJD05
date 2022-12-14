@@ -16644,7 +16644,7 @@ MonoBehaviour:
   mainTheme: {fileID: 0}
   mainThemeClip: {fileID: 8300000, guid: 8871e46a0560f604e966da315f2e0548, type: 3}
   inGameThemeClip: {fileID: 8300000, guid: d8c56ac47d791bf46813cd03385892ce, type: 3}
-  creditThemeClip: {fileID: 8300000, guid: a6300bc5cc9855c4bae305aa76356137, type: 3}
+  creditThemeClip: {fileID: 8300000, guid: ec428fffa63b3fd4e9b62c08414eca1c, type: 3}
   bottomvolume: 0.01
   scrollRectTransform: {fileID: 3240590271223471195}
   black: {fileID: 6709988429108092689}
