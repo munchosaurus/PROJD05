@@ -321,9 +321,8 @@ public class IngameMenu : MonoBehaviour
             SetAimCursor();
         }
 
-        if (scene == SceneManager.sceneCountInBuildSettings - 1)
+        if (scene == SceneManager.sceneCountInBuildSettings - 1 || scene == 0)
         {
-            Debug.Log("Yes, nu ska startfade triggas");
             StartCoroutine(_levelSelector
                 .StartFade(scene));
             StartCoroutine(_levelSelector

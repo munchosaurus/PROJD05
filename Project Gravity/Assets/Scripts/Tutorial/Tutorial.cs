@@ -22,7 +22,7 @@ public class Tutorial : MonoBehaviour
     {
         try
         {
-            mainTheme = GameObject.Find("MainThemeSpeaker").GetComponent<AudioSource>();
+            mainTheme = GameObject.Find("MainThemeSpeaker(Clone)").GetComponent<AudioSource>();
             mainTheme.volume *= 0.5f;
         }
         catch (Exception e)
