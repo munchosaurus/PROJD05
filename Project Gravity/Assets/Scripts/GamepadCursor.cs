@@ -22,7 +22,6 @@ public class GamepadCursor : MonoBehaviour
     private string _previousControlScheme = "";
     private Mouse _currentMouse;
 
-
     private const string gamePadScheme = "GamePad";
     private const string mouseScheme = "Mouse";
 
@@ -111,16 +110,6 @@ public class GamepadCursor : MonoBehaviour
 
         InputState.Change(VirtualMouse.position, newPosition);
         InputState.Change(VirtualMouse.delta, stickValue);
-
-        // var rightTriggerPressed = Gamepad.current.rightTrigger.IsPressed();
-        //
-        // if (_previousMouseState != rightTriggerPressed)
-        // {
-        //     VirtualMouse.CopyState<MouseState>(out var mouseState);
-        //     mouseState.WithButton(MouseButton.Left, rightTriggerPressed);
-        //     InputState.Change(VirtualMouse, mouseState);
-        //     _previousMouseState = rightTriggerPressed;
-        // }
 
         ChangeCursorSprite();
         AnchorCursor(newPosition);
