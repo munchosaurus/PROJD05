@@ -1515,8 +1515,8 @@ MonoBehaviour:
   canvas: {fileID: 9064548700267641868}
   cursorSpeed: 1500
   padding: 50
-  aimCursor: {fileID: 21300000, guid: 1114e860007ef0744ad26ae6f78e6911, type: 3}
-  regularCursor: {fileID: 21300000, guid: f1e7fa41923c49b4fb16e29b1da4bab2, type: 3}
+  aimCursor: {fileID: 21300000, guid: 969b2903c50d37b44ba8ef5cfe344d81, type: 3}
+  regularCursor: {fileID: 21300000, guid: b68451149c9654c469f282464bdf4f4e, type: 3}
   cursorImage: {fileID: 1047718894}
 --- !u!114 &3389007568940360421
 MonoBehaviour:
