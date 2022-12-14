@@ -162,7 +162,16 @@ public class SoundManager : MonoBehaviour
         }
         else if (gravityGunEvent.TargetGameObject.layer == magnetLayer)
         {
-            PlayMagnetToggle(gravityGunEvent, speaker);
+            if (gravityGunEvent.MagnetGotActivated)
+            {
+                speaker.GetComponent<AudioSource>().PlayOneShot(magnetActivationClip);
+                StartCoroutine(DestroyAfterTime(speaker, magnetActivationClip.length));
+            }
+            else
+            {
+                speaker.GetComponent<AudioSource>().PlayOneShot(magnetDeactivationClip);
+                StartCoroutine(DestroyAfterTime(speaker, magnetDeactivationClip.length));
+            }
         }
         else if (gravityGunEvent.TargetGameObject.layer == lavaLayer)
         {
@@ -181,41 +190,6 @@ public class SoundManager : MonoBehaviour
             AudioClip audioClip = groundHitClip[rnd.Next(groundHitClip.Length)];
             speaker.GetComponent<AudioSource>().PlayOneShot(audioClip);
             StartCoroutine(DestroyAfterTime(speaker, audioClip.length));
-        }
-    }
-
-    private void PlayMagnetToggle(GravityGunEvent gravityGunEvent, GameObject sp)
-    {
-        float clipLength;
-        if (gravityGunEvent.TargetGameObject.transform.GetComponent<GravityMagnet>() != null)
-        {
-            if (gravityGunEvent.TargetGameObject.transform.GetComponent<GravityMagnet>().triggered)
-            {
-                clipLength = magnetActivationClip.length;
-                sp.GetComponent<AudioSource>().PlayOneShot(magnetActivationClip);
-            }
-            else
-            {
-                clipLength = magnetDeactivationClip.length;
-                sp.GetComponent<AudioSource>().PlayOneShot(magnetDeactivationClip);
-            }
-
-            StartCoroutine(DestroyAfterTime(sp, clipLength));
-        }
-        else if (gravityGunEvent.TargetGameObject.transform.GetComponentInParent<DynamicObjectMovement>() != null)
-        {
-            if (gravityGunEvent.TargetGameObject.transform.GetComponentInParent<DynamicObjectMovement>().lockedToMagnet)
-            {
-                clipLength = magnetActivationClip.length;
-                sp.GetComponent<AudioSource>().PlayOneShot(magnetActivationClip);
-            }
-            else
-            {
-                clipLength = magnetDeactivationClip.length;
-                sp.GetComponent<AudioSource>().PlayOneShot(magnetDeactivationClip);
-            }
-
-            StartCoroutine(DestroyAfterTime(sp, clipLength));
         }
     }
 

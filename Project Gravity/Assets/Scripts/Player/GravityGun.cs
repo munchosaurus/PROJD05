@@ -15,18 +15,25 @@ public class GravityGun : MonoBehaviour
     [SerializeField] private LayerMask magnetMask;
     [SerializeField] private LayerMask lavaMask;
     [SerializeField] private LayerMask mirrorMask;
-    [ColorUsage(true, true)]
-    [SerializeField] public Color magnetHitColor;
-    [ColorUsage(true, true)]
-    [SerializeField] public Color groundHitColor;
-    [ColorUsage(true, true)]
-    [SerializeField] public Color gravityHitColor;
-    [ColorUsage(true, true)]
-    [SerializeField] public Color alternativeMagnetHitColor;
-    [ColorUsage(true, true)]
-    [SerializeField] public Color alternativeGroundHitColor;
-    [ColorUsage(true, true)]
-    [SerializeField] public Color alternativeGravityHitColor;
+
+    [ColorUsage(true, true)] [SerializeField]
+    public Color magnetHitColor;
+
+    [ColorUsage(true, true)] [SerializeField]
+    public Color groundHitColor;
+
+    [ColorUsage(true, true)] [SerializeField]
+    public Color gravityHitColor;
+
+    [ColorUsage(true, true)] [SerializeField]
+    public Color alternativeMagnetHitColor;
+
+    [ColorUsage(true, true)] [SerializeField]
+    public Color alternativeGroundHitColor;
+
+    [ColorUsage(true, true)] [SerializeField]
+    public Color alternativeGravityHitColor;
+
     [SerializeField] private PlayerAimEffectController _playerAimEffectController;
     [SerializeField] private AudioClip playerAims;
     [SerializeField] private AudioClip playerShoots;
@@ -58,10 +65,10 @@ public class GravityGun : MonoBehaviour
         magnetLayer = LayerMask.NameToLayer("GravityMagnet");
         mirrorLayer = LayerMask.NameToLayer("Mirror");
         playerInput = FindObjectOfType<PlayerInput>();
-        
+
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
-        
+
         if (aimDirector.GetComponent<SpriteRenderer>().enabled)
         {
             aimDirector.GetComponent<SpriteRenderer>().enabled = false;
@@ -119,7 +126,7 @@ public class GravityGun : MonoBehaviour
         var lineSpot = GetSingleRay(transform.position, hits);
 
         SetAimingColor(hit);
-        
+
         _playerAimEffectController.SetAim(transform.position,
             lineSpot.point * Constants.PLAYER_AIMING_POINT_POSITIONING_MULTIPLIER);
     }
@@ -202,7 +209,10 @@ public class GravityGun : MonoBehaviour
             SourceGameObject = gameObject,
             HitNormal = hit.normal,
             GravityWasChanged = hit.transform.gameObject.layer == gravityLayer &&
-                                -hit.normal != GravityController.GetCurrentFacing()
+                                -hit.normal != GravityController.GetCurrentFacing(),
+            MagnetGotActivated = hit.transform.gameObject.layer == magnetLayer &&
+                                 hit.transform.gameObject.GetComponent<GravityMagnet>() != null &&
+                                 !hit.transform.gameObject.GetComponent<GravityMagnet>().triggered
         };
         EventSystem.Current.FireEvent(gravityGunEvent);
     }
@@ -364,8 +374,8 @@ public class GravityGun : MonoBehaviour
         else
         {
             ray = Camera.main.ScreenPointToRay(FindObjectOfType<GamepadCursor>().VirtualMouse.position.ReadValue());
-
         }
+
         Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, 1));
         xy.Raycast(ray, out float distance);
         return ray.GetPoint(distance);
