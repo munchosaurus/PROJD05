@@ -99,4 +99,9 @@ public class MainMenuOptions : MonoBehaviour
         StartCoroutine(_levelSelector.StartFadeToBlack(SceneManager.sceneCountInBuildSettings - 1,
             Constants.LEVEL_SWITCH_FADE_DURATION * 2, true));
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
