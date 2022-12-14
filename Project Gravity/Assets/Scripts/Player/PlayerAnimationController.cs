@@ -10,6 +10,7 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private GameObject target;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip swirlClip;
+    [SerializeField] private AudioClip basicVictorySound;
     [SerializeField] private AudioClip[] victoryClip;
     [SerializeField] private float suctionSpeed;
     private static int lastSound;
@@ -50,8 +51,15 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void FinishAnimation()
     {
-        _audioSource.PlayOneShot(GetVictorySound());
+        _audioSource.PlayOneShot(basicVictorySound);
+        StartCoroutine(PlaySecondPartOfVictorySound());
         FindObjectOfType<IngameMenu>().Pause(1);
+    }
+
+    private IEnumerator PlaySecondPartOfVictorySound()
+    {
+        yield return new WaitWhile(()=> _audioSource.isPlaying);
+        _audioSource.PlayOneShot(GetVictorySound());
     }
 
     public void OnPlayerDeathEvent(PlayerDeathEvent playerDeathEvent)

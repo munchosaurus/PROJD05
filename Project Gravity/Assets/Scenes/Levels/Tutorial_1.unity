@@ -1464,6 +1464,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 627992507, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: m_Volume
+      value: 0.702
+      objectReference: {fileID: 0}
     - target: {fileID: 869113264, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1660,6 +1664,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3389007568940360421, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: basicVictorySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2d3ef720675f54646b7666e3b5ed0b6e, type: 3}
     - target: {fileID: 3389007568940360421, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
       propertyPath: victoryClip.Array.size
       value: 5
