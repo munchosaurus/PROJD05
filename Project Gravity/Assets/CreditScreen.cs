@@ -16,6 +16,7 @@ public class CreditScreen : MonoBehaviour
     [SerializeField] private float bottomvolume;
     [SerializeField] private GameObject black;
     [SerializeField] private AudioSource mainTheme;
+    [SerializeField] private GameObject mainThemeSpeaker;
 
     [SerializeField] private TMP_Text titleText;
     // Update is called once per frame
@@ -26,14 +27,12 @@ public class CreditScreen : MonoBehaviour
             titleText.text = "Congratulations";
         }
         
-        try
+        if (GameObject.Find("MainThemeSpeaker(Clone)") == null)
         {
-            mainTheme = GameObject.FindGameObjectWithTag("MainMenuSpeaker").GetComponent<AudioSource>();
+            mainTheme = Instantiate(mainThemeSpeaker).GetComponent<AudioSource>();
         }
-        catch (Exception e)
-        {
-            Debug.Log("No Main theme in scene");
-        }
+
+        StartCoroutine(StartFadeToBlack(0, Constants.LEVEL_SWITCH_FADE_DURATION, false));
     }
 
     public void LoadMainMenu()
@@ -101,8 +100,7 @@ public class CreditScreen : MonoBehaviour
             b.color = c;
             yield return null;
         }
-
-        GameController.PlayerIsDead = false;
+        
         if (turnBlack)
         {
             GameController.previousSceneIndex = SceneManager.GetActiveScene().buildIndex;

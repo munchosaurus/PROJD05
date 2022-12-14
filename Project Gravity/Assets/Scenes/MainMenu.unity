@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.038252655, g: 0.039315138, b: 0.052182116, a: 1}
+  m_IndirectSpecularColor: {r: 0.040280595, g: 0.041301526, b: 0.054827143, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5772,7 +5772,7 @@ MonoBehaviour:
   mainThemeClip: {fileID: 8300000, guid: 8871e46a0560f604e966da315f2e0548, type: 3}
   inGameThemeClip: {fileID: 8300000, guid: d8c56ac47d791bf46813cd03385892ce, type: 3}
   creditThemeClip: {fileID: 8300000, guid: a6300bc5cc9855c4bae305aa76356137, type: 3}
-  bottomvolume: 0.3
+  bottomvolume: 0.01
   scrollRectTransform: {fileID: 3595288795230006039}
   black: {fileID: 1488134290}
 --- !u!114 &2668584371881051847
@@ -11560,7 +11560,7 @@ MonoBehaviour:
   - {fileID: 4344223336222494173}
   - {fileID: 5800143336243745284}
   - {fileID: 3030846529900160688}
-  speakerPrefab: {fileID: 7650552164420973290, guid: fb75c72239580694e9236af10b9cd9ee, type: 3}
+  mainThemeSpeaker: {fileID: 7650552164420973290, guid: fb75c72239580694e9236af10b9cd9ee, type: 3}
 --- !u!114 &7275072337568170225
 MonoBehaviour:
   m_ObjectHideFlags: 0

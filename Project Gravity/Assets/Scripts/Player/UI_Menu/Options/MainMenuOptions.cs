@@ -11,13 +11,13 @@ public class MainMenuOptions : MonoBehaviour
     [SerializeField] private GameObject levelObject;
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject[] optionTabs;
-    [SerializeField] private GameObject speakerPrefab;
+    [SerializeField] private GameObject mainThemeSpeaker;
 
     private void Awake()
     {
-        if (GameObject.Find("MainThemeSpeaker") == null)
+        if (GameObject.Find("MainThemeSpeaker(Clone)") == null)
         {
-            FindObjectOfType<LevelSelector>().mainTheme = Instantiate(speakerPrefab).GetComponent<AudioSource>();
+            FindObjectOfType<LevelSelector>().mainTheme = Instantiate(mainThemeSpeaker).GetComponent<AudioSource>();
         }
         
         StartCoroutine(FindObjectOfType<LevelSelector>().StartFadeToBlack(0, Constants.LEVEL_SWITCH_FADE_DURATION * 2, false));

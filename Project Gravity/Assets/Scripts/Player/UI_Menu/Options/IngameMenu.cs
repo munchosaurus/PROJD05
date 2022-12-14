@@ -23,7 +23,9 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private GameObject levelCompleteReturn;
 
     [SerializeField] private GameObject[] optionTabs;
+    [SerializeField] private GameObject mainThemeSpeaker;
     private PlayerInput _playerInput;
+    private LevelSelector _levelSelector;
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
     private bool _playerWon;
@@ -31,13 +33,21 @@ public class IngameMenu : MonoBehaviour
     // TODO: REMOVE AT LAUNCHES, ONLY USED NOW FOR EASIER CONTROL SETTINGS
     private void Awake()
     {
+        _levelSelector = FindObjectOfType<LevelSelector>();
+        if (GameObject.Find("MainThemeSpeaker(Clone)") == null)
+        {
+            _levelSelector.mainTheme = Instantiate(mainThemeSpeaker).GetComponent<AudioSource>();
+            _levelSelector.mainTheme.clip = _levelSelector.inGameThemeClip;
+            _levelSelector.mainTheme.Play();
+        }
+        
         // Loads gamedata from file
         GameLauncher.LoadSettings();
         CompletionLogger.gravityChanges = 0;
         GetComponent<SoundOptions>().LoadSoundSettings();
         GetComponent<GameOptions>().LoadGameSettings();
         GetComponent<ControlOptions>().SetControlImagesAndTexts();
-        StartCoroutine(FindObjectOfType<LevelSelector>()
+        StartCoroutine(_levelSelector
             .StartFadeToBlack(0, Constants.LEVEL_SWITCH_FADE_DURATION, false));
     }
 
@@ -290,7 +300,7 @@ public class IngameMenu : MonoBehaviour
             }
 
             levelRecordText.text = $"Best Time: {minutes:00}:{seconds:00}:{milliSeconds:00}";
-            completedLevelTitle.text = GetComponent<LevelSelector>()
+            completedLevelTitle.text = _levelSelector
                 .levelContainers[SceneManager.GetActiveScene().buildIndex - 1].levelName;
             GameLauncher.SaveLevels();
             CompletionLogger.lose = 0;
@@ -314,14 +324,14 @@ public class IngameMenu : MonoBehaviour
         if (scene == SceneManager.sceneCountInBuildSettings - 1)
         {
             Debug.Log("Yes, nu ska startfade triggas");
-            StartCoroutine(FindObjectOfType<LevelSelector>()
+            StartCoroutine(_levelSelector
                 .StartFade());
-            StartCoroutine(FindObjectOfType<LevelSelector>()
+            StartCoroutine(_levelSelector
                 .StartFadeToBlack(scene, Constants.LEVEL_SWITCH_FADE_DURATION * 2, true));
         }
         else
         {
-            StartCoroutine(FindObjectOfType<LevelSelector>()
+            StartCoroutine(_levelSelector
                 .StartFadeToBlack(scene, Constants.LEVEL_SWITCH_FADE_DURATION, true));
         }
     }
@@ -391,7 +401,7 @@ public class IngameMenu : MonoBehaviour
             menus[3].SetActive(true);
         }
 
-        GetComponent<LevelSelector>().LaunchLevelSelection();
+        _levelSelector.LaunchLevelSelection();
     }
 
     public void OpenOptionsMenu(int index)

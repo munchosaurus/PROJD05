@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.042315755, g: 0.04339125, b: 0.057625305, a: 1}
+  m_IndirectSpecularColor: {r: 0.040280595, g: 0.041301526, b: 0.054827143, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -652,7 +652,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1455079230
 RectTransform:
   m_ObjectHideFlags: 0
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1588,7 +1588,8 @@ MonoBehaviour:
   mainThemeClip: {fileID: 8300000, guid: 8871e46a0560f604e966da315f2e0548, type: 3}
   inGameThemeClip: {fileID: 8300000, guid: d8c56ac47d791bf46813cd03385892ce, type: 3}
   creditThemeClip: {fileID: 8300000, guid: a6300bc5cc9855c4bae305aa76356137, type: 3}
-  bottomvolume: 0.2
+  bottomvolume: 0.01
   black: {fileID: 1455079229}
   mainTheme: {fileID: 0}
+  mainThemeSpeaker: {fileID: 7650552164420973290, guid: fb75c72239580694e9236af10b9cd9ee, type: 3}
   titleText: {fileID: 2072521567}

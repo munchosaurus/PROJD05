@@ -21,7 +21,7 @@ public class LevelSelector : MonoBehaviour
     [Header("Music player audio clips")] [SerializeField]
     private AudioClip mainThemeClip;
 
-    [SerializeField] private AudioClip inGameThemeClip;
+    [SerializeField] public AudioClip inGameThemeClip;
     [SerializeField] private AudioClip creditThemeClip;
     [SerializeField] private float bottomvolume;
     [SerializeField] private RectTransform scrollRectTransform;

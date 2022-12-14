@@ -16572,11 +16572,12 @@ MonoBehaviour:
   newRecordText: {fileID: 945776164395657395}
   completedLevelTitle: {fileID: 3708190619368190632}
   nextLevelButton: {fileID: 5842399292195836329}
-  levelCompleteReturn: {fileID: 0}
+  levelCompleteReturn: {fileID: 3782812195342660393}
   optionTabs:
   - {fileID: 2401583712048118417}
   - {fileID: 5576533931908703560}
   - {fileID: 3968323757324390908}
+  mainThemeSpeaker: {fileID: 7650552164420973290, guid: fb75c72239580694e9236af10b9cd9ee, type: 3}
 --- !u!114 &1300517236831362815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16644,7 +16645,7 @@ MonoBehaviour:
   mainThemeClip: {fileID: 8300000, guid: 8871e46a0560f604e966da315f2e0548, type: 3}
   inGameThemeClip: {fileID: 8300000, guid: d8c56ac47d791bf46813cd03385892ce, type: 3}
   creditThemeClip: {fileID: 8300000, guid: a6300bc5cc9855c4bae305aa76356137, type: 3}
-  bottomvolume: 0.2
+  bottomvolume: 0.01
   scrollRectTransform: {fileID: 3240590271223471195}
   black: {fileID: 6709988429108092689}
 --- !u!114 &8751868177768858637
