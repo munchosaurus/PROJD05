@@ -16,6 +16,7 @@ public class GamepadCursor : MonoBehaviour
     [SerializeField] private Sprite aimCursor;
     [SerializeField] private Sprite regularCursor;
     [SerializeField] private Image cursorImage;
+    [SerializeField] private float cursorSize;
     private Camera _mainCamera;
     public Mouse VirtualMouse;
     private bool _previousMouseState;
@@ -119,12 +120,12 @@ public class GamepadCursor : MonoBehaviour
     {
         if (playerInput.currentActionMap.name == "MenuControls")
         {
-            Debug.Log("Borde ha bytt controllers image nu till REGULAR");
+            cursorImage.rectTransform.localScale = new Vector3(4,4,4);
             cursorImage.sprite = regularCursor;
         }
         else if (playerInput.currentActionMap.name == "PlayerControls")
         {
-            Debug.Log("Borde ha bytt controllers image nu till AIM");
+            cursorImage.rectTransform.localScale = new Vector3(1,1,1);
             cursorImage.sprite = aimCursor;
         }
     }
