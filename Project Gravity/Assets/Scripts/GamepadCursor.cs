@@ -120,7 +120,7 @@ public class GamepadCursor : MonoBehaviour
     {
         if (playerInput.currentActionMap.name == "MenuControls")
         {
-            cursorImage.rectTransform.localScale = new Vector3(4,4,4);
+            cursorImage.rectTransform.localScale = new Vector3(2,2,2);
             cursorImage.sprite = regularCursor;
         }
         else if (playerInput.currentActionMap.name == "PlayerControls")
