@@ -37,6 +37,7 @@ public static class GameLauncher
             }
             catch (Exception e)
             {
+                Debug.Log(e);
                 _fileStream?.Close();
                 File.Delete(filePath);
                 _fileStream = new FileStream(filePath, FileMode.Create);
@@ -54,7 +55,7 @@ public static class GameLauncher
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Debug.Log(e);
             }
         }
     }
@@ -78,6 +79,7 @@ public static class GameLauncher
             }
             catch (Exception e)
             {
+                Debug.Log(e);
                 _fileStream?.Close();
                 File.Delete(settingsTextFile);
                 _fileStream = new FileStream(settingsTextFile, FileMode.Create);
@@ -100,6 +102,7 @@ public static class GameLauncher
             }
             catch (Exception e)
             {
+                Debug.Log(e);
                 _fileStream?.Close();
                 File.Delete(levelSettingsFile);
             }

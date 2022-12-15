@@ -27,7 +27,7 @@ public class Tutorial : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.Log("No main theme speaker found");
+            Debug.Log("No main theme speaker found" + e);
         }
 
         panels[activeIndex].SetActive(true);
@@ -54,7 +54,7 @@ public class Tutorial : MonoBehaviour
                 }
                 catch (Exception e)
                 {
-                    Debug.Log("No main theme speaker found");
+                    Debug.Log("No main theme speaker found" + e);
                 }
 
                 Time.timeScale = 1;

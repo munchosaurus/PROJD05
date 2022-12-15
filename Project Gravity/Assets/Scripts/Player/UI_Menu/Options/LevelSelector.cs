@@ -40,7 +40,7 @@ public class LevelSelector : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.Log("No Main theme in scene");
+            Debug.Log("No Main theme in scene" + e);
         }
         
         levelSelectorPlay.onClick.AddListener(OnLevelSelectorPlayPressed);

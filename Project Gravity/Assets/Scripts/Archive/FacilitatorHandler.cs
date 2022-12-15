@@ -31,7 +31,7 @@ public class FacilitatorHandler : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.Log("Level timer not found");
+            Debug.Log("Level timer not found" + e);
         }
         
         try
@@ -41,7 +41,7 @@ public class FacilitatorHandler : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.Log("Main theme speaker not found");
+            Debug.Log("Main theme speaker not found" + e);
         }
         rnd = new Random();
     }
