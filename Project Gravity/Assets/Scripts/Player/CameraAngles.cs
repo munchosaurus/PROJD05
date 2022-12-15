@@ -31,6 +31,7 @@ public class CameraAngles : MonoBehaviour
     {
         if (_rotationToggled)
         {
+            Debug.Log("yes, rotation toggled");
             Rotate();
         }
         else if (GameController.CameraAutoRotationToggled)
