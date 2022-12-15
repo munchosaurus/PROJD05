@@ -119,10 +119,12 @@ public class GamepadCursor : MonoBehaviour
     {
         if (playerInput.currentActionMap.name == "MenuControls")
         {
+            cursorImage.rectTransform.localScale = new Vector3(2,2,2);
             cursorImage.sprite = regularCursor;
         }
         else if (playerInput.currentActionMap.name == "PlayerControls")
         {
+            cursorImage.rectTransform.localScale = new Vector3(1,1,1);
             cursorImage.sprite = aimCursor;
         }
     }
@@ -138,20 +140,17 @@ public class GamepadCursor : MonoBehaviour
 
     private void Update()
     {
-        if (_previousControlScheme != playerInput.currentControlScheme)
-        {
-            OnControlsChanged(playerInput);
-        }
-
+        OnControlsChanged(playerInput);
+        
         _previousControlScheme = playerInput.currentControlScheme;
-        if (playerInput.currentControlScheme == gamePadScheme)
+        if (_previousControlScheme == gamePadScheme)
         {
             if (Cursor.visible)
             {
                 Cursor.visible = false;
             }
         }
-        else if (playerInput.currentControlScheme == mouseScheme)
+        else if (_previousControlScheme == mouseScheme)
         {
             if (!Cursor.visible)
             {

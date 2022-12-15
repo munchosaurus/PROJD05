@@ -84,6 +84,7 @@ public class IngameMenu : MonoBehaviour
 
     void SetMenuCursor()
     {
+        
         Cursor.SetCursor(customMenuCursor, new Vector2(0, 0),
             CursorMode.Auto);
     }

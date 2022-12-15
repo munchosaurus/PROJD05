@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.043124903, g: 0.044253588, b: 0.05878933, a: 1}
+  m_IndirectSpecularColor: {r: 0.04255711, g: 0.043650437, b: 0.057976317, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1663,7 +1663,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1818751363343521549
 GameObject:
@@ -1936,7 +1936,7 @@ MonoBehaviour:
     m_ActionName: MenuControls/NextTutorialPage[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Mouse
-  m_DefaultActionMap: PlayerControls
+  m_DefaultActionMap: MenuControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &7275072337568170226
@@ -1957,8 +1957,8 @@ MonoBehaviour:
   canvas: {fileID: 7275072337568170221}
   cursorSpeed: 2000
   padding: 50
-  aimCursor: {fileID: 21300000, guid: 1114e860007ef0744ad26ae6f78e6911, type: 3}
-  regularCursor: {fileID: 21300000, guid: f1e7fa41923c49b4fb16e29b1da4bab2, type: 3}
+  aimCursor: {fileID: 21300000, guid: 969b2903c50d37b44ba8ef5cfe344d81, type: 3}
+  regularCursor: {fileID: 21300000, guid: b68451149c9654c469f282464bdf4f4e, type: 3}
   cursorImage: {fileID: 1818751363343521551}
 --- !u!114 &7275072337568170228
 MonoBehaviour:
