@@ -146,7 +146,7 @@ public class GamepadCursor : MonoBehaviour
         }
 
         _previousControlScheme = playerInput.currentControlScheme;
-        if (playerInput.currentControlScheme == gamePadScheme)
+        if (_previousControlScheme == gamePadScheme)
         {
             if (Cursor.visible)
             {
@@ -154,7 +154,7 @@ public class GamepadCursor : MonoBehaviour
                 Cursor.visible = false;
             }
         }
-        else if (playerInput.currentControlScheme == mouseScheme)
+        else if (_previousControlScheme == mouseScheme)
         {
             if (!Cursor.visible)
             {
