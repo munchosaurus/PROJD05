@@ -210,9 +210,14 @@ public class LevelSelector : MonoBehaviour
             if (SceneManager.GetActiveScene().buildIndex == 0)
             {
                 StartCoroutine(StartFade(_selectedLevel));
+                StartCoroutine(StartFadeToBlack(_selectedLevel, Constants.LEVEL_SWITCH_FADE_DURATION * 2, true));
+            }
+            else
+            {
+                StartCoroutine(StartFadeToBlack(_selectedLevel, Constants.LEVEL_SWITCH_FADE_DURATION, true));
             }
 
-            StartCoroutine(StartFadeToBlack(_selectedLevel, Constants.LEVEL_SWITCH_FADE_DURATION, true));
+            
         }
     }
 
