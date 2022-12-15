@@ -12,6 +12,7 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private GameObject[] menus;
     [SerializeField] public GameObject interactText;
     [SerializeField] private Texture2D customAimCursor;
+    [SerializeField] private Texture2D customMenuCursor;
     [SerializeField] private int previousMenu;
 
     [Header("Level complete UI objects")] [SerializeField]
@@ -67,13 +68,6 @@ public class IngameMenu : MonoBehaviour
             _playerInput.SwitchCurrentActionMap("PlayerControls");
         }
 
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            //Cursor.SetCursor(customCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2), CursorMode.Auto);
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-            return;
-        }
-
         Physics.gravity = new Vector3(0, -GravityController.GravityMultiplier * Constants.GRAVITY, 0);
 
         if (customAimCursor != null)
@@ -85,6 +79,12 @@ public class IngameMenu : MonoBehaviour
     void SetAimCursor()
     {
         Cursor.SetCursor(customAimCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2),
+            CursorMode.Auto);
+    }
+
+    void SetMenuCursor()
+    {
+        Cursor.SetCursor(customMenuCursor, new Vector2(customMenuCursor.width / 4, customMenuCursor.height / 6),
             CursorMode.Auto);
     }
 
@@ -247,7 +247,7 @@ public class IngameMenu : MonoBehaviour
         }
 
         ToggleActionMap(true);
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        SetMenuCursor();
         GameController.PauseGame();
     }
 
@@ -314,7 +314,7 @@ public class IngameMenu : MonoBehaviour
     {
         if (scene == 0)
         {
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            SetMenuCursor();
         }
         else
         {

@@ -3,7 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamepadCursor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamepadCursor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/UI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/IngameMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/IngameMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/MainMenuOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/MainMenuOptions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/Cursors/Cursor_MenuNormal.psd.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/Cursors/Cursor_MenuNormal.psd.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/Cursors/T_Cursor_AIMING.psd.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/Cursors/T_Cursor_AIMING.psd.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,6 +151,7 @@
       <workItem from="1670836609525" duration="15363000" />
       <workItem from="1670923561436" duration="16404000" />
       <workItem from="1671011604276" duration="4292000" />
+      <workItem from="1671096011416" duration="993000" />
     </task>
     <task id="LOCAL−00001" summary="Added logic to level selector">
       <created>1669027248858</created>

@@ -12,7 +12,9 @@ public class MainMenuOptions : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject[] optionTabs;
     [SerializeField] private GameObject mainThemeSpeaker;
+    [SerializeField] private Texture2D customMenuCursor;
     private LevelSelector _levelSelector;
+    
 
     private void Awake()
     {
@@ -21,13 +23,19 @@ public class MainMenuOptions : MonoBehaviour
         {
             _levelSelector.mainTheme = Instantiate(mainThemeSpeaker).GetComponent<AudioSource>();
         }
-        
+        SetMenuCursor();
         StartCoroutine(_levelSelector.StartFadeToBlack(0, Constants.LEVEL_SWITCH_FADE_DURATION * 2, false));
         CompletionLogger.LoadCountfile();
         GameLauncher.LoadSettings();
         LevelCompletionTracker.AddUnlockedLevel(1);
         GetComponent<SoundOptions>().LoadSoundSettings();
         GetComponent<GameOptions>().LoadGameSettings();
+    }
+    
+    void SetMenuCursor()
+    {
+        Cursor.SetCursor(customMenuCursor, new Vector2(customMenuCursor.width / 4, customMenuCursor.height / 6),
+            CursorMode.Auto);
     }
 
     public void OpenOptionsMenu()

@@ -16567,6 +16567,7 @@ MonoBehaviour:
   - {fileID: 297355259227441067}
   interactText: {fileID: 6983272430263495672}
   customAimCursor: {fileID: 2800000, guid: 1114e860007ef0744ad26ae6f78e6911, type: 3}
+  customMenuCursor: {fileID: 2800000, guid: 0da2fc2bf73cd53458b8a7cdd0214ac4, type: 3}
   previousMenu: 0
   levelRecordText: {fileID: 6646039950270224239}
   newRecordText: {fileID: 945776164395657395}
