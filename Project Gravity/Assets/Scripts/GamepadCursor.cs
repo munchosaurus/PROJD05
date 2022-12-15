@@ -119,10 +119,12 @@ public class GamepadCursor : MonoBehaviour
     {
         if (playerInput.currentActionMap.name == "MenuControls")
         {
+            Debug.Log("Borde ha bytt controllers image nu till REGULAR");
             cursorImage.sprite = regularCursor;
         }
         else if (playerInput.currentActionMap.name == "PlayerControls")
         {
+            Debug.Log("Borde ha bytt controllers image nu till AIM");
             cursorImage.sprite = aimCursor;
         }
     }
