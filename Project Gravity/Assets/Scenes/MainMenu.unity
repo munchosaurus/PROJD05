@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04346558, g: 0.0446224, b: 0.059287407, a: 1}
+  m_IndirectSpecularColor: {r: 0.04255711, g: 0.043650437, b: 0.057976317, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12363,7 +12363,7 @@ MonoBehaviour:
     m_ActionName: MenuControls/NextTutorialPage[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Mouse
-  m_DefaultActionMap: PlayerControls
+  m_DefaultActionMap: MenuControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &7275072337568170226
