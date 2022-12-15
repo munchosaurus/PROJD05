@@ -16,7 +16,6 @@ public class GamepadCursor : MonoBehaviour
     [SerializeField] private Sprite aimCursor;
     [SerializeField] private Sprite regularCursor;
     [SerializeField] private Image cursorImage;
-    [SerializeField] private float cursorSize;
     private Camera _mainCamera;
     public Mouse VirtualMouse;
     private bool _previousMouseState;
