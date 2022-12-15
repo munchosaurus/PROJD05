@@ -150,6 +150,7 @@ public class GamepadCursor : MonoBehaviour
         {
             if (Cursor.visible)
             {
+                Debug.Log("Nu borde vi göra cursor invisible");
                 Cursor.visible = false;
             }
         }
@@ -160,5 +161,7 @@ public class GamepadCursor : MonoBehaviour
                 Cursor.visible = true;
             }
         }
+        
+        Debug.Log("NU är cursor:" + Cursor.visible);
     }
 }

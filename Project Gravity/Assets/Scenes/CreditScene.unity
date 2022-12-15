@@ -1936,7 +1936,7 @@ MonoBehaviour:
     m_ActionName: MenuControls/NextTutorialPage[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Mouse
-  m_DefaultActionMap: PlayerControls
+  m_DefaultActionMap: MenuControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &7275072337568170226
