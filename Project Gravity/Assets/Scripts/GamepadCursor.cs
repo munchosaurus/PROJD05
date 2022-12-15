@@ -140,11 +140,8 @@ public class GamepadCursor : MonoBehaviour
 
     private void Update()
     {
-        if (_previousControlScheme != playerInput.currentControlScheme)
-        {
-            OnControlsChanged(playerInput);
-        }
-
+        OnControlsChanged(playerInput);
+        
         _previousControlScheme = playerInput.currentControlScheme;
         if (_previousControlScheme == gamePadScheme)
         {
