@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
-  m_Name: Backwards A
+  m_Name: Box Jumper
   m_EditorClassIdentifier: 
-  levelName: Backwards A
-  levelSprite: {fileID: 21300000, guid: 58cde443e225d1345ab67eaf65701471, type: 3}
-  levelDescription: Backwards A description
-  playLongClipTime: 40
-  strictClip: {fileID: 8300000, guid: 64602f869582670459417ea81f41bab3, type: 3}
-  strictClipTime: 20
+  levelName: Box Jumper
+  levelSprite: {fileID: 21300000, guid: 670a0974bd1073d49bdbbcd7135a505a, type: 3}
+  levelDescription: Thank you box for letting me jump on you.
+  playLongClipTime: 15
+  strictClip: {fileID: 0}
+  strictClipTime: 0

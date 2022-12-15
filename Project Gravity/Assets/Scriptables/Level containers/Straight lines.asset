@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
   m_Name: Straight lines
   m_EditorClassIdentifier: 
-  levelName: Straight lines
+  levelName: Straight Lines
   levelSprite: {fileID: 21300000, guid: cc85d887158de564e854392c1585a0cc, type: 3}
-  levelDescription: Straight lines description
+  levelDescription: Straight lines are slow but reliable.
   playLongClipTime: 30
   strictClip: {fileID: 0}
   strictClipTime: 0

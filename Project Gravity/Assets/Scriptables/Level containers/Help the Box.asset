@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Help the Box
   levelSprite: {fileID: 21300000, guid: 636cbfbeebaa2db4faa0896f3e5ba104, type: 3}
-  levelDescription: Help the Box description
+  levelDescription: Can you help the box get back to the portal?
   playLongClipTime: 45
   strictClip: {fileID: 8300000, guid: a3afd98396479cf44baec8aab881a956, type: 3}
   strictClipTime: 20

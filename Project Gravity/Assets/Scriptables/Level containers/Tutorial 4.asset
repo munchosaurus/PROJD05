@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
-  m_Name: Lava One
+  m_Name: Tutorial 4
   m_EditorClassIdentifier: 
-  levelName: Lava 1
-  levelSprite: {fileID: 21300000, guid: 346d8397331920f408de40d3f58a3f7d, type: 3}
-  levelDescription: Lava One description
-  playLongClipTime: 20
-  strictClip: {fileID: 0}
-  strictClipTime: 0
+  levelName: Tutorial 4
+  levelSprite: {fileID: 21300000, guid: 98ff92c76caf23a4d9eda87f7486bd4a, type: 3}
+  levelDescription: Your first real test.
+  playLongClipTime: 30
+  strictClip: {fileID: 8300000, guid: 114672cb3ab8e4a43a83ea1d5ddc4571, type: 3}
+  strictClipTime: 5

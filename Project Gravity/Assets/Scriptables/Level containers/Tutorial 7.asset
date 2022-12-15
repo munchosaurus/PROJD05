@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
-  m_Name: Magnet One
+  m_Name: Tutorial 7
   m_EditorClassIdentifier: 
-  levelName: Magnet 1
-  levelSprite: {fileID: 21300000, guid: 670a0974bd1073d49bdbbcd7135a505a, type: 3}
-  levelDescription: Magnet One description
-  playLongClipTime: 15
+  levelName: Tutorial 7
+  levelSprite: {fileID: 21300000, guid: 7742be31eb202f74db210b4d85842967, type: 3}
+  levelDescription: Learn more about Magnets.
+  playLongClipTime: 30
   strictClip: {fileID: 0}
   strictClipTime: 0

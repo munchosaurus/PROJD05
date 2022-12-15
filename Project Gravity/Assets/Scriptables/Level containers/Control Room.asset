@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Control Room
   levelSprite: {fileID: 21300000, guid: 8a940e8658a23be428dcf6770384ef7e, type: 3}
-  levelDescription: Control Room description
+  levelDescription: Be the box.
   playLongClipTime: 25
   strictClip: {fileID: 8300000, guid: 65a0a42490e10d848b895432e7157c46, type: 3}
   strictClipTime: 8

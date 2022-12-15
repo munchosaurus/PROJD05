@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
-  m_Name: Tutorial_5
+  m_Name: Tutorial 3
   m_EditorClassIdentifier: 
-  levelName: Tutorial 5
-  levelSprite: {fileID: 21300000, guid: ce6eb53795e8f744d9a01e636f0399d6, type: 3}
-  levelDescription: Tutorial 5 description
+  levelName: Tutorial 3
+  levelSprite: {fileID: 21300000, guid: 3d0fd008ca4d2ec4db4f682a62402412, type: 3}
+  levelDescription: Learn about Gravity Objects.
   playLongClipTime: 25
-  strictClip: {fileID: 8300000, guid: 82a58930453425e468ea6b34ed5b4846, type: 3}
-  strictClipTime: 3
+  strictClip: {fileID: 0}
+  strictClipTime: 0

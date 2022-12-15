@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
-  m_Name: Tutorial_6
+  m_Name: Tricky Box
   m_EditorClassIdentifier: 
-  levelName: Tutorial 6
-  levelSprite: {fileID: 21300000, guid: fcd45139240d61f4ba5d260788fc78c0, type: 3}
-  levelDescription: Tutorial 6 description
-  playLongClipTime: 30
-  strictClip: {fileID: 0}
-  strictClipTime: 0
+  levelName: Tricky Box
+  levelSprite: {fileID: 21300000, guid: 58cde443e225d1345ab67eaf65701471, type: 3}
+  levelDescription: How do you get the box there?
+  playLongClipTime: 40
+  strictClip: {fileID: 8300000, guid: 64602f869582670459417ea81f41bab3, type: 3}
+  strictClipTime: 20

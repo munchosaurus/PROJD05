@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
-  m_Name: Tutorial_1
+  m_Name: Tutorial 2
   m_EditorClassIdentifier: 
-  levelName: Tutorial_1
-  levelSprite: {fileID: 21300000, guid: 2dabd63aaed195c46af73d1302f41f6f, type: 3}
-  levelDescription: Tutorial 1 description
+  levelName: Tutorial 2
+  levelSprite: {fileID: 21300000, guid: b07a8ff2df54e364bb337a070187f755, type: 3}
+  levelDescription: Learn more about Gravity Plates.
+  playLongClipTime: 30
+  strictClip: {fileID: 8300000, guid: 71f85ee2c4c4744478e8b49e876658d2, type: 3}
+  strictClipTime: 8
