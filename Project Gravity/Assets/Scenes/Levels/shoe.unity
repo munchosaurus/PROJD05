@@ -5883,6 +5883,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 376214374}
     m_Modifications:
+    - target: {fileID: 1596915450132777401, guid: 83426658413c0cc4e9b4a420fe3fdbeb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
+    - target: {fileID: 5135811361900508977, guid: 83426658413c0cc4e9b4a420fe3fdbeb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
     - target: {fileID: 6098653093695181756, guid: 83426658413c0cc4e9b4a420fe3fdbeb, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_PlasticScratched
@@ -5931,6 +5939,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8311123472441014532, guid: 83426658413c0cc4e9b4a420fe3fdbeb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83426658413c0cc4e9b4a420fe3fdbeb, type: 3}
 --- !u!4 &1293816661 stripped
