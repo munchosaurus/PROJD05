@@ -6,10 +6,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
+using UnityEngine.Rendering;
 
 public class IngameMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject[] menus;
+    [SerializeField] public GameObject[] menus;
     [SerializeField] public GameObject interactText;
     [SerializeField] private Texture2D customAimCursor;
     [SerializeField] private Texture2D customMenuCursor;
@@ -32,6 +34,7 @@ public class IngameMenu : MonoBehaviour
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
     private bool _playerWon;
+    private bool tutorialWasOnAtStart;
 
     // TODO: REMOVE AT LAUNCHES, ONLY USED NOW FOR EASIER CONTROL SETTINGS
     private void Awake()
@@ -43,6 +46,8 @@ public class IngameMenu : MonoBehaviour
             _levelSelector.mainTheme.clip = _levelSelector.inGameThemeClip;
             _levelSelector.mainTheme.Play();
         }
+
+        tutorialWasOnAtStart = GameController.TutorialIsOn;
         
         // Loads gamedata from file
         GameLauncher.LoadSettings();
@@ -138,6 +143,18 @@ public class IngameMenu : MonoBehaviour
         }
     }
 
+    public void ReopenTutorial(Tutorial t)
+    {
+        if (t.canChange && t.activeIndex < t.panels.Length)
+        {
+            menus[0].gameObject.SetActive(false);
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            playerGui.SetActive(true);
+            t.panels[t.activeIndex].GetComponent<AudioSource>().UnPause();
+            t.OpenPanel();
+        }
+    }
+
     public void ClosePauseScreen(InputAction.CallbackContext context)
     {
         if (context.canceled && !GameController.PlayerIsDead && !newSceneHasBeenLoaded)
@@ -149,10 +166,35 @@ public class IngameMenu : MonoBehaviour
                     if (_playerWon)
                     {
                         ToggleLevelCompleteMenu(false);
-                        return;
                     }
-
-                    Unpause();
+                    else if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn && tutorialWasOnAtStart)
+                    {
+                        Tutorial t = FindObjectOfType<Tutorial>();
+                        if (t.activeIndex < t.panels.Length)
+                        {
+                            ReopenTutorial(t);
+                        }
+                        else
+                        {
+                            Time.timeScale = 1;
+                            ShutMenuItems();
+                        }
+                        
+                    } else if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && !GameController.TutorialIsOn)
+                    {
+                        Tutorial t = FindObjectOfType<Tutorial>();
+                        foreach (var var in t.panels)
+                        {
+                            var.SetActive(false);
+                        }
+                        Time.timeScale = 1;
+                        ShutMenuItems();
+                    }
+                    else
+                    {
+                        ShutMenuItems();
+                        GameController.UnpauseGame();
+                    }
                 }
                 else if (menus[1].gameObject.activeSelf)
                 {
@@ -165,6 +207,14 @@ public class IngameMenu : MonoBehaviour
                 else if (menus[4].gameObject.activeSelf)
                 {
                     CloseOptionsMenu();
+                }
+            } else if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
+            {
+                Tutorial t = FindObjectOfType<Tutorial>();
+                if (t.canChange && t.activeIndex < t.panels.Length)
+                {
+                    t.panels[t.activeIndex].GetComponent<AudioSource>().Pause();
+                    Pause(0);
                 }
             }
         }
@@ -193,6 +243,35 @@ public class IngameMenu : MonoBehaviour
 
     public void Unpause()
     {
+        if (FindObjectOfType<LevelSettings>().IsTutorialLevel())
+        {
+            Tutorial t = FindObjectOfType<Tutorial>();
+            if (GameController.TutorialIsOn)
+            {
+                if (tutorialWasOnAtStart)
+                {
+                    if (t.activeIndex < t.panels.Length && t.canChange)
+                    {
+                        ReopenTutorial(t);
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var var in t.panels)
+                {
+                    var.SetActive(false);
+                }
+            }
+        }
+        
+        ShutMenuItems();
+        GameController.UnpauseGame();
+    }
+
+    public void ShutMenuItems()
+    {
         if (menus.Length > 0)
         {
             for (int i = 0; i < menus.Length; i++)
@@ -212,7 +291,6 @@ public class IngameMenu : MonoBehaviour
         playerGui.SetActive(true);
         ToggleActionMap(false);
         SetAimCursor();
-        GameController.UnpauseGame();
     }
 
     public void Pause(int index)
@@ -353,8 +431,15 @@ public class IngameMenu : MonoBehaviour
     {
         if (!_playerWon)
         {
-            CompletionLogger.finishTime = FindObjectOfType<LevelTimer>().GetTimePassed();
-            CompletionLogger.WriteCompletionLog();
+            try
+            {
+                CompletionLogger.finishTime = FindObjectOfType<LevelTimer>().GetTimePassed();
+                CompletionLogger.WriteCompletionLog();
+            }
+            catch (Exception e)
+            {
+                Debug.Log("Logging restart failed " + e);
+            }
         }
 
         LoadScene(SceneManager.GetActiveScene().buildIndex);

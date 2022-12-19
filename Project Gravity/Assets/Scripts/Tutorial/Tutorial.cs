@@ -6,10 +6,16 @@ using UnityEngine.InputSystem;
 
 public class Tutorial : MonoBehaviour
 {
-    [SerializeField] GameObject[] panels;
+    [SerializeField] public GameObject[] panels;
     [SerializeField] private AudioSource mainTheme;
-    int activeIndex = 0;
-    bool canChange= false;
+    private IngameMenu _ingameMenu;
+    public int activeIndex = 0;
+    public bool canChange = false;
+
+    private void Awake()
+    {
+        _ingameMenu = FindObjectOfType<IngameMenu>();
+    }
 
     IEnumerator CountDownToChangeAllowed()
     {
@@ -34,16 +40,21 @@ public class Tutorial : MonoBehaviour
         StartCoroutine(CountDownToChangeAllowed());
     }
 
+    public void OpenPanel()
+    {
+        panels[activeIndex].SetActive(true);
+        StartCoroutine(CountDownToChangeAllowed());
+    }
+
     public void ChangeActivePanel(InputAction.CallbackContext cbc)
     {
-        if (cbc.started && canChange)
+        if (cbc.started && canChange && !_ingameMenu.transform.GetChild(0).gameObject.activeSelf)
         {
             panels[activeIndex++].SetActive(false);
 
             if (activeIndex < panels.Length)
             {
-                panels[activeIndex].SetActive(true);
-                StartCoroutine(CountDownToChangeAllowed());
+                OpenPanel();
             }
             else
             {
