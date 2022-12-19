@@ -3871,7 +3871,7 @@ GameObject:
   - component: {fileID: 1409191797}
   - component: {fileID: 1409191796}
   m_Layer: 5
-  m_Name: Gravity Object
+  m_Name: Lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3933,7 +3933,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 236.50015, y: 55.8}
+  m_AnchoredPosition: {x: 220, y: 80}
   m_SizeDelta: {x: 240, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1409191796
