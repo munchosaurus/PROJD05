@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
   m_Name: Tutorial 1
   m_EditorClassIdentifier: 
-  levelName: Tutorial 1
+  levelName: First Initialization
   levelSprite: {fileID: 21300000, guid: 2dabd63aaed195c46af73d1302f41f6f, type: 3}
   levelDescription: Learn the basic controls.
   playLongClipTime: 0

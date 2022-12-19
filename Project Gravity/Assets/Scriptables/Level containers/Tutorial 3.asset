@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
   m_Name: Tutorial 3
   m_EditorClassIdentifier: 
-  levelName: Tutorial 3
+  levelName: Gravity Objects
   levelSprite: {fileID: 21300000, guid: 3d0fd008ca4d2ec4db4f682a62402412, type: 3}
   levelDescription: Learn about Gravity Objects.
   playLongClipTime: 25
