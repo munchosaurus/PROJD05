@@ -17,6 +17,7 @@ public class PlayerAnimationController : MonoBehaviour
     private bool playerHasWon;
     private Vector3 velocity;
     private static Guid _playerSucceedsGuid;
+    public bool finishedEntrance;
 
     private void Start()
     {
@@ -34,6 +35,11 @@ public class PlayerAnimationController : MonoBehaviour
             playerHasWon = true;
             _animator.SetBool("Won", true);
         }
+    }
+
+    public void FinishEntrance()
+    {
+        finishedEntrance = true;
     }
 
     private AudioClip GetVictorySound()
@@ -102,6 +108,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void StartLevel()
     {
+        GameController.UnpauseGame();
         LevelStartEvent levelStartEvent = new LevelStartEvent()
         {
         };

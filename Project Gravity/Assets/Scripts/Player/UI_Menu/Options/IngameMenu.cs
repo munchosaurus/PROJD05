@@ -176,10 +176,8 @@ public class IngameMenu : MonoBehaviour
                         }
                         else
                         {
-                            Time.timeScale = 1;
-                            ShutMenuItems();
+                            Unpause();
                         }
-                        
                     } else if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && !GameController.TutorialIsOn)
                     {
                         Tutorial t = FindObjectOfType<Tutorial>();
@@ -187,13 +185,12 @@ public class IngameMenu : MonoBehaviour
                         {
                             var.SetActive(false);
                         }
-                        Time.timeScale = 1;
-                        ShutMenuItems();
+
+                        Unpause();
                     }
                     else
                     {
-                        ShutMenuItems();
-                        GameController.UnpauseGame();
+                        Unpause();
                     }
                 }
                 else if (menus[1].gameObject.activeSelf)
@@ -267,7 +264,14 @@ public class IngameMenu : MonoBehaviour
         }
         
         ShutMenuItems();
-        GameController.UnpauseGame();
+        if (FindObjectOfType<PlayerAnimationController>().finishedEntrance)
+        {
+            GameController.UnpauseGame();
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 
     public void ShutMenuItems()
