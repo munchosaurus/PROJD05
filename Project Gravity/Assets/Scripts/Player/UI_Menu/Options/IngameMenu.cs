@@ -139,7 +139,7 @@ public class IngameMenu : MonoBehaviour
 
     public void ClosePauseScreen(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.canceled)
         {
             if (gameObject.transform.GetChild(0).gameObject.activeSelf)
             {
@@ -220,8 +220,7 @@ public class IngameMenu : MonoBehaviour
         gameObject.transform.parent.GetComponent<AudioSource>().mute = true;
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         gameObject.SetActive(true);
-
-        levelCompleteReturn.SetActive(false);
+        
         foreach (var menu in menus)
         {
             if (menu.gameObject.activeSelf)
