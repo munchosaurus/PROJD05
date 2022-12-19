@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using System.Data;
+using Unity.VisualScripting;
 
 public class LevelSelector : MonoBehaviour
 {
@@ -74,6 +75,10 @@ public class LevelSelector : MonoBehaviour
 
 
         mainTheme.Play();
+        if (mainTheme.clip == creditThemeClip)
+        {
+            yield break;
+        }
         currentTime = 0;
         while (currentTime < (Constants.LEVEL_SWITCH_FADE_DURATION))
         {
