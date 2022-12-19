@@ -7722,6 +7722,7 @@ GameObject:
   - component: {fileID: 855317169}
   - component: {fileID: 855317168}
   - component: {fileID: 855317167}
+  - component: {fileID: 855317170}
   m_Layer: 11
   m_Name: Graphics
   m_TagString: Untagged
@@ -7807,6 +7808,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855317165}
   m_Mesh: {fileID: 2928831531024867810, guid: ee652d0f77296ba49bd0ca7f9939c1c2, type: 3}
+--- !u!95 &855317170
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855317165}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a59a3426c6255b74ba2e5fc6e6a1ada1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &857849700
 PrefabInstance:
   m_ObjectHideFlags: 0
