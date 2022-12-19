@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
-  m_Name: B
+  m_Name: The Letter A
   m_EditorClassIdentifier: 
-  levelName: B
-  levelSprite: {fileID: 21300000, guid: 953cb3ec31cd5e945a230aa36ff5c885, type: 3}
-  levelDescription: B is for Brilliant.
+  levelName: A
+  levelSprite: {fileID: 21300000, guid: 51f5a0838860d68418d0f11758cf9ba5, type: 3}
+  levelDescription: A is for Adaptable.
   playLongClipTime: 30
   strictClip: {fileID: 0}
   strictClipTime: 0
