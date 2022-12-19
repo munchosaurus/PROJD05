@@ -26,6 +26,7 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] private GameObject[] optionTabs;
     [SerializeField] private GameObject mainThemeSpeaker;
     [SerializeField] private GameObject playerGui;
+    public bool newSceneHasBeenLoaded;
     private PlayerInput _playerInput;
     private LevelSelector _levelSelector;
     private static Guid _playerDeathGuid;
@@ -110,7 +111,7 @@ public class IngameMenu : MonoBehaviour
 
     public void ChangePauseState(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !GameController.PlayerIsDead && !newSceneHasBeenLoaded)
         {
             UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
             if (SceneManager.GetActiveScene().buildIndex == 0)
@@ -139,7 +140,7 @@ public class IngameMenu : MonoBehaviour
 
     public void ClosePauseScreen(InputAction.CallbackContext context)
     {
-        if (context.canceled)
+        if (context.canceled && !GameController.PlayerIsDead && !newSceneHasBeenLoaded)
         {
             if (gameObject.transform.GetChild(0).gameObject.activeSelf)
             {
@@ -315,6 +316,7 @@ public class IngameMenu : MonoBehaviour
 
     public void LoadScene(int scene)
     {
+        newSceneHasBeenLoaded = true;
         if (scene == 0)
         {
             SetMenuCursor();
@@ -340,7 +342,7 @@ public class IngameMenu : MonoBehaviour
 
     public void RestartWithRButton(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !GameController.PlayerIsDead && !_playerWon)
         {
             Restart();
         }

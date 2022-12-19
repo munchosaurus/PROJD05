@@ -205,6 +205,18 @@ public class LevelSelector : MonoBehaviour
 
     private void OnLevelSelectorPlayPressed()
     {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            try
+            {
+                FindObjectOfType<IngameMenu>().newSceneHasBeenLoaded = true;
+            }
+            catch (Exception e)
+            {
+                Debug.Log("Couldn't set newSceneHasBeenLoaded = true " + e);
+            }
+        }
+
         if (LevelCompletionTracker.unlockedLevels.Contains(_selectedLevel))
         {
             if (SceneManager.GetActiveScene().buildIndex == 0)
@@ -216,8 +228,6 @@ public class LevelSelector : MonoBehaviour
             {
                 StartCoroutine(StartFadeToBlack(_selectedLevel, Constants.LEVEL_SWITCH_FADE_DURATION, true));
             }
-
-            
         }
     }
 
