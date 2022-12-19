@@ -1639,6 +1639,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1049751914841088714}
     m_Modifications:
+    - target: {fileID: 1827058397106459540, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
+      propertyPath: playerGui
+      value: 
+      objectReference: {fileID: 1946085346806778852}
     - target: {fileID: 8785348646229604258, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
       propertyPath: m_Name
       value: UI
@@ -1745,6 +1749,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1946085346806778852 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2243225030426476617, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}
+  m_PrefabInstance: {fileID: 297355258967296941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2124406989537400889 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1827058397106459540, guid: fd43fcdcb96038c4f95c25ad0eaa72c7, type: 3}

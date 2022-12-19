@@ -25,6 +25,7 @@ public class IngameMenu : MonoBehaviour
 
     [SerializeField] private GameObject[] optionTabs;
     [SerializeField] private GameObject mainThemeSpeaker;
+    [SerializeField] private GameObject playerGui;
     private PlayerInput _playerInput;
     private LevelSelector _levelSelector;
     private static Guid _playerDeathGuid;
@@ -207,6 +208,7 @@ public class IngameMenu : MonoBehaviour
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
 
+        playerGui.SetActive(true);
         ToggleActionMap(false);
         SetAimCursor();
         GameController.UnpauseGame();
@@ -247,6 +249,7 @@ public class IngameMenu : MonoBehaviour
             nextLevelButton.GetComponentInChildren<TMP_Text>().text = "Continue";
         }
 
+        playerGui.SetActive(false);
         ToggleActionMap(true);
         SetMenuCursor();
         GameController.PauseGame();
