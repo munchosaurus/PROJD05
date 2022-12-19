@@ -6941,6 +6941,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 376214374}
     m_Modifications:
+    - target: {fileID: 501196219669675125, guid: 6bdeb64655d36954aad4a8cfdfc88d83, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ee21806515d80a46afa2f100bdcf1df, type: 2}
+    - target: {fileID: 5207711400946469541, guid: 6bdeb64655d36954aad4a8cfdfc88d83, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ee21806515d80a46afa2f100bdcf1df, type: 2}
+    - target: {fileID: 5738211397274595945, guid: 6bdeb64655d36954aad4a8cfdfc88d83, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5738211397274595945, guid: 6bdeb64655d36954aad4a8cfdfc88d83, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ee21806515d80a46afa2f100bdcf1df, type: 2}
     - target: {fileID: 6098653093695181756, guid: 6bdeb64655d36954aad4a8cfdfc88d83, type: 3}
       propertyPath: m_Name
       value: Tile_SingleClean
@@ -6993,6 +7009,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7834444080594070629, guid: 6bdeb64655d36954aad4a8cfdfc88d83, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ee21806515d80a46afa2f100bdcf1df, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bdeb64655d36954aad4a8cfdfc88d83, type: 3}
 --- !u!4 &1593185196 stripped

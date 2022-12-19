@@ -1863,6 +1863,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 174161207}
     m_Modifications:
+    - target: {fileID: 838609421760342775, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
+    - target: {fileID: 1992508994429646453, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
+    - target: {fileID: 4629866672007191179, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
     - target: {fileID: 6098653093695181756, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_PlasticClean
@@ -4565,6 +4577,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2143261765}
     m_Modifications:
+    - target: {fileID: 838609421760342775, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
+    - target: {fileID: 1992508994429646453, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
+    - target: {fileID: 4629866672007191179, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
     - target: {fileID: 6098653093695181756, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_PlasticClean
@@ -7658,6 +7682,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 589421138}
     m_Modifications:
+    - target: {fileID: 838609421760342775, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
+    - target: {fileID: 1992508994429646453, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
+    - target: {fileID: 4629866672007191179, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
     - target: {fileID: 6098653093695181756, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_PlasticClean
@@ -8208,6 +8244,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1532433803}
     m_Modifications:
+    - target: {fileID: 838609421760342775, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
+    - target: {fileID: 1992508994429646453, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
+    - target: {fileID: 4629866672007191179, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aeb927225eaccf418f46199f52fc0d0, type: 2}
     - target: {fileID: 6098653093695181756, guid: c557b3c807ab0d24c8bb9e944b263916, type: 3}
       propertyPath: m_Name
       value: BuildingBlock_Cube_PlasticClean
