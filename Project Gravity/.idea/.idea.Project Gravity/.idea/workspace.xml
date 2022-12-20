@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2acdde4e-4621-445e-a717-0f8cbce70b91" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/WinningConfettiHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/WinningConfettiHandler.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Jump the Lava.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Jump the Lava.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,6 +146,7 @@
       <workItem from="1671096011416" duration="1779000" />
       <workItem from="1671441730342" duration="9310000" />
       <workItem from="1671527582819" duration="3219000" />
+      <workItem from="1671550955940" duration="35000" />
     </task>
     <task id="LOCAL−00001" summary="Added logic to level selector">
       <created>1669027248858</created>
