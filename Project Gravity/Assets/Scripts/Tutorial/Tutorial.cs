@@ -30,7 +30,7 @@ public class Tutorial : MonoBehaviour
         try
         {
             mainTheme = GameObject.Find("MainThemeSpeaker(Clone)").GetComponent<AudioSource>();
-            mainTheme.volume *= 0.5f;
+            mainTheme.volume /= 2;
         }
         catch (Exception e)
         {
@@ -63,7 +63,7 @@ public class Tutorial : MonoBehaviour
                 canChange = false;
                 try
                 {
-                    mainTheme.volume *= 2f;
+                    StartCoroutine(mainTheme.gameObject.GetComponent<MainMenuSpeaker>().FadeMusic());
                 }
                 catch (Exception e)
                 {

@@ -52,11 +52,11 @@ public class LevelSelector : MonoBehaviour
     {
         float currentTime = 0;
         float start = mainTheme.volume;
-        while (currentTime < (Constants.LEVEL_SWITCH_FADE_DURATION))
+        while (currentTime < (Constants.LEVEL_SWITCH_FADE_DURATION * 2))
         {
             currentTime += Time.unscaledDeltaTime;
             mainTheme.volume =
-                Mathf.Lerp(start, bottomvolume, currentTime / (Constants.LEVEL_SWITCH_FADE_DURATION));
+                Mathf.Lerp(start, bottomvolume, currentTime / (Constants.LEVEL_SWITCH_FADE_DURATION * 2));
             yield return null;
         }
 
@@ -79,14 +79,14 @@ public class LevelSelector : MonoBehaviour
         {
             yield break;
         }
-        currentTime = 0;
-        while (currentTime < (Constants.LEVEL_SWITCH_FADE_DURATION))
-        {
-            currentTime += Time.unscaledDeltaTime;
-            mainTheme.volume =
-                Mathf.Lerp(bottomvolume, start, currentTime / (Constants.LEVEL_SWITCH_FADE_DURATION));
-            yield return null;
-        }
+        // currentTime = 0;
+        // while (currentTime < (Constants.LEVEL_SWITCH_FADE_DURATION))
+        // {
+        //     currentTime += Time.unscaledDeltaTime;
+        //     mainTheme.volume =
+        //         Mathf.Lerp(bottomvolume, start, currentTime / (Constants.LEVEL_SWITCH_FADE_DURATION));
+        //     yield return null;
+        // }
 
         GameLauncher.WriteSettings();
     }
