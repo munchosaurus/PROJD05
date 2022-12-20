@@ -11,6 +11,7 @@ public class Tutorial : MonoBehaviour
     private IngameMenu _ingameMenu;
     public int activeIndex = 0;
     public bool canChange = false;
+    public bool tutorialFinished;
 
     private void Awake()
     {
@@ -58,6 +59,7 @@ public class Tutorial : MonoBehaviour
             }
             else
             {
+                tutorialFinished = true;
                 canChange = false;
                 try
                 {
@@ -69,7 +71,6 @@ public class Tutorial : MonoBehaviour
                 }
 
                 Time.timeScale = 1;
-                //FindObjectOfType<IngameMenu>().Unpause();
             }
         }
     }

@@ -47,8 +47,7 @@ public class IngameMenu : MonoBehaviour
             _levelSelector.mainTheme.Play();
         }
 
-        tutorialWasOnAtStart = GameController.TutorialIsOn;
-        
+
         // Loads gamedata from file
         GameLauncher.LoadSettings();
         CompletionLogger.gravityChanges = 0;
@@ -66,7 +65,8 @@ public class IngameMenu : MonoBehaviour
 
         _playerInput = FindObjectOfType<PlayerInput>();
 
-        if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
+        tutorialWasOnAtStart = GameController.TutorialIsOn;
+        if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && tutorialWasOnAtStart)
         {
             _playerInput.SwitchCurrentActionMap("MenuControls");
         }
@@ -91,7 +91,6 @@ public class IngameMenu : MonoBehaviour
 
     void SetMenuCursor()
     {
-        
         Cursor.SetCursor(customMenuCursor, new Vector2(0, 0),
             CursorMode.Auto);
     }
@@ -145,7 +144,7 @@ public class IngameMenu : MonoBehaviour
 
     public void ReopenTutorial(Tutorial t)
     {
-        if (t.canChange && t.activeIndex < t.panels.Length)
+        if (!t.tutorialFinished)
         {
             menus[0].gameObject.SetActive(false);
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
@@ -167,10 +166,11 @@ public class IngameMenu : MonoBehaviour
                     {
                         ToggleLevelCompleteMenu(false);
                     }
-                    else if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn && tutorialWasOnAtStart)
+                    else if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn &&
+                             tutorialWasOnAtStart)
                     {
                         Tutorial t = FindObjectOfType<Tutorial>();
-                        if (t.activeIndex < t.panels.Length)
+                        if (!t.tutorialFinished)
                         {
                             ReopenTutorial(t);
                         }
@@ -178,7 +178,8 @@ public class IngameMenu : MonoBehaviour
                         {
                             Unpause();
                         }
-                    } else if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && !GameController.TutorialIsOn)
+                    }
+                    else if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && !GameController.TutorialIsOn)
                     {
                         Tutorial t = FindObjectOfType<Tutorial>();
                         foreach (var var in t.panels)
@@ -205,10 +206,11 @@ public class IngameMenu : MonoBehaviour
                 {
                     CloseOptionsMenu();
                 }
-            } else if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
+            }
+            else if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && GameController.TutorialIsOn)
             {
                 Tutorial t = FindObjectOfType<Tutorial>();
-                if (t.canChange && t.activeIndex < t.panels.Length)
+                if (!t.tutorialFinished)
                 {
                     t.panels[t.activeIndex].GetComponent<AudioSource>().Pause();
                     Pause(0);
@@ -243,26 +245,18 @@ public class IngameMenu : MonoBehaviour
         if (FindObjectOfType<LevelSettings>().IsTutorialLevel())
         {
             Tutorial t = FindObjectOfType<Tutorial>();
-            if (GameController.TutorialIsOn)
+            if (GameController.TutorialIsOn && tutorialWasOnAtStart && !t.tutorialFinished)
             {
-                if (tutorialWasOnAtStart)
-                {
-                    if (t.activeIndex < t.panels.Length && t.canChange)
-                    {
-                        ReopenTutorial(t);
-                        return;
-                    }
-                }
+                ReopenTutorial(t);
+                return;
             }
-            else
+
+            foreach (var var in t.panels)
             {
-                foreach (var var in t.panels)
-                {
-                    var.SetActive(false);
-                }
+                var.SetActive(false);
             }
         }
-        
+
         ShutMenuItems();
         if (FindObjectOfType<PlayerAnimationController>().finishedEntrance)
         {
@@ -303,7 +297,7 @@ public class IngameMenu : MonoBehaviour
         gameObject.transform.parent.GetComponent<AudioSource>().mute = true;
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         gameObject.SetActive(true);
-        
+
         foreach (var menu in menus)
         {
             if (menu.gameObject.activeSelf)

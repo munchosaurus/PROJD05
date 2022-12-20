@@ -16579,6 +16579,8 @@ MonoBehaviour:
   - {fileID: 5576533931908703560}
   - {fileID: 3968323757324390908}
   mainThemeSpeaker: {fileID: 7650552164420973290, guid: fb75c72239580694e9236af10b9cd9ee, type: 3}
+  playerGui: {fileID: 0}
+  newSceneHasBeenLoaded: 0
 --- !u!114 &1300517236831362815
 MonoBehaviour:
   m_ObjectHideFlags: 0
