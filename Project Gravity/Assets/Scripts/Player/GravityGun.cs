@@ -58,6 +58,8 @@ public class GravityGun : MonoBehaviour
     private bool playerWon;
     private bool playerDied;
 
+    private PlayerAnimationController _playerAnimationController;
+
     private void Awake()
     {
         aimDirector = GameObject.FindGameObjectWithTag("AimingDirector");
@@ -65,7 +67,8 @@ public class GravityGun : MonoBehaviour
         magnetLayer = LayerMask.NameToLayer("GravityMagnet");
         mirrorLayer = LayerMask.NameToLayer("Mirror");
         playerInput = FindObjectOfType<PlayerInput>();
-
+        _playerAnimationController = FindObjectOfType<PlayerAnimationController>();
+        
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
 
@@ -345,7 +348,7 @@ public class GravityGun : MonoBehaviour
             return;
         }
 
-        if (val.performed)
+        if (val.performed && _playerAnimationController.finishedEntrance)
         {
             playerShotAudioSource.loop = true;
             buttonPressed = true;
