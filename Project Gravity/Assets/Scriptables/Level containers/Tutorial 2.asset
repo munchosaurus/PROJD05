@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
   m_Name: Tutorial 2
   m_EditorClassIdentifier: 
-  levelName: Tutorial 2
+  levelName: Gravity Plates
   levelSprite: {fileID: 21300000, guid: b07a8ff2df54e364bb337a070187f755, type: 3}
   levelDescription: Learn more about Gravity Plates.
   playLongClipTime: 30

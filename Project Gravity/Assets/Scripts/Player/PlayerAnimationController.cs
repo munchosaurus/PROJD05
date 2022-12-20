@@ -13,15 +13,18 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private AudioClip basicVictorySound;
     [SerializeField] private AudioClip[] victoryClip;
     [SerializeField] private float suctionSpeed;
+    private AudioSource mainTheme;
     private static int lastSound;
     private bool playerHasWon;
     private Vector3 velocity;
     private static Guid _playerSucceedsGuid;
+    public bool finishedEntrance;
 
     private void Start()
     {
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeathEvent, ref _playerSucceedsGuid);
+        mainTheme = GameObject.Find("MainThemeSpeaker(Clone)").GetComponent<AudioSource>();
     }
 
     private void OnPlayerSucceedsLevel(WinningEvent winningEvent)
@@ -34,6 +37,11 @@ public class PlayerAnimationController : MonoBehaviour
             playerHasWon = true;
             _animator.SetBool("Won", true);
         }
+    }
+
+    public void FinishEntrance()
+    {
+        finishedEntrance = true;
     }
 
     private AudioClip GetVictorySound()
@@ -51,6 +59,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void FinishAnimation()
     {
+        mainTheme.volume /= 2;
         _audioSource.PlayOneShot(basicVictorySound);
         StartCoroutine(PlaySecondPartOfVictorySound());
         FindObjectOfType<IngameMenu>().Pause(1);
@@ -60,6 +69,8 @@ public class PlayerAnimationController : MonoBehaviour
     {
         yield return new WaitWhile(()=> _audioSource.isPlaying);
         _audioSource.PlayOneShot(GetVictorySound());
+        yield return new WaitWhile(()=> _audioSource.isPlaying);
+        StartCoroutine(mainTheme.gameObject.GetComponent<MainMenuSpeaker>().FadeMusic());
     }
 
     public void OnPlayerDeathEvent(PlayerDeathEvent playerDeathEvent)
@@ -102,6 +113,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void StartLevel()
     {
+        GameController.UnpauseGame();
         LevelStartEvent levelStartEvent = new LevelStartEvent()
         {
         };

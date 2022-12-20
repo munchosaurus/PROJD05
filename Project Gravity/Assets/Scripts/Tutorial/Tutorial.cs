@@ -6,10 +6,17 @@ using UnityEngine.InputSystem;
 
 public class Tutorial : MonoBehaviour
 {
-    [SerializeField] GameObject[] panels;
+    [SerializeField] public GameObject[] panels;
     [SerializeField] private AudioSource mainTheme;
-    int activeIndex = 0;
-    bool canChange= false;
+    private IngameMenu _ingameMenu;
+    public int activeIndex = 0;
+    public bool canChange = false;
+    public bool tutorialFinished;
+
+    private void Awake()
+    {
+        _ingameMenu = FindObjectOfType<IngameMenu>();
+    }
 
     IEnumerator CountDownToChangeAllowed()
     {
@@ -23,7 +30,7 @@ public class Tutorial : MonoBehaviour
         try
         {
             mainTheme = GameObject.Find("MainThemeSpeaker(Clone)").GetComponent<AudioSource>();
-            mainTheme.volume *= 0.5f;
+            mainTheme.volume /= 2;
         }
         catch (Exception e)
         {
@@ -34,23 +41,29 @@ public class Tutorial : MonoBehaviour
         StartCoroutine(CountDownToChangeAllowed());
     }
 
+    public void OpenPanel()
+    {
+        panels[activeIndex].SetActive(true);
+        StartCoroutine(CountDownToChangeAllowed());
+    }
+
     public void ChangeActivePanel(InputAction.CallbackContext cbc)
     {
-        if (cbc.started && canChange)
+        if (cbc.started && canChange && !_ingameMenu.transform.GetChild(0).gameObject.activeSelf)
         {
             panels[activeIndex++].SetActive(false);
 
             if (activeIndex < panels.Length)
             {
-                panels[activeIndex].SetActive(true);
-                StartCoroutine(CountDownToChangeAllowed());
+                OpenPanel();
             }
             else
             {
+                tutorialFinished = true;
                 canChange = false;
                 try
                 {
-                    mainTheme.volume *= 2f;
+                    StartCoroutine(mainTheme.gameObject.GetComponent<MainMenuSpeaker>().FadeMusic());
                 }
                 catch (Exception e)
                 {
@@ -58,7 +71,6 @@ public class Tutorial : MonoBehaviour
                 }
 
                 Time.timeScale = 1;
-                //FindObjectOfType<IngameMenu>().Unpause();
             }
         }
     }

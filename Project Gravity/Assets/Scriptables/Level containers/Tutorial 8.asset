@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf340f1a92364e31904dd6752f33b9b9, type: 3}
   m_Name: Tutorial 8
   m_EditorClassIdentifier: 
-  levelName: Tutorial 8
+  levelName: Magnets 1.2
   levelSprite: {fileID: 21300000, guid: d66747291d0502847b68026ee6aab064, type: 3}
   levelDescription: Learn even more about Magnets.
   playLongClipTime: 30

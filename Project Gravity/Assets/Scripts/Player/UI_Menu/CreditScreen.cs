@@ -35,8 +35,22 @@ public class CreditScreen : MonoBehaviour
         {
             mainTheme = GameObject.Find("MainThemeSpeaker(Clone)").GetComponent<AudioSource>();
         }
-
+        
+        StartCoroutine(IncreaseVolume());
         StartCoroutine(StartFadeToBlack(0, Constants.LEVEL_SWITCH_FADE_DURATION, false));
+    }
+
+    private IEnumerator IncreaseVolume()
+    {
+        float currentTime = 0;
+        mainTheme.volume = 0.01f;
+        while (currentTime < Constants.LEVEL_SWITCH_FADE_DURATION * 3)
+        {
+            currentTime += Time.unscaledDeltaTime;
+            mainTheme.volume =
+                Mathf.Lerp(bottomvolume, mainThemeSpeaker.GetComponent<AudioSource>().volume, currentTime / (Constants.LEVEL_SWITCH_FADE_DURATION * 3));
+            yield return null;
+        }
     }
 
     public void LoadMainMenu()

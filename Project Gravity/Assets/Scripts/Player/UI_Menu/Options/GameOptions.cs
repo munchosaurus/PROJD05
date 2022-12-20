@@ -5,6 +5,7 @@ using System.Globalization;
 using Mono.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOptions : MonoBehaviour
@@ -113,6 +114,13 @@ public class GameOptions : MonoBehaviour
     public void OnTutorialToggleValueChanged()
     {
         GameController.TutorialIsOn = tutorialToggle.isOn;
+        if (SceneManager.GetActiveScene().buildIndex != 0) 
+        {
+            if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && FindObjectOfType<LevelTimer>().GetTimePassed() == 0f)
+            {
+                FindObjectOfType<Tutorial>().tutorialFinished = !GameController.TutorialIsOn;
+            }
+        }
         
         GameLauncher.WriteSettings();
     }
