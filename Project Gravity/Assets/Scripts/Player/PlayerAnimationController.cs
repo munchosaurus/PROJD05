@@ -39,7 +39,6 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void FinishEntrance()
     {
-        Debug.Log("yes, entrance is now true");
         finishedEntrance = true;
     }
 

@@ -38,7 +38,6 @@ public class GravityGun : MonoBehaviour
     [SerializeField] private AudioClip playerAims;
     [SerializeField] private AudioClip playerShoots;
     [SerializeField] private AudioSource playerShotAudioSource;
-    [SerializeField] private float gunDelay;
 
     private PlayerInput playerInput;
     private GameObject aimDirector;
@@ -328,17 +327,14 @@ public class GravityGun : MonoBehaviour
 
     public void ShootGravityGun()
     {
-        StartCoroutine(StartShotWithDelay());
-        DisableAimDirector();
-    }
-
-    private IEnumerator StartShotWithDelay()
-    {
-        playerShotAudioSource.loop = false;
-        playerShotAudioSource.PlayOneShot(playerShoots);
-        var hits = InitRaycasts(transform.position, _currentDirection);
-        yield return new WaitForSeconds(gunDelay);
-        TriggerGravityGunEvent(GetFinalGravityGunHit(transform.position, _currentDirection, hits));
+        if (_currentDirection != Vector3.zero)
+        {
+            playerShotAudioSource.loop = false;
+            playerShotAudioSource.PlayOneShot(playerShoots);
+            var hits = InitRaycasts(transform.position, _currentDirection);
+            TriggerGravityGunEvent(GetFinalGravityGunHit(transform.position, _currentDirection, hits));
+            DisableAimDirector();
+        }
     }
 
     public void Aim(InputAction.CallbackContext val)
