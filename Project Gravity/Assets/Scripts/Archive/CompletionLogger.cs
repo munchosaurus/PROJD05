@@ -6,29 +6,29 @@ using UnityEngine.SceneManagement;
 
 public static class CompletionLogger
 {
-    public static readonly string logFile = Application.persistentDataPath + "/Logfile.csv";
-    public static readonly string playCountFile = Application.persistentDataPath + "/Playcountfile.txt";
+    private static readonly string LOGFile = Application.persistentDataPath + "/Logfile.csv";
+    private static readonly string PlayCountFile = Application.persistentDataPath + "/Playcountfile.txt";
     private static CompletionLogLine _completionLogLine;
     private static FileStream _fileStream;
-    public static int count;
-    public static float finishTime;
-    public static int gravityChanges;
-    public static int win;
-    public static int lose;
+    private static int _count;
+    private static float _finishTime;
+    private static int _gravityChanges;
+    private static int _win;
+    private static int _lose;
 
     public static void LoadCountfile()
     {
-        if (File.Exists(playCountFile))
+        if (File.Exists(PlayCountFile))
         {
-            count = int.Parse(File.ReadAllText(playCountFile)) + 1;
-            File.WriteAllText(playCountFile, String.Empty);
-            File.AppendAllText(playCountFile, count.ToString());
+            _count = int.Parse(File.ReadAllText(PlayCountFile)) + 1;
+            File.WriteAllText(PlayCountFile, String.Empty);
+            File.AppendAllText(PlayCountFile, _count.ToString());
         }
         else
         {
-            _fileStream = new FileStream(playCountFile, FileMode.Create);
+            _fileStream = new FileStream(PlayCountFile, FileMode.Create);
             _fileStream.Dispose();
-            File.AppendAllText(playCountFile, count.ToString());
+            File.AppendAllText(PlayCountFile, _count.ToString());
         }
     }
 
@@ -46,19 +46,19 @@ public static class CompletionLogger
     
     public static void WriteCompletionLog()
     {
-        _completionLogLine = new CompletionLogLine(count, SceneManager.GetActiveScene().buildIndex, finishTime, gravityChanges, win, lose, BuildSettingsString());
+        _completionLogLine = new CompletionLogLine(_count, SceneManager.GetActiveScene().buildIndex, _finishTime, _gravityChanges, _win, _lose, BuildSettingsString());
         try
         {
-            if (!File.Exists(logFile))
+            if (!File.Exists(LOGFile))
             {
-                _fileStream = new FileStream(logFile, FileMode.Create);
+                _fileStream = new FileStream(LOGFile, FileMode.Create);
                 _fileStream.Dispose();
-                File.AppendAllText(logFile, "sessionID;levelID;elapsedTime;GravityChanges;Win;Lose;Settings" + Environment.NewLine);
-                File.AppendAllText(logFile, _completionLogLine.ToString() + Environment.NewLine);
+                File.AppendAllText(LOGFile, "sessionID;levelID;elapsedTime;GravityChanges;Win;Lose;Settings" + Environment.NewLine);
+                File.AppendAllText(LOGFile, _completionLogLine.ToString() + Environment.NewLine);
             }
             else
             {
-                File.AppendAllText(logFile, _completionLogLine.ToString() + Environment.NewLine);
+                File.AppendAllText(LOGFile, _completionLogLine.ToString() + Environment.NewLine);
             }
         }
         catch (Exception e)
@@ -66,8 +66,8 @@ public static class CompletionLogger
             Console.WriteLine(e);
             throw;
         } 
-        win = 0;
-        lose = 0;
+        _win = 0;
+        _lose = 0;
     }
 }
 

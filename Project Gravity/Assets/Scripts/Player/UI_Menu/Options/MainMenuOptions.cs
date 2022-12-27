@@ -25,7 +25,6 @@ public class MainMenuOptions : MonoBehaviour
         }
         SetMenuCursor();
         StartCoroutine(_levelSelector.StartFadeToBlack(0, Constants.LEVEL_SWITCH_FADE_DURATION * 2, false));
-        CompletionLogger.LoadCountfile();
         GameLauncher.LoadSettings();
         LevelCompletionTracker.AddUnlockedLevel(1);
         GetComponent<SoundOptions>().LoadSoundSettings();

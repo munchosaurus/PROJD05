@@ -50,7 +50,6 @@ public class IngameMenu : MonoBehaviour
 
         // Loads gamedata from file
         GameLauncher.LoadSettings();
-        CompletionLogger.gravityChanges = 0;
         GetComponent<SoundOptions>().LoadSoundSettings();
         GetComponent<GameOptions>().LoadGameSettings();
         GetComponent<ControlOptions>().SetControlImagesAndTexts();
@@ -338,8 +337,6 @@ public class IngameMenu : MonoBehaviour
 
     private IEnumerator RestartWhenDead(PlayerDeathEvent playerDeathEvent)
     {
-        CompletionLogger.lose = 1;
-        CompletionLogger.win = 0;
         GameController.SetInputLockState(true);
         GameController.PlayerIsDead = true;
         yield return new WaitForSecondsRealtime(playerDeathEvent.DeathTime);
@@ -383,10 +380,6 @@ public class IngameMenu : MonoBehaviour
             completedLevelTitle.text = _levelSelector
                 .levelContainers[SceneManager.GetActiveScene().buildIndex - 1].levelName;
             GameLauncher.SaveLevels();
-            CompletionLogger.lose = 0;
-            CompletionLogger.win = 1;
-            CompletionLogger.finishTime = elapsedTime;
-            CompletionLogger.WriteCompletionLog();
         }
     }
 
@@ -427,19 +420,6 @@ public class IngameMenu : MonoBehaviour
 
     public void Restart()
     {
-        if (!_playerWon)
-        {
-            try
-            {
-                CompletionLogger.finishTime = FindObjectOfType<LevelTimer>().GetTimePassed();
-                CompletionLogger.WriteCompletionLog();
-            }
-            catch (Exception e)
-            {
-                Debug.Log("Logging restart failed " + e);
-            }
-        }
-
         LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
