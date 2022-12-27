@@ -11,26 +11,39 @@ public class HazardLogic : MonoBehaviour
     [SerializeField] private float collisionVelocityThreshold;
     private PlayerController _playerController;
     private static Guid _playerDeathEventGuid;
+    private static Guid _playerWinEventGuid;
     private const float PlayerCollisionGridClamp = 0.5f;
+    private bool _playerWon;
+
     void Start()
     {
         menu = FindObjectOfType<IngameMenu>();
         _playerController = gameObject.GetComponent<PlayerController>();
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(MuteMovementSound, ref _playerDeathEventGuid);
+        EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerWins, ref _playerWinEventGuid);
+    }
+
+    public void OnPlayerWins(WinningEvent winningEvent)
+    {
+        _playerWon = true;
     }
 
     private void FixedUpdate()
     {
+        if (_playerWon)
+            return;
+
         CheckForHazards();
     }
 
-    
+
     private void CheckForHazards()
     {
         RaycastHit hit;
         if (Physics.BoxCast(transform.position, verticalCast, Vector3.down, out hit, Quaternion.identity,
-                Mathf.Abs(transform.position.y - (transform.position + (_playerController.velocity * Time.fixedDeltaTime)).y) +
-            PlayerCollisionGridClamp, hazardMask, QueryTriggerInteraction.Collide))
+                Mathf.Abs(transform.position.y -
+                          (transform.position + (_playerController.velocity * Time.fixedDeltaTime)).y) +
+                PlayerCollisionGridClamp, hazardMask, QueryTriggerInteraction.Collide))
         {
             if (menu != null && (_playerController.velocity.y < -collisionVelocityThreshold || Physics.gravity.y < 0))
             {
@@ -51,7 +64,8 @@ public class HazardLogic : MonoBehaviour
         }
 
         if (Physics.BoxCast(transform.position, verticalCast, Vector3.up, out hit, Quaternion.identity,
-                Mathf.Abs(transform.position.y - (transform.position + (_playerController.velocity * Time.fixedDeltaTime)).y) +
+                Mathf.Abs(transform.position.y -
+                          (transform.position + (_playerController.velocity * Time.fixedDeltaTime)).y) +
                 PlayerCollisionGridClamp, hazardMask, QueryTriggerInteraction.Collide))
         {
             if (menu != null && (_playerController.velocity.y > collisionVelocityThreshold || Physics.gravity.y > 0))
@@ -73,10 +87,11 @@ public class HazardLogic : MonoBehaviour
         }
 
         if (Physics.BoxCast(transform.position, horizontalCast, Vector3.right, out hit, Quaternion.identity,
-                Mathf.Abs(transform.position.x - (transform.position + (_playerController.velocity * Time.fixedDeltaTime)).x) +
+                Mathf.Abs(transform.position.x -
+                          (transform.position + (_playerController.velocity * Time.fixedDeltaTime)).x) +
                 PlayerCollisionGridClamp, hazardMask, QueryTriggerInteraction.Collide))
         {
-            if (menu != null  && (_playerController.velocity.x > collisionVelocityThreshold || Physics.gravity.x > 0))
+            if (menu != null && (_playerController.velocity.x > collisionVelocityThreshold || Physics.gravity.x > 0))
             {
                 transform.position = new Vector3(hit.point.x - PlayerCollisionGridClamp, transform.position.y,
                     transform.position.z);
@@ -95,7 +110,8 @@ public class HazardLogic : MonoBehaviour
         }
 
         if (Physics.BoxCast(transform.position, horizontalCast, Vector3.left, out hit, Quaternion.identity,
-                Mathf.Abs(transform.position.x - (transform.position + (_playerController.velocity * Time.fixedDeltaTime)).x) +
+                Mathf.Abs(transform.position.x -
+                          (transform.position + (_playerController.velocity * Time.fixedDeltaTime)).x) +
                 PlayerCollisionGridClamp, hazardMask, QueryTriggerInteraction.Collide))
         {
             if (menu != null && (_playerController.velocity.x < -collisionVelocityThreshold || Physics.gravity.x < 0))

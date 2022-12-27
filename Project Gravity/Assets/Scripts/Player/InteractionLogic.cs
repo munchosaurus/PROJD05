@@ -10,20 +10,28 @@ public class InteractionLogic : MonoBehaviour
     private PlayerController _playerController;
     private const float DISTANCE_TO_INTERACT_THRESHOLD = 0.5f;
     private IngameMenu _menu;
+    private static Guid _playerDeathEventGuid;
+    private bool playerDied;
 
     private void Start()
     {
         _playerController = GetComponent<PlayerController>();
         StartCoroutine(FetchInteractablesInScene());
         _menu = gameObject.GetComponentInChildren<IngameMenu>();
+        EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathEventGuid);
     }
 
     private void FixedUpdate()
     {
-        if (interactableGameObjects.Count > 0)
+        if (interactableGameObjects.Count > 0 && !playerDied)
         {
             ToggleInteraction();
         }
+    }
+
+    public void OnPlayerDeath(PlayerDeathEvent playerDeathEvent)
+    {
+        playerDied = true;
     }
 
     private IEnumerator FetchInteractablesInScene()
@@ -91,6 +99,9 @@ public class InteractionLogic : MonoBehaviour
 
     public void Interact()
     {
+        if (playerDied)
+        return;
+        
         if (IsInteractableCloseEnough(GetClosestInteractable()))
         {
             switch (GetClosestInteractable().GetComponent<InteractableObject>().interactable.interactableType)
