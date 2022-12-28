@@ -313,7 +313,7 @@ MonoBehaviour:
   verticalCast: {x: 0.49, y: 0.05, z: 0.49}
   groundMask:
     serializedVersion: 2
-    m_Bits: 2176
+    m_Bits: 3200
   magnetMask:
     serializedVersion: 2
     m_Bits: 512
