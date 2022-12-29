@@ -2495,6 +2495,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_noRB
       objectReference: {fileID: 0}
+    - target: {fileID: 7406499542109578702, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bc5abd69eab1cf4e8bdf94284ed730c, type: 3}
 --- !u!1 &405204461
@@ -5297,7 +5301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 870111135}
   - component: {fileID: 870111136}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Lava TOp 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5877,7 +5881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 949894321}
   - component: {fileID: 949894322}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Lava Bottom 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7161,7 +7165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1152458489}
   - component: {fileID: 1152458490}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Lava Top 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9363,7 +9367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1617849004}
   - component: {fileID: 1617849005}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Lava Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10224,7 +10228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1740416143}
   - component: {fileID: 1740416144}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10663,7 +10667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1831564973}
   - component: {fileID: 1831564974}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Lava Bottom 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11656,7 +11660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1955902342}
   - component: {fileID: 1955902343}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Lava Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
