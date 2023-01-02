@@ -5,13 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Gravity/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/SkyBox/Starfield_Skybox.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player_noRB.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/UI.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Tutorial 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Tutorial 1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/GameOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/GameOptions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/LevelSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/UI_Menu/Options/LevelSelector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/StaticData/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StaticData/GameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/StaticData/GameLauncher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StaticData/GameLauncher.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +152,7 @@
       <workItem from="1671550955940" duration="35000" />
       <workItem from="1672135219009" duration="659000" />
       <workItem from="1672220678395" duration="1960000" />
-      <workItem from="1672654566742" duration="7871000" />
+      <workItem from="1672654566742" duration="8613000" />
     </task>
     <task id="LOCAL−00001" summary="Added logic to level selector">
       <created>1669027248858</created>
