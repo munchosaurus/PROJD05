@@ -18,9 +18,14 @@ public static class GravityController
         EventSystem.Current.RegisterListener<GravityGunEvent>(OnGravityGunHit, ref _gravityGunEventGuid);
     }
 
-    public static void SetUp()
+    public static void SetUpNormalSpeed()
     {
         GravityMultiplier = 1;
+    }
+
+    public static void SetUpSlowSpeed()
+    {
+        GravityMultiplier = 0.7f;
     }
 
     public static bool IsGravityHorizontal()
@@ -40,7 +45,7 @@ public static class GravityController
 
     public static void SetNewGravity(Vector3 direction)
     {
-        Physics.gravity = direction * Constants.GRAVITY * GravityMultiplier * GameController.GlobalSpeedMultiplier;
+        Physics.gravity = direction * Constants.GRAVITY * GravityMultiplier;
     }
 
     private static void OnGravityGunHit(GravityGunEvent gravityGunEvent)
@@ -49,7 +54,7 @@ public static class GravityController
         {
             try
             {
-                if (Physics.gravity != -gravityGunEvent.HitNormal * Constants.GRAVITY * GravityMultiplier * GameController.GlobalSpeedMultiplier)
+                if (Physics.gravity != -gravityGunEvent.HitNormal * Constants.GRAVITY * GravityMultiplier)
                 {
                     SetCurrentFacing(-gravityGunEvent.HitNormal);
                     SetNewGravity(-gravityGunEvent.HitNormal);

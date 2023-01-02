@@ -67,7 +67,7 @@ public class Tutorial : MonoBehaviour
                 }
                 catch (Exception e)
                 {
-                    Debug.Log("No main theme speaker found" + e);
+                    Debug.Log("No main theme speaker found :" + e);
                 }
 
                 Time.timeScale = 1;

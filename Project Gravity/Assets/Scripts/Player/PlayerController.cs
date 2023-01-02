@@ -134,14 +134,6 @@ public class PlayerController : MonoBehaviour
             if (IsGrounded() && !IsRoofed())
             {
                 float force = GameController.PlayerJumpForce;
-                if (GameController.GlobalSpeedMultiplier < 0.8f)
-                {
-                    force *= GameController.GlobalSpeedMultiplier * 1.1f;
-                }
-                else
-                {
-                    force *= GameController.GlobalSpeedMultiplier;
-                }
 
                 if (GravityController.IsGravityHorizontal())
                 {
@@ -208,7 +200,7 @@ public class PlayerController : MonoBehaviour
             if (collision.transform.GetComponentInParent<DynamicObjectMovement>())
             {
                 if (collision.transform.GetComponentInParent<DynamicObjectMovement>().velocity.magnitude <
-                    Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
+                    Constants.COLLISION_SPEED_THRESHOLD)
                 {
                     layers.Add(collision.collider.gameObject.layer);
                 }
@@ -226,14 +218,14 @@ public class PlayerController : MonoBehaviour
     {
         List<int> layers = new List<int>();
         if (direction.y != 0 && Math.Abs(velocity.y) >
-            Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
+            Constants.COLLISION_SPEED_THRESHOLD)
         {
             layers = GetCollisionLayersInDirection(verticalCast, direction, soundCollisionMask,
                 Mathf.Abs(transform.position.y - (transform.position + (velocity * Time.fixedDeltaTime)).y) +
                 PlayerCollisionGridClamp);
         }
         else if (direction.x != 0 && Math.Abs(velocity.x) >
-                 Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
+                 Constants.COLLISION_SPEED_THRESHOLD)
         {
             layers = GetCollisionLayersInDirection(horizontalCast, direction, soundCollisionMask,
                 Mathf.Abs(transform.position.x - (transform.position + (velocity * Time.fixedDeltaTime)).x) +
@@ -389,8 +381,7 @@ public class PlayerController : MonoBehaviour
 
         if (ShouldAddMoreMoveForce(direction))
         {
-            velocity.x += GameController.GlobalSpeedMultiplier *
-                          (direction * GameController.PlayerAcceleration * Time.fixedDeltaTime);
+            velocity.x += direction * GameController.PlayerAcceleration * Time.fixedDeltaTime;
         }
     }
 
@@ -413,10 +404,9 @@ public class PlayerController : MonoBehaviour
             _audioSource.mute = true;
         }
 
-        if (ShouldAddMoreMoveForce(direction * GameController.GlobalSpeedMultiplier))
+        if (ShouldAddMoreMoveForce(direction))
         {
-            velocity.y += GameController.GlobalSpeedMultiplier *
-                          (direction * GameController.PlayerAcceleration * Time.fixedDeltaTime);
+            velocity.y += direction * GameController.PlayerAcceleration * Time.fixedDeltaTime;
         }
     }
 
@@ -452,12 +442,12 @@ public class PlayerController : MonoBehaviour
 
         if (moveCoefficient != 0)
         {
-            return Math.Abs(magnitude) < GameController.PlayerMaxVelocity * GameController.GlobalSpeedMultiplier &&
+            return Math.Abs(magnitude) < GameController.PlayerMaxVelocity &&
                    !BoxCast(dir);
         }
 
         return moveCoefficient != 0 &&
-               Math.Abs(magnitude) < GameController.PlayerMaxVelocity * GameController.GlobalSpeedMultiplier;
+               Math.Abs(magnitude) < GameController.PlayerMaxVelocity;
     }
 
     private bool BoxCast(Vector3 direction)

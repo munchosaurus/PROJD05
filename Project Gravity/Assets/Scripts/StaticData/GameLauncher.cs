@@ -87,6 +87,33 @@ public static class GameLauncher
                 File.AppendAllText(settingsTextFile, _settingsData.ToString());
             }
         }
+        
+        // TODO: REMOVE LATER
+        _testData = new TestData();
+            
+        if (!File.Exists(testSettingsTextFile))
+        {
+            _fileStream = new FileStream(testSettingsTextFile, FileMode.Create);
+            _fileStream.Dispose();
+            File.AppendAllText(testSettingsTextFile, _testData.ToString());
+        }
+        else
+        {
+            try
+            {
+                File.WriteAllText(testSettingsTextFile, String.Empty);
+                File.AppendAllText(testSettingsTextFile, _testData.ToString());
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+                _fileStream?.Close();
+                File.Delete(testSettingsTextFile);
+                _fileStream = new FileStream(testSettingsTextFile, FileMode.Create);
+                _fileStream?.Dispose();
+                File.AppendAllText(testSettingsTextFile, _testData.ToString());
+            }
+        }
     }
 
     private static void LoadLevelSettings()
@@ -146,8 +173,8 @@ public static class GameLauncher
         }
         else
         {
-            GameController.SetUp();
-            GravityController.SetUp();
+            GameController.SetUpNormalSpeed();
+            GravityController.SetUpNormalSpeed();
             _testData = new TestData();
             _fileStream = new FileStream(testSettingsTextFile, FileMode.Create);
             _fileStream.Dispose();
@@ -157,22 +184,6 @@ public static class GameLauncher
 
     public static void LoadSettings()
     {
-        // if (File.Exists(settingsFile))
-        // {
-        //     try
-        //     {
-        //         _fileStream = new FileStream(settingsFile, FileMode.Open);
-        //         _settingsData = converter.Deserialize(fileStream) as SettingsData;
-        //         _fileStream.Close();
-        //         GameController.SetUp(_settingsData);
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         fileStream?.Close();
-        //         File.Delete(settingsFile);
-        //         GameController.SetUp();
-        //     }
-        // }
         try
         {
             LoadLevelSettings();
@@ -208,7 +219,7 @@ public static class GameLauncher
     }
 
     private static void UpdateTestSettings(string[] values)
-    {        
+    {
         // Movement
         GameController.PlayerJumpForce = float.Parse(values[0]);
         GameController.PlayerAcceleration = float.Parse(values[1]);

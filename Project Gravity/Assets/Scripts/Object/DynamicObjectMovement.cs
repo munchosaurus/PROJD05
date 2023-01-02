@@ -120,7 +120,7 @@ public class DynamicObjectMovement : MonoBehaviour
     {
         RaycastHit[] raycastHits;
         if (direction.y != 0 && Math.Abs(velocity.y) >
-            Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
+            Constants.COLLISION_SPEED_THRESHOLD)
         {
             raycastHits = Physics.BoxCastAll(transform.position, verticalCast, direction,
                 Quaternion.identity,
@@ -156,7 +156,7 @@ public class DynamicObjectMovement : MonoBehaviour
             EventSystem.Current.FireEvent(collisionEvent);
         }
         else if (direction.x != 0 && Math.Abs(velocity.x) >
-                 Constants.COLLISION_SPEED_THRESHOLD * GameController.GlobalSpeedMultiplier)
+                 Constants.COLLISION_SPEED_THRESHOLD)
         {
             raycastHits = Physics.BoxCastAll(transform.position, horizontalCast, direction,
                 Quaternion.identity,

@@ -38,8 +38,8 @@ public class GameOptions : MonoBehaviour
     {
         // Speed
         speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
-        speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
+        speedSlider.value = GameController.GlobalSpeedMultiplier;
+        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
 
         // Tutorial
         tutorialToggle.onValueChanged.AddListener(delegate { OnTutorialToggleValueChanged(); });
@@ -64,8 +64,8 @@ public class GameOptions : MonoBehaviour
 
     public void LoadGameSettings()
     {
-        speedSlider.value = GameController.GlobalSpeedMultiplier * 100;
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
+        speedSlider.value = GameController.GlobalSpeedMultiplier;
+        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
         tutorialToggle.isOn = GameController.TutorialIsOn;
         fullscreenDropdown.value = GameController.FullscreenMode;
         cameraAutoRotationToggle.isOn = GameController.CameraAutoRotationToggled;
@@ -149,9 +149,19 @@ public class GameOptions : MonoBehaviour
     
     private void OnSpeedValueChanged()
     {
-        GameController.GlobalSpeedMultiplier = speedSlider.value / 100;
+        GameController.GlobalSpeedMultiplier = speedSlider.value;
+        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
+        if (GameController.GlobalSpeedMultiplier == 2)
+        {
+            GameController.SetUpNormalSpeed();
+            GravityController.SetUpNormalSpeed();
+        }
+        else
+        {
+            GameController.SetUpSlowSpeed();
+            GravityController.SetUpSlowSpeed();
+        }
         GravityController.SetNewGravity(GravityController.GetCurrentFacing());
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture) + "%";
         
         GameLauncher.WriteSettings();;
     }

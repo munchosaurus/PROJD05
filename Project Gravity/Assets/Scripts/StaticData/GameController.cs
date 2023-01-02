@@ -45,19 +45,28 @@ public static class GameController
         
         // Game
         FullscreenMode = 0;
-        GlobalSpeedMultiplier = 1f;
+        GlobalSpeedMultiplier = 2f;
         TutorialIsOn = true;
         CameraAutoRotationToggled = false;
         DyslecticModeIsOn = false;
     }
 
-    public static void SetUp()
+    public static void SetUpNormalSpeed()
     {
         // Player
         PlayerAcceleration = 10f;
         PlayerJumpForce = 8f;
         PlayerAirMovementMultiplier = 0.7f;
         PlayerMaxVelocity = 5f;
+    }
+
+    public static void SetUpSlowSpeed()
+    {
+        // Player
+        PlayerAcceleration = 10f;
+        PlayerJumpForce = 7f;
+        PlayerAirMovementMultiplier = 1f;
+        PlayerMaxVelocity = 4f;
     }
 
     public static void PauseGame()
