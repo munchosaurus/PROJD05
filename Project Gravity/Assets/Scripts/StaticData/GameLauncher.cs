@@ -209,7 +209,7 @@ public static class GameLauncher
         // Game
         GameController.FullscreenMode = int.Parse(values[5]);
         GameController.TutorialIsOn = bool.Parse(values[6]);
-        GameController.GlobalSpeedMultiplier = float.Parse(values[7]);
+        GameController.SlowSpeedToggled = bool.Parse(values[7]);
         GameController.CameraAutoRotationToggled = bool.Parse(values[8]);
         GameController.DyslecticModeIsOn = bool.Parse(values[9]);
         
@@ -279,7 +279,7 @@ public class SettingsData
         // Game
         ScreenMode = GameController.FullscreenMode;
         TutorialIsOn = GameController.TutorialIsOn;
-        GlobalSpeedMultiplier = GameController.GlobalSpeedMultiplier;
+        SlowSpeedToggled = GameController.SlowSpeedToggled;
         CameraAutoRotationToggled = GameController.CameraAutoRotationToggled;
         DyslecticModeIsOn = GameController.DyslecticModeIsOn;
         
@@ -297,7 +297,7 @@ public class SettingsData
     // Game
     public int ScreenMode { get; set; }
     public bool TutorialIsOn { get; set; }
-    public float GlobalSpeedMultiplier { get; set; }
+    public bool SlowSpeedToggled { get; set; }
     public bool CameraAutoRotationToggled { get; set; }
     public bool DyslecticModeIsOn { get; set; }
     
@@ -317,7 +317,7 @@ public class SettingsData
         // Game
         sb.Append("ScreenMode: " + ScreenMode + "\n");
         sb.Append("TutorialIsOn: " + TutorialIsOn + "\n");
-        sb.Append("GlobalSpeedMultiplier: " + GlobalSpeedMultiplier + "\n");
+        sb.Append("GlobalSpeedMultiplier: " + SlowSpeedToggled + "\n");
         sb.Append("CameraAutoRotationToggled: " + CameraAutoRotationToggled + "\n");
         sb.Append("DyslecticModeIsOn: " + DyslecticModeIsOn + "\n");
         

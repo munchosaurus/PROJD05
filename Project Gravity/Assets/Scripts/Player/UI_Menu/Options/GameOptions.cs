@@ -11,9 +11,8 @@ using UnityEngine.UI;
 public class GameOptions : MonoBehaviour
 {
     [Header("Speed settings")] [SerializeField]
-    private Slider speedSlider;
-
-    [SerializeField] private TMP_Text speedText;
+    private Toggle slowSpeedToggle;
+    
     private static Guid _playerDeathGuid;
     private static Guid _playerSucceedsGuid;
 
@@ -37,14 +36,13 @@ public class GameOptions : MonoBehaviour
     void Start()
     {
         // Speed
-        speedSlider.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
-        speedSlider.value = GameController.GlobalSpeedMultiplier;
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
+        slowSpeedToggle.onValueChanged.AddListener(delegate { OnSpeedValueChanged(); });
+        slowSpeedToggle.isOn = GameController.SlowSpeedToggled;
 
         // Tutorial
         tutorialToggle.onValueChanged.AddListener(delegate { OnTutorialToggleValueChanged(); });
         tutorialToggle.isOn = GameController.TutorialIsOn;
-
+        
         // Screen mode
         fullscreenDropdown.onValueChanged.AddListener(delegate { OnFullScreenToggleChanged(); });
         fullscreenDropdown.value = GameController.FullscreenMode;
@@ -64,8 +62,7 @@ public class GameOptions : MonoBehaviour
 
     public void LoadGameSettings()
     {
-        speedSlider.value = GameController.GlobalSpeedMultiplier;
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
+        slowSpeedToggle.isOn = GameController.SlowSpeedToggled;
         tutorialToggle.isOn = GameController.TutorialIsOn;
         fullscreenDropdown.value = GameController.FullscreenMode;
         cameraAutoRotationToggle.isOn = GameController.CameraAutoRotationToggled;
@@ -118,6 +115,7 @@ public class GameOptions : MonoBehaviour
         {
             if (FindObjectOfType<LevelSettings>().IsTutorialLevel() && FindObjectOfType<LevelTimer>().GetTimePassed() == 0f)
             {
+                Debug.Log("Yes, it");
                 FindObjectOfType<Tutorial>().tutorialFinished = !GameController.TutorialIsOn;
             }
         }
@@ -149,9 +147,8 @@ public class GameOptions : MonoBehaviour
     
     private void OnSpeedValueChanged()
     {
-        GameController.GlobalSpeedMultiplier = speedSlider.value;
-        speedText.text = (speedSlider.value).ToString(CultureInfo.InvariantCulture);
-        if (GameController.GlobalSpeedMultiplier == 2)
+        GameController.SlowSpeedToggled = slowSpeedToggle.isOn;
+        if (!GameController.SlowSpeedToggled)
         {
             GameController.SetUpNormalSpeed();
             GravityController.SetUpNormalSpeed();

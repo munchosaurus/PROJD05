@@ -79,14 +79,6 @@ public class LevelSelector : MonoBehaviour
         {
             yield break;
         }
-        // currentTime = 0;
-        // while (currentTime < (Constants.LEVEL_SWITCH_FADE_DURATION))
-        // {
-        //     currentTime += Time.unscaledDeltaTime;
-        //     mainTheme.volume =
-        //         Mathf.Lerp(bottomvolume, start, currentTime / (Constants.LEVEL_SWITCH_FADE_DURATION));
-        //     yield return null;
-        // }
 
         GameLauncher.WriteSettings();
     }
@@ -150,12 +142,17 @@ public class LevelSelector : MonoBehaviour
     public void SetupLevelContainers()
     {
         _levelContainerButtons = new Button[levelContainers.Length];
+        bool levelsAreUnlocked = FindObjectOfType<LevelSettings>().GetLevelsAreUnlocked();
+        
         for (int i = 0; i < levelContainers.Length; i++)
         {
             GameObject go = Instantiate(scrollviewObjectTemplate, scrollviewParent.transform, false);
             go.GetComponentInChildren<TMP_Text>().text = levelContainers[i].levelName;
             _levelContainerButtons[i] = go.GetComponent<Button>();
-            if (!LevelCompletionTracker.unlockedLevels.Contains(i + 1))
+
+            
+            
+            if (!LevelCompletionTracker.unlockedLevels.Contains(i + 1) && !levelsAreUnlocked)
             {
                 _levelContainerButtons[i].interactable = false;
                 Color32 color = _levelContainerButtons[i].gameObject.transform.GetComponentInChildren<TMP_Text>()

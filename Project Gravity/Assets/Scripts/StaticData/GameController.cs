@@ -18,7 +18,7 @@ public static class GameController
 
     // Game
     public static int FullscreenMode;
-    public static float GlobalSpeedMultiplier;
+    public static bool SlowSpeedToggled;
     public static bool TutorialIsOn;
     public static bool DyslecticModeIsOn;
 
@@ -45,7 +45,7 @@ public static class GameController
         
         // Game
         FullscreenMode = 0;
-        GlobalSpeedMultiplier = 2f;
+        SlowSpeedToggled = false;
         TutorialIsOn = true;
         CameraAutoRotationToggled = false;
         DyslecticModeIsOn = false;
