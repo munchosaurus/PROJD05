@@ -158,7 +158,6 @@ public class SoundManager : MonoBehaviour
                 speaker.GetComponent<AudioSource>().PlayOneShot(gravityDullHitClip);
                 StartCoroutine(DestroyAfterTime(speaker, gravityDullHitClip.length));
             }
-
         }
         else if (gravityGunEvent.TargetGameObject.layer == magnetLayer)
         {
@@ -181,7 +180,6 @@ public class SoundManager : MonoBehaviour
         }
         else if (gravityGunEvent.TargetGameObject.layer == mirrorLayer)
         {
-            
             speaker.GetComponent<AudioSource>().PlayOneShot(mirrorHitClip);
             StartCoroutine(DestroyAfterTime(speaker, mirrorHitClip.length));
         }

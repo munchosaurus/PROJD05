@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public static class GameController
@@ -9,6 +6,7 @@ public static class GameController
     public static int CurrentControlSchemeIndex = 0;
 
     public static int previousSceneIndex;
+
     // Sound
     public static bool GlobalSoundIsOn;
     public static float MasterVolumeMultiplier;
@@ -24,10 +22,10 @@ public static class GameController
 
     // Player death
     public static bool PlayerIsDead;
-    
+
     // Camera rotation toggle
     public static bool CameraAutoRotationToggled;
-    
+
     // Player
     public static float PlayerAcceleration;
     public static float PlayerJumpForce;
@@ -42,7 +40,7 @@ public static class GameController
         MusicVolumeMultiplier = 1f;
         EffectsVolumeMultiplier = 1f;
         DialogueVolumeMultiplier = 1f;
-        
+
         // Game
         FullscreenMode = 0;
         SlowSpeedToggled = false;

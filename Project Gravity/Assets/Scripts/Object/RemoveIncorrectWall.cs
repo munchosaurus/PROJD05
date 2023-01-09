@@ -6,8 +6,6 @@ using UnityEditor;
 #endif
 
 using UnityEngine;
-using UnityEngine.UI;
-using Object = System.Object;
 
 [ExecuteInEditMode]
 public class RemoveIncorrectWall : MonoBehaviour
@@ -15,6 +13,9 @@ public class RemoveIncorrectWall : MonoBehaviour
     [SerializeField] List<String> namesToChange;
 
 #if UNITY_EDITOR
+    /*
+     * Removes old and outdated prefabs from scenes in editor
+     */
     private void Awake()
     {
         foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])

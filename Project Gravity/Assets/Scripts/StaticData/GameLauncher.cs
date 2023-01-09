@@ -63,7 +63,7 @@ public static class GameLauncher
     public static void WriteSettings()
     {
         _settingsData = new SettingsData();
-        
+
         if (!File.Exists(settingsTextFile))
         {
             _fileStream = new FileStream(settingsTextFile, FileMode.Create);
@@ -87,10 +87,10 @@ public static class GameLauncher
                 File.AppendAllText(settingsTextFile, _settingsData.ToString());
             }
         }
-        
+
         // TODO: REMOVE LATER
         _testData = new TestData();
-            
+
         if (!File.Exists(testSettingsTextFile))
         {
             _fileStream = new FileStream(testSettingsTextFile, FileMode.Create);
@@ -147,6 +147,7 @@ public static class GameLauncher
                 values[counter] = line.Split(' ', 2)[1].Trim();
                 counter++;
             }
+
             UpdateSettings(values);
         }
         else
@@ -169,6 +170,7 @@ public static class GameLauncher
                 values[counter] = line.Split(' ', 2)[1].Trim();
                 counter++;
             }
+
             UpdateTestSettings(values);
         }
         else
@@ -205,17 +207,16 @@ public static class GameLauncher
         GameController.MusicVolumeMultiplier = float.Parse(values[2]) / 100f;
         GameController.EffectsVolumeMultiplier = float.Parse(values[3]) / 100f;
         GameController.DialogueVolumeMultiplier = float.Parse(values[4]) / 100f;
-        
+
         // Game
         GameController.FullscreenMode = int.Parse(values[5]);
         GameController.TutorialIsOn = bool.Parse(values[6]);
         GameController.SlowSpeedToggled = bool.Parse(values[7]);
         GameController.CameraAutoRotationToggled = bool.Parse(values[8]);
         GameController.DyslecticModeIsOn = bool.Parse(values[9]);
-        
+
         // Control
         GameController.CurrentControlSchemeIndex = int.Parse(values[10]);
-
     }
 
     private static void UpdateTestSettings(string[] values)
@@ -228,6 +229,7 @@ public static class GameLauncher
         GravityController.GravityMultiplier = float.Parse(values[4]);
     }
 }
+
 [Serializable]
 public class TestData
 {
@@ -239,20 +241,19 @@ public class TestData
         MaxVelocity = GameController.PlayerMaxVelocity;
         GravityMultiplier = GravityController.GravityMultiplier;
     }
-    
+
     // Movement
     public float JumpForce { get; set; }
-    public float Acceleration{ get; set; }
-    public float AirMovementMultiplier{ get; set; }
+    public float Acceleration { get; set; }
+    public float AirMovementMultiplier { get; set; }
     public float MaxVelocity { get; set; }
     public float GravityMultiplier { get; set; }
 
-    
 
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
-        
+
         // Movement
         sb.Append("JumpForce: " + JumpForce + "\n");
         sb.Append("Acceleration: " + Acceleration + "\n");
@@ -282,7 +283,7 @@ public class SettingsData
         SlowSpeedToggled = GameController.SlowSpeedToggled;
         CameraAutoRotationToggled = GameController.CameraAutoRotationToggled;
         DyslecticModeIsOn = GameController.DyslecticModeIsOn;
-        
+
         // Controll
         CurrentControlSchemeIndex = GameController.CurrentControlSchemeIndex;
     }
@@ -300,7 +301,7 @@ public class SettingsData
     public bool SlowSpeedToggled { get; set; }
     public bool CameraAutoRotationToggled { get; set; }
     public bool DyslecticModeIsOn { get; set; }
-    
+
     // Control
     public int CurrentControlSchemeIndex { get; set; }
 
@@ -313,17 +314,17 @@ public class SettingsData
         sb.Append("MusicVolume: " + Mathf.Floor(MusicVolumeMultiplier * 100) + "\n");
         sb.Append("EffectsVolume: " + Mathf.Floor(EffectsVolumeMultiplier * 100) + "\n");
         sb.Append("DialogueVolume: " + Mathf.Floor(DialogueVolumeMultiplier * 100) + "\n");
-        
+
         // Game
         sb.Append("ScreenMode: " + ScreenMode + "\n");
         sb.Append("TutorialIsOn: " + TutorialIsOn + "\n");
         sb.Append("GlobalSpeedMultiplier: " + SlowSpeedToggled + "\n");
         sb.Append("CameraAutoRotationToggled: " + CameraAutoRotationToggled + "\n");
         sb.Append("DyslecticModeIsOn: " + DyslecticModeIsOn + "\n");
-        
+
         // Control
         sb.Append("CurrentControlSchemeIndex: " + CurrentControlSchemeIndex);
-        
+
         return sb.ToString();
     }
 }

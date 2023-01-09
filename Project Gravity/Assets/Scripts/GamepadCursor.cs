@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -119,12 +118,12 @@ public class GamepadCursor : MonoBehaviour
     {
         if (playerInput.currentActionMap.name == "MenuControls")
         {
-            cursorImage.rectTransform.localScale = new Vector3(2,2,2);
+            cursorImage.rectTransform.localScale = new Vector3(2, 2, 2);
             cursorImage.sprite = regularCursor;
         }
         else if (playerInput.currentActionMap.name == "PlayerControls")
         {
-            cursorImage.rectTransform.localScale = new Vector3(1,1,1);
+            cursorImage.rectTransform.localScale = new Vector3(1, 1, 1);
             cursorImage.sprite = aimCursor;
         }
     }
@@ -141,7 +140,7 @@ public class GamepadCursor : MonoBehaviour
     private void Update()
     {
         OnControlsChanged(playerInput);
-        
+
         _previousControlScheme = playerInput.currentControlScheme;
         if (_previousControlScheme == gamePadScheme)
         {

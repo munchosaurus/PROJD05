@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -69,7 +68,10 @@ public class DynamicObjectMovement : MonoBehaviour
         magnetPosition = targetPos;
         magnetVel = magnetSpeed;
     }
-
+    
+    /*
+     * Moves the moveable object to a magnet if a magnet lock is triggered
+     */
     public void MoveToMagnet()
     {
         Vector3 nextPos = Vector3.MoveTowards(transform.position, magnetPosition, magnetVel * Time.fixedDeltaTime);
@@ -87,35 +89,9 @@ public class DynamicObjectMovement : MonoBehaviour
         }
     }
 
-    // private bool ShouldInheritMovement(GameObject otherObject, bool isHorizontal)
-    // {
-    //     var otherMovement = new Vector3();
-    //     if (otherObject.GetComponentInParent<PlayerController>() != null)
-    //     {
-    //         otherMovement = otherObject.GetComponentInParent<PlayerController>().velocity;
-    //     }
-    //     else if (otherObject.GetComponent<DynamicObjectMovement>() != null)
-    //     {
-    //         otherMovement = otherObject.GetComponent<DynamicObjectMovement>().velocity;
-    //     }
-    //
-    //     if (otherMovement.magnitude > 0)
-    //     {
-    //         if (isHorizontal)
-    //         {
-    //             if (!(Math.Abs(otherMovement.x) < velocity.x) || otherMovement.x == 0) return false;
-    //             velocity.x = otherMovement.x;
-    //             return true;
-    //         }
-    //
-    //         if (!(Math.Abs(otherMovement.y) < velocity.y) || otherMovement.y == 0) return false;
-    //         velocity.y = otherMovement.y;
-    //         return true;
-    //     }
-    //
-    //     return false;
-    // }
-
+    /*
+     * Triggers sound events at a time of collision
+     */
     private void CheckCollisionInMovement(Vector3 direction)
     {
         RaycastHit[] raycastHits;
@@ -280,6 +256,14 @@ public class DynamicObjectMovement : MonoBehaviour
         }
     }
 
+    /*
+     * Solves issue with object not stopping at the time of collision when the current
+     * movement isn't in line with the collision direction
+     * Example:
+     *      * Gravity is DOWN
+     *      * velocity is DOWN and LEFT and object collides DOWN.
+     *      * Object stops moving to the LEFT
+     */
     private void ApplyFrictionStop()
     {
         if (Physics.gravity.x < 0 && velocity.y != 0)
@@ -324,6 +308,10 @@ public class DynamicObjectMovement : MonoBehaviour
         }
     }
 
+    /*
+     * Checks in a specified direction for boxcasthits.
+     * if a player or moveable object is located, returns false.
+     */
     private bool ShouldObjectStopAfterCheckInDirection(Vector3 direction, Vector3 boxcastDimensions)
     {
         List<RaycastHit> raycastHits = new List<RaycastHit>();
@@ -352,6 +340,9 @@ public class DynamicObjectMovement : MonoBehaviour
         return true;
     }
 
+    /*
+     * Boxcasts for ground in a movement direction
+     */
     private bool IsGroundFoundInDirection(Vector3 direction, Vector3 boxcastDimensions)
     {
         if (Physics.BoxCast(transform.position, boxcastDimensions, direction, Quaternion.identity,

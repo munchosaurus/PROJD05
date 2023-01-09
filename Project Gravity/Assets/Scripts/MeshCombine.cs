@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,11 +11,12 @@ public class MeshCombine : MonoBehaviour
         List<List<CombineInstance>> combineLists = new();
         MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
 
-        foreach(MeshFilter meshFilter in meshFilters)
+        foreach (MeshFilter meshFilter in meshFilters)
         {
             MeshRenderer meshRenderer = meshFilter.gameObject.GetComponent<MeshRenderer>();
 
-            if (!meshRenderer || !meshFilter.sharedMesh || meshRenderer.sharedMaterials.Length != meshFilter.sharedMesh.subMeshCount)
+            if (!meshRenderer || !meshFilter.sharedMesh ||
+                meshRenderer.sharedMaterials.Length != meshFilter.sharedMesh.subMeshCount)
             {
                 continue;
             }
@@ -37,7 +37,7 @@ public class MeshCombine : MonoBehaviour
                 combine.transform = meshFilter.transform.localToWorldMatrix;
                 combine.subMeshIndex = i;
                 combine.mesh = meshFilter.sharedMesh;
-                
+
                 combineLists[materialIndex].Add(combine);
             }
 

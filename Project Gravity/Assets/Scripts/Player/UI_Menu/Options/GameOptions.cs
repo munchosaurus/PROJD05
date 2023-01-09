@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using Mono.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -29,9 +26,6 @@ public class GameOptions : MonoBehaviour
     [SerializeField] private TMP_FontAsset dyslecticFont;
     [SerializeField] private TMP_FontAsset regularFont;
     
-    
-    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +54,9 @@ public class GameOptions : MonoBehaviour
         }
     }
 
+    /*
+     * Is used to load the game settings from file when a scene is loaded
+     */
     public void LoadGameSettings()
     {
         slowSpeedToggle.isOn = GameController.SlowSpeedToggled;
@@ -70,6 +67,9 @@ public class GameOptions : MonoBehaviour
         OnFullScreenToggleChanged();
     }
 
+    /*
+     * Changes font if the dyslectic toggle is turned on/off in game
+     */
     public void OnDyslecticToggleChanged()
     {
         GameController.DyslecticModeIsOn = dyslecticToggle.isOn;
@@ -84,6 +84,9 @@ public class GameOptions : MonoBehaviour
         GameLauncher.WriteSettings();
     }
     
+    /*
+     * Fetches all TMP_Text objects and updates the font of those components to either be the dyslectic or regular font
+     */
     public void SetFont(TMP_FontAsset fontToUse)
     {
         Collection<TMP_Text> texts = new Collection<TMP_Text>();
@@ -91,8 +94,6 @@ public class GameOptions : MonoBehaviour
         {
             if (go.hideFlags != HideFlags.None)
                 continue;
-            // if (PrefabUtility.GetPrefabType(go) == PrefabType.Prefab || PrefabUtility.GetPrefabType(go) == PrefabType.ModelPrefab)
-            //     continue;
             texts.Add(go);
         }
         foreach (var VARIABLE in texts)

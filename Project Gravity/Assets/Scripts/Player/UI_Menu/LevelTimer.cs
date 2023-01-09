@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -18,12 +16,13 @@ public class LevelTimer : MonoBehaviour
     private bool shouldCount;
     private bool _shouldKeepCounting;
     private Guid _playerSucceedsGuid;
+
     private void Start()
     {
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
         EventSystem.Current.RegisterListener<LevelStartEvent>(OnLevelStarts, ref _levelStartsGuid);
-        _levelSettings = (LevelSettings) FindObjectOfType (typeof(LevelSettings));
-        _ingameMenu = (IngameMenu) FindObjectOfType (typeof(IngameMenu));
+        _levelSettings = (LevelSettings) FindObjectOfType(typeof(LevelSettings));
+        _ingameMenu = (IngameMenu) FindObjectOfType(typeof(IngameMenu));
         if (_levelSettings == null)
         {
             Debug.Log("Cannot find levelsettings in scene, are you sure you have added?");
@@ -31,7 +30,7 @@ public class LevelTimer : MonoBehaviour
         }
 
         timePressure = _levelSettings.GetLevelIsTimed();
-        
+
         if (!timePressure)
         {
             levelTimer = 0;
@@ -41,7 +40,7 @@ public class LevelTimer : MonoBehaviour
             levelTimer = _levelSettings.GetLevelTimeLimit();
         }
     }
-    
+
     public void OnLevelStarts(LevelStartEvent levelStartEvent)
     {
         _shouldKeepCounting = true;
@@ -61,6 +60,7 @@ public class LevelTimer : MonoBehaviour
                 Debug.Log("Cannot find levelsettings in scene, are you sure you have added?");
                 return;
             }
+
             if (timePressure)
             {
                 if (levelTimer > 0)
@@ -80,7 +80,7 @@ public class LevelTimer : MonoBehaviour
                 levelTimer += Time.deltaTime;
             }
         }
-        
+
         DisplayTime(levelTimer);
     }
 
@@ -90,6 +90,7 @@ public class LevelTimer : MonoBehaviour
         {
             timeToDisplay = 0;
         }
+
         minutes = Mathf.FloorToInt(timeToDisplay / 60);
         seconds = Mathf.FloorToInt(timeToDisplay % 60);
         milliSeconds = Mathf.Floor(timeToDisplay % 1 * 100);

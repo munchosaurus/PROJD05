@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = System.Random;
 
 public class PlayerAnimationController : MonoBehaviour
@@ -67,9 +66,9 @@ public class PlayerAnimationController : MonoBehaviour
 
     private IEnumerator PlaySecondPartOfVictorySound()
     {
-        yield return new WaitWhile(()=> _audioSource.isPlaying);
+        yield return new WaitWhile(() => _audioSource.isPlaying);
         _audioSource.PlayOneShot(GetVictorySound());
-        yield return new WaitWhile(()=> _audioSource.isPlaying);
+        yield return new WaitWhile(() => _audioSource.isPlaying);
         StartCoroutine(mainTheme.gameObject.GetComponent<MainMenuSpeaker>().FadeMusic());
     }
 

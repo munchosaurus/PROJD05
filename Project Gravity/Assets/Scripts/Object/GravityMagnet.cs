@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class GravityMagnet : MonoBehaviour
@@ -14,9 +13,7 @@ public class GravityMagnet : MonoBehaviour
     [SerializeField] private float magnetSpeed;
     [SerializeField] private GameObject effectHolder;
     private static Guid _gravityGunEventGuid;
-
-
-
+    
     private void Start()
     {
         EventSystem.Current.RegisterListener<GravityGunEvent>(ToggleMagnet, ref _gravityGunEventGuid);
@@ -41,6 +38,11 @@ public class GravityMagnet : MonoBehaviour
         }
     }
 
+    /*
+     * Turns the magnet on or off if either of these are true:
+     *      * THIS magnet is hit
+     *      * Object bound to THIS magnet is hit
+     */
     private void ToggleMagnet(GravityGunEvent gravityGunEvent)
     {
         if (gravityGunEvent.TargetGameObject.layer == gameObject.layer)
@@ -69,6 +71,9 @@ public class GravityMagnet : MonoBehaviour
         }
     }
 
+    /*
+     * Scouts for moveable objects in the directions that are enabled in the editor
+     */
     private void CheckForBoxes()
     {
         RaycastHit hit;

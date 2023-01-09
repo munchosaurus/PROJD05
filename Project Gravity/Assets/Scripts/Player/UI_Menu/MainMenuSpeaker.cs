@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +12,7 @@ public class MainMenuSpeaker : MonoBehaviour
         mainMenuSource.volume = volume;
         DontDestroyOnLoad(this.gameObject);
     }
-    
+
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;

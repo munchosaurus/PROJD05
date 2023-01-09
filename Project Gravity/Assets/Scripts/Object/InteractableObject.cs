@@ -1,16 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class InteractableObject : MonoBehaviour
 {
     public Interactable interactable;
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         if (interactable.shouldRotate)
@@ -19,6 +12,9 @@ public class InteractableObject : MonoBehaviour
         }
     }
 
+    /*
+     * Useless shell, no keycards used in levels.
+     */
     public void Interact()
     {
         switch (interactable.interactableType)
@@ -33,5 +29,4 @@ public class InteractableObject : MonoBehaviour
                 break;
         }
     }
-
 }

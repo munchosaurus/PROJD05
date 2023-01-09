@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class KeycardLogic : MonoBehaviour
@@ -10,6 +7,7 @@ public class KeycardLogic : MonoBehaviour
     public bool keyCardsCompleted;
     private int collectedKeycards;
     private Quaternion keyCardRotation;
+
     void Start()
     {
         _levelSettings = FindObjectOfType<LevelSettings>();
@@ -37,7 +35,7 @@ public class KeycardLogic : MonoBehaviour
                 }
             }
         }
-        
+
         if (collectedKeycards == keyCards.Length)
         {
             keyCardsCompleted = true;

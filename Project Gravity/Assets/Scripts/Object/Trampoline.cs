@@ -31,7 +31,10 @@ public class Trampoline : MonoBehaviour
         }
     }
     
-    
+    /*
+     * Scouts for player in range of trampoline trigger,
+     * Shoots event if player is detected
+     */
     public void DetectPlayer()
     {
         RaycastHit hit;

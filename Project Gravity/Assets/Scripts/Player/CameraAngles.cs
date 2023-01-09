@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -56,7 +53,7 @@ public class CameraAngles : MonoBehaviour
             turn.x += _gamepadCursor.VirtualMouse.delta.y.ReadValue() * sensitivity;
             turn.y += _gamepadCursor.VirtualMouse.delta.x.ReadValue() * sensitivity;
         }
-        
+
         turn.x = Mathf.Clamp(turn.x, minXRotation, maxXRotation);
         turn.y = Mathf.Clamp(turn.y, minYRotation, maxYRotation);
 
@@ -69,7 +66,6 @@ public class CameraAngles : MonoBehaviour
     public void OnRotateToggle(InputAction.CallbackContext context)
     {
         _rotationToggled = context.ReadValue<float>() == 1;
-        
     }
 
     public void RotateToDefault(InputAction.CallbackContext context)

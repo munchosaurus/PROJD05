@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class LevelSettings : MonoBehaviour
@@ -41,6 +40,7 @@ public class LevelSettings : MonoBehaviour
         {
             SetDefaultCameraValues();
         }
+
         Physics.gravity = new Vector3(0, -GravityController.GravityMultiplier, 0);
     }
 
@@ -57,14 +57,13 @@ public class LevelSettings : MonoBehaviour
         targetX = Constants.LEVEL_DEFAULT_CAMERA_TARGET_X;
         targetY = Constants.LEVEL_DEFAULT_CAMERA_TARGET_Y;
         targetZ = Constants.LEVEL_DEFAULT_CAMERA_TARGET_Z;
-
     }
 
     public bool IsTutorialLevel()
     {
         return isTutorialLevel;
     }
-    
+
     public float GetLevelLeeway()
     {
         return leeway;

@@ -20,10 +20,6 @@ public class TrampolineEvent : Event
 {
 }
 
-public class ObjectFoundMagnetEvent : Event
-{
-}
-
 public class PlayerDeathEvent : Event
 {
     public float DeathTime;
@@ -40,5 +36,4 @@ public class WinningEvent : Event
 
 public class LevelStartEvent : Event
 {
-    
 }

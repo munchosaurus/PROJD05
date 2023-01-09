@@ -27,6 +27,7 @@ public class LevelSelector : MonoBehaviour
     [SerializeField] private float bottomvolume;
     [SerializeField] private RectTransform scrollRectTransform;
     [SerializeField] private GameObject black;
+
     private Button[] _levelContainerButtons;
     private int _selectedLevel;
     private GameObject lastSelected;
@@ -43,7 +44,7 @@ public class LevelSelector : MonoBehaviour
         {
             Debug.Log("No Main theme in scene" + e);
         }
-        
+
         levelSelectorPlay.onClick.AddListener(OnLevelSelectorPlayPressed);
         SetupLevelContainers();
     }
@@ -70,7 +71,7 @@ public class LevelSelector : MonoBehaviour
         }
         else
         {
-            mainTheme.clip = inGameThemeClip;  
+            mainTheme.clip = inGameThemeClip;
         }
 
 
@@ -143,15 +144,14 @@ public class LevelSelector : MonoBehaviour
     {
         _levelContainerButtons = new Button[levelContainers.Length];
         bool levelsAreUnlocked = FindObjectOfType<LevelSettings>().GetLevelsAreUnlocked();
-        
+
         for (int i = 0; i < levelContainers.Length; i++)
         {
             GameObject go = Instantiate(scrollviewObjectTemplate, scrollviewParent.transform, false);
             go.GetComponentInChildren<TMP_Text>().text = levelContainers[i].levelName;
             _levelContainerButtons[i] = go.GetComponent<Button>();
 
-            
-            
+
             if (!LevelCompletionTracker.unlockedLevels.Contains(i + 1) && !levelsAreUnlocked)
             {
                 _levelContainerButtons[i].interactable = false;

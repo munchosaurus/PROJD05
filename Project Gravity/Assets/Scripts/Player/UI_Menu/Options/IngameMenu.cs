@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEngine.PlayerLoop;
-using UnityEngine.Rendering;
 
 public class IngameMenu : MonoBehaviour
 {

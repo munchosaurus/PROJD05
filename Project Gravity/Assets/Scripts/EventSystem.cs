@@ -18,6 +18,7 @@ public class EventSystem : MonoBehaviour
 
     private static EventSystem _current;
     private Dictionary<System.Type, List<GameListener>> _eventListeners;
+
     delegate void EventListener(Event e);
 
     void OnEnable()
@@ -25,7 +26,7 @@ public class EventSystem : MonoBehaviour
         _current = this;
         GravityController.Init();
     }
-    
+
     public static EventSystem Current
     {
         get
@@ -41,7 +42,7 @@ public class EventSystem : MonoBehaviour
             return _current;
         }
     }
-    
+
     // Adds a listener to the dictionary, the appended Guid will be gererated when the gamelistener is
     // instanciated, will also be stored in the class listening. The reasoning behind not using instance IDs could be that
     // classes want to make use of several listeners in the same class.
@@ -63,7 +64,7 @@ public class EventSystem : MonoBehaviour
         _eventListeners[eventType].Add(gameListener);
         guid = gameListener.guid;
     }
-    
+
     // Should be called upon as soon as soon as we switch scenes.
     public void ClearListeners()
     {
@@ -72,7 +73,7 @@ public class EventSystem : MonoBehaviour
             _eventListeners = new Dictionary<Type, List<GameListener>>();
         }
     }
-    
+
     public void FireEvent(Event e)
     {
         System.Type trueEventInfoClass = e.GetType();

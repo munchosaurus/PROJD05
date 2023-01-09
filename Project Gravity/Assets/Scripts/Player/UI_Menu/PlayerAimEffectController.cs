@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -18,9 +16,7 @@ public class PlayerAimEffectController : MonoBehaviour
 
     public void SetColors(Vector4 c, Vector4 c2)
     {
-        _visualEffect.SetVector4("Colour",c);
-        _visualEffect.SetVector4("Colour_Alt",c2);
+        _visualEffect.SetVector4("Colour", c);
+        _visualEffect.SetVector4("Colour_Alt", c2);
     }
-    
-    
 }

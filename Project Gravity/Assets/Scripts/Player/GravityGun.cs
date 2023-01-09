@@ -67,7 +67,7 @@ public class GravityGun : MonoBehaviour
         mirrorLayer = LayerMask.NameToLayer("Mirror");
         playerInput = FindObjectOfType<PlayerInput>();
         _playerAnimationController = FindObjectOfType<PlayerAnimationController>();
-        
+
         EventSystem.Current.RegisterListener<WinningEvent>(OnPlayerSucceedsLevel, ref _playerSucceedsGuid);
         EventSystem.Current.RegisterListener<PlayerDeathEvent>(OnPlayerDeath, ref _playerDeathGuid);
 

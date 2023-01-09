@@ -1,13 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
 public class MainMenuCameraRotation : MonoBehaviour
 {
-    [Header("Keeping these for troubleshooting")]
-    [SerializeField] private float rotationSpeedX;
+    [Header("Keeping these for troubleshooting")] [SerializeField]
+    private float rotationSpeedX;
+
     [SerializeField] private float rotationSpeedY;
     [SerializeField] private Vector2 turn;
 
@@ -15,7 +13,7 @@ public class MainMenuCameraRotation : MonoBehaviour
     [SerializeField] private float startingRotationSpeed;
     [SerializeField] private int framesBeforeRotationSwitch;
     [SerializeField] private float rotationChangeValue;
-    
+
     private static Random rnd = new Random();
     private int _counter;
 
@@ -45,7 +43,7 @@ public class MainMenuCameraRotation : MonoBehaviour
             {
                 rotationSpeedX = NextFloat(rotationSpeedX - rotationChangeValue, rotationSpeedX + rotationChangeValue);
             }
-            
+
             if (rotationSpeedY > maxRotationSpeed)
             {
                 rotationSpeedY -= rotationChangeValue;
@@ -58,6 +56,7 @@ public class MainMenuCameraRotation : MonoBehaviour
             {
                 rotationSpeedY = NextFloat(rotationSpeedY - rotationChangeValue, rotationSpeedY + rotationChangeValue);
             }
+
             _counter = 0;
         }
 
