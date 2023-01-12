@@ -4120,8 +4120,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The same <color=#00aaffff>[Gravity Plate]</color> can be used to change
-    the direction of gravity in different ways, <color=#00aaffff>[depending on which
+  m_text: The same <color=#00ddffff>[Gravity Plate]</color> can be used to change
+    the direction of gravity in different ways, <color=#00ddffff>[depending on which
     side you hit]</color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}

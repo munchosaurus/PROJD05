@@ -1510,7 +1510,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: First activation protocols complete. Testing <color=#00aaffff>[the subject]</color>.
+  m_text: First activation protocols complete. Testing <color=#00ddffff>[the subject]</color>.
     Use what you have learned to solve this simple puzzle.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}

@@ -1826,10 +1826,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<color=#00aaffff>[It]</color> is <color=#00aaffff>[active by default]</color>.
-    \nYou can <color=#00aaffff>[deactivate it]</color> and <color=#00aaffff>[reactivate
-    it]</color>, by hitting it or a <color=#00aaffff>[Gravity Object]</color> that
-    is attached to it with your <color=#00aaffff>[Gravity Gun]</color>. "
+  m_text: "<color=#00ddffff>[It]</color> is <color=#00ddffff>[active by default]</color>.
+    \nYou can <color=#00ddffff>[deactivate it]</color> and <color=#00ddffff>[reactivate
+    it]</color>, by hitting it or a <color=#00ddffff>[Gravity Object]</color> that
+    is attached to it with your <color=#00ddffff>[Gravity Gun]</color>. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
   m_sharedMaterial: {fileID: 2126825604142186142, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
@@ -2272,8 +2272,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=#00aaffff>[Magnetism]</color> introduction protocols loaded. This
-    is a <color=#00aaffff>[Magnetic Block]</color>. It has the power to hold <color=#00aaffff>[Gravity
+  m_text: <color=#00ddffff>[Magnetism]</color> introduction protocols loaded. This
+    is a <color=#00ddffff>[Magnetic Block]</color>. It has the power to hold <color=#00ddffff>[Gravity
     Objects]</color> in place.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}

@@ -1813,7 +1813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is a <color=#00aaffff>[Gravity Object]</color>, it is affected by
+  m_text: This is a <color=#00ddffff>[Gravity Object]</color>, it is affected by
     gravity the same way you are.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}

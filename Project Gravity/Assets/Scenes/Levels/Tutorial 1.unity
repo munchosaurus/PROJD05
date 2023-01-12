@@ -1036,8 +1036,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Initializing <color=#00aaffff>[Test Subject 37]</color>. Welcome. Beginning
-    first activation protocols. Press <color=#00aaffff>[Left Click]</color> to continue.
+  m_text: Initializing <color=#00ddffff>[Test Subject 37]</color>. Welcome. Beginning
+    first activation protocols. Press <color=#00ddffff>[Left Click]</color> to continue.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
   m_sharedMaterial: {fileID: 2126825604142186142, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
@@ -2651,9 +2651,9 @@ MonoBehaviour:
   alternateClip: {fileID: 8300000, guid: 8a503804d782ec641a40bed52297570d, type: 3}
   hasAlternateStuff: 1
   theText: {fileID: 1210250280}
-  alternateTextString: "This is a <color=#00aaffff>[Gravity Plate]</color>. \n\nYou
-    can change the direction of gravity by shooting at it with your <color=#00aaffff>[Gravity
-    Gun]</color>.\nPress the <color=#00aaffff>[Right Trigger]</color> to shoot!"
+  alternateTextString: "This is a <color=#00ddffff>[Gravity Plate]</color>. \n\nYou
+    can change the direction of gravity by shooting at it with your <color=#00ddffff>[Gravity
+    Gun]</color>.\nPress the <color=#00ddffff>[Right Trigger]</color> to shoot!"
   theImages:
   - {fileID: 1356179837}
   alternateImageSprites:
@@ -3008,10 +3008,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Use the <color=#00aaffff>[W] [A] [S] [D]</color> keys on your keyboard
+  m_text: 'Use the <color=#00ddffff>[W] [A] [S] [D]</color> keys on your keyboard
     to move Up, Left, Down and Right.
 
-    To Jump, use the <color=#00aaffff>[SPACE]</color>
+    To Jump, use the <color=#00ddffff>[SPACE]</color>
     key.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
@@ -4092,9 +4092,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "This is a <color=#00aaffff>[Gravity Plate]</color>. \n\nYou can change
-    the direction of gravity by shooting at it with your <color=#00aaffff>[Gravity
-    Gun]</color>.\nPress <color=#00aaffff>[Left Click]</color> to shoot!"
+  m_text: "This is a <color=#00ddffff>[Gravity Plate]</color>. \n\nYou can change
+    the direction of gravity by shooting at it with your <color=#00ddffff>[Gravity
+    Gun]</color>.\nPress <color=#00ddffff>[Left Click]</color> to shoot!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
   m_sharedMaterial: {fileID: 2126825604142186142, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
@@ -4291,7 +4291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#00aaffff>[Goal]</color>. It is your main objective.
+  m_text: This is the <color=#00ddffff>[Goal]</color>. It is your main objective.
     Reach it while grounded to finish the test!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
@@ -5462,8 +5462,8 @@ MonoBehaviour:
   alternateClip: {fileID: 8300000, guid: 1ffee701e0bd5934182c2470f51e629c, type: 3}
   hasAlternateStuff: 1
   theText: {fileID: 313699933}
-  alternateTextString: Initializing <color=#00aaffff>[Test Subject 37]</color>. Welcome.
-    Beginning first activation protocols. Press <color=#00aaffff>[Right Trigger]</color>
+  alternateTextString: Initializing <color=#00ddffff>[Test Subject 37]</color>. Welcome.
+    Beginning first activation protocols. Press <color=#00ddffff>[Right Trigger]</color>
     to continue.
   theImages: []
   alternateImageSprites: []
@@ -7272,8 +7272,8 @@ MonoBehaviour:
   alternateClip: {fileID: 8300000, guid: e8259f6c7e03b174385e667b3c7d784a, type: 3}
   hasAlternateStuff: 1
   theText: {fileID: 945465069}
-  alternateTextString: Use the <color=#00aaffff>D-pad</color> on your controller
-    to move Up, Left, Down and Right. To Jump, use the <color=#00aaffff>[South Face]</color>
+  alternateTextString: Use the <color=#00ddffff>D-pad</color> on your controller
+    to move Up, Left, Down and Right. To Jump, use the <color=#00ddffff>[South Face]</color>
     button.
   theImages:
   - {fileID: 2034795806}

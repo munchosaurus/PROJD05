@@ -3422,11 +3422,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<color=#00aaffff>[Magnetic Blocks]</color> attract objects relative to
-    what side of the magnet they are. \n\nIf a <color=#00aaffff>[Gravity Object]</color>
-    is to the <color=#00aaffff>[left of the magnet]</color> then it will be attracted
-    to the <color=#00aaffff>[left side]</color>.\n\nIf it is <color=#00aaffff>[above
-    the magnet]</color> then it will be attracted to the <color=#00aaffff>[top]</color>."
+  m_text: "<color=#00ddffff>[Magnetic Blocks]</color> attract objects relative to
+    what side of the magnet they are. \n\nIf a <color=#00ddffff>[Gravity Object]</color>
+    is to the <color=#00ddffff>[left of the magnet]</color> then it will be attracted
+    to the <color=#00ddffff>[left side]</color>.\n\nIf it is <color=#00ddffff>[above
+    the magnet]</color> then it will be attracted to the <color=#00ddffff>[top]</color>."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
   m_sharedMaterial: {fileID: 2126825604142186142, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}

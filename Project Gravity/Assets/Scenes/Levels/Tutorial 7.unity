@@ -1680,8 +1680,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=#00aaffff>[Magnetic Blocks]</color> lock on to the first <color=#00aaffff>[Gravity
-    Object]</color> to come close enough, and attracts <color=#00aaffff>[the object]</color>
+  m_text: <color=#00ddffff>[Magnetic Blocks]</color> lock on to the first <color=#00ddffff>[Gravity
+    Object]</color> to come close enough, and attracts <color=#00ddffff>[the object]</color>
     to its side.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}

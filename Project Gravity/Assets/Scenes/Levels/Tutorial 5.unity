@@ -358,10 +358,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hazard introduction protocols loaded. Welcome <color=#00aaffff>[37]</color>.
+  m_text: Hazard introduction protocols loaded. Welcome <color=#00ddffff>[37]</color>.
     This is <color=#ff0000ff>[Lava]</color>. It is a <color=#ff0000ff>[dangerous
     hazard]</color> and if you come into contact with it we will have to consider
-    the test a <color=#ff0000ff>[failure]</color> and <color=#00aaffff>[restart the
+    the test a <color=#ff0000ff>[failure]</color> and <color=#00ddffff>[restart the
     experiment]</color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7672e9d3897e5f45aa59b4e1411e67a, type: 2}
