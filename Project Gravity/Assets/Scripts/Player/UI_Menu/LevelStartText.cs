@@ -22,14 +22,14 @@ public class LevelStartText : MonoBehaviour
 
     private void SetLevelName(int buildID)
     {
-        levelName.text = levelSelector.levelContainers[buildID + 1].levelName;
+        levelName.text = levelSelector.levelContainers[buildID - 1].levelName;
     }
 
     private void SetLevelRecord(int buildID)
     {
         if(LevelCompletionTracker.LevelHasRecord(buildID))
         {
-            float bestTime = LevelCompletionTracker.levelRecords[buildID];
+            float bestTime = LevelCompletionTracker.levelRecords[buildID - 1];
 
             float minutes = Mathf.FloorToInt(bestTime / 60);
             float seconds = Mathf.FloorToInt(bestTime % 60);
