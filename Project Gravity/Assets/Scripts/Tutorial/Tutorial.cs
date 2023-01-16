@@ -49,7 +49,7 @@ public class Tutorial : MonoBehaviour
 
     public void ChangeActivePanel(InputAction.CallbackContext cbc)
     {
-        if (cbc.started && canChange && !_ingameMenu.transform.GetChild(0).gameObject.activeSelf)
+        if (cbc.started && canChange && !_ingameMenu.GetMenuGO().activeSelf)
         {
             panels[activeIndex++].SetActive(false);
 

@@ -5,11 +5,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class IngameMenu : MonoBehaviour
 {
     [SerializeField] public GameObject[] menus;
     [SerializeField] public GameObject interactText;
+    [SerializeField] private GameObject menuParent;
     [SerializeField] private Texture2D customAimCursor;
     [SerializeField] private Texture2D customMenuCursor;
     [SerializeField] private int previousMenu;
@@ -78,6 +80,11 @@ public class IngameMenu : MonoBehaviour
         }
     }
 
+    public GameObject GetMenuGO()
+    {
+        return menuParent;
+    }
+
     void SetAimCursor()
     {
         Cursor.SetCursor(customAimCursor, new Vector2(customAimCursor.width / 2, customAimCursor.height / 2),
@@ -142,7 +149,7 @@ public class IngameMenu : MonoBehaviour
         if (!t.tutorialFinished)
         {
             menus[0].gameObject.SetActive(false);
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            menuParent.SetActive(false);
             playerGui.SetActive(true);
             t.panels[t.activeIndex].GetComponent<AudioSource>().UnPause();
             t.OpenPanel();
@@ -153,7 +160,7 @@ public class IngameMenu : MonoBehaviour
     {
         if (context.canceled && !GameController.PlayerIsDead && !newSceneHasBeenLoaded)
         {
-            if (gameObject.transform.GetChild(0).gameObject.activeSelf)
+            if (menuParent.activeSelf)
             {
                 if (menus[0].gameObject.activeSelf)
                 {
@@ -276,9 +283,9 @@ public class IngameMenu : MonoBehaviour
             }
         }
 
-        if (gameObject.transform.GetChild(0).gameObject.activeSelf)
+        if (menuParent.activeSelf)
         {
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            menuParent.SetActive(false);
         }
 
         playerGui.SetActive(true);
@@ -290,7 +297,7 @@ public class IngameMenu : MonoBehaviour
     {
         UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
         gameObject.transform.parent.GetComponent<AudioSource>().mute = true;
-        gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        menuParent.gameObject.SetActive(true);
         gameObject.SetActive(true);
 
         foreach (var menu in menus)
