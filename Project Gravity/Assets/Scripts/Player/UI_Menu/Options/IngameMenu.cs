@@ -72,7 +72,6 @@ public class IngameMenu : MonoBehaviour
         }
 
         Physics.gravity = new Vector3(0, -GravityController.GravityMultiplier * Constants.GRAVITY, 0);
-        Debug.Log(GravityController.GravityMultiplier + " " + Physics.gravity);
         if (customAimCursor != null)
         {
             SetAimCursor();

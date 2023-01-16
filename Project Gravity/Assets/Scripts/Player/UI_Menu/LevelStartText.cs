@@ -27,9 +27,10 @@ public class LevelStartText : MonoBehaviour
 
     private void SetLevelRecord(int buildID)
     {
+        Debug.Log(buildID);
         if(LevelCompletionTracker.LevelHasRecord(buildID))
         {
-            float bestTime = LevelCompletionTracker.levelRecords[buildID - 1];
+            float bestTime = LevelCompletionTracker.levelRecords[buildID];
 
             float minutes = Mathf.FloorToInt(bestTime / 60);
             float seconds = Mathf.FloorToInt(bestTime % 60);
