@@ -318,7 +318,7 @@ public class SettingsData
         // Game
         sb.Append("ScreenMode: " + ScreenMode + "\n");
         sb.Append("TutorialIsOn: " + TutorialIsOn + "\n");
-        sb.Append("GlobalSpeedMultiplier: " + SlowSpeedToggled + "\n");
+        sb.Append("SlowSpeedToggled: " + SlowSpeedToggled + "\n");
         sb.Append("CameraAutoRotationToggled: " + CameraAutoRotationToggled + "\n");
         sb.Append("DyslecticModeIsOn: " + DyslecticModeIsOn + "\n");
 
